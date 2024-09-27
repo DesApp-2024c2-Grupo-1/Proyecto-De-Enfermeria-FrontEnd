@@ -5,12 +5,13 @@ import { TopMenu } from "./components/TopMenu";
 import { AppRouter } from "./AppRouter";
 import { getCurrentWeather } from "./services/WeatherService";
 import { WeatherIndicator } from "./components/WeatherIndicator";
-import { PruebaPagina } from "./components/pruebaPagina"
+import { FormRegister } from './components/FormRegister';
+import './index.css'
 
 export function App() {
   return (
-    <div>
-      <PruebaPagina />
+    <div className="form-container">
+      <FormRegister />
     </div>
   )
 }
