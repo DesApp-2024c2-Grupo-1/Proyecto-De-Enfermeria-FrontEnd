@@ -1,3 +1,5 @@
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -20,12 +22,6 @@ a:hover {
   color: #535bf2;
 }
 
-/*body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}*/
-
 body {
   font-family: Arial, sans-serif;
   background-color: #0b775e;
@@ -36,26 +32,16 @@ body {
   max-width: 400px;
   margin: auto;
   padding-bottom: 20px;
-  padding-top: 90px;
+  padding-top: 70px;
   padding-right: 10%;
   padding-left: 10%;
-  background-color: #c5e0d8;
+  background-color: #77C4A0;
   border-radius: 75px;
-  margin-top: 10%;
-  margin-bottom: 10%
+  margin-top: 5%;
 }
 
 .form-group {
   margin-bottom: 15px;
-}
-
-.input-icon {
-  display: flex;
-  align-items: center;
-}
-
-.input-icon i {
-  margin-right: 10px;
 }
 
 input {
@@ -66,6 +52,33 @@ input {
   box-sizing: border-box;
 }
 
+.input-container {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  background-color: white;
+  margin-top: 8px;
+}
+
+.input-container i {
+  margin-right: 8px; /* Espacio a la derecha del icono */
+  color: #fff; /* Color del icono */
+  border-radius: 4px;
+  background-color: #429870; /* Color de fondo para el icono */ /* Hacer el fondo del icono redondo */
+  padding: 8px; /* Espacio interno alrededor del icono */
+}
+
+.input-container input {
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 0;
+}
+
+.form-input {
+  margin-bottom: 16px;
+}
+
 label {
   margin-bottom: '8px';
   font-weight: 'bold'
@@ -73,7 +86,7 @@ label {
 
 button.register-button {
   padding: 10px;
-  background-color: #2b8a77;
+  background-color: #429870;
   color: white;
   border: none;
   border-radius: 4px;
@@ -81,5 +94,5 @@ button.register-button {
 }
 
 button.register-button:hover {
-  background-color: #1f6d5b;
+  background-color: #2b8a77;
 }
