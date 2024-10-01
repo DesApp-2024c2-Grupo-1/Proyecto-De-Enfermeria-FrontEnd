@@ -1,8 +1,7 @@
 import React from 'react';
 import { Stack, Box } from '@mui/material';
-import FormInput from './FormInput';
-import RegisterButton from './ButtonRegister';
-
+import FormInput from '../components/FormInput';
+import RegisterButton from '../components/ButtonRegister';
 
 export const FormRegistro = () => {
   const handleRegisterClick = () => {
@@ -12,10 +11,28 @@ export const FormRegistro = () => {
 
   return (
     <Box className='form-container'
-    component="form"
-    oValidate
-    autoComplete="off">
-      <Stack direction="row" spacing={5} mt={2}>
+      component="form"
+      oValidate
+      autoComplete="off"
+      maxWidth="30vw">
+        
+      <i
+        className="fas fa-user-circle"
+        style={{
+          position: 'absolute',
+          top: '15px',
+          left: '51%',
+          transform: 'translateX(-50%)',
+          fontSize: '80px',
+          color: '#429870',
+          backgroundColor: 'white',
+          borderRadius: '50%'  
+        }}
+      ></i>
+
+      <Stack direction={{xs: "column", sm: "row"}} 
+      spacing={{ xs: 1, sm: 2 }} 
+      mt={{ xs: 1, sm: 2 }}>
         <FormInput
           label="Nombre"
           type="text"
@@ -33,7 +50,9 @@ export const FormRegistro = () => {
       </Stack>
 
 
-      <Stack direction="row" spacing={5} mt={2}>
+      <Stack direction={{xs: "column", sm: "row"}} 
+      spacing={{ xs: 1, sm: 2 }}
+      mt={{ xs: 1, sm: 2 }}>
         <FormInput
           label="DNI"
           type="text"
@@ -51,7 +70,9 @@ export const FormRegistro = () => {
       </Stack>
 
 
-      <Stack direction="row" spacing={5} mt={2}>
+      <Stack direction={{xs: "column", sm: "row"}} 
+      spacing={{ xs: 1, sm: 2 }}
+      mt={{ xs: 1, sm: 2 }}>
         <FormInput
           label="Contraseña"
           type="password"
