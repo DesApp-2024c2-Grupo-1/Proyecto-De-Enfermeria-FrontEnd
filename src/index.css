@@ -56,9 +56,10 @@ input {
 .input-container {
   display: flex;
   align-items: center;
+  background-color: #fff;
   border-radius: 4px;
-  background-color: white;
   margin-top: 8px;
+  max-width: 20vw;
 }
 
 .input-container i {
