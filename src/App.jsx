@@ -6,13 +6,14 @@ import { AppRouter } from "./AppRouter";
 import { getCurrentWeather } from "./services/WeatherService";
 import { WeatherIndicator } from "./components/WeatherIndicator";
 import { FormRegistro } from './pages/FormRegisterPage';
+import { FormLogin } from "./pages/FormLoginPage";
 import './index.css'
 
 export function App() {
   return (
     <div style={{ padding: 20, display: 'flex', justifyContent: 'center' }}>
       <div className="background"></div>
-      <FormRegistro />
+      <FormLogin/>
     </div>
   )
 }
