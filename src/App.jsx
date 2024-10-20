@@ -5,8 +5,6 @@ import { TopMenu } from "./components/TopMenu";
 import { AppRouter } from "./AppRouter";
 
 export function App() {
-  const [weatherData, setWeatherData] = useState();
-
   return (
     <BrowserRouter>
       <Stack direction="column">
