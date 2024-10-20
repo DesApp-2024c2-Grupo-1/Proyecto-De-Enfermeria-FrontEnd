@@ -1,5 +1,5 @@
 import Button from "../components/Button";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export function LoginPage() {
   return (
     <>
       <div>Login</div>
-      <Button text="Iniciar sesión" onClick={handleLogin} />
+      <Button text="Iniciar sesión" onClick={handleLogin} className="login" />
       <p>¿No tenés cuenta?</p>
       <Button text="Registrate" onClick={handleRegister} />
     </>
