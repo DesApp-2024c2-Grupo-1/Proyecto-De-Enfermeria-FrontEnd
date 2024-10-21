@@ -7,7 +7,7 @@ function MenuOption({ path, label }) {
   const { pathname } = useLocation();
 
   return <Box 
-    sx={{ typography: pathname === path ? 'topMenuSelected' : 'topMenu', mr: 8 }} 
+    sx={{ typography: pathname === path ? 'topMenu' : 'topMenuSelected', mr: 8 }} 
     onClick={() => navigate(path)}
   >
     {label}
@@ -16,7 +16,7 @@ function MenuOption({ path, label }) {
 
 export function TopMenu() {
   return <Stack direction='row' alignItems='center' sx={{ width: '100%', height: '4rem', backgroundColor: cyan[700], pl: 4 }}>
-    <MenuOption path='/films' label='Películas' />
-    <MenuOption path='/actors' label='Actores' />
+    <MenuOption path='/' label='Home' />
+    <MenuOption path='/perfilDocente' label='Perfil' />
   </Stack>;
 }
