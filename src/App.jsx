@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Box, Grid, Stack } from "@mui/material";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useLocation } from "react-router-dom";
 import { TopMenu } from "./components/TopMenu";
 import { AppRouter } from "./AppRouter";
 
 export function App() {
-  const [weatherData, setWeatherData] = useState();
-
   return (
     <BrowserRouter>
-      <Stack direction="column">
-        <Grid container direction="row">
-          <TopMenu />
-        </Grid>
-        <Box sx={{ mx: { xs: 1, md: 4 }, my: 4 }}>
-          <AppRouter />
-        </Box>
-      </Stack>
+      <MainLayout />
     </BrowserRouter>
+  );
+}
+
+export function MainLayout() {
+  const location = useLocation();
+
+  const hiddenMenuPaths = ["/", "/register"];
+
+  const shouldHideMenu = hiddenMenuPaths.includes(location.pathname);
+
+  return (
+    <Stack direction="column">
+      {!shouldHideMenu && <TopMenu />}
+      <Box sx={{ mx: { xs: 1, md: 4 }, my: 4 }}>
+        <AppRouter />
+      </Box>
+    </Stack>
   );
 }
