@@ -27,18 +27,27 @@ body {
   min-height: 100vh;
 }
 
-.login {
-  background-color: blue;
+h1 {
+  margin-bottom: 5rem;
+}
+
+/* Botones */
+
+.botonClaro {
+  background-color: #449b73;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width: 8rem;
 }
 
-.login:hover {
-  background-color: darkblue;
+.botonClaro:hover {
+  background-color: #3d8a66;
 }
+
+/* Menú */
 
 .menu {
   height: 13vh;
@@ -50,4 +59,40 @@ body {
   height: 100%;
   padding-right: 20px;
   margin-left: 10px;
+}
+
+/* Home */
+
+.carpeta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.carpetaFondo {
+  width: 15rem;
+  background-color: #daf2e3; 
+  position: relative;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.carpetaPestaña {
+  width: 80px; 
+  height: 20px; 
+  background-color: #daf2e3; /* Mismo color que la carpeta */
+  position: absolute;
+  top: -15px; 
+  border-bottom: none; 
+  border-radius: 5px 5px 0 0; 
+}
+
+.botonesContainer {
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;     
+  gap: 12px;
+  margin: 12px;             
 }
