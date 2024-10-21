@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Grid, Stack } from "@mui/material";
 import { BrowserRouter, useLocation } from "react-router-dom";
-import { TopMenu } from "./components/TopMenu";
+import { Menu } from "./components/TopMenu";
 import { AppRouter } from "./AppRouter";
 
 export function App() {
@@ -21,7 +21,7 @@ export function MainLayout() {
 
   return (
     <Stack direction="column">
-      {!shouldHideMenu && <TopMenu />}
+      {!shouldHideMenu && <Menu />}
       <Box sx={{ mx: { xs: 1, md: 4 }, my: 4 }}>
         <AppRouter />
       </Box>
