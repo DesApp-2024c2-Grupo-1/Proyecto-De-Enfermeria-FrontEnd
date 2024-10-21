@@ -4,43 +4,41 @@ import { blue, blueGrey, lightBlue } from "@mui/material/colors";
 export const customMuiTheme = createTheme({
   typography: {
     h4: {
-      fontWeight: 'bold',
+      fontWeight: "bold",
       color: lightBlue[700],
     },
     h5: {
-      fontWeight: 'bold',
+      fontWeight: "bold",
       color: blue[800],
-      fontSize: '1.5rem',
+      fontSize: "1.5rem",
     },
     subtitle1: {
-      fontSize: '1rem',
+      fontSize: "1rem",
     },
     subtitle2: {
-      fontSize: '1.2rem',
+      fontSize: "1.2rem",
     },
     button: {
-      textTransform: 'none',
+      textTransform: "none",
     },
     topMenu: {
       color: blueGrey[50],
-      fontSize: '1.5rem',
-      fontWeight: 'bold',
+      fontSize: "1rem",
     },
     topMenuSelected: {
       color: blueGrey[200],
-      fontSize: '1.5rem',
-      fontWeight: 'bold',
-    }
+      fontSize: "1rem",
+    },
   },
   components: {
     MuiTableCell: {
       styleOverrides: {
         head: {
-          fontWeight: 'bold',
-          fontSize: '1rem',
-          color: lightBlue[900]
-        }
-      }
-    }
-  }
+          fontWeight: "bold",
+          fontSize: "1rem",
+          color: lightBlue[900],
+        },
+      },
+    },
+  },
 });

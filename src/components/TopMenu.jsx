@@ -1,5 +1,4 @@
 import { Box, Stack } from "@mui/material";
-import { cyan } from "@mui/material/colors";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function MenuOption({ path, label }) {
@@ -10,7 +9,7 @@ function MenuOption({ path, label }) {
     <Box
       sx={{
         typography: pathname === path ? "topMenu" : "topMenuSelected",
-        mr: 8,
+        padding: 2,
       }}
       onClick={() => navigate(path)}
     >
@@ -19,11 +18,14 @@ function MenuOption({ path, label }) {
   );
 }
 
-export function TopMenu() {
+export function Menu() {
   return (
-    <Stack direction="row" alignItems="center" className="menu">
-      <MenuOption path="/home" label="Home" />
-      <MenuOption path="/perfilDocente" label="Perfil" />
-    </Stack>
+    <div>
+      <Stack direction="row" alignItems="center" className="menu">
+        <MenuOption path="/home" label="Inicio" />
+        <MenuOption path="/alumnos" label="Alumnos" />
+        <MenuOption path="/perfilDocente" label="Perfil" />
+      </Stack>
+    </div>
   );
 }

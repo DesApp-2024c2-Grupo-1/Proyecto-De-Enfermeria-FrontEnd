@@ -41,9 +41,7 @@ body {
 }
 
 .menu {
+  height: 10vh;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 20px;
   background-color: #31614b;
 }
