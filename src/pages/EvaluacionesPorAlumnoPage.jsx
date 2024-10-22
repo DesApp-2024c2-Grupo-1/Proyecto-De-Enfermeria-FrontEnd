@@ -3,16 +3,17 @@ import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
 
 const datos = [
-  { nombre: "Maria Gonzalez", documento: "12345369" },
-  { nombre: "Juan Perez", documento: "98765432" },
-  { nombre: "Ana López", documento: "23456789" },
-  { nombre: "Luis Rodríguez", documento: "34567890" },
-  { nombre: "Sofia Torres", documento: "45678901" },
+  { fecha: "12/10/24", porcentaje: "100%" },
+  { fecha: "13/10/24" },
+  { fecha: "14/10/24" },
+  { fecha: "15/10/24"  },
+  { fecha: "16/10/24" },
 ];
 
-export function RegistroEvaluacionesPage() {
+
+export function EvaluacionesPorAlumno() {
   const navigate = useNavigate();
-  const keys = ["nombre", "documento"];
+  const keys = ["fecha", "porcentaje"];
 
   return (
     <>
