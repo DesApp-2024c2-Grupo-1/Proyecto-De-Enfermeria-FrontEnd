@@ -1,6 +1,6 @@
 import React from "react";
 
-function ListItem({ textoUno, textoDos, buttonOnClick, estilos }) {
+function ListItem({ textoUno, textoDos, buttonOnClick}) {
   return (
     <div className="listItem">
       <div className="listItemTextos">

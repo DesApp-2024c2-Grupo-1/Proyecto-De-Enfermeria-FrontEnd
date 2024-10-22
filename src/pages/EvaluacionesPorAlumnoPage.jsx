@@ -10,10 +10,6 @@ const datos = [
   { fecha: "16/10/24" },
 ];
 
-const estilos = {
-  textoUno: { color: "blue", fontWeight: "bold" }, // Estilos para textoUno
-  textoDos: { color: "green", fontStyle: "italic" }, // Estilos para textoDos
-};
 
 export function EvaluacionesPorAlumno() {
   const navigate = useNavigate();
@@ -28,7 +24,6 @@ export function EvaluacionesPorAlumno() {
           <Lista
             lista={datos}
             keys={keys}
-            estilos={estilos}
             buttonOnClick={() => navigate("/evaluacionesPorAlumno")}
           />
         </div>
