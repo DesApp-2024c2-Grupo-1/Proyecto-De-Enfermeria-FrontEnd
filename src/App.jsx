@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Box, Grid, Stack } from "@mui/material";
 import { BrowserRouter, useLocation } from "react-router-dom";
 import { Menu } from "./components/TopMenu";
@@ -15,9 +15,18 @@ export function App() {
 export function MainLayout() {
   const location = useLocation();
 
-  const hiddenMenuPaths = ["/", "/register"];
+  const menuRoutes = ["/", "/register"];
+  const shouldHideMenu = menuRoutes.includes(location.pathname);
 
-  const shouldHideMenu = hiddenMenuPaths.includes(location.pathname);
+  useEffect(() => {
+    const body = document.body;
+
+    if (menuRoutes.includes(location.pathname)) {
+      body.style.backgroundColor = "#1A3D2D"; 
+    } else {
+      body.style.backgroundColor = "rgba(255, 255, 255, 0.87)"; 
+    }
+  }, [location.pathname]); 
 
   return (
     <Stack direction="column">

@@ -14,12 +14,13 @@ export function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
-      <Route path="/alumnos" element={<AlumnosPage/>} />
+      <Route path="/alumnos" element={<AlumnosPage />} />
       <Route path="/home" element={<HomePage />} />
       <Route
         path="/evaluacionesPorAlumno"
         element={<EvaluacionesPorAlumno />}
       />
+      <Route path="/verEvaluacion" element={<VerEvaluacionPage />} />
       <Route path="/perfilAlumno" element={<AlumnoPerfilPage />} />
       <Route path="/perfilDocente" element={<PerfilDocentePage />} />
       <Route path="/register" element={<RegisterPage />} />
