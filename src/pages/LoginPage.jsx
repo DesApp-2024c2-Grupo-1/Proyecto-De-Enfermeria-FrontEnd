@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
+import FormInput from '../components/FormInput'
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -19,15 +20,14 @@ export function LoginPage() {
   return (
     <>
       <div>Login</div>
-      <input
+      <FormInput
         type="email"
         placeholder="nombre@apellido.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         className="input-email"
       />
-
-      <input
+      <FormInput
         type="password"
         placeholder="contraseña"
         value={password}
