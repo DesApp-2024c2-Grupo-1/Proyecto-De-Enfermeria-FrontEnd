@@ -1,4 +1,4 @@
-export function ExamenEvaluadoPage() {
+export function VerEvaluacionPage() {
     return <>
       <div>Exámen evaluado</div>
     </>  

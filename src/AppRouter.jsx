@@ -6,8 +6,8 @@ import { RegisterPage } from "./pages/RegisterPage";
 import { AlumnosPage } from "./pages/AlumnosPage";
 import { RegistrarEvaluacionPage } from "./pages/RegistrarEvaluacionPage";
 import { RegistroEvaluacionesPage } from "./pages/RegistroEvaluacionesPage";
-//import { VerExamenPage } from "./pages/VerExamenPage";
-//import { RegistroEvaluacionesPage } from "./pages/RegistroEvaluacionesPage";
+import { VerEvaluacionPage } from "./pages/VerEvaluacionPage";
+import { EvaluacionesPorAlumno } from "./pages/EvaluacionesPorAlumnoPage";
 
 export function AppRouter() {
   return (
@@ -15,11 +15,12 @@ export function AppRouter() {
       <Route path="/" element={<LoginPage />} />
       <Route path="/alumnos" element={<AlumnosPage />} />
       <Route path="/home" element={<HomePage />} />
+      <Route path="/evaluacionesPorAlumno" element={<EvaluacionesPorAlumno />} />
       <Route path="/perfilDocente" element={<PerfilDocentePage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/registrarEvaluacion" element={<RegistrarEvaluacionPage />} />
       <Route path="/registroEvaluaciones" element={<RegistroEvaluacionesPage />} />
-
+      <Route path="/verEvaluacion" element={<VerEvaluacionPage />} />
     </Routes>
   );
 }
