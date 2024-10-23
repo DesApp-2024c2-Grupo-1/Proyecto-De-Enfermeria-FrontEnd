@@ -164,3 +164,15 @@ h1 {
   justify-content: space-evenly;
   gap: 2;
 }
+
+.listaPreguntas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pregunta {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

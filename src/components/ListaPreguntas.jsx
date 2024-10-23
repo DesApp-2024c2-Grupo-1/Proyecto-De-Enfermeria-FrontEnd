@@ -2,7 +2,7 @@ import { Pregunta } from "../components/Pregunta";
 
 export function ListaPreguntas({ preguntas, disabled }) {
   return (
-    <div>
+    <div className="listaPreguntas">
       {preguntas.map((pregunta, index) => (
         <Pregunta
           key={index}
