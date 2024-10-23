@@ -19,24 +19,36 @@ export function LoginPage() {
 
   return (
     <>
-      <div>Login</div>
+    <div className="alineacion">
+    <img src="../assets/profile.png" className="bordePerfil"/> 
+      <div className="recuadroTexto">
       <FormInput
         type="email"
         placeholder="nombre@apellido.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="input-email"
+        className="recuadroInputs"
       />
       <FormInput
         type="password"
-        placeholder="contraseña"
+        placeholder="Contraseña"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="input-password"
+        className="recuadroInputs"
       />
-      <Button text="Iniciar sesión" onClick={handleLogin} className="login" />
+      <Button text="Iniciar sesión" onClick={handleLogin} className="botonClaro" />
+      
+      <div className="">
       <p>¿No tenés cuenta?</p>
-      <Button text="Registrate" onClick={handleRegister} />
+      <Button text="Registrate" onClick={handleRegister} className="botonClaro"/>
+      </div>
+      
+    </div>
+
+    <div>
+    <img src="../assets/unahur-logo-figma-sf.png" className="unahur-logo" alt="Logo UNAHUR"/> 
+    </div>
+  </div>
     </>
   );
 }
