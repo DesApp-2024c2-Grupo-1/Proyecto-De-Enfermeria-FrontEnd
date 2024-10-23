@@ -1,3 +1,5 @@
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -174,15 +176,13 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
 
 .recuadroTexto {
-  
   width: 350px;
-  height: 300px;
+  height: 350px;
   background-color: #77C4A0;
   position: relative;
   border-radius: 30px;
@@ -192,23 +192,36 @@ h1 {
   gap: 10px;
   justify-content: center;
   align-items: center;
-
-
 }
 
 .recuadroInputs{
-  width: 200px; /* Establece un ancho fijo */
-  padding: 10px;
   display: flex;
   align-items: center;
   background-color: #DDF0E7;
   border-radius: 4px;
   margin-top: 8px;
   max-width: 20vw;
+
+}
+
+.recuadroInputs i {
+  margin-right: 8px;
+  color: #fff;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  background-color: #429870;
+  padding: 8px; 
+}
+
+.recuadroInputs input {
+  width: 100%;
+  border: none;
+  outline: none;
+  flex: 1;
 }
 
 .bordePerfil{
-  margin-bottom: -55px;
+  margin-bottom: -60px;
   z-index: 1;
   width: 60px;
   height: 60px;
@@ -219,6 +232,22 @@ h1 {
 }
 
 .unahur-logo {
-  width: 190px; /* Ajusta el tamaño */
-  margin-top: 10px; /* Espacio entre el formulario y el logo */
+  width: 190px; 
+  margin-top: 10px;
+}
+
+.alineacion-texto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+
+#espacio {
+  margin-top: -11px;
+}
+
+.texto {
+  color: #242424;
+  font-weight: 400;
 }
