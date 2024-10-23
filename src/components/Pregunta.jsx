@@ -1,16 +1,31 @@
-export function Pregunta({ disabled, placeholder, texto, titulo }) {
-    return (
+export function Pregunta({ pregunta, respuesta, disabled, onChange }) {
+  return (
+    <div className="pregunta">
+      <p>{pregunta}</p>
       <div>
-        <h2>{titulo}</h2>
         <input
-          type="text"
-          placeholder={placeholder}
+          type="radio"
+          id={`si-${pregunta}`}
+          name={`respuesta-${pregunta}`}
+          value="Si"
           disabled={disabled}
-          className="input"
-        >
-          {texto}
-        </input>
+          checked={respuesta === true}
+          onChange={() => onChange(true)} // Cambiamos el estado si se selecciona "Sí"
+        />
+        <label htmlFor={`si-${pregunta}`}> Si </label>
       </div>
-    );
-  }
-  
+      <div>
+        <input
+          type="radio"
+          id={`no-${pregunta}`}
+          name={`respuesta-${pregunta}`}
+          value="No"
+          disabled={disabled}
+          checked={respuesta === false}
+          onChange={() => onChange(false)} // Cambiamos el estado si se selecciona "No"
+        />
+        <label htmlFor={`no-${pregunta}`}> No </label>
+      </div>
+    </div>
+  );
+}
