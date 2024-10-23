@@ -14,49 +14,66 @@ export function RegisterPage() {
   };
 
     return <>
-      <div>Register</div>
+    <div className="alineacion">
+    <img src="../assets/profile.png" className="bordePerfil"/> 
+      <div className="recuadroTexto2">
       <FormInput
         type="name"
         placeholder="Ingrese su nombre"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="input-email"
+        className="recuadroInputs"
+        icono="user"
       />
       <FormInput
         type="apellido"
         placeholder="Ingrese su apellido"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="input-email"
+        className="recuadroInputs"
+        icono="user" 
       />
       <FormInput
         type="dni"
         placeholder="Ingrese su DNI"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="input-email"
+        className="recuadroInputs"
+        icono="address-card"
       />
       <FormInput
         type="email"
         placeholder="nombre@apellido.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="input-email"
+        className="recuadroInputs"
+        icono="envelope"        
       />
       <FormInput
         type="password"
         placeholder="Ingrese su contraseña"
         value={email}
         onChange={(e) => setPassword(e.target.value)}
-        className="input-email"
+        className="recuadroInputs"
+        icono="lock"
       />
       <FormInput
         type="password"
         placeholder="Repita su contraseña"
         value={email}
         onChange={(e) => setPassword(e.target.value)}
-        className="input-email"
+        className="recuadroInputs"
+        icono="lock"
       />
-      <Button text="Registrarse" onClick={handleRegister} className="register" />
-    </>  
+      <div id="espaciojaja"></div>
+      <Button text="Registrarse" onClick={handleRegister} className="botonClaro"/>
+      </div>
+      
+    
+
+    <div>
+    <img src="../assets/unahur-logo-figma-sf.png" className="unahur-logo" alt="Logo UNAHUR"/> 
+    </div>
+    </div>
+    </> 
   }

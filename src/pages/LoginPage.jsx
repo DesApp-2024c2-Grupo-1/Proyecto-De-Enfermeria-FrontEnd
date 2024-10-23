@@ -29,7 +29,7 @@ export function LoginPage() {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         className="recuadroInputs"
-        icono="address-card"
+        icono="envelope"
       />
       <FormInput
         type="password"
