@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import FormInput from '../components/FormInput'
+import "../index.css"
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -19,24 +20,41 @@ export function LoginPage() {
 
   return (
     <>
-      <div>Login</div>
+    <div className="alineacion">
+    <img src="../assets/profile.png" className="bordePerfil"/> 
+      <div className="recuadroTexto">
       <FormInput
         type="email"
         placeholder="nombre@apellido.com"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="input-email"
+        className="recuadroInputs"
+        icono="envelope"
       />
       <FormInput
         type="password"
-        placeholder="contraseña"
+        placeholder="Contraseña"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="input-password"
+        className="recuadroInputs"
+        icono="lock"
       />
-      <Button text="Iniciar sesión" onClick={handleLogin} className="login" />
-      <p>¿No tenés cuenta?</p>
-      <Button text="Registrate" onClick={handleRegister} />
+      <Button text="Iniciar sesión" onClick={handleLogin} className="botonClaro" />
+      
+      <div className="alineacion-texto">
+      <p className="texto">
+      <a className="texto" href="https://ar.pinterest.com/pin/369084131975098694/" target="_blank">¿Olvidaste la contraseña?</a>
+      </p>
+      <p id="espacio">¿No tenés cuenta?</p>
+      <Button text="Registrate" onClick={handleRegister} className="botonClaro"/>
+      </div>
+      
+    </div>
+
+    <div>
+    <img src="../assets/unahur-logo-figma-sf.png" className="unahur-logo" alt="Logo UNAHUR"/> 
+    </div>
+    </div>
     </>
   );
 }

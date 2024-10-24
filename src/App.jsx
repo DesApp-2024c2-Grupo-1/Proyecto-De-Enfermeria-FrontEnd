@@ -31,9 +31,7 @@ export function MainLayout() {
   return (
     <Stack direction="column">
       {!shouldHideMenu && <Menu />}
-      <Box sx={{ mx: { xs: 1, md: 4 }, my: 4 }}>
         <AppRouter />
-      </Box>
     </Stack>
   );
 }
