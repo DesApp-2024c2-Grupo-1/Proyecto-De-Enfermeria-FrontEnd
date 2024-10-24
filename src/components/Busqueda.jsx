@@ -1,22 +1,40 @@
 import React, { useState } from 'react';
+import { TextField, InputAdornment } from '@mui/material';
 
-const Busqueda = ({ onSearch, placeholder }) => {
-  const [query, setQuery] = useState('');
+const Busqueda = ({ placeholder }) => {
+  const [isFocused, setIsFocused] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSearch(query);
-  };
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input 
-        type="text" 
-        value={query} 
-        onChange={(e) => setQuery(e.target.value)} 
-        placeholder={placeholder || 'Search...'}
-      />
-    </form>
+    <TextField
+      fullWidth
+      placeholder={placeholder || "Buscar..."}
+      variant="outlined"
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <img
+              src={isFocused ? "assets/busqueda-focused-1.png" : "assets/busqueda.png"} 
+              alt="busqueda-icon"
+              style={{ width: 30, height: 30 }}
+            />
+          </InputAdornment>
+        ),
+      }}
+      sx={{
+        width: 200,
+        '& .MuiOutlinedInput-root': {
+          borderRadius: '50px',
+          '&.Mui-focused fieldset': {
+            borderColor: '#77C4A0', 
+          },
+        },
+      }}
+    />
   );
 };
 

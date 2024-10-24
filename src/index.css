@@ -168,6 +168,20 @@ h1 {
   gap: 2;
 }
 
+.listaPreguntas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pregunta {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+}
+
+
 /* Recuadro del login y register */
 
 .alineacion{
