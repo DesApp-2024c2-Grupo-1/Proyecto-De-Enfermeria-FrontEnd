@@ -1,4 +1,4 @@
-@import '@fortawesome/fontawesome-free/css/all.min.css';
+@import "@fortawesome/fontawesome-free/css/all.min.css";
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -27,10 +27,10 @@ body {
   margin: 0px;
   min-width: 320px;
   min-height: 100vh;
-
 }
 
 h1 {
+  margin-top: 5rem;
   margin-bottom: 5rem;
   text-align: center;
 }
@@ -61,12 +61,17 @@ h1 {
 }
 
 .logo {
-  height: 100%;
+  width: 190px;
   padding-right: 20px;
   margin-left: 10px;
+  margin-top: 10px;
 }
 
 /* Home */
+
+.gridCarpetas {
+  padding: 20vh;
+}
 
 .carpeta {
   display: flex;
@@ -86,7 +91,7 @@ h1 {
 .carpetaPestaña {
   width: 80px;
   height: 20px;
-  background-color: #daf2e3; 
+  background-color: #daf2e3;
   position: absolute;
   top: -15px;
   border-bottom: none;
@@ -109,12 +114,12 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center; 
+  text-align: center;
 }
 
 .registroEvaluaciones {
   width: 80%;
-  text-align: justify; 
+  text-align: justify;
 }
 
 .listItem {
@@ -125,7 +130,8 @@ h1 {
   margin-top: 2rem;
   padding: 0rem 1.5rem;
   border-radius: 100px;
-  background-color: aliceblue;
+  background-color: #BBE2D0;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 .listItemTextos {
@@ -135,20 +141,22 @@ h1 {
   padding: 0.2rem;
 }
 
-.boton-negro {
-  background-color: black; 
-  color: white; 
-  border: none; 
+.botonVerde {
+  background-color: #31614b;
+  color: white;
+  border: none;
   padding: 12px 50px;
-  border-radius: 50px; 
-  cursor: pointer; 
+  border-radius: 50px;
+  cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
-.boton-negro:hover {
-  background-color: #414141;
+.botonVerde:hover {
+  background-color: #234637;
+
 }
 
 /* Evaluaciones por alumno*/
@@ -178,13 +186,11 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-around;
-
 }
-
 
 /* Recuadro del login y register */
 
-.alineacion{
+.alineacion {
   margin: 0;
   padding: 0;
   display: flex;
@@ -198,7 +204,7 @@ h1 {
 .recuadroTexto {
   width: 350px;
   height: 350px;
-  background-color: #77C4A0;
+  background-color: #77c4a0;
   position: relative;
   border-radius: 30px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
@@ -212,7 +218,7 @@ h1 {
 .recuadroTexto2 {
   width: 350px;
   height: 430px;
-  background-color: #77C4A0;
+  background-color: #77c4a0;
   position: relative;
   border-radius: 30px;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
@@ -223,10 +229,10 @@ h1 {
   align-items: center;
 }
 
-.recuadroInputs{
+.recuadroInputs {
   display: flex;
   align-items: center;
-  background-color: #DDF0E7;
+  background-color: #ddf0e7;
   border-radius: 4px;
   margin-top: 8px;
   width: 225px;
@@ -238,7 +244,7 @@ h1 {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
   background-color: #429870;
-  padding: 8px; 
+  padding: 8px;
 }
 
 .recuadroInputs input {
@@ -257,7 +263,7 @@ h1 {
   font-style: italic;
 }
 
-.bordePerfil{
+.bordePerfil {
   margin-bottom: -60px;
   z-index: 1;
   width: 60px;
@@ -269,7 +275,7 @@ h1 {
 }
 
 .unahur-logo {
-  width: 190px; 
+  width: 190px;
   margin-top: 10px;
 }
 
@@ -292,3 +298,5 @@ h1 {
 #espaciojaja {
   margin-top: 5px;
 }
+
+/* Perfil Alumno */

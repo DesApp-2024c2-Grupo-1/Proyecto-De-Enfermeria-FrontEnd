@@ -1,4 +1,4 @@
-import Busqueda from "../components/busqueda";
+import Filtro from "../components/Filtro";
 import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
 
@@ -31,16 +31,20 @@ export function AlumnoPerfilPage() {
   return (
     <>
       <h1>Maria Gonzalez</h1>
-      <div style={{ margin: 120 }}>
-        {examenes.map((examen, index) => (
-          <Lista
-            key={index}
-            titulo={examen.titulo}
-            lista={examen.instancias}
-            keys={keys}
-            buttonOnClick={() => navigate("/verEvaluacion")}
-          />
-        ))}
+
+      <div style={{ margin: "10px 120px" }}>
+        <Filtro />
+        <div>
+          {examenes.map((examen, index) => (
+            <Lista
+              key={index}
+              titulo={examen.titulo}
+              lista={examen.instancias}
+              keys={keys}
+              buttonOnClick={() => navigate("/verEvaluacion")}
+            />
+          ))}
+        </div>
       </div>
     </>
   );

@@ -18,9 +18,9 @@ const Busqueda = ({ placeholder }) => {
         startAdornment: (
           <InputAdornment position="start">
             <img
-              src={isFocused ? "assets/busqueda-focused-1.png" : "assets/busqueda.png"} 
+              src={isFocused ? "assets/busqueda-focused.png" : "assets/busqueda.png"} 
               alt="busqueda-icon"
-              style={{ width: 30, height: 30 }}
+              style={{ width: 25, height: 25,  }}
             />
           </InputAdornment>
         ),
