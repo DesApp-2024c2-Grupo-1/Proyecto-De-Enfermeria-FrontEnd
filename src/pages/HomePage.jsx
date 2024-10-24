@@ -27,14 +27,15 @@ export function HomePage() {
       }}
     >
       <h1>¡Bienvenido/a, Carlos Perez!</h1>
-
-      <Grid container spacing={5}>
+      <div className="gridCarpetas">
+      <Grid container spacing={10}>
         {carpetas.map((titulo, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <Carpeta titulo={titulo} />
           </Grid>
         ))}
       </Grid>
+      </div>
     </div>
   );
 }

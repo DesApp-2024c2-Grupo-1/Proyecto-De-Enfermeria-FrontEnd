@@ -2,7 +2,7 @@ import ListItem from "./ListItem";
 
 function Lista({ titulo,  lista, keys, buttonOnClick }) {
   return (
-    <div>
+    <div className="lista">
       <h2>{titulo}</h2>
       {lista.map((item, index) => (
         <ListItem

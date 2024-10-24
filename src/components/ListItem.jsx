@@ -8,7 +8,7 @@ function ListItem({ textoUno, textoDos, buttonOnClick}) {
         <p>{textoDos}</p>
       </div>
       <div>
-        <button className="boton-negro" onClick={buttonOnClick}>
+        <button className="botonVerde" onClick={buttonOnClick}>
           Ver
         </button>
       </div>

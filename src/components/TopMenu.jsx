@@ -4,7 +4,6 @@ import HomeIcon from "/assets/home.png";
 import ProfileIcon from "/assets/profile.png";
 import AlumnosIcon from "/assets/alumnos.png";
 
-
 function MenuOption({ path, label, icon }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -15,10 +14,9 @@ function MenuOption({ path, label, icon }) {
         typography: pathname === path ? "topMenu" : "topMenuSelected",
         padding: 8,
         cursor: "pointer",
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-       
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
       }}
       onClick={() => navigate(path)}
     >
@@ -44,7 +42,11 @@ export function Menu() {
         </Stack>
 
         {/* Logo a la derecha */}
-        <img src="../assets/logoUnahur.svg" className="logo" alt="Logo" />
+        <img
+          src="../assets/unahur-logo-figma-sf.png"
+          className="logo"
+          alt="Logo"
+        />
       </Stack>
     </div>
   );
