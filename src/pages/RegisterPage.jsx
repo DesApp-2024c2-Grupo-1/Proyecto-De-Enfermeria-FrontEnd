@@ -6,8 +6,12 @@ import Button from "../components/Button"
 export function RegisterPage() {
 
   const navigate = useNavigate();
+  const [nombre, setNombre] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [dni, setDni] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmarPassword, setConfirmarPassword] = useState("");
 
   const handleRegister = () => {
     navigate("register");
@@ -20,24 +24,24 @@ export function RegisterPage() {
       <FormInput
         type="name"
         placeholder="Ingrese su nombre"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        value={nombre}
+        onChange={(e) => setNombre(e.target.value)}
         className="recuadroInputs"
         icono="user"
       />
       <FormInput
         type="apellido"
         placeholder="Ingrese su apellido"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        value={apellido}
+        onChange={(e) => setApellido(e.target.value)}
         className="recuadroInputs"
         icono="user" 
       />
       <FormInput
         type="dni"
         placeholder="Ingrese su DNI"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        value={dni}
+        onChange={(e) => setDni(e.target.value)}
         className="recuadroInputs"
         icono="address-card"
       />
@@ -52,7 +56,7 @@ export function RegisterPage() {
       <FormInput
         type="password"
         placeholder="Ingrese su contraseña"
-        value={email}
+        value={password}
         onChange={(e) => setPassword(e.target.value)}
         className="recuadroInputs"
         icono="lock"
@@ -60,8 +64,8 @@ export function RegisterPage() {
       <FormInput
         type="password"
         placeholder="Repita su contraseña"
-        value={email}
-        onChange={(e) => setPassword(e.target.value)}
+        value={confirmarPassword}
+        onChange={(e) => setConfirmarPassword(e.target.value)}
         className="recuadroInputs"
         icono="lock"
       />
