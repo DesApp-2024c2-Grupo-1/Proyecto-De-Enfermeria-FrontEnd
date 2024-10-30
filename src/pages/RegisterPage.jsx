@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput"
 import Button from "../components/Button"
+import { registrarDocente } from "../services/DocenteService";
 
 export function RegisterPage() {
 
@@ -12,10 +13,23 @@ export function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmarPassword, setConfirmarPassword] = useState("");
+  const [error, setError] = useState(null);
 
-  const handleRegister = () => {
-    navigate("register");
+  const handleRegister = async () => {
+    if (password !== confirmarPassword) {
+      setError('Las contraseñas no coinciden')
+      return error;
+    }
+    setError(null)
+
+    const docenteData = { nombre, apellido, email, dni, password };
+    registrarDocente(docenteData);
+    navigate("home");
+
+    
   };
+ 
+  
 
     return <>
     <div className="alineacion">
