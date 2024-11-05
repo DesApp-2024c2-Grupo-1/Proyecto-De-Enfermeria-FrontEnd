@@ -299,4 +299,18 @@ h1 {
   margin-top: 5px;
 }
 
-/* Perfil Alumno */
+/* Perfil Docente */
+
+.perfilCirculo {
+  height: 6rem;
+  width: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  background-color: #DDF0E7;
+  color: #429870;
+  font-size: 3rem;
+  font-weight: 500;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
