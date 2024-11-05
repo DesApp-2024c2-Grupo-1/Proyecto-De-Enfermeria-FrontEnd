@@ -22,7 +22,7 @@ export function RegistrarEvaluacionPage() {
       <div className="grupoInput">
         <Input
           disabled={false}
-          placeholder={"Ingresar DNI del alumno:"}
+          placeholder={"Ingresar DNI:"}
           titulo={"Alumno"}
         ></Input>
         <Input
