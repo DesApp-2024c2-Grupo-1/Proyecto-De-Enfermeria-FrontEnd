@@ -35,7 +35,7 @@ export function ListaPreguntas({ preguntas, disabled }) {
           />
         ))}
         {!registrado ? (
-          <button onClick={handleOnClick}> Registrar </button>
+          <div><button className="botonVerde flex-center"  onClick={handleOnClick}> Registrar </button></div>
         ) : (
           <div></div>
         )}

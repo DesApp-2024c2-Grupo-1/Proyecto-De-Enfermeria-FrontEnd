@@ -1,6 +1,6 @@
-import { Input } from "../components/Input";
-import { ListaPreguntas } from "../components/ListaPreguntas";
+
 import { Evaluacion } from "../components/Evaluacion";
+
 
 const preguntas = [
   { pregunta: "Lorem ipsum dolor sit amet?" },
@@ -18,6 +18,7 @@ const preguntas = [
 ];
 
 export function RegistrarEvaluacionPage() {
+
   return (
     <>
     <Evaluacion preguntas={preguntas} />
