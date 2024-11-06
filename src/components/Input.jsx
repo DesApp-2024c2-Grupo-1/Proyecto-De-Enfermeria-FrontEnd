@@ -1,6 +1,10 @@
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 
-export function Input({ disabled, placeholder, texto, titulo, width }) {
+
+
+export function Input({ disabled, placeholder, texto, titulo, width, helperText }) {
+
+
   return (
     <div>
       <h2>{titulo}</h2>
@@ -22,8 +26,8 @@ export function Input({ disabled, placeholder, texto, titulo, width }) {
           },
           "& .MuiInputLabel-root": {
             color: "#429870",
-            "&.Mui-focused": { // Add this to keep the label color when focused
-              color: "#429870", // Keep the same color when focused
+            "&.Mui-focused": {
+              color: "#429870",
             },
           },
         }}
@@ -31,7 +35,14 @@ export function Input({ disabled, placeholder, texto, titulo, width }) {
         id={texto}
         label={placeholder}
         variant="outlined"
+      
+      
       />
+      {!disabled && helperText && ( 
+        <Typography sx={{ marginTop: "8px", color: "#429870" }}>
+          {helperText}
+        </Typography>
+      )}
     </div>
   );
 }
