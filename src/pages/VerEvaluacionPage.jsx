@@ -19,8 +19,8 @@ const preguntas = [
 
 export function VerEvaluacionPage() {
   return (
-    <div>
-      <Evaluacion preguntas={preguntas} disabled={true} />
-    </div>
+    <>
+      <Evaluacion preguntas={preguntas} disabled={true}  alumnoDisabled={true} alumnoPlaceholder="Maria Gonzalez" />
+    </>
   );
 }
