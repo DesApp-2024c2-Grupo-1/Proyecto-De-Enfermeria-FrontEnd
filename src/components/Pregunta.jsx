@@ -3,10 +3,12 @@ import { Stack, Box } from "@mui/material";
 export function Pregunta({ pregunta, respuesta, disabled, onChange }) {
   return (
     <Stack
+
       direction={{ xs: "column", sm: "row" }}
       sx={{
         justifyContent: "space-between",
         alignItems: "center",
+        my: "1rem",
       }}
     >
       <Box sx={{ maxWidth: "60%", textAlign: "center" /* backgroundColor: "green" */}}>
