@@ -30,13 +30,14 @@ export function Evaluacion({
             disabled={alumnoDisabled}
             placeholder={"Ingresar DNI:" || alumnoPlaceholder}
             titulo={"Alumno"}
-            
+           
           /> 
           <Input
             disabled={true}
             activo={false}
             placeholder={"Carlos Perez"}
             titulo={"Docente"}
+          
           ></Input>
         </Stack>
         <Box>

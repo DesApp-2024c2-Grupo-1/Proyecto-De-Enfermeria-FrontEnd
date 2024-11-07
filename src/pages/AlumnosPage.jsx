@@ -18,7 +18,7 @@ export function AlumnosPage() {
   const listaFiltrada = searchTerm.length >= 7 ? datos.filter((alumno) =>
     alumno.documento.includes(searchTerm)) : datos;
 
-  return (
+  return ( 
     <>
       <div className="registroEvaluacionesContainer">
         <h1>Alumnos</h1>
