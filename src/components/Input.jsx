@@ -2,7 +2,7 @@ import { TextField, Typography } from "@mui/material";
 
 
 
-export function Input({ disabled, placeholder, texto, titulo, width, helperText }) {
+export function Input({ disabled, placeholder, texto, titulo, width, helperText, onChange }) {
 
 
   return (
@@ -35,7 +35,7 @@ export function Input({ disabled, placeholder, texto, titulo, width, helperText 
         id={texto}
         label={placeholder}
         variant="outlined"
-      
+        onChange={onChange}
       
       />
       {!disabled && helperText && ( 

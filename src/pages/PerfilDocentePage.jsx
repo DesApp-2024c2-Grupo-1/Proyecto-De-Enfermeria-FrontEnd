@@ -13,7 +13,7 @@ const keyValues = ["nombre", "apellido", "email", "dni"];
 
 export function PerfilDocentePage() {
   const [editando, setEditando] = useState(true);
-
+ 
   const handleClick = () => {
     setEditando(!editando);
   };
@@ -30,6 +30,7 @@ export function PerfilDocentePage() {
           const key = keyValues[index];
           return (
             <Input
+              onChange={(e) => setSearchTerm(e.target.value)}
               width="25rem"
               key={key}
               disabled={editando || !dato.modificable}
