@@ -62,6 +62,7 @@ export function Evaluacion({
           placeholder={alumnoPlaceholder || "Ingresar DNI:"}
           titulo={"Alumno"}
           helperText={alumno}
+          helperTextColor={alumno === "Alumno no encontrado" ? "red" : "#429870"}
         />
         <Input
           disabled={true}

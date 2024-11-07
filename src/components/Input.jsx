@@ -1,10 +1,15 @@
 import { TextField, Typography } from "@mui/material";
 
-
-
-export function Input({ disabled, placeholder, texto, titulo, width, helperText, onChange }) {
-
-
+export function Input({
+  disabled,
+  placeholder,
+  texto,
+  titulo,
+  width,
+  helperText,
+  helperTextColor,
+  onChange,
+}) {
   return (
     <div>
       <h2>{titulo}</h2>
@@ -36,10 +41,9 @@ export function Input({ disabled, placeholder, texto, titulo, width, helperText,
         label={placeholder}
         variant="outlined"
         onChange={onChange}
-      
       />
-      {!disabled && helperText && ( 
-        <Typography sx={{ marginTop: "8px", color: "#429870" }}>
+      {!disabled && helperText && (
+        <Typography sx={{ marginTop: "8px", color: `${helperTextColor}` }}>
           {helperText}
         </Typography>
       )}
