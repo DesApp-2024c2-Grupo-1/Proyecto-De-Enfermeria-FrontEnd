@@ -1,23 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Busqueda from "../components/busqueda";
 import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
-
-const datos = [
-  { nombre: "Maria Gonzalez", documento: "12345369" },
-  { nombre: "Juan Perez", documento: "98765432" },
-  { nombre: "Ana López", documento: "23456789" },
-  { nombre: "Luis Rodríguez", documento: "34567890" },
-  { nombre: "Sofia Torres", documento: "45678901" },
-];
+import { getAllAlumnos } from "../services/alumnoService";
 
 export function AlumnosPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-  const keys = ["nombre", "documento"];
-  const listaFiltrada = searchTerm.length >= 7 ? datos.filter((alumno) =>
-    alumno.documento.includes(searchTerm)) : datos;
 
+  const keys = ["nombre", "dni"]
+  const [alumnos, setAlumnos] = useState([]);
+  const listaFiltrada = searchTerm.length >= 7 ? alumnos.filter((alumno) => 
+    String(alumno.dni).includes(searchTerm)) : alumnos;
+
+  const fetchAlumnos = async () => {
+    const data = await getAllAlumnos();
+    setAlumnos(data)
+  };
+
+  useEffect(() => {
+    fetchAlumnos();
+  }, []);
+
+  
   return ( 
     <>
       <div className="registroEvaluacionesContainer">
