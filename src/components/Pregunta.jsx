@@ -1,8 +1,20 @@
+import { Stack, Box } from "@mui/material";
+
 export function Pregunta({ pregunta, respuesta, disabled, onChange }) {
   return (
-    <div className="pregunta">
-      <p>{pregunta}</p>
-      <div>
+    <Stack
+
+      direction={{ xs: "column", sm: "row" }}
+      sx={{
+        justifyContent: "space-between",
+        alignItems: "center",
+        my: "1rem",
+      }}
+    >
+      <Box sx={{ maxWidth: "60%", textAlign: "center" /* backgroundColor: "green" */}}>
+        <p>{pregunta}</p> 
+      </Box>
+      <Stack direction={"row"} spacing={2.5} sx={{/*backgroundColor: "yellow" */}}>
         <input
           type="radio"
           id={`si-${pregunta}`}
@@ -10,11 +22,10 @@ export function Pregunta({ pregunta, respuesta, disabled, onChange }) {
           value="Si"
           disabled={disabled}
           checked={respuesta === true}
-          onChange={() => onChange(true)} // Cambiamos el estado si se selecciona "Sí"
+          onChange={() => onChange(true)}
         />
         <label htmlFor={`si-${pregunta}`}> Si </label>
-      </div>
-      <div>
+
         <input
           type="radio"
           id={`no-${pregunta}`}
@@ -22,10 +33,10 @@ export function Pregunta({ pregunta, respuesta, disabled, onChange }) {
           value="No"
           disabled={disabled}
           checked={respuesta === false}
-          onChange={() => onChange(false)} // Cambiamos el estado si se selecciona "No"
+          onChange={() => onChange(false)}
         />
         <label htmlFor={`no-${pregunta}`}> No </label>
-      </div>
-    </div>
+      </Stack>
+    </Stack>
   );
 }

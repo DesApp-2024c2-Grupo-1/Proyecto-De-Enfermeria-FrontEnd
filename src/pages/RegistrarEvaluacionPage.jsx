@@ -1,5 +1,6 @@
-import { Input } from "../components/Input";
-import { ListaPreguntas } from "../components/ListaPreguntas";
+
+import { Evaluacion } from "../components/Evaluacion";
+
 
 const preguntas = [
   { pregunta: "Lorem ipsum dolor sit amet?" },
@@ -8,33 +9,17 @@ const preguntas = [
   { pregunta: "Ut labore et dolore magna aliqua?" },
   { pregunta: "Ut enim ad minim veniam?" },
   { pregunta: "Duis aute irure dolor in reprehenderit?" },
-  {
-    pregunta: "Excepteur sint occaecat cupidatat non proident?",
-  },
+  {pregunta: "Sint occaecat cupidatat non proident?"},
   {
     pregunta: "Sunt in culpa qui officia deserunt mollit anim id est laborum?",
   },
 ];
 
 export function RegistrarEvaluacionPage() {
+
   return (
     <>
-      <div className="grupoInput">
-        <Input
-          disabled={false}
-          placeholder={"Ingresar DNI:"}
-          titulo={"Alumno"}
-        ></Input>
-        <Input
-          disabled={true}
-          activo={false}
-          placeholder={"Carlos Perez"}
-          titulo={"Docente"}
-        ></Input>
-      </div>
-      <div>
-        <ListaPreguntas preguntas={preguntas} />
-      </div>
+    <Evaluacion preguntas={preguntas} />
     </>
   );
 }

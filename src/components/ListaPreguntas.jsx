@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Pregunta } from "../components/Pregunta";
+import { Stack } from "@mui/material";
 
 export function ListaPreguntas({ preguntas, disabled }) {
   const [respuestas, setRespuestas] = useState(
@@ -21,8 +22,7 @@ export function ListaPreguntas({ preguntas, disabled }) {
 
   return (
     <div>
-
-      <div className="listaPreguntas">
+      <Stack>
         {preguntas.map((pregunta, index) => (
           <Pregunta
             key={index}
@@ -34,10 +34,12 @@ export function ListaPreguntas({ preguntas, disabled }) {
             }
           />
         ))}
-        {!registrado ? <button onClick={handleOnClick}> Registrar </button> : <div></div>}
-        
-      </div>
+        {!registrado ? (
+          <div><button className="botonVerde flex-center" style={{marginTop:"3rem"}} onClick={handleOnClick}> Registrar </button></div>
+        ) : (
+          <div></div>
+        )}
+      </Stack>
     </div>
-    
   );
 }

@@ -1,5 +1,4 @@
-import { Input } from "../components/Input";
-import { ListaPreguntas } from "../components/ListaPreguntas";
+import { Evaluacion } from "../components/Evaluacion";
 
 const preguntas = [
   { pregunta: "Lorem ipsum dolor sit amet?", respuesta: true },
@@ -21,22 +20,7 @@ const preguntas = [
 export function VerEvaluacionPage() {
   return (
     <>
-      <div className="grupoInput">
-        <Input
-          disabled={true}
-          placeholder={"Maria Gonzalez"}
-          titulo={"Alumno"}
-        ></Input>
-        <Input
-          disabled={true}
-          activo={false}
-          placeholder={"Carlos Perez"}
-          titulo={"Docente"}
-        ></Input>
-      </div>
-      <div>
-        <ListaPreguntas preguntas={preguntas} disabled={true} />
-      </div>
+      <Evaluacion preguntas={preguntas} disabled={true}  alumnoDisabled={true} alumnoPlaceholder="Maria Gonzalez" />
     </>
   );
 }
