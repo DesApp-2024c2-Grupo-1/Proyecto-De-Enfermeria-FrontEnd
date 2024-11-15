@@ -8,7 +8,7 @@ export function AlumnosPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
-  const keys = ["nombre", "dni"]
+  const keys = ["nombre", "apellido", "dni"]
   const [alumnos, setAlumnos] = useState([]);
   const listaFiltrada = searchTerm.length >= 7 ? alumnos.filter((alumno) => 
     String(alumno.dni).includes(searchTerm)) : alumnos;
