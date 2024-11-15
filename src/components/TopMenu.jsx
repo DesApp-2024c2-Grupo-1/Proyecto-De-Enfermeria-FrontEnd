@@ -2,6 +2,7 @@ import { Box, Stack } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import HomeIcon from "/assets/home.png";
 import ProfileIcon from "/assets/profile.png";
+import CrearIcon from "/assets/examen.png";
 import AlumnosIcon from "/assets/alumnos.png";
 
 function MenuOption({ path, label, icon }) {
@@ -20,7 +21,7 @@ function MenuOption({ path, label, icon }) {
       }}
       onClick={() => navigate(path)}
     >
-      <img src={icon} alt={label} style={{ width: 30, height: 30 }} />
+      <img src={icon} alt={label} style={{ width: 50, height: 50 }} />
       {label}
     </Box>
   );
@@ -38,6 +39,7 @@ export function Menu() {
         <Stack direction="row" spacing={2}>
           <MenuOption path="/home" label="Inicio" icon={HomeIcon} />
           <MenuOption path="/alumnos" label="Alumnos" icon={AlumnosIcon} />
+          <MenuOption path="/crearEvaluacion" label="Crear" icon={CrearIcon} />
           <MenuOption path="/perfilDocente" label="Perfil" icon={ProfileIcon} />
         </Stack>
 
