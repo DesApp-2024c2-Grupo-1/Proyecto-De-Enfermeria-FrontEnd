@@ -22,7 +22,7 @@ export function AlumnosPage() {
     fetchAlumnos();
   }, []);
 
-  
+
   return ( 
     <>
       <div className="registroEvaluacionesContainer">

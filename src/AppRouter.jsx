@@ -9,6 +9,7 @@ import { VerEvaluacionPage } from "./pages/VerEvaluacionPage";
 import { EvaluacionesPorAlumno } from "./pages/EvaluacionesPorAlumnoPage";
 import { AlumnoPerfilPage } from "./pages/AlumnoPerfilPage";
 import { AlumnosPage } from "./pages/AlumnosPage";
+import { CrearEvaluacionPage } from "./pages/CrearEvaluacionPage";
 
 export function AppRouter() {
   return (
@@ -31,6 +32,10 @@ export function AppRouter() {
       <Route
         path="/registroEvaluaciones"
         element={<RegistroEvaluacionesPage />}
+      />
+      <Route
+        path="/crearEvaluacion"
+        element={<CrearEvaluacionPage />}
       />
       <Route path="/verEvaluacion" element={<VerEvaluacionPage />} />
     </Routes>
