@@ -18,7 +18,7 @@ export function RegistrarEvaluacionPage() {
 
   return (
     <>
-    <Evaluacion preguntas={preguntas} />
+    <Evaluacion preguntas={preguntas} /> 
     </>
   );
 }

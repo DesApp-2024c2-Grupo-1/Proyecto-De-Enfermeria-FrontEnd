@@ -11,7 +11,7 @@ const preguntas = [
     pregunta: "Excepteur sint occaecat cupidatat non proident?",
     respuesta: true,
   },
-  {
+  { 
     pregunta: "Sunt in culpa qui officia deserunt mollit anim id est laborum?",
     respuesta: false,
   },

@@ -1,18 +1,19 @@
 import { Input } from "../components/Input";
 import { TextField } from "@mui/material";
 
-export function Observacion({
-}) {
+export function Observacion({ disabled }) {
   return (
     <div>
-    <h2>Observaciones</h2>
-    <TextField
+      <Input titulo="Modificación de puntaje" disabled={disabled} />
+      <h2>Observaciones</h2>
+      <TextField
+        disabled={disabled}
         multiline
         rows={7}
         placeholder="Escribe tu texto aquí"
         variant="outlined"
         sx={{
-          width: "800px",
+          width: "100%",
           backgroundColor: "#DDF0E7",
 
           "& .MuiOutlinedInput-root": {
@@ -25,7 +26,6 @@ export function Observacion({
             "&.Mui-focused fieldset": {
               borderColor: "#429870",
             },
-            
           },
           "& .MuiInputLabel-root": {
             color: "#429870",
@@ -35,10 +35,6 @@ export function Observacion({
           },
         }}
       />
-    <Input
-              width="3rem"
-              titulo="Modificación de puntaje"
-            />
     </div>
   );
 }

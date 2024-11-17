@@ -79,10 +79,9 @@ export function Evaluacion({ preguntas, disabled, alumnoDisabled, alumnoPlacehol
       </Stack>
 
       <Box>
-        <ListaPreguntas preguntas={preguntas} disabled={disabled} />
+        <ListaPreguntas preguntas={preguntas}  disabled={disabled}/>
       </Box>
-      <Lugar />
-      <Observacion />
+
     </Stack>
   );
 }

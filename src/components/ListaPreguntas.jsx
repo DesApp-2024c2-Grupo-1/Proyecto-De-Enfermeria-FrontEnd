@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Pregunta } from "../components/Pregunta";
 import { Stack } from "@mui/material";
+import { Lugar } from "../components/Lugar";
+import { Observacion } from "../components/Observacion";
 
 export function ListaPreguntas({ preguntas, disabled }) {
   const [respuestas, setRespuestas] = useState(
@@ -34,8 +36,19 @@ export function ListaPreguntas({ preguntas, disabled }) {
             }
           />
         ))}
+        <Lugar />
+        <Observacion disabled={registrado} />
         {!registrado ? (
-          <div><button className="botonVerde flex-center" style={{marginTop:"3rem"}} onClick={handleOnClick}> Registrar </button></div>
+          <div>
+            <button
+              className="botonVerde flex-center"
+              style={{ marginTop: "3rem" }}
+              onClick={handleOnClick}
+            >
+              {" "}
+              Registrar{" "}
+            </button>
+          </div>
         ) : (
           <div></div>
         )}
