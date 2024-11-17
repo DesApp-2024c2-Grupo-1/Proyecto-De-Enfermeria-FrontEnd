@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput"
 import Button from "../components/Button"
-// import { registrarAlumno } from "../services/AlumnoService";
+import { registrarAlumno } from "../services/alumnoService";
 
 export function RegisterPageAlumnos() {
 
@@ -11,13 +11,12 @@ export function RegisterPageAlumnos() {
   const [apellido, setApellido] = useState("");
   const [dni, setDni] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmarPassword, setConfirmarPassword] = useState("");
   const [error, setError] = useState(null);
 
+  
 const handleRegister = async () => {
-  const alumnoData = { nombre, apellido, email, dni, password };
-//  await registrarAlumno(alumnoData);
+  const alumnoData = { nombre, apellido, email, dni };
+  await registrarAlumno(alumnoData);
   navigate("/registroAlumnoExitoso");
 };
 

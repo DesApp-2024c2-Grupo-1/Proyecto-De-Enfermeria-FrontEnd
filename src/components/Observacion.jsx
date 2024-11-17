@@ -1,21 +1,18 @@
-import { TextField, Typography } from "@mui/material";
+import { Input } from "../components/Input";
+import { TextField } from "@mui/material";
 
-export function Input({
-  disabled,
-  placeholder,
-  texto,
-  titulo,
-  width,
-  helperText,
-  helperTextColor,
-  onChange,
+export function Observacion({
 }) {
   return (
     <div>
-      <h2>{titulo}</h2>
-      <TextField
+    <h2>Observaciones</h2>
+    <TextField
+        multiline
+        rows={7}
+        placeholder="Escribe tu texto aquí"
+        variant="outlined"
         sx={{
-          width: width,
+          width: "800px",
           backgroundColor: "#DDF0E7",
 
           "& .MuiOutlinedInput-root": {
@@ -37,17 +34,11 @@ export function Input({
             },
           },
         }}
-        disabled={disabled}
-        id={texto}
-        label={placeholder}
-        variant="outlined"
-        onChange={onChange}
       />
-      {!disabled && helperText && (
-        <Typography sx={{ marginTop: "8px", color: `${helperTextColor}` }}>
-          {helperText}
-        </Typography>
-      )}
+    <Input
+              width="3rem"
+              titulo="Modificación de puntaje"
+            />
     </div>
   );
 }
