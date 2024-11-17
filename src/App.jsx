@@ -15,7 +15,7 @@ export function App() {
 export function MainLayout() {
   const location = useLocation();
 
-  const menuRoutes = ["/", "/register"];
+  const menuRoutes = ["/", "/register", "/registerAlumnos", "/registroAlumnoExitoso"];
   const shouldHideMenu = menuRoutes.includes(location.pathname);
 
   useEffect(() => {
