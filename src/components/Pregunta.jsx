@@ -9,6 +9,8 @@ export function Pregunta({ pregunta, respuesta, disabled, onChange }) {
         justifyContent: "space-between",
         alignItems: "center",
         my: "1rem",
+        borderBottom: "1px solid black",
+      
       }}
     >
       <Box sx={{ maxWidth: "60%", textAlign: "center" /* backgroundColor: "green" */}}>
