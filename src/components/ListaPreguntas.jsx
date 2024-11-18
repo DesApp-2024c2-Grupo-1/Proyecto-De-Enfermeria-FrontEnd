@@ -5,6 +5,7 @@ import { Lugar } from "../components/Lugar";
 import { Observacion } from "../components/Observacion";
 
 export function ListaPreguntas({ preguntas, disabled }) {
+
   const [respuestas, setRespuestas] = useState(
     preguntas.map((pregunta) => pregunta.respuesta || null)
   );
@@ -36,7 +37,7 @@ export function ListaPreguntas({ preguntas, disabled }) {
             }
           />
         ))}
-        <Lugar />
+        <Lugar disabled={registrado} />
         <Observacion disabled={registrado} />
         {!registrado ? (
           <div>

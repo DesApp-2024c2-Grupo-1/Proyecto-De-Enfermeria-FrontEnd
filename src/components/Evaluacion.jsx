@@ -18,6 +18,7 @@ export function Evaluacion({ preguntas, disabled, alumnoDisabled, alumnoPlacehol
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [alumno, setAlumno] = useState("");
+  
 
   const handleRegister = async () => {
     // const alumnoData = { nombre, apellido, email, dni, password };
