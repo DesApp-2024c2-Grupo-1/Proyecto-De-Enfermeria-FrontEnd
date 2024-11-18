@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { Input } from "../components/Input";
 import { TextField } from "@mui/material";
 
+
 export function Observacion({ disabled }) {
+ 
   return (
     <div>
-      <Input titulo="Modificación de puntaje" disabled={disabled} />
+      <Input titulo="Modificación de puntaje" disabled={disabled}  />
       <h2>Observaciones</h2>
       <TextField
         disabled={disabled}
