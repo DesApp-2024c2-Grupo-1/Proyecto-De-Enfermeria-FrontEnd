@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Filtro from "../components/Filtro";
-import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
+import { getAlumnoByDni } from "../services/alumnoService";
 
 const examenes = [
   {
@@ -25,12 +27,25 @@ const examenes = [
 ];
 
 export function AlumnoPerfilPage() {
+  const [alumno, setAlumno] = useState(null);
   const keys = ["fecha", "porcentaje"];
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const fetchAlumnoByDni = async (id) => {
+    const data = await getAlumnoByDni(id);
+    setAlumno(data);
+  };
+
+ 
+  useEffect(() => {
+    fetchAlumnoByDni(id);
+  }, [id]);
 
   return (
     <>
-      <h1>Maria Gonzalez</h1>
+      
+      <h1>{alumno ? `${alumno.nombre} ${alumno.apellido}` : "Cargando..."}</h1>
 
       <div style={{ margin: "10px 120px" }}>
         <Filtro />

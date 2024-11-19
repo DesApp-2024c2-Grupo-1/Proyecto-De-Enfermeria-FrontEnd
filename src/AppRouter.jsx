@@ -25,6 +25,7 @@ export function AppRouter() {
       />
       <Route path="/verEvaluacion" element={<VerEvaluacionPage />} />
       <Route path="/perfilAlumno" element={<AlumnoPerfilPage />} />
+      <Route path="/perfilAlumno/:id" element={<AlumnoPerfilPage />} />
       <Route path="/perfilDocente" element={<PerfilDocentePage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/registerAlumnos" element={<RegisterPageAlumnos />} />

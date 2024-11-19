@@ -5,7 +5,7 @@ import Lista from "../components/Lista";
 import { getAllAlumnos } from "../services/alumnoService";
 
 export function AlumnosPage() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(""); 
   const navigate = useNavigate();
 
   const keys = ["nombre", "apellido", "dni"]
@@ -22,6 +22,10 @@ export function AlumnosPage() {
     fetchAlumnos();
   }, []);
 
+  const handleNavigate = (dni) => {
+    navigate(`/perfilAlumno/${dni}`);
+  };
+
 
   return ( 
     <>
@@ -35,7 +39,7 @@ export function AlumnosPage() {
           <Lista
             lista={listaFiltrada}
             keys={keys}
-            buttonOnClick={() => navigate("/perfilAlumno")}
+            buttonOnClick={handleNavigate}
           />
         </div>
       </div>
