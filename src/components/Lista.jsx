@@ -10,9 +10,9 @@ function Lista({ titulo,  lista, keys, buttonOnClick }) {
           textoUno={item[keys[0]]} 
           textoDos={item[keys[1]]} 
           textoTres={item[keys[2]]} 
-          buttonOnClick={buttonOnClick}
+          buttonOnClick={() => buttonOnClick(item.dni)} 
         />
-      ))}
+      ))} 
     </div>
   );
 }

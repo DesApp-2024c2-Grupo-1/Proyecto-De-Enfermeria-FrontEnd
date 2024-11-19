@@ -9,3 +9,8 @@ export const getAllAlumnos = async () => {
     const response = await axios.get('http://localhost:3000/alumno');
     return response.data;
 };
+
+export const getAlumnoByDni = async (dni) => {
+    const response = await axios.get(`http://localhost:3000/alumno/dni/${dni}`);
+    return response.data;
+};
