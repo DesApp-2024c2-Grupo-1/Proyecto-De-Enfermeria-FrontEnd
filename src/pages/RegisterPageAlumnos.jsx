@@ -11,7 +11,6 @@ export function RegisterPageAlumnos() {
   const [apellido, setApellido] = useState("");
   const [dni, setDni] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(null);
 
   
 const handleRegister = async () => {
