@@ -24,7 +24,7 @@ export function RegisterPage() {
 
     const docenteData = { nombre, apellido, email, dni, password };
     registrarDocente(docenteData);
-    navigate("/home");
+    navigate("/registroDocenteExitoso");
   };
  
   
