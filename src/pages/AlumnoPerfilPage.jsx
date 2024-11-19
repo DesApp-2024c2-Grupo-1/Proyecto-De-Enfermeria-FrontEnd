@@ -45,7 +45,7 @@ export function AlumnoPerfilPage() {
   return (
     <>
       
-      <h1>{alumno ? alumno.nombre : "Cargando..."}</h1>
+      <h1>{alumno ? `${alumno.nombre} ${alumno.apellido}` : "Cargando..."}</h1>
 
       <div style={{ margin: "10px 120px" }}>
         <Filtro />
