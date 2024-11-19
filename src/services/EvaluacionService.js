@@ -6,6 +6,6 @@ export const getAllEvaluaciones = async () => {
 };
 
 export const getEvaluacionById = async (id) => {
-    const response = await axios.get(`http://localhost:3000/alumno/dni/${id}`);
+    const response = await axios.get(`http://localhost:3000/evaluacion/${id}`);
     return response.data;
 };
