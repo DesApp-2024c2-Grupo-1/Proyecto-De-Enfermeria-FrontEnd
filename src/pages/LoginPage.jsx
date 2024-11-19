@@ -1,17 +1,33 @@
-import { useState } from "react";
+import {  useEffect, useState } from "react";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import FormInput from '../components/FormInput'
 import "../index.css"
+import { getDocenteByDni } from "../services/DocenteService";
 
 export function LoginPage() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [dni, setDni] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    console.log("Login Attempt", { email, password });
-    navigate("home");
+  const [docente, setDocente] = useState(null)
+  
+
+  const fetchDocente = async (dni) => {
+    const data = await getDocenteByDni(Number(dni));
+    setDocente(data)
+  };
+  
+  useEffect(() => {
+    fetchDocente(dni);
+  }, [dni]);
+
+  const handleLogin = async () => {
+    const data = await getDocenteByDni(Number(dni));
+    setDocente(data)
+    if (password === docente.password) {
+      navigate("home");
+    } 
   };
 
   const handleRegister = () => {
@@ -24,10 +40,9 @@ export function LoginPage() {
     <img src="../assets/profile.png" className="bordePerfil"/> 
       <div className="recuadroTexto">
       <FormInput
-        type="email"
-        placeholder="nombre@apellido.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Ingrese su DNI"
+        value={dni}
+        onChange={(e) => setDni(e.target.value)}
         className="recuadroInputs"
         icono="envelope"
       />

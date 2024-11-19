@@ -5,7 +5,7 @@ import { getEvaluacionById } from "../services/EvaluacionService";
 export function RegistrarEvaluacionPage() {
   const [evaluacion, setEvaluacion] = useState(null);
   const fetchEvaluacion = async () => {
-  const data = await getEvaluacionById(1);
+    const data = await getEvaluacionById(1);
     setEvaluacion(data)
   };
   useEffect(() => {
