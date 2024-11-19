@@ -1,4 +1,4 @@
-import { TextField, Typography } from "@mui/material";
+import { TextField, Typography,Box } from "@mui/material";
 
 export function Input({
   disabled,
@@ -28,7 +28,6 @@ export function Input({
             "&.Mui-focused fieldset": {
               borderColor: "#429870",
             },
-            
           },
           "& .MuiInputLabel-root": {
             color: "#429870",
@@ -43,11 +42,13 @@ export function Input({
         variant="outlined"
         onChange={onChange}
       />
-      {!disabled && helperText && (
-        <Typography sx={{ marginTop: "8px", color: `${helperTextColor}` }}>
-          {helperText}
-        </Typography>
-      )}
+      <Box sx={{ minHeight: "1.5em", marginTop: "8px" }}>
+        {!disabled && (
+          <Typography sx={{ color: helperTextColor }}>
+            {helperText || " "}
+          </Typography>
+        )}
+      </Box>
     </div>
   );
 }

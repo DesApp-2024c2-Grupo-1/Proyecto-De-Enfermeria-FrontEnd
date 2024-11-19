@@ -21,7 +21,7 @@ function MenuOption({ path, label, icon }) {
       }}
       onClick={() => navigate(path)}
     >
-      <img src={icon} alt={label} style={{ width: 50, height: 50 }} />
+      <img src={icon} alt={label} style={{ width:35, height: 35 }} />
       {label}
     </Box>
   );
