@@ -73,14 +73,21 @@ h1 {
   padding: 20vh;
 }
 
-.carpeta {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+/*.carpeta {
+display: flex;
+flex-direction: column;
+align-items: center;
+
+}
+
+.carpeta h2 {
+  margin: 10px 0 0 0;
+  text-align: center; 
 }
 
 .carpetaFondo {
+  padding-top: 10px;
+  padding-bottom: 10px;
   width: 15rem;
   background-color: #daf2e3;
   position: relative;
@@ -106,6 +113,7 @@ h1 {
   gap: 12px;
   margin: 12px;
 }
+*/
 
 /* Registro Evaluaciones */
 
