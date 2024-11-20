@@ -8,6 +8,7 @@ import {
   Paper,
 } from "@mui/material";
 import Button from "../components/Button";
+import { postEvaluacionYPreguntas } from "../services/EvaluacionService";
 
 export function CrearEvaluacionPage() {
   const [criterios, setCriterios] = useState([]);
@@ -15,6 +16,8 @@ export function CrearEvaluacionPage() {
   const [puntaje, setNuevoPuntaje] = useState("");
   const [tituloEvaluacion, setTituloEvaluacion] = useState("");
   const [exigencia, setExigencia] = useState("");
+  const docente = 1
+  const evaluacionData = {tituloEvaluacion, exigencia, docente, criterios}
 
   const agregarCriterio = () => {
     if (nuevoCriterio) {
@@ -31,6 +34,12 @@ export function CrearEvaluacionPage() {
     setCriterios(criterios.filter((_, i) => i !== indice));
   };
 
+  const manejarEnvio = () => { postEvaluacionYPreguntas(evaluacionData) 
+    
+  }
+  
+  /*
+
   const manejarEnvio = () => {
     console.log("guarde la evaluacion loco!!!!!", {
       tituloEvaluacion,
@@ -38,6 +47,9 @@ export function CrearEvaluacionPage() {
       criterios,
     });
   };
+
+  */
+
 
   return (
     <Box>
@@ -66,7 +78,6 @@ export function CrearEvaluacionPage() {
           <TextField
             fullWidth
             label="Exigencia (%)"
-            type="number"
             value={exigencia}
             onChange={(e) => setExigencia(e.target.value)}
             margin="normal"
