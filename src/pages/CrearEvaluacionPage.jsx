@@ -11,18 +11,18 @@ import Button from "../components/Button";
 import { postEvaluacionYPreguntas } from "../services/EvaluacionService";
 
 export function CrearEvaluacionPage() {
-  const [criterios, setCriterios] = useState([]);
+  const [preguntas, setPreguntas] = useState([]);
   const [nuevoCriterio, setNuevoCriterio] = useState("");
   const [puntaje, setNuevoPuntaje] = useState("");
-  const [tituloEvaluacion, setTituloEvaluacion] = useState("");
+  const [titulo, setTitulo] = useState("");
   const [exigencia, setExigencia] = useState("");
   const docente = 1
-  const evaluacionData = {tituloEvaluacion, exigencia, docente, criterios}
+  const evaluacionData = {titulo, exigencia, docente, preguntas}
 
   const agregarCriterio = () => {
     if (nuevoCriterio) {
-      setCriterios([
-        ...criterios,
+      setPreguntas([
+        ...preguntas,
         { pregunta: nuevoCriterio, puntaje: puntaje },
       ]);
       setNuevoCriterio("");
@@ -31,7 +31,7 @@ export function CrearEvaluacionPage() {
   };
 
   const eliminarCriterio = (indice) => {
-    setCriterios(criterios.filter((_, i) => i !== indice));
+    setPreguntas(preguntas.filter((_, i) => i !== indice));
   };
 
   const manejarEnvio = () => { postEvaluacionYPreguntas(evaluacionData) 
@@ -70,8 +70,8 @@ export function CrearEvaluacionPage() {
           <TextField
             fullWidth
             label="Título de evaluación"
-            value={tituloEvaluacion}
-            onChange={(e) => setTituloEvaluacion(e.target.value)}
+            value={titulo}
+            onChange={(e) => setTitulo(e.target.value)}
             margin="normal"
             sx={{ marginBottom: 2, backgroundColor: '#BBE2D0'}}
           />
@@ -85,7 +85,7 @@ export function CrearEvaluacionPage() {
           />
           <p style={{ marginBottom: 1, fontSize: "17px", fontWeight: "bold" }}>Criterio de Evaluación</p>      
           <List sx={{ marginBottom: 3 }}>
-            {criterios.map((criterio, indice) => (
+            {preguntas.map((criterio, indice) => (
               <ListItem
                 key={indice}
                 secondaryAction={
