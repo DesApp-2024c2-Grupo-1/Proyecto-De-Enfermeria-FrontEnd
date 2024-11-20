@@ -1,6 +1,6 @@
 import { Stack, Box } from "@mui/material";
 
-export function Pregunta({ pregunta, respuesta, disabled, onChange }) {
+export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
   return (
     <Stack
 
@@ -14,9 +14,11 @@ export function Pregunta({ pregunta, respuesta, disabled, onChange }) {
       }}
     >
       <Box sx={{ maxWidth: "60%", textAlign: "center" /* backgroundColor: "green" */}}>
-        <p>{pregunta}</p> 
+        <p className= "alineacionIzquierda">{pregunta}</p> 
+
       </Box>
       <Stack direction={"row"} spacing={2.5} sx={{/*backgroundColor: "yellow" */}}>
+        <p>{puntaje}</p>
         <input
           type="radio"
           id={`si-${pregunta}`}

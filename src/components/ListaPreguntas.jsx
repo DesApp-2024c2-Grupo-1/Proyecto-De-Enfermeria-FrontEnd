@@ -30,6 +30,7 @@ export function ListaPreguntas({ preguntas, disabled }) {
           <Pregunta
             key={index}
             pregunta={pregunta.pregunta}
+            puntaje={pregunta.puntaje}
             respuesta={respuestas[index]}
             disabled={registrado || pregunta.respuesta !== undefined}
             onChange={(nuevaRespuesta) =>

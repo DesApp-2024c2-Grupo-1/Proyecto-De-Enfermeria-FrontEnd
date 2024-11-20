@@ -1,21 +1,18 @@
 import { Grid } from "@mui/material";
 import Carpeta from "../components/Carpeta";
+import { useEffect, useState } from "react";
+import { getAllEvaluaciones } from "../services/EvaluacionService";
 
 export function HomePage() {
-  const carpetas = [
-    "Carpeta 1",
-    "Carpeta 2",
-    "Carpeta 3",
-    "Carpeta 4",
-    "Carpeta 5",
-    "Carpeta 6",
-    "Carpeta 7",
-    "Carpeta 8",
-    "Carpeta 9",
-    "Carpeta 10",
-    "Carpeta 11",
-    "Carpeta 12"
-  ];
+  const [carpetas, setCarpetas] = useState([]) 
+  const fetchCarpetas = async () => {
+    const data = await getAllEvaluaciones()
+    setCarpetas(data)
+  };
+
+  useEffect(() =>{
+    fetchCarpetas()
+  }, [])
 
   return (
     <div
@@ -29,9 +26,9 @@ export function HomePage() {
       <h1>¡Bienvenido/a, Carlos Perez!</h1>
       <div className="gridCarpetas">
       <Grid container spacing={10}>
-        {carpetas.map((titulo, index) => (
+        {carpetas.map((evaluacion, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
-            <Carpeta titulo={titulo} />
+            <Carpeta titulo={evaluacion.titulo} />
           </Grid>
         ))}
       </Grid>
