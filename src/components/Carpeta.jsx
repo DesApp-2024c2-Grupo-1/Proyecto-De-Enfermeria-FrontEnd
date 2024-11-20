@@ -15,7 +15,7 @@ function Carpeta({ titulo }) {
     >
       <Paper
         sx={{
-          paddingTop: "5vh", /* Cambiar a 2.5  */
+          paddingTop: "5vh",
           paddingBottom: "5vh",
           width: "15rem",
           backgroundColor: "#daf2e3",
