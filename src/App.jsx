@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Box, Grid, Stack } from "@mui/material";
 import { BrowserRouter, useLocation } from "react-router-dom";
-import { Menu } from "./components/TopMenu";
+import { Menu } from "./components/otroTopMenu";
 import { AppRouter } from "./AppRouter";
 
 export function App() {

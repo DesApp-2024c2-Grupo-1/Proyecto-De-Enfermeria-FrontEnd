@@ -19,7 +19,7 @@ export function CrearEvaluacionPage() {
   const [exigencia, setExigencia] = useState("");
   const { docenteContext } = useDocente()
 
-  const evaluacionData = {titulo, exigencia, docente: docenteContext.id, preguntas}
+  const evaluacionData = {titulo, exigencia, docente: docenteContext.id, preguntas} 
 
   const agregarCriterio = () => {
     if (nuevoCriterio) {
