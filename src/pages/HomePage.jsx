@@ -31,8 +31,10 @@ export function HomePage() {
       </h1>
       <div className="gridCarpetas">
         <Grid container spacing={10}>
+        <Grid item xs={12} sm={6} md={4}>
           <CarpetaFake />
-          {carpetas.map((evaluacion, index) => (
+        </Grid>          
+        {carpetas.map((evaluacion, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Carpeta titulo={evaluacion.titulo} />
             </Grid>

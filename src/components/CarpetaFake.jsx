@@ -38,7 +38,7 @@ function CarpetaFake({ titulo }) {
         {/* Contenedor de botones */}
         <IconButton
                 onClick={() => navigate("/crearEvaluacion")}
-                sx={{ marginLeft: "5.5rem", mt: 1, mb: 1}}
+                sx={{ marginLeft: "5.5rem", mt: 3.95, mb: 3.95}}
               >
                 <i class="fa fa-plus-circle fa-2xl" aria-hidden="true"></i>
               </IconButton>
