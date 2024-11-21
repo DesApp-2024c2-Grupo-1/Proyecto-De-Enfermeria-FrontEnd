@@ -2,9 +2,11 @@ import { Grid } from "@mui/material";
 import Carpeta from "../components/Carpeta";
 import { useEffect, useState } from "react";
 import { getAllEvaluaciones } from "../services/EvaluacionService";
+import { useDocente } from "../context/DocenteContext";
 
 export function HomePage() {
   const [carpetas, setCarpetas] = useState([]) 
+  const { docenteContext } = useDocente()
   const fetchCarpetas = async () => {
     const data = await getAllEvaluaciones()
     setCarpetas(data)
@@ -23,7 +25,7 @@ export function HomePage() {
         flexDirection: "column",
       }}
     >
-      <h1>¡Bienvenido/a, Carlos Perez!</h1>
+      <h1>¡Bienvenido/a, {docenteContext.nombre} {docenteContext.apellido}!</h1>
       <div className="gridCarpetas">
       <Grid container spacing={10}>
         {carpetas.map((evaluacion, index) => (

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Observacion } from "../components/Observacion";
 import { Lugar } from "../components/Lugar";
 import { useNavigate } from "react-router-dom";
+import { useDocente } from "../context/DocenteContext";
 
 const datos = [
   { nombre: "Maria Gonzalez", documento: "12345369" },
@@ -18,6 +19,7 @@ export function Evaluacion({ preguntas, disabled, alumnoDisabled, alumnoPlacehol
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [alumno, setAlumno] = useState("");
+  const { docenteContext } = useDocente()
   
 
   const handleRegister = async () => {
@@ -68,7 +70,7 @@ export function Evaluacion({ preguntas, disabled, alumnoDisabled, alumnoPlacehol
         <Input 
           disabled={true}
           activo={false}
-          placeholder="Carlos Perez"
+          placeholder={`${docenteContext.nombre} ${docenteContext.apellido}`}
           titulo="Docente"
         />
         <Input 

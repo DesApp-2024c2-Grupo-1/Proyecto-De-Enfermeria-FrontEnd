@@ -31,7 +31,7 @@ export function MainLayout() {
   return (
     <Stack direction="column">
       {!shouldHideMenu && <Menu />}
-        <AppRouter />
+          <AppRouter />
     </Stack>
   );
 }
