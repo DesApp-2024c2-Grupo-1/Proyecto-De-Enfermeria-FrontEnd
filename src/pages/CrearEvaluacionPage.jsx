@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import Button from "../components/Button";
 import { postEvaluacionYPreguntas } from "../services/EvaluacionService";
+import { useDocente } from "../context/DocenteContext";
 
 export function CrearEvaluacionPage() {
   const [preguntas, setPreguntas] = useState([]);
@@ -16,8 +17,9 @@ export function CrearEvaluacionPage() {
   const [puntaje, setNuevoPuntaje] = useState("");
   const [titulo, setTitulo] = useState("");
   const [exigencia, setExigencia] = useState("");
-  const docente = 1
-  const evaluacionData = {titulo, exigencia, docente, preguntas}
+  const { docenteContext } = useDocente()
+
+  const evaluacionData = {titulo, exigencia, docente: docenteContext.id, preguntas} 
 
   const agregarCriterio = () => {
     if (nuevoCriterio) {
