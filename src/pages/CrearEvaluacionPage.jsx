@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   TextField,
   Box,
@@ -34,22 +34,7 @@ export function CrearEvaluacionPage() {
     setPreguntas(preguntas.filter((_, i) => i !== indice));
   };
 
-  const manejarEnvio = () => { postEvaluacionYPreguntas(evaluacionData) 
-    
-  }
-  
-  /*
-
-  const manejarEnvio = () => {
-    console.log("guarde la evaluacion loco!!!!!", {
-      tituloEvaluacion,
-      exigencia,
-      criterios,
-    });
-  };
-
-  */
-
+  const manejarEnvio = () => { postEvaluacionYPreguntas(evaluacionData) }
 
   return (
     <Box>

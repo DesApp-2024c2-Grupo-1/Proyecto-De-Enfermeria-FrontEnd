@@ -1,5 +1,3 @@
-import React from "react";
-
 function ListItem({ textoUno, textoDos, textoTres, buttonOnClick}) {
   return (
     <div className="listItem">
