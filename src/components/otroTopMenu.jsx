@@ -3,7 +3,6 @@ import { Box, Stack, Drawer, IconButton, useMediaQuery } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import HomeIcon from "/assets/home.png";
 import ProfileIcon from "/assets/profile.png";
-import CrearIcon from "/assets/examen.png";
 import AlumnosIcon from "/assets/alumnos.png";
 
 function MenuOption({ path, label, icon, onClick }) {
@@ -39,10 +38,10 @@ export function Menu() {
     setMobileOpen(!mobileOpen);
   };
 
-  const menuOptions = [
+  const opcionesMenu = [
     { path: "/home", label: "Inicio", icon: HomeIcon },
     { path: "/alumnos", label: "Alumnos", icon: AlumnosIcon },
-    { path: "/crearEvaluacion", label: "Crear", icon: CrearIcon },
+  //  { path: "/crearEvaluacion", label: "Crear", icon: CrearIcon },
     { path: "/perfilDocente", label: "Perfil", icon: ProfileIcon },
   ];
 
@@ -56,7 +55,7 @@ export function Menu() {
           className="menu"
         >
           <Stack direction="row" spacing={10} sx={{marginLeft: 6}}>
-            {menuOptions.map((option) => (
+            {opcionesMenu.map((option) => (
               <MenuOption
                 key={option.path}
                 path={option.path}
@@ -103,7 +102,7 @@ export function Menu() {
               >
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
               </IconButton>
-              {menuOptions.map((option) => (
+              {opcionesMenu.map((option) => (
                 <MenuOption
                   key={option.path}
                   path={option.path}
