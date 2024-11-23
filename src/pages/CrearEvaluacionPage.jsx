@@ -126,7 +126,7 @@ export function CrearEvaluacionPage() {
               text="Añadir"
               onClick={agregarCriterio}
               className="botonClaro"
-              style={{ marginLeft: "20px" }}
+              style={{ marginLeft: "20px"}}
             />
           </Box>
         </Paper>
@@ -134,11 +134,11 @@ export function CrearEvaluacionPage() {
           text="Guardar"
           onClick={manejarEnvio}
           className="botonClaro"
-          style={{ marginTop: "20px" }}
+          style={{ marginTop: "20px"}}
         />
       </Box>
     </Box>
   );
 }
 
-// style={{borderRadius: 10}}
+// 

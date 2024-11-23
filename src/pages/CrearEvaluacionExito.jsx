@@ -37,13 +37,13 @@ export function CrearEvaluacionExitoPage() {
           text="Ir al inicio"
           onClick={() => navigate("/home")}
           className="botonClaro"
-          style={{borderRadius: 10}}
+          style={{borderRadius: 8}}
         />
         <Button
           text="Crear otra"
           onClick={() => navigate("/crearEvaluacion")}
           className="botonClaro"
-          style={{borderRadius: 10}}
+          style={{borderRadius: 8}}
         />
       </Box>
         </Paper>

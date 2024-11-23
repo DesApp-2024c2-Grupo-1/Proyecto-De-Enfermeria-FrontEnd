@@ -50,11 +50,13 @@ function Carpeta({ titulo }) {
             text="Evaluar"
             className="botonClaro"
             onClick={() => navigate("/registrarEvaluacion")}
+            style={{borderRadius: 5}}
           />
           <Button
             text="Ver"
             className="botonClaro"
             onClick={() => navigate("/registroEvaluaciones")}
+            style={{borderRadius: 5}}
           />
           
         </Stack>
