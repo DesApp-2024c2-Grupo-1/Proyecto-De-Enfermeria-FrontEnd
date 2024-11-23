@@ -27,7 +27,7 @@ export function HomePage() {
       }}
     >
       <h1>
-        ¡Bienvenido/a, {docenteContext.nombre} {docenteContext.apellido}!
+      ¡Bienvenido/a, {docenteContext.nombre} {docenteContext.apellido}!
       </h1>
       <div className="gridCarpetas">
         <Grid container spacing={10}>

@@ -17,9 +17,9 @@ export function CrearEvaluacionPage() {
   const [puntaje, setNuevoPuntaje] = useState("");
   const [titulo, setTitulo] = useState("");
   const [exigencia, setExigencia] = useState("");
-  const { docenteContext } = useDocente()
+  const { docenteContext } = useDocente();
 
-  const evaluacionData = {titulo, exigencia, docente: docenteContext.id, preguntas} 
+  const evaluacionData = {titulo, exigencia, docente: docenteContext.id, preguntas}
 
   const agregarCriterio = () => {
     if (nuevoCriterio) {
@@ -36,11 +36,16 @@ export function CrearEvaluacionPage() {
     setPreguntas(preguntas.filter((_, i) => i !== indice));
   };
 
-  const manejarEnvio = () => { postEvaluacionYPreguntas(evaluacionData) }
+  const manejarEnvio = () => {
+    postEvaluacionYPreguntas(evaluacionData);
+    navigate("/crearEvaluacionExito");
+  };
 
   return (
     <Box>
-      <h2 style={{textAlign: 'center', marginTop: '7vh'}}>Crear Evaluación</h2>      
+      <h2 style={{ textAlign: "center", marginTop: "7vh" }}>
+        Crear Evaluación
+      </h2>
       <Box
         sx={{
           display: "flex",
@@ -52,7 +57,13 @@ export function CrearEvaluacionPage() {
       >
         <Paper
           elevation={3}
-          sx={{ width: "100%", maxWidth: 600, padding: 3, borderRadius: 7, backgroundColor: '#DDF0E7' }}
+          sx={{
+            width: "100%",
+            maxWidth: 600,
+            padding: 3,
+            borderRadius: 7,
+            backgroundColor: "#DDF0E7",
+          }}
         >
           <TextField
             fullWidth
@@ -60,7 +71,7 @@ export function CrearEvaluacionPage() {
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
             margin="normal"
-            sx={{ marginBottom: 2, backgroundColor: '#BBE2D0'}}
+            sx={{ marginBottom: 2, backgroundColor: "#BBE2D0" }}
           />
           <TextField
             fullWidth
@@ -68,15 +79,21 @@ export function CrearEvaluacionPage() {
             value={exigencia}
             onChange={(e) => setExigencia(e.target.value)}
             margin="normal"
-            sx={{ marginBottom: 3, backgroundColor: '#BBE2D0' }}
+            sx={{ marginBottom: 3, backgroundColor: "#BBE2D0" }}
           />
-          <p style={{ marginBottom: 1, fontSize: "17px", fontWeight: "bold" }}>Criterio de Evaluación</p>      
+          <p style={{ marginBottom: 1, fontSize: "17px", fontWeight: "bold" }}>
+            Criterio de Evaluación
+          </p>
           <List sx={{ marginBottom: 3 }}>
             {preguntas.map((criterio, indice) => (
               <ListItem
                 key={indice}
                 secondaryAction={
-                  <Button text="Borrar" onClick={() => eliminarCriterio(indice)} className="botonClaro"/>
+                  <Button
+                    text="Borrar"
+                    onClick={() => eliminarCriterio(indice)}
+                    className="botonClaro"
+                  />
                 }
               >
                 <ListItemText
@@ -92,20 +109,36 @@ export function CrearEvaluacionPage() {
               label="Nueva pregunta"
               value={nuevoCriterio}
               onChange={(e) => setNuevoCriterio(e.target.value)}
-              sx={{backgroundColor: '#BBE2D0'}}
+              sx={{ backgroundColor: "#BBE2D0" }}
             />
             <TextField
               label="Puntaje"
               value={puntaje}
               onChange={(e) => setNuevoPuntaje(e.target.value)}
-              sx={{ width: 132, marginLeft: '20px', backgroundColor: '#BBE2D0'}}
+              sx={{
+                width: 132,
+                marginLeft: "20px",
+                backgroundColor: "#BBE2D0",
+              }}
               inputProps={{ min: 2 }}
             />
-            <Button text="Añadir" onClick={agregarCriterio} className="botonClaro" style={{ marginLeft: '20px'}}/>
+            <Button
+              text="Añadir"
+              onClick={agregarCriterio}
+              className="botonClaro"
+              style={{ marginLeft: "20px" }}
+            />
           </Box>
         </Paper>
-        <Button text="Guardar" onClick={manejarEnvio} className="botonClaro" style={{ marginTop: '20px' }}/>
+        <Button
+          text="Guardar"
+          onClick={manejarEnvio}
+          className="botonClaro"
+          style={{ marginTop: "20px" }}
+        />
       </Box>
     </Box>
   );
 }
+
+// style={{borderRadius: 10}}

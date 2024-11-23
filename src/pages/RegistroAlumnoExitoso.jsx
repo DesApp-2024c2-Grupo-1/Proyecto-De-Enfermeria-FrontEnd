@@ -5,8 +5,7 @@ export function RegistroAlumnoExitoso() {
         <div className="alineacion">
         <img src="../assets/profile.png" className="bordePerfil"/>
         <div className="recuadroTexto">
-        <h1>¡Alumno registrado con éxito!</h1>
-        <p id="espacio">¡Bienvenid@, muchas gracias por registrarte!</p>
+        <h1>¡Te registraste con éxito!</h1>
         </div>
         <div><img src="../assets/unahur-logo-figma-sf.png" className="unahur-logo" alt="Logo UNAHUR"/> </div>
         </div>

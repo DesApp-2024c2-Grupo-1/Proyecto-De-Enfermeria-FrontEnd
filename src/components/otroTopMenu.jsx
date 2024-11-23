@@ -41,8 +41,7 @@ export function Menu() {
   const opcionesMenu = [
     { path: "/home", label: "Inicio", icon: HomeIcon },
     { path: "/alumnos", label: "Alumnos", icon: AlumnosIcon },
-  //  { path: "/crearEvaluacion", label: "Crear", icon: CrearIcon },
-    { path: "/perfilDocente", label: "Perfil", icon: ProfileIcon },
+        { path: "/perfilDocente", label: "Perfil", icon: ProfileIcon },
   ];
 
   return (
