@@ -36,7 +36,7 @@ export function HomePage() {
         </Grid>          
         {carpetas.map((evaluacion, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <Carpeta titulo={evaluacion.titulo} />
+              <Carpeta titulo={evaluacion.titulo} id={evaluacion.id} />
             </Grid>
           ))}
         </Grid>
