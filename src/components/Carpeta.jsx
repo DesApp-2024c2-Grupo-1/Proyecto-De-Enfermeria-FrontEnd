@@ -2,8 +2,12 @@ import Button from "../components/Button";
 import { Box, Typography, Paper, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function Carpeta({ titulo }) {
+function Carpeta({ titulo, id }) {
   const navigate = useNavigate();
+
+  const handleNavigateRegistrar = (id) => {
+    navigate(`/registrarEvaluacion/${id}`);
+  };
 
   return (
     <Stack
@@ -49,7 +53,7 @@ function Carpeta({ titulo }) {
           <Button
             text="Evaluar"
             className="botonClaro"
-            onClick={() => navigate("/registrarEvaluacion")}
+            onClick={handleNavigateRegistrar}
             style={{borderRadius: 5}}
           />
           <Button
