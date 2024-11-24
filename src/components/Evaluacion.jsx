@@ -2,10 +2,9 @@ import { Stack, Box } from "@mui/material";
 import { Input } from "../components/Input";
 import { ListaPreguntas } from "../components/ListaPreguntas";
 import { useState } from "react";
-import { Observacion } from "../components/Observacion";
-import { Lugar } from "../components/Lugar";
 import { useNavigate } from "react-router-dom";
 import { useDocente } from "../context/DocenteContext";
+import Button from "../components/Button";
 
 const datos = [
   { nombre: "Maria Gonzalez", documento: "12345369" },
@@ -23,9 +22,7 @@ export function Evaluacion({ preguntas, disabled, alumnoDisabled, alumnoPlacehol
   
 
   const handleRegister = async () => {
-    // const alumnoData = { nombre, apellido, email, dni, password };
-    // await registrarAlumno(alumnoData);
-    navigate("/registerAlumno");
+    navigate("/registerAlumnos");
   };
 
   const handleOnChange = (event) => {
@@ -41,7 +38,6 @@ export function Evaluacion({ preguntas, disabled, alumnoDisabled, alumnoPlacehol
     }
   };
 
-  // <Button text="Registrar" onClick={handleRegister} className="botonClaro"/>
 
   return (
     <Stack 
@@ -80,7 +76,14 @@ export function Evaluacion({ preguntas, disabled, alumnoDisabled, alumnoPlacehol
           titulo="Exigencia"
         />
       </Stack>
-
+      {alumno === "Alumno no encontrado" && (
+          <Button
+          text="Registrar"
+          className="botonClaro"
+          onClick={handleRegister}
+          style={{borderRadius: 5}}
+        />
+        )}
       <Box>
         <ListaPreguntas preguntas={preguntas}  disabled={disabled}/>
       </Box>
