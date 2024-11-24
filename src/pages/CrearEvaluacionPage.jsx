@@ -10,6 +10,7 @@ import {
 import Button from "../components/Button";
 import { postEvaluacionYPreguntas } from "../services/EvaluacionService";
 import { useDocente } from "../context/DocenteContext";
+import { useNavigate } from 'react-router-dom';
 
 export function CrearEvaluacionPage() {
   const [preguntas, setPreguntas] = useState([]);
@@ -17,6 +18,7 @@ export function CrearEvaluacionPage() {
   const [puntaje, setNuevoPuntaje] = useState("");
   const [titulo, setTitulo] = useState("");
   const [exigencia, setExigencia] = useState("");
+  const navigate = useNavigate();
   const { docenteContext } = useDocente();
 
   const evaluacionData = {titulo, exigencia, docente: docenteContext.id, preguntas}

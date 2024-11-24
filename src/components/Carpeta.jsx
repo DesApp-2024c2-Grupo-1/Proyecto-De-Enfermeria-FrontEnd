@@ -5,9 +5,13 @@ import { useNavigate } from "react-router-dom";
 function Carpeta({ titulo, id }) {
   const navigate = useNavigate();
 
+  /*
   const handleNavigateRegistrar = (id) => {
     navigate(`/registrarEvaluacion/${id}`);
   };
+  */
+
+  
 
   return (
     <Stack
@@ -53,7 +57,7 @@ function Carpeta({ titulo, id }) {
           <Button
             text="Evaluar"
             className="botonClaro"
-            onClick={handleNavigateRegistrar}
+            onClick={() => navigate(`/registrarEvaluacion/${id}`)}
             style={{borderRadius: 5}}
           />
           <Button
