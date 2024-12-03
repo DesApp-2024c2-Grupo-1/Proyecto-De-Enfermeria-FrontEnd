@@ -1,22 +1,26 @@
 import { useState } from "react";
 import { Input } from "../components/Input";
 import { Box, Stack } from "@mui/material";
-
-const datosDocente = [
-  { nombre: "Carlos", modificable: false },
-  { apellido: "Perez", modificable: false },
-  { email: "carlos.perez@estudiantes.unahur.edu.ar", modificable: true },
-  { dni: "33456978", modificable: false },
-];
-
-const keyValues = ["nombre", "apellido", "email", "dni"];
+import { useDocente } from "../context/DocenteContext";
 
 export function PerfilDocentePage() {
   const [editando, setEditando] = useState(true);
- 
+  const { docenteContext } = useDocente();
+
+  console.log("docenteContext:", docenteContext);
+
+  const docenteData = docenteContext 
+  ? {
+      ...docenteContext,
+      email: docenteContext.email,
+      modificable: true,
+    }
+  : null;
+
   const handleClick = () => {
     setEditando(!editando);
   };
+
 
   return (
     <>
@@ -25,24 +29,35 @@ export function PerfilDocentePage() {
         spacing={3}
         sx={{ display: "flex", alignItems: "center", my: "2rem" }}
       >
-        <Box className="perfilCirculo">CP</Box>
-        {datosDocente.map((dato, index) => {
-          const key = keyValues[index];
-          return (
-            <Input
-              onChange={(e) => setSearchTerm(e.target.value)}
-              width="25rem"
-              key={key}
-              disabled={editando || !dato.modificable}
-              placeholder={dato[key]}
-              titulo={
-                key == "dni"
-                  ? "DNI"
-                  : key.charAt(0).toUpperCase() + key.slice(1)
-              }
-            />
-          );
-        })}
+        <Box className="perfilCirculo">
+        {docenteData?.nombre?.charAt(0)}
+        {docenteData?.apellido?.charAt(0)}
+        </Box>
+
+        <Input
+          key="nombre"
+          width="25rem"
+          disabled={editando} 
+          placeholder={docenteContext?.nombre || "Nombre no definido"}
+          titulo="Nombre"
+        />
+
+        <Input
+          key="apellido"
+          width="25rem"
+          disabled={editando} 
+          placeholder={docenteContext?.apellido || "Apellido no definido"}
+          titulo="Apellido"
+        />
+
+        <Input
+          width="25rem"
+          key="email"
+          disabled={true} 
+          placeholder={docenteContext?.email || "Email no definido"}
+          titulo="Email"
+        />
+        
         <button className="botonVerde" onClick={handleClick}>
           {editando ? "Editar" : "Guardar"}
         </button>
