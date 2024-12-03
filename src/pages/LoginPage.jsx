@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import FormInput from '../components/FormInput'
 import "../index.css"
 import { getDocenteByDni } from "../services/DocenteService";
+import { useDocente } from "../context/DocenteContext";
 
 export function LoginPage() {
   const navigate = useNavigate();
   const [dni, setDni] = useState("");
   const [password, setPassword] = useState("");
+  const { setDocenteContext } = useDocente()
 
   const [docente, setDocente] = useState(null)
   
@@ -25,6 +27,7 @@ export function LoginPage() {
   const handleLogin = async () => {
     const data = await getDocenteByDni(Number(dni));
     setDocente(data)
+    setDocenteContext(data)
     if (password === docente.password) {
       navigate("home");
     } 

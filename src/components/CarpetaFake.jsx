@@ -1,17 +1,8 @@
-import Button from "../components/Button";
-import { Box, Typography, Paper, Stack } from "@mui/material";
+import { Box, Typography, Paper, Stack, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-function Carpeta({ titulo, id }) {
+function CarpetaFake({ titulo }) {
   const navigate = useNavigate();
-
-  /*
-  const handleNavigateRegistrar = (id) => {
-    navigate(`/registrarEvaluacion/${id}`);
-  };
-  */
-
-  
 
   return (
     <Stack
@@ -45,29 +36,12 @@ function Carpeta({ titulo, id }) {
           }}
         />
         {/* Contenedor de botones */}
-        <Stack
-          sx={{
-            flexDirection: "column",
-            justifyContent: "center", 
-            alignItems: "center", 
-            height: "100%", 
-            gap: "10px",
-          }}
-        >
-          <Button
-            text="Evaluar"
-            className="botonClaro"
-            onClick={() => navigate(`/registrarEvaluacion/${id}`)}
-            style={{borderRadius: 5}}
-          />
-          <Button
-            text="Ver"
-            className="botonClaro"
-            onClick={() => navigate("/registroEvaluaciones")}
-            style={{borderRadius: 5}}
-          />
-          
-        </Stack>
+        <IconButton
+                onClick={() => navigate("/crearEvaluacion")}
+                sx={{ marginLeft: "5.5rem", mt: 3.95, mb: 3.95}}
+              >
+                <i class="fa fa-plus-circle fa-2xl" aria-hidden="true"></i>
+              </IconButton>
       </Paper>
 
       {/* Título */}
@@ -80,15 +54,10 @@ function Carpeta({ titulo, id }) {
           width: "15rem",
         }}
       >
-        {titulo}
+        Crear evaluación
       </Typography>
     </Stack>
   );
 }
 
-export default Carpeta;
-
-/*
-
-
-*/
+export default CarpetaFake;

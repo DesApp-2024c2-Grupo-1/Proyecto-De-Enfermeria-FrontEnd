@@ -1,4 +1,5 @@
 import Busqueda from "../components/busqueda";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
 
@@ -12,16 +13,23 @@ const datos = [
 
 export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState(""); 
+  
   const keys = ["nombre", "documento"];
+  const listaFiltrada = searchTerm.length >= 7 ? datos.filter((dato) => 
+    String(dato.documento).includes(searchTerm)) : datos;
 
   return (
     <>
       <div className="registroEvaluacionesContainer">
         <h1>Lavado de manos</h1>
         <div className="registroEvaluaciones">
-          <Busqueda />
+          <Busqueda 
+            placeholder="Buscar por DNI..."
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <Lista
-            lista={datos}
+            lista={listaFiltrada}
             keys={keys}
             buttonOnClick={() => navigate("/evaluacionesPorAlumno")}
           />

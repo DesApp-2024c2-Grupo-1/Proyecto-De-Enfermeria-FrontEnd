@@ -8,11 +8,14 @@ import { App } from './App';
 import './index.css'
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import { DocenteProvider } from './context/DocenteContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <ThemeProvider theme={customMuiTheme}>
-      <App />
+      <DocenteProvider>
+        <App />
+      </DocenteProvider>
     </ThemeProvider>
   </Provider>
 )

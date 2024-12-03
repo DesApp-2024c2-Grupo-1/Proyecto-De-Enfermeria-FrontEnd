@@ -18,7 +18,7 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
 
       </Box>
       <Stack direction={"row"} spacing={2.5} sx={{/*backgroundColor: "yellow" */}}>
-        <p>{puntaje}</p>
+        <p style={{marginRight:50}}>{puntaje}</p>
         <input
           type="radio"
           id={`si-${pregunta}`}
