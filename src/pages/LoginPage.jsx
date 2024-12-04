@@ -47,7 +47,7 @@ export function LoginPage() {
         value={dni}
         onChange={(e) => setDni(e.target.value)}
         className="recuadroInputs"
-        icono="envelope"
+        icono="address-card"
       />
       <FormInput
         type="password"
