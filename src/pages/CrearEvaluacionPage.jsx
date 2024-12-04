@@ -21,7 +21,7 @@ export function CrearEvaluacionPage() {
   const navigate = useNavigate();
   const { docenteContext } = useDocente();
 
-//  const evaluacionData = {titulo, exigencia, docente: docenteContext.id, preguntas}
+const evaluacionData = {titulo, exigencia, docente: docenteContext.id, preguntas}
 
   const agregarCriterio = () => {
     if (nuevoCriterio) {
@@ -74,16 +74,6 @@ export function CrearEvaluacionPage() {
         helperTextColor="gray"
         value={titulo}
         onChange={(e) => setTitulo(e.target.value)}
-      />
-      <Input
-        titulo="Exigencia (%)"
-        placeholder="Exigencia (%)"
-        texto="exigencia"
-        width="100%"
-        helperText=""
-        helperTextColor="gray"
-        value={exigencia}
-        onChange={(e) => setExigencia(e.target.value)}
       />
       <p style={{ marginBottom: 1, fontSize: "17px", fontWeight: "bold" }}>
         Criterio de Evaluación
