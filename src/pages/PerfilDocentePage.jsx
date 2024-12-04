@@ -38,7 +38,7 @@ export function PerfilDocentePage() {
           key="nombre"
           width="25rem"
           disabled={editando} 
-          placeholder={docenteContext?.nombre || "Nombre no definido"}
+          placeholder={docenteContext?.nombre}
           titulo="Nombre"
         />
 
@@ -46,7 +46,7 @@ export function PerfilDocentePage() {
           key="apellido"
           width="25rem"
           disabled={editando} 
-          placeholder={docenteContext?.apellido || "Apellido no definido"}
+          placeholder={docenteContext?.apellido}
           titulo="Apellido"
         />
 
