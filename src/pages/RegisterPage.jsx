@@ -23,8 +23,15 @@ export function RegisterPage() {
     setError(null)
 
     const docenteData = { nombre, apellido, email, dni, password };
-    registrarDocente(docenteData);
-    navigate("/registroDocenteExitoso");
+
+    try {
+      await registrarDocente(docenteData);
+      navigate("/registroDocenteExitoso");
+    } catch (error) {
+      const mensajeError = error.response?.data?.message || "Error al registrar docente";
+      setError(mensajeError);
+      console.error("Error al registrar docente:", mensajeError);
+    }
   };
  
   

@@ -11,7 +11,7 @@ export function RegistroDocenteExitoso() {
         <>
         <div className="alineacion">
         <img src="../assets/profile.png" className="bordePerfil"/>
-        <div className="recuadroTexto1">
+        <div className="recuadroTexto">
         <h1>¡Docente registrado con éxito!</h1>
         <button className="botonClaro" onClick={handleRedirect}>Iniciar sesión</button>
         </div>
