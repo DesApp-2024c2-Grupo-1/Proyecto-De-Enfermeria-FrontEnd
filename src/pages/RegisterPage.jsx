@@ -30,7 +30,7 @@ export function RegisterPage() {
     } catch (error) {
       const mensajeError = error.response?.data?.message || "Error al registrar docente";
       setError(mensajeError);
-      console.error("Error al registrar docente:", mensajeError);
+      alert(mensajeError.join('\n'));
     }
   };
  

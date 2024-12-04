@@ -43,7 +43,19 @@ const evaluacionData = {titulo, /*exigencia,*/ docente: docenteContext.id, pregu
       await postEvaluacionYPreguntas(evaluacionData);
       navigate("/crearEvaluacionExito");
     } catch (error) {
-      console.error("Error al crear la evaluación:", error.response?.data || error.message);
+      const data = error.response?.data || ['Ocurrió un error inesperado'];
+
+      let mensajes;
+    if (Array.isArray(data)) {
+      mensajes = data;
+    } else if (typeof data === "object" && data !== null) {
+      mensajes = Object.values(data).flat();
+    } else {
+      mensajes = [data || "Ocurrió un error inesperado"];
+    }
+
+    alert(mensajes.join('\n'));
+
     }
   };
 

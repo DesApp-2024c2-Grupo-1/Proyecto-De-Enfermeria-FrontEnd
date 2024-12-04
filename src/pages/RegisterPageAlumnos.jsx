@@ -22,7 +22,7 @@ const handleRegister = async () => {
     navigate("/registroAlumnoExitoso");
   } catch (error) {
     const mensajeError = error.response?.data?.message || "Error al registrar alumno/a";
-    console.error("Error al registrar alumno/a:", mensajeError);
+    alert(mensajeError.join('\n'));
   }
 };
 
