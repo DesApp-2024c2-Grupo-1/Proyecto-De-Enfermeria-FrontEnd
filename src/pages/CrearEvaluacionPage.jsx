@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  TextField,
   Box,
   List,
   ListItem,
@@ -11,6 +10,7 @@ import Button from "../components/Button";
 import { postEvaluacionYPreguntas } from "../services/EvaluacionService";
 import { useDocente } from "../context/DocenteContext";
 import { useNavigate } from 'react-router-dom';
+import { Input } from "../components/Input";
 
 export function CrearEvaluacionPage() {
   const [preguntas, setPreguntas] = useState([]);
@@ -21,7 +21,7 @@ export function CrearEvaluacionPage() {
   const navigate = useNavigate();
   const { docenteContext } = useDocente();
 
-  const evaluacionData = {titulo, exigencia, docente: docenteContext.id, preguntas}
+const evaluacionData = {titulo, exigencia, docente: docenteContext.id, preguntas}
 
   const agregarCriterio = () => {
     if (nuevoCriterio) {
@@ -45,101 +45,104 @@ export function CrearEvaluacionPage() {
 
   return (
     <Box>
-      <h2 style={{ textAlign: "center", marginTop: "7vh" }}>
-        Crear Evaluación
-      </h2>
+  <h2 style={{ textAlign: "center", marginTop: "7vh" }}>Crear Evaluación</h2>
+  <Box
+    sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 4,
+    }}
+  >
+    <Paper
+      elevation={3}
+      sx={{
+        width: "100%",
+        maxWidth: 600,
+        padding: 3,
+        borderRadius: 7,
+        backgroundColor: "#DDF0E7",
+      }}
+    >
+      <Input
+        titulo="Título de Evaluación"
+        placeholder="Título de evaluación"
+        texto="titulo"
+        width="100%"
+        helperText=""
+        helperTextColor="gray"
+        value={titulo}
+        onChange={(e) => setTitulo(e.target.value)}
+      />
+      <p style={{ marginBottom: 1, fontSize: "17px", fontWeight: "bold" }}>
+        Criterio de Evaluación
+      </p>
+      <List sx={{ marginBottom: 3 }}>
+        {preguntas.map((criterio, indice) => (
+          <ListItem
+            key={indice}
+            secondaryAction={
+              <Button
+                text="Borrar"
+                onClick={() => eliminarCriterio(indice)}
+                className="botonClaro"
+              />
+            }
+          >
+            <ListItemText
+              primary={criterio.pregunta}
+              secondary={`Puntaje: ${criterio.puntaje}`}
+            />
+          </ListItem>
+        ))}
+      </List>
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
+          justifyContent: "space-between",
           alignItems: "center",
-          justifyContent: "center",
-          padding: 4,
+          gap: 2,
+          marginTop: 2,
         }}
       >
-        <Paper
-          elevation={3}
-          sx={{
-            width: "100%",
-            maxWidth: 600,
-            padding: 3,
-            borderRadius: 7,
-            backgroundColor: "#DDF0E7",
-          }}
-        >
-          <TextField
-            fullWidth
-            label="Título de evaluación"
-            value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
-            margin="normal"
-            sx={{ marginBottom: 2, backgroundColor: "#BBE2D0" }}
-          />
-          <TextField
-            fullWidth
-            label="Exigencia (%)"
-            value={exigencia}
-            onChange={(e) => setExigencia(e.target.value)}
-            margin="normal"
-            sx={{ marginBottom: 3, backgroundColor: "#BBE2D0" }}
-          />
-          <p style={{ marginBottom: 1, fontSize: "17px", fontWeight: "bold" }}>
-            Criterio de Evaluación
-          </p>
-          <List sx={{ marginBottom: 3 }}>
-            {preguntas.map((criterio, indice) => (
-              <ListItem
-                key={indice}
-                secondaryAction={
-                  <Button
-                    text="Borrar"
-                    onClick={() => eliminarCriterio(indice)}
-                    className="botonClaro"
-                  />
-                }
-              >
-                <ListItemText
-                  primary={criterio.pregunta}
-                  secondary={`Puntaje: ${criterio.puntaje}`}
-                />
-              </ListItem>
-            ))}
-          </List>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <TextField
-              fullWidth
-              label="Nueva pregunta"
-              value={nuevoCriterio}
-              onChange={(e) => setNuevoCriterio(e.target.value)}
-              sx={{ backgroundColor: "#BBE2D0" }}
-            />
-            <TextField
-              label="Puntaje"
-              value={puntaje}
-              onChange={(e) => setNuevoPuntaje(e.target.value)}
-              sx={{
-                width: 132,
-                marginLeft: "20px",
-                backgroundColor: "#BBE2D0",
-              }}
-              inputProps={{ min: 2 }}
-            />
-            <Button
-              text="Añadir"
-              onClick={agregarCriterio}
-              className="botonClaro"
-              style={{ marginLeft: "20px"}}
-            />
-          </Box>
-        </Paper>
+        <Input
+          titulo="Nueva Pregunta"
+          placeholder="Nueva pregunta"
+          texto="nuevaPregunta"
+          width="85%"
+          helperText=""
+          helperTextColor="gray"
+          value={nuevoCriterio}
+          onChange={(e) => setNuevoCriterio(e.target.value)}
+        />
+        <Input
+          titulo="Puntaje"
+          placeholder="Puntaje"
+          texto="puntaje"
+          width="42.5%"
+          helperText=""
+          helperTextColor="gray"
+          value={puntaje}
+          onChange={(e) => setNuevoPuntaje(e.target.value)}
+        />
         <Button
-          text="Guardar"
-          onClick={manejarEnvio}
+          text="Añadir"
+          onClick={agregarCriterio}
           className="botonClaro"
-          style={{ marginTop: "20px"}}
+          style={{ marginTop: "42px" }}
         />
       </Box>
-    </Box>
+    </Paper>
+    <Button
+      text="Guardar"
+      onClick={manejarEnvio}
+      className="botonClaro"
+      style={{ marginTop: "20px" }}
+    />
+  </Box>
+</Box>
+
   );
 }
 
