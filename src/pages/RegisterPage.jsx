@@ -22,7 +22,7 @@ export function RegisterPage() {
     }
     setError(null)
 
-    const docenteData = { nombre, apellido, email, dni, password };
+    const docenteData = { nombre, apellido, email, dni: Number(dni), password };
 
     try {
       await registrarDocente(docenteData);
