@@ -17,17 +17,17 @@ export function CrearEvaluacionPage() {
   const [nuevoCriterio, setNuevoCriterio] = useState("");
   const [puntaje, setNuevoPuntaje] = useState("");
   const [titulo, setTitulo] = useState("");
-  const [exigencia, setExigencia] = useState("");
+  //const [exigencia, setExigencia] = useState("");
   const navigate = useNavigate();
   const { docenteContext } = useDocente();
 
-const evaluacionData = {titulo, exigencia, docente: docenteContext.id, preguntas}
+const evaluacionData = {titulo, /*exigencia,*/ docente: docenteContext.id, preguntas}
 
   const agregarCriterio = () => {
     if (nuevoCriterio) {
       setPreguntas([
         ...preguntas,
-        { pregunta: nuevoCriterio, puntaje: puntaje },
+        { pregunta: nuevoCriterio, puntaje: Number(puntaje) },
       ]);
       setNuevoCriterio("");
       setNuevoPuntaje("");
@@ -38,9 +38,13 @@ const evaluacionData = {titulo, exigencia, docente: docenteContext.id, preguntas
     setPreguntas(preguntas.filter((_, i) => i !== indice));
   };
 
-  const manejarEnvio = () => {
-    postEvaluacionYPreguntas(evaluacionData);
-    navigate("/crearEvaluacionExito");
+  const manejarEnvio = async () => {
+    try {
+      await postEvaluacionYPreguntas(evaluacionData);
+      navigate("/crearEvaluacionExito");
+    } catch (error) {
+      console.error("Error al crear la evaluación:", error.response?.data || error.message);
+    }
   };
 
   return (
