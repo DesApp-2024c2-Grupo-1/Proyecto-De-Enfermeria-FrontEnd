@@ -7,7 +7,6 @@ export function RegistrarEvaluacionPage() {
   const [evaluacion, setEvaluacion] = useState(null);
   const { id } = useParams();
 
-  console.log(Number(id))
 
   const fetchEvaluacion = async (idDeEvaluacion) => {
     const data = await getEvaluacionById(idDeEvaluacion);

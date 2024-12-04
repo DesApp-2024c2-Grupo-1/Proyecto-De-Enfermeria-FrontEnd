@@ -8,7 +8,10 @@ export function Input({
   width,
   helperText,
   helperTextColor,
+  backgroundColor,
+  color,
   onChange,
+
 }) {
   return (
     <div>
@@ -16,7 +19,7 @@ export function Input({
       <TextField
         sx={{
           width: width,
-          backgroundColor: "#DDF0E7",
+          backgroundColor: backgroundColor,
 
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
@@ -30,7 +33,7 @@ export function Input({
             },
           },
           "& .MuiInputLabel-root": {
-            color: "#429870",
+            color: "color",
             "&.Mui-focused": {
               color: "#429870",
             },

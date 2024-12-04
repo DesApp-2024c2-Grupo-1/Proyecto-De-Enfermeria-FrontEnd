@@ -75,14 +75,7 @@ export function CrearEvaluacionPage() {
             margin="normal"
             sx={{ marginBottom: 2, backgroundColor: "#BBE2D0" }}
           />
-          <TextField
-            fullWidth
-            label="Exigencia (%)"
-            value={exigencia}
-            onChange={(e) => setExigencia(e.target.value)}
-            margin="normal"
-            sx={{ marginBottom: 3, backgroundColor: "#BBE2D0" }}
-          />
+
           <p style={{ marginBottom: 1, fontSize: "17px", fontWeight: "bold" }}>
             Criterio de Evaluación
           </p>
@@ -142,5 +135,3 @@ export function CrearEvaluacionPage() {
     </Box>
   );
 }
-
-// 
