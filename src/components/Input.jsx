@@ -9,6 +9,7 @@ export function Input({
   helperText,
   helperTextColor,
   onChange,
+  value
 }) {
   return (
     <div>
@@ -37,6 +38,7 @@ export function Input({
           },
         }}
         disabled={disabled}
+        value={value}
         id={texto}
         label={placeholder}
         variant="outlined"

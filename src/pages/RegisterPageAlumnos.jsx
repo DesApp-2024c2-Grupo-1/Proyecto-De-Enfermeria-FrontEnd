@@ -14,9 +14,16 @@ export function RegisterPageAlumnos() {
 
   
 const handleRegister = async () => {
-  const alumnoData = { nombre, apellido, email, dni };
-  await registrarAlumno(alumnoData);
-  navigate("/registroAlumnoExitoso");
+  const alumnoData = { nombre, apellido, email, dni: Number(dni) };
+
+
+  try {
+    await registrarAlumno(alumnoData);
+    navigate("/registroAlumnoExitoso");
+  } catch (error) {
+    const mensajeError = error.response?.data?.message || "Error al registrar alumno/a";
+    alert(mensajeError.join('\n'));
+  }
 };
 
     return <>

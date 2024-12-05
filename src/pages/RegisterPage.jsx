@@ -22,9 +22,16 @@ export function RegisterPage() {
     }
     setError(null)
 
-    const docenteData = { nombre, apellido, email, dni, password };
-    registrarDocente(docenteData);
-    navigate("/registroDocenteExitoso");
+    const docenteData = { nombre, apellido, email, dni: Number(dni), password };
+
+    try {
+      await registrarDocente(docenteData);
+      navigate("/registroDocenteExitoso");
+    } catch (error) {
+      const mensajeError = error.response?.data?.message || "Error al registrar docente";
+      setError(mensajeError);
+      alert(mensajeError.join('\n'));
+    }
   };
  
   
