@@ -14,13 +14,13 @@ export function PerfilDocentePage() {
 
 
 
-  const docenteData = docenteContext 
-  ? {
-      ...docenteContext,
-      email: docenteContext.email,
-      modificable: true,
-    }
-  : null;
+  const docenteData = docenteContext
+    ? {
+        ...docenteContext,
+        email: docenteContext.email,
+        modificable: true,
+      }
+    : null;
 
 
   const handleClick = async () => {
@@ -43,7 +43,6 @@ export function PerfilDocentePage() {
     }
   };
 
-
   return (
     <>
       <Stack
@@ -52,13 +51,14 @@ export function PerfilDocentePage() {
         sx={{ display: "flex", alignItems: "center", my: "2rem" }}
       >
         <Box className="perfilCirculo">
-        {docenteData?.nombre?.charAt(0)}
-        {docenteData?.apellido?.charAt(0)}
+          {docenteData?.nombre?.charAt(0)}
+          {docenteData?.apellido?.charAt(0)}
         </Box>
 
         <Input
           key="nombre"
           width="25rem"
+          backgroundColor={"#DDF0E7"}
           disabled={editando} 
           placeholder={docenteContext?.nombre}
           value={nombre}
@@ -70,6 +70,7 @@ export function PerfilDocentePage() {
         <Input
           key="apellido"
           width="25rem"
+          backgroundColor={"#DDF0E7"}
           disabled={editando} 
           placeholder={docenteContext?.apellido}
           value={apellido}
@@ -79,12 +80,13 @@ export function PerfilDocentePage() {
 
         <Input
           width="25rem"
+          backgroundColor={"#DDF0E7"}
           key="email"
-          disabled={true} 
+          disabled={true}
           placeholder={docenteContext?.email || "Email no definido"}
           titulo="Email"
         />
-        
+
         <button className="botonVerde" onClick={handleClick}>
           {editando ? "Editar" : "Guardar"}
         </button>

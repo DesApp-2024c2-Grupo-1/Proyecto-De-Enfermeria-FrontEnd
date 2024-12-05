@@ -110,7 +110,12 @@ export function CrearEvaluacionPage() {
             helperTextColor="gray"
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
+
+            margin="normal"
+           
           />
+
+
           <p style={{ marginBottom: 1, fontSize: "17px", fontWeight: "bold" }}>
             Criterio de Evaluación
           </p>
@@ -179,6 +184,7 @@ export function CrearEvaluacionPage() {
       </Box>
     </Box>
   );
+
 }
 
-//
+
