@@ -11,27 +11,45 @@ export function LoginPage() {
   const [dni, setDni] = useState("");
   const [password, setPassword] = useState("");
   const { setDocenteContext } = useDocente()
+  const [loading, setLoading] = useState(false);  // Estado para carga
+  const [error, setError] = useState(""); // Estado para manejo de errores
 
   const [docente, setDocente] = useState(null)
   
 
   const fetchDocente = async (dni) => {
-    const data = await getDocenteByDni(Number(dni));
-    setDocente(data)
+    try {
+      setLoading(true);
+      setError(""); // Resetear errores previos
+      const data = await getDocenteByDni(Number(dni));
+      setDocente(data);
+    } catch (err) {
+      setError("Docente no encontrado.");
+    }  finally {
+      setLoading(false);
+  }
   };
   
   useEffect(() => {
-    fetchDocente(dni);
-  }, [dni]);
+    if (dni.length === 8) { 
+      fetchDocente(dni);
+    }
+    }, [dni]);
 
   const handleLogin = async () => {
-    const data = await getDocenteByDni(Number(dni));
-    setDocente(data)
-    setDocenteContext(data)
+    if (!docente) {
+      setError("Docente no encontrado.");
+      return;
+    }
+
     if (password === docente.password) {
+      setDocenteContext(docente); // Establecer docente en contexto
       navigate("home");
-    } 
+    } else {
+      setError("Contraseña incorrecta.");
+    }
   };
+
 
   const handleRegister = () => {
     navigate("register");
@@ -57,15 +75,23 @@ export function LoginPage() {
         className="recuadroInputs"
         icono="lock"
       />
-      <Button text="Iniciar sesión" onClick={handleLogin} className="botonClaro" />
+      <Button
+        text={loading ? "Cargando..." : "Iniciar sesión"}
+        onClick={handleLogin}
+        className="botonClaro"
+        disabled={loading} // Deshabilitar botón mientras se carga
+      />
       
+      {error && <p className="error-message">{error}</p>}  {/* Mostrar el mensaje de error */}
+
+
       <div className="alineacion-texto">
-      <p className="texto">
-      <a className="texto" href="https://ar.pinterest.com/pin/369084131975098694/" target="_blank">¿Olvidaste la contraseña?</a>
-      </p>
-      <p id="espacio">¿No tenés cuenta?</p>
-      <Button text="Registrate" onClick={handleRegister} className="botonClaro"/>
-      </div>
+        <p className="texto">
+          <a className="texto" href="https://ar.pinterest.com/pin/369084131975098694/" target="_blank">¿Olvidaste la contraseña?</a>
+        </p>
+        <p id="espacio">¿No tenés cuenta?</p>
+        <Button text="Registrate" onClick={handleRegister} className="botonClaro"/>
+        </div>
       
     </div>
 
