@@ -6,10 +6,13 @@ import { useDocente } from "../context/DocenteContext";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
 
+
 export function CrearEvaluacionPage() {
   const [preguntas, setPreguntas] = useState([]);
   const [nuevoCriterio, setNuevoCriterio] = useState("");
   const [puntaje, setNuevoPuntaje] = useState("");
+  const [errorCriterio, setErrorCriterio] = useState("");
+  const [errorPuntaje, setErrorPuntaje] = useState("");
   const [titulo, setTitulo] = useState("");
   const navigate = useNavigate();
   const { docenteContext } = useDocente();
@@ -17,16 +20,40 @@ export function CrearEvaluacionPage() {
   const evaluacionData = { titulo, docente: docenteContext.id, preguntas };
 
   const agregarCriterio = () => {
-    if (nuevoCriterio) {
-      setPreguntas([
-        ...preguntas,
-        { pregunta: nuevoCriterio, puntaje: Number(puntaje) },
-      ]);
-      setNuevoCriterio("");
-      setNuevoPuntaje("");
+    if (!nuevoCriterio.trim()) {
+      setErrorCriterio("La pregunta no puede estar vacía.");
+      return;
+    } else {
+      setErrorCriterio("");
     }
-  };
 
+    if (!puntaje.trim()) {
+      setErrorPuntaje("El puntaje no puede estar vacío.");
+      return;
+    } else if (isNaN(puntaje) || Number(puntaje) <= 0) {
+      setErrorPuntaje("El puntaje debe ser un número mayor a 0.");
+      return;
+    } else {
+      setErrorPuntaje("");
+    }
+
+    const existePregunta = preguntas.some(
+      (criterio) =>
+        criterio.pregunta.trim().toLowerCase() ===
+        nuevoCriterio.trim().toLowerCase()
+    );
+    if (existePregunta) {
+      setErrorCriterio("La pregunta ya está en la lista.");
+      return;
+    }
+
+    setPreguntas([
+      ...preguntas,
+      { pregunta: nuevoCriterio.trim(), puntaje: Number(puntaje) },
+    ]);
+    setNuevoCriterio("");
+    setNuevoPuntaje("");
+  };
   const eliminarCriterio = (indice) => {
     setPreguntas(preguntas.filter((_, i) => i !== indice));
   };
@@ -110,7 +137,7 @@ export function CrearEvaluacionPage() {
             sx={{
               display: "flex",
               justifyContent: "space-between",
-              alignItems: "center",
+              alignItems: "flex-start",
               gap: 2,
               marginTop: 2,
             }}
@@ -118,25 +145,29 @@ export function CrearEvaluacionPage() {
             <Input
               placeholder="Nueva pregunta"
               texto="nuevaPregunta"
-              helperText=""
-              helperTextColor="gray"
+              helperText={errorCriterio || " "}
+              helperTextColor="red"
               value={nuevoCriterio}
               onChange={(e) => setNuevoCriterio(e.target.value)}
             />
             <Input
+              width="200px"
               placeholder="Puntaje"
               texto="puntaje"
-              helperText=""
-              helperTextColor="gray"
+              helperText={errorPuntaje || " "}
+              helperTextColor="red"
+              helperTextWidth="200px"
               value={puntaje}
               onChange={(e) => setNuevoPuntaje(e.target.value)}
             />
-            <Button
-              text="Añadir"
-              onClick={agregarCriterio}
-              className="botonClaro"
-              style={{ marginBottom: "12px" }}
-            />
+            <Box sx={{ alignSelf: "flex-start" }}>
+              <Button
+                text="Añadir"
+                onClick={agregarCriterio}
+                className="botonClaro"
+                style={{ marginTop: "28px" }}
+              />
+            </Box>
           </Box>
         </Paper>
         <Button

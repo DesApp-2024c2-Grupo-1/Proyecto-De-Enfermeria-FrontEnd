@@ -8,6 +8,7 @@ export function Input({
   width,
   helperText,
   helperTextColor,
+  helperTextWidth,
   onChange,
   value
 }) {
@@ -46,7 +47,7 @@ export function Input({
       />
       <Box sx={{ minHeight: "1.5em", marginTop: "8px" }}>
         {!disabled && (
-          <Typography sx={{ color: helperTextColor }}>
+          <Typography sx={{ color: helperTextColor, width: helperTextWidth }}>
             {helperText || " "}
           </Typography>
         )}
