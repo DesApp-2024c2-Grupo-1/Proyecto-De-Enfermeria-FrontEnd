@@ -42,7 +42,7 @@ export function Lugar({ disabled }) {
             checked={selected === "1"}
             onChange={() => onChange("1")}
           />
-          <label htmlFor="1"> Lugar 1</label>
+          <label htmlFor="1"> Campo Practico</label>
         </div>
         <div>
           <input
@@ -53,7 +53,7 @@ export function Lugar({ disabled }) {
             checked={selected === "2"}
             onChange={() => onChange("2")}
           />
-          <label htmlFor="2"> Lugar 2</label>
+          <label htmlFor="2"> Centro de Simulación</label>
         </div>
       </Stack>
     </Stack>
