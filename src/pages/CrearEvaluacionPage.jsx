@@ -5,7 +5,7 @@ import { postEvaluacionYPreguntas } from "../services/EvaluacionService";
 import { useDocente } from "../context/DocenteContext";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
-import { max } from "lodash";
+
 
 export function CrearEvaluacionPage() {
   const [preguntas, setPreguntas] = useState([]);
@@ -20,15 +20,13 @@ export function CrearEvaluacionPage() {
   const evaluacionData = { titulo, docente: docenteContext.id, preguntas };
 
   const agregarCriterio = () => {
-    // Validar nuevo criterio
     if (!nuevoCriterio.trim()) {
       setErrorCriterio("La pregunta no puede estar vacía.");
       return;
     } else {
-      setErrorCriterio(""); // Limpiar error si pasa la validación
+      setErrorCriterio("");
     }
 
-    // Validar puntaje
     if (!puntaje.trim()) {
       setErrorPuntaje("El puntaje no puede estar vacío.");
       return;
@@ -36,10 +34,9 @@ export function CrearEvaluacionPage() {
       setErrorPuntaje("El puntaje debe ser un número mayor a 0.");
       return;
     } else {
-      setErrorPuntaje(""); // Limpiar error si pasa la validación
+      setErrorPuntaje("");
     }
 
-    // Verificar si la pregunta ya existe
     const existePregunta = preguntas.some(
       (criterio) =>
         criterio.pregunta.trim().toLowerCase() ===
@@ -50,7 +47,6 @@ export function CrearEvaluacionPage() {
       return;
     }
 
-    // Si todo está bien, agrega la pregunta
     setPreguntas([
       ...preguntas,
       { pregunta: nuevoCriterio.trim(), puntaje: Number(puntaje) },
@@ -141,7 +137,7 @@ export function CrearEvaluacionPage() {
             sx={{
               display: "flex",
               justifyContent: "space-between",
-              alignItems: "flex-start", // Alineación superior para evitar desplazamientos
+              alignItems: "flex-start",
               gap: 2,
               marginTop: 2,
             }}
@@ -149,7 +145,7 @@ export function CrearEvaluacionPage() {
             <Input
               placeholder="Nueva pregunta"
               texto="nuevaPregunta"
-              helperText={errorCriterio || " "} // Espacio reservado si no hay error
+              helperText={errorCriterio || " "}
               helperTextColor="red"
               value={nuevoCriterio}
               onChange={(e) => setNuevoCriterio(e.target.value)}
@@ -158,7 +154,7 @@ export function CrearEvaluacionPage() {
               width="200px"
               placeholder="Puntaje"
               texto="puntaje"
-              helperText={errorPuntaje || " "} // Espacio reservado si no hay error
+              helperText={errorPuntaje || " "}
               helperTextColor="red"
               helperTextWidth="200px"
               value={puntaje}
