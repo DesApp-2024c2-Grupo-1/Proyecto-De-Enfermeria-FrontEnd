@@ -14,3 +14,8 @@ export const getDocenteByDni = async (dni) => {
   const response = await axios.get(`http://localhost:3000/docente/dni/${dni}`)
   return response.data
 }
+
+export const modificarDocente = async (id, docenteData) => {
+  const response = await axios.put(`http://localhost:3000/docente/${id}`, docenteData);
+  return response.data
+}
