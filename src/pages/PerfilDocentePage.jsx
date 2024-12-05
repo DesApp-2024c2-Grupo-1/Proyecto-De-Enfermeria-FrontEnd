@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Input } from "../components/Input";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, Snackbar, Alert } from "@mui/material";
 import { useDocente } from "../context/DocenteContext";
 import { modificarDocente } from "../services/DocenteService";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,8 @@ export function PerfilDocentePage() {
   const { docenteContext, setDocenteContext } = useDocente();
   const [nombre, setNombre] = useState(docenteContext.nombre)
   const [apellido, setApellido] = useState(docenteContext.apellido)
+  const [openSnackbar, setOpenSnackbar] = useState(false)
+  const [error, setError] = useState([])
   const navigate = useNavigate();
 
 
@@ -39,7 +41,10 @@ export function PerfilDocentePage() {
         navigate("/")
       }
     } catch (error) {
-      console.error("Error al actualizar el perfil del docente:", error);
+      const mensajeError =
+        error.response?.data?.message || "Error al modificar docente";
+      setError(mensajeError);
+      setOpenSnackbar(true);
     }
   };
 
@@ -91,6 +96,31 @@ export function PerfilDocentePage() {
           {editando ? "Editar" : "Guardar"}
         </button>
       </Stack>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          margin: "auto",
+        }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="error"
+          sx={{ width: "50%" }}
+        >
+          <ul>
+            {error.map((err, index) => (
+              <li key={index}>{err}</li>
+            ))}
+          </ul>
+        </Alert>
+      </Snackbar>
     </>
   );
 }
