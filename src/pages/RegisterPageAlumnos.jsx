@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput"
 import Button from "../components/Button"
 import { registrarAlumno } from "../services/alumnoService";
+import { Snackbar, Alert } from "@mui/material";
 
 export function RegisterPageAlumnos() {
 
@@ -11,6 +12,8 @@ export function RegisterPageAlumnos() {
   const [apellido, setApellido] = useState("");
   const [dni, setDni] = useState("");
   const [email, setEmail] = useState("");
+  const [error, setError] = useState([]);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   
 const handleRegister = async () => {
@@ -21,8 +24,10 @@ const handleRegister = async () => {
     await registrarAlumno(alumnoData);
     navigate("/registroAlumnoExitoso");
   } catch (error) {
-    const mensajeError = error.response?.data?.message || "Error al registrar alumno/a";
-    alert(mensajeError.join('\n'));
+    const mensajeError =
+        error.response?.data?.message || "Error al registrar docente";
+      setError(mensajeError);
+      setOpenSnackbar(true);
   }
 };
 
@@ -72,5 +77,30 @@ const handleRegister = async () => {
     <img src="../assets/unahur-logo-figma-sf.png" className="unahur-logo" alt="Logo UNAHUR"/> 
     </div>
     </div>
+
+    <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          margin: "auto",
+        }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="error"
+          sx={{ width: "50%" }}
+        >
+          <ul>
+            {error.map((err, index) => (
+              <li key={index}>{err}</li>
+            ))}
+          </ul>
+        </Alert>
+      </Snackbar>
     </> 
   }
