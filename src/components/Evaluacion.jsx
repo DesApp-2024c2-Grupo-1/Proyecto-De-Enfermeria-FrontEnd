@@ -7,12 +7,17 @@ import { useDocente } from "../context/DocenteContext";
 import Button from "../components/Button";
 import { getAllAlumnos } from "../services/alumnoService";
 
-export function Evaluacion({ preguntas, disabled, alumnoDisabled, alumnoPlaceholder }) {
+export function Evaluacion({
+  preguntas,
+  disabled,
+  alumnoDisabled,
+  alumnoPlaceholder,
+}) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [alumno, setAlumno] = useState("");
-  const [alumnos, setAlumnos] = useState([])
-  const { docenteContext } = useDocente()
+  const [alumnos, setAlumnos] = useState([]);
+  const { docenteContext } = useDocente();
 
   const handleRegister = async () => {
     navigate("/registerAlumnos");
@@ -20,7 +25,7 @@ export function Evaluacion({ preguntas, disabled, alumnoDisabled, alumnoPlacehol
 
   const fetchAlumnos = async () => {
     const data = await getAllAlumnos();
-    setAlumnos(data)
+    setAlumnos(data);
   };
 
   useEffect(() => {
@@ -33,7 +38,7 @@ export function Evaluacion({ preguntas, disabled, alumnoDisabled, alumnoPlacehol
     console.log("DNI ingresado:", inputDNI);
 
     const foundAlumno = alumnos.find((dato) => String(dato.dni) === inputDNI);
-    console.log(foundAlumno)
+    console.log(foundAlumno);
     if (foundAlumno) {
       setAlumno(`Evaluando a ${foundAlumno.nombre} ${foundAlumno.apellido}`);
     } else {
@@ -41,38 +46,42 @@ export function Evaluacion({ preguntas, disabled, alumnoDisabled, alumnoPlacehol
     }
   };
 
-
   return (
-    <Stack 
-      spacing={5} 
-      sx={{ 
-        mx: "20%", 
-        my: "5rem", 
-        justifyContent: "space-between" 
+    <Stack
+      spacing={5}
+      sx={{
+        mx: "20%",
+        my: "5rem",
+        justifyContent: "space-between",
       }}
     >
-      <Stack 
-        direction={{ xs: "column", sm: "row" }} 
-        sx={{ 
-          justifyContent: "space-between", 
-          alignItems: "center" 
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        sx={{
+          justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
-        <Input 
+        <Input
           onChange={handleOnChange}
           disabled={alumnoDisabled}
           placeholder={alumnoPlaceholder || "Ingresar DNI:"}
           titulo="Alumno"
+          backgroundColor={"#DDF0E7"}
           helperText={alumno}
-          helperTextColor={alumno === "Alumno no encontrado" ? "red" : "#429870"}
+          helperTextColor={
+            alumno === "Alumno no encontrado" ? "red" : "#429870"
+          }
         />
-        <Input 
+        <Input
+          backgroundColor={"#DDF0E7"}
           disabled={true}
           activo={false}
           placeholder={`${docenteContext.nombre} ${docenteContext.apellido}`}
           titulo="Docente"
         />
-        <Input 
+        <Input
+          backgroundColor={"#DDF0E7"}
           disabled={true}
           activo={false}
           placeholder="60%"
@@ -80,17 +89,16 @@ export function Evaluacion({ preguntas, disabled, alumnoDisabled, alumnoPlacehol
         />
       </Stack>
       {alumno === "Alumno no encontrado" && (
-          <Button
+        <Button
           text="Registrar"
           className="botonClaro"
           onClick={handleRegister}
-          style={{borderRadius: 5}}
+          style={{ borderRadius: 5 }}
         />
-        )}
+      )}
       <Box>
-        <ListaPreguntas preguntas={preguntas}  disabled={disabled}/>
+        <ListaPreguntas preguntas={preguntas} disabled={disabled} />
       </Box>
-
     </Stack>
   );
 }

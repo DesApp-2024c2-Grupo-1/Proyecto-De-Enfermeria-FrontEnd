@@ -2,12 +2,17 @@ import { useState } from "react";
 import { Input } from "../components/Input";
 import { Box, Stack } from "@mui/material";
 import { useDocente } from "../context/DocenteContext";
+import { modificarDocente } from "../services/DocenteService";
+import { useNavigate } from "react-router-dom";
 
 export function PerfilDocentePage() {
   const [editando, setEditando] = useState(true);
-  const { docenteContext } = useDocente();
+  const { docenteContext, setDocenteContext } = useDocente();
+  const [nombre, setNombre] = useState(docenteContext.nombre)
+  const [apellido, setApellido] = useState(docenteContext.apellido)
+  const navigate = useNavigate();
 
-  console.log("docenteContext:", docenteContext);
+
 
   const docenteData = docenteContext
     ? {
@@ -17,8 +22,25 @@ export function PerfilDocentePage() {
       }
     : null;
 
-  const handleClick = () => {
-    setEditando(!editando);
+
+  const handleClick = async () => {
+    if (!docenteContext?.id) return;
+
+    const updatedData = { nombre, apellido };
+    try {
+      if(editando){
+        setEditando(!editando)
+      }
+      else{
+        console.log(docenteContext)
+        const updatedDocente = await modificarDocente(docenteContext.id, updatedData);      
+        setDocenteContext(updatedDocente);
+        setEditando(!editando)
+        navigate("/")
+      }
+    } catch (error) {
+      console.error("Error al actualizar el perfil del docente:", error);
+    }
   };
 
   return (
@@ -37,17 +59,22 @@ export function PerfilDocentePage() {
           key="nombre"
           width="25rem"
           backgroundColor={"#DDF0E7"}
-          disabled={editando}
-          placeholder={docenteContext?.nombre || "Nombre no definido"}
+          disabled={editando} 
+          placeholder={docenteContext?.nombre}
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value) }
           titulo="Nombre"
+          
         />
 
         <Input
           key="apellido"
           width="25rem"
           backgroundColor={"#DDF0E7"}
-          disabled={editando}
-          placeholder={docenteContext?.apellido || "Apellido no definido"}
+          disabled={editando} 
+          placeholder={docenteContext?.apellido}
+          value={apellido}
+          onChange={(e) => setApellido(e.target.value) }
           titulo="Apellido"
         />
 

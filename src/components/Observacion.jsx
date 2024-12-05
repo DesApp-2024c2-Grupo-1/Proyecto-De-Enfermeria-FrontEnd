@@ -6,7 +6,7 @@ export function Observacion({ disabled }) {
  
   return (
     <div>
-      <Input titulo="Modificación de puntaje" disabled={disabled}  />
+      <Input titulo="Modificación de puntaje" disabled={disabled} backgroundColor={"#DDF0E7"}  />
       <h2>Observaciones</h2>
       <TextField
         disabled={disabled}

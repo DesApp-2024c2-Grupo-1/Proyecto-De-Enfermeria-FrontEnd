@@ -11,6 +11,8 @@ export function Input({
   backgroundColor,
   color,
   onChange,
+  helperTextWidth,
+  value
 
 }) {
   return (
@@ -40,6 +42,7 @@ export function Input({
           },
         }}
         disabled={disabled}
+        value={value}
         id={texto}
         label={placeholder}
         variant="outlined"
@@ -47,7 +50,7 @@ export function Input({
       />
       <Box sx={{ minHeight: "1.5em", marginTop: "8px" }}>
         {!disabled && (
-          <Typography sx={{ color: helperTextColor }}>
+          <Typography sx={{ color: helperTextColor, width: helperTextWidth }}>
             {helperText || " "}
           </Typography>
         )}

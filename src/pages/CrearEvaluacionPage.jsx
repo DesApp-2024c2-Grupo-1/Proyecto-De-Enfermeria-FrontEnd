@@ -1,46 +1,81 @@
 import { useState } from "react";
-import {
-  TextField,
-  Box,
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
-} from "@mui/material";
+import { Box, List, ListItem, ListItemText, Paper } from "@mui/material";
 import Button from "../components/Button";
 import { postEvaluacionYPreguntas } from "../services/EvaluacionService";
 import { useDocente } from "../context/DocenteContext";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { Input } from "../components/Input";
+
 
 export function CrearEvaluacionPage() {
   const [preguntas, setPreguntas] = useState([]);
   const [nuevoCriterio, setNuevoCriterio] = useState("");
   const [puntaje, setNuevoPuntaje] = useState("");
+  const [errorCriterio, setErrorCriterio] = useState("");
+  const [errorPuntaje, setErrorPuntaje] = useState("");
   const [titulo, setTitulo] = useState("");
-  const [exigencia, setExigencia] = useState("");
   const navigate = useNavigate();
   const { docenteContext } = useDocente();
 
-  const evaluacionData = {titulo, exigencia, docente: docenteContext.id, preguntas}
+  const evaluacionData = { titulo, docente: docenteContext.id, preguntas };
 
   const agregarCriterio = () => {
-    if (nuevoCriterio) {
-      setPreguntas([
-        ...preguntas,
-        { pregunta: nuevoCriterio, puntaje: puntaje },
-      ]);
-      setNuevoCriterio("");
-      setNuevoPuntaje("");
+    if (!nuevoCriterio.trim()) {
+      setErrorCriterio("La pregunta no puede estar vacía.");
+      return;
+    } else {
+      setErrorCriterio("");
     }
-  };
 
+    if (!puntaje.trim()) {
+      setErrorPuntaje("El puntaje no puede estar vacío.");
+      return;
+    } else if (isNaN(puntaje) || Number(puntaje) <= 0) {
+      setErrorPuntaje("El puntaje debe ser un número mayor a 0.");
+      return;
+    } else {
+      setErrorPuntaje("");
+    }
+
+    const existePregunta = preguntas.some(
+      (criterio) =>
+        criterio.pregunta.trim().toLowerCase() ===
+        nuevoCriterio.trim().toLowerCase()
+    );
+    if (existePregunta) {
+      setErrorCriterio("La pregunta ya está en la lista.");
+      return;
+    }
+
+    setPreguntas([
+      ...preguntas,
+      { pregunta: nuevoCriterio.trim(), puntaje: Number(puntaje) },
+    ]);
+    setNuevoCriterio("");
+    setNuevoPuntaje("");
+  };
   const eliminarCriterio = (indice) => {
     setPreguntas(preguntas.filter((_, i) => i !== indice));
   };
 
-  const manejarEnvio = () => {
-    postEvaluacionYPreguntas(evaluacionData);
-    navigate("/crearEvaluacionExito");
+  const manejarEnvio = async () => {
+    try {
+      await postEvaluacionYPreguntas(evaluacionData);
+      navigate("/crearEvaluacionExito");
+    } catch (error) {
+      const data = error.response?.data || ["Ocurrió un error inesperado"];
+
+      let mensajes;
+      if (Array.isArray(data)) {
+        mensajes = data;
+      } else if (typeof data === "object" && data !== null) {
+        mensajes = Object.values(data).flat();
+      } else {
+        mensajes = [data || "Ocurrió un error inesperado"];
+      }
+
+      alert(mensajes.join("\n"));
+    }
   };
 
   return (
@@ -67,14 +102,19 @@ export function CrearEvaluacionPage() {
             backgroundColor: "#DDF0E7",
           }}
         >
-          <TextField
-            fullWidth
-            label="Título de evaluación"
+          <Input
+            placeholder="Título de evaluación"
+            texto="titulo"
+            width="100%"
+            helperText=""
+            helperTextColor="gray"
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
+
             margin="normal"
-            sx={{ marginBottom: 2, backgroundColor: "#BBE2D0" }}
+           
           />
+
 
           <p style={{ marginBottom: 1, fontSize: "17px", fontWeight: "bold" }}>
             Criterio de Evaluación
@@ -98,40 +138,53 @@ export function CrearEvaluacionPage() {
               </ListItem>
             ))}
           </List>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <TextField
-              fullWidth
-              label="Nueva pregunta"
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              gap: 2,
+              marginTop: 2,
+            }}
+          >
+            <Input
+              placeholder="Nueva pregunta"
+              texto="nuevaPregunta"
+              helperText={errorCriterio || " "}
+              helperTextColor="red"
               value={nuevoCriterio}
               onChange={(e) => setNuevoCriterio(e.target.value)}
-              sx={{ backgroundColor: "#BBE2D0" }}
             />
-            <TextField
-              label="Puntaje"
+            <Input
+              width="200px"
+              placeholder="Puntaje"
+              texto="puntaje"
+              helperText={errorPuntaje || " "}
+              helperTextColor="red"
+              helperTextWidth="200px"
               value={puntaje}
               onChange={(e) => setNuevoPuntaje(e.target.value)}
-              sx={{
-                width: 132,
-                marginLeft: "20px",
-                backgroundColor: "#BBE2D0",
-              }}
-              inputProps={{ min: 2 }}
             />
-            <Button
-              text="Añadir"
-              onClick={agregarCriterio}
-              className="botonClaro"
-              style={{ marginLeft: "20px"}}
-            />
+            <Box sx={{ alignSelf: "flex-start" }}>
+              <Button
+                text="Añadir"
+                onClick={agregarCriterio}
+                className="botonClaro"
+                style={{ marginTop: "28px" }}
+              />
+            </Box>
           </Box>
         </Paper>
         <Button
           text="Guardar"
           onClick={manejarEnvio}
           className="botonClaro"
-          style={{ marginTop: "20px"}}
+          style={{ marginTop: "20px" }}
         />
       </Box>
     </Box>
   );
+
 }
+
+
