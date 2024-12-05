@@ -335,3 +335,14 @@ align-items: center;
 .alineacionIzquierda {
   text-align: justify;
 }
+
+/* Perfil Alumno */
+
+.helperTextRegister {
+  color: #fe0000;
+  background-color: #145236;
+  font-size: 14px;
+  font-weight: 400;
+  margin: auto;
+}
+

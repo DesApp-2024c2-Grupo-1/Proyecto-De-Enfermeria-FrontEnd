@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FormInput from "../components/FormInput"
-import Button from "../components/Button"
+import FormInput from "../components/FormInput";
+import Button from "../components/Button";
 import { registrarDocente } from "../services/DocenteService";
+import { Snackbar, Alert } from "@mui/material";
 
 export function RegisterPage() {
-
   const navigate = useNavigate();
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
@@ -13,14 +13,23 @@ export function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmarPassword, setConfirmarPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState([]);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleRegister = async () => {
+    let errorList = [];
+
+    // Verificar si las contraseñas coinciden
     if (password !== confirmarPassword) {
-      setError('Las contraseñas no coinciden')
-      return error;
+      errorList.push("Las contraseñas no coinciden");
     }
-    setError(null)
+
+    if (errorList.length > 0) {
+      setError(errorList);
+      setOpenSnackbar(true);
+    }
+
+    setError([]);
 
     const docenteData = { nombre, apellido, email, dni: Number(dni), password };
 
@@ -28,75 +37,106 @@ export function RegisterPage() {
       await registrarDocente(docenteData);
       navigate("/registroDocenteExitoso");
     } catch (error) {
-      const mensajeError = error.response?.data?.message || "Error al registrar docente";
+      const mensajeError =
+        error.response?.data?.message || "Error al registrar docente";
       setError(mensajeError);
-      alert(mensajeError.join('\n'));
+      setOpenSnackbar(true);
     }
   };
- 
-  
 
-    return <>
-    <div className="alineacion">
-    <img src="../assets/profile.png" className="bordePerfil"/> 
-      <div className="recuadroTexto2">
-      <FormInput
-        type="name"
-        placeholder="Ingrese su nombre"
-        value={nombre}
-        onChange={(e) => setNombre(e.target.value)}
-        className="recuadroInputs"
-        icono="user"
-      />
-      <FormInput
-        type="apellido"
-        placeholder="Ingrese su apellido"
-        value={apellido}
-        onChange={(e) => setApellido(e.target.value)}
-        className="recuadroInputs"
-        icono="user" 
-      />
-      <FormInput
-        type="dni"
-        placeholder="Ingrese su DNI"
-        value={dni}
-        onChange={(e) => setDni(e.target.value)}
-        className="recuadroInputs"
-        icono="address-card"
-      />
-      <FormInput
-        type="email"
-        placeholder="nombre@apellido.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="recuadroInputs"
-        icono="envelope"        
-      />
-      <FormInput
-        type="password"
-        placeholder="Ingrese su contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="recuadroInputs"
-        icono="lock"
-      />
-      <FormInput
-        type="password"
-        placeholder="Repita su contraseña"
-        value={confirmarPassword}
-        onChange={(e) => setConfirmarPassword(e.target.value)}
-        className="recuadroInputs"
-        icono="lock"
-      />
-      <div id="espaciojaja"></div>
-      <Button text="Registrarse" onClick={handleRegister} className="botonClaro"/>
+  return (
+    <>
+      <div className="alineacion">
+        <img src="../assets/profile.png" className="bordePerfil" />
+        <div className="recuadroTexto2">
+          <FormInput
+            type="name"
+            placeholder="Ingrese su nombre"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            className="recuadroInputs"
+            icono="user"
+          />
+          <FormInput
+            type="apellido"
+            placeholder="Ingrese su apellido"
+            value={apellido}
+            onChange={(e) => setApellido(e.target.value)}
+            className="recuadroInputs"
+            icono="user"
+          />
+          <FormInput
+            type="dni"
+            placeholder="Ingrese su DNI"
+            value={dni}
+            onChange={(e) => setDni(e.target.value)}
+            className="recuadroInputs"
+            icono="address-card"
+          />
+          <FormInput
+            type="email"
+            placeholder="nombre@apellido.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="recuadroInputs"
+            icono="envelope"
+          />
+          <FormInput
+            type="password"
+            placeholder="Ingrese su contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="recuadroInputs"
+            icono="lock"
+          />
+          <FormInput
+            type="password"
+            placeholder="Repita su contraseña"
+            value={confirmarPassword}
+            onChange={(e) => setConfirmarPassword(e.target.value)}
+            className="recuadroInputs"
+            icono="lock"
+          />
+          <div id="espaciojaja"></div>
+          <Button
+            text="Registrarse"
+            onClick={handleRegister}
+            className="botonClaro"
+          />
+        </div>
+        <div>
+          <img
+            src="../assets/unahur-logo-figma-sf.png"
+            className="unahur-logo"
+            alt="Logo UNAHUR"
+          />
+        </div>
       </div>
-      
-    
 
-    <div>
-    <img src="../assets/unahur-logo-figma-sf.png" className="unahur-logo" alt="Logo UNAHUR"/> 
-    </div>
-    </div>
-    </> 
-  }
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          margin: "auto",
+        }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="error"
+          sx={{ width: "50%" }}
+        >
+          <ul>
+            {error.map((err, index) => (
+              <li key={index}>{err}</li>
+            ))}
+          </ul>
+        </Alert>
+      </Snackbar>
+    </>
+  );
+}
