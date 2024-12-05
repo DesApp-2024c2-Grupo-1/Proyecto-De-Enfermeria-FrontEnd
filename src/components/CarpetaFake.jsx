@@ -1,5 +1,7 @@
 import { Box, Typography, Paper, Stack, IconButton } from "@mui/material";
+import { red } from "@mui/material/colors";
 import { useNavigate } from "react-router-dom";
+import { AiFillPlusCircle } from "react-icons/ai";
 
 function CarpetaFake({ titulo }) {
   const navigate = useNavigate();
@@ -36,12 +38,14 @@ function CarpetaFake({ titulo }) {
           }}
         />
         {/* Contenedor de botones */}
-        <IconButton
-                onClick={() => navigate("/crearEvaluacion")}
-                sx={{ marginLeft: "5.5rem", mt: 3.95, mb: 3.95}}
-              >
-                <i class="fa fa-plus-circle fa-2xl" aria-hidden="true"></i>
-              </IconButton>
+        <Box
+          onClick={() => navigate("/crearEvaluacion")}
+          sx={{display: "flex", alignContent: "center", justifyContent:"center", my:2.5}}
+        >
+            
+            <AiFillPlusCircle size="40" color="#275B43"/>
+
+        </Box>
       </Paper>
 
       {/* Título */}
