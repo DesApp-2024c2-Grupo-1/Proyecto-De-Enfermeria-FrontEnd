@@ -83,11 +83,11 @@ const handleRegister = async () => {
         autoHideDuration={3000}
         onClose={() => setOpenSnackbar(false)}
         sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
           width: "100%",
-          margin: "auto",
+        }}
+        anchorOrigin={{
+          vertical:"bottom",
+          horizontal:"center"
         }}
       >
         <Alert

@@ -28,13 +28,13 @@ export function LoginPage() {
 
   const handleLogin = async () => {
     if (!docente) {
-      setError("Docente no encontrado.");
+      setError("Datos incorrectos");
       setOpenSnackbar(true);
     } else if (password === docente.password) {
       setDocenteContext(docente);
       navigate("home");
     } else {
-      setError("La contraseña es incorrecta");
+      setError("Datos incorrectos");
       setOpenSnackbar(true);
     }
   };
@@ -102,11 +102,14 @@ export function LoginPage() {
         autoHideDuration={3000}
         onClose={() => setOpenSnackbar(false)}
         sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-          margin: "auto",
+          width: {xs: "100%",
+                  sm: "75%",
+                  md: "50%"
+          }
+        }}
+        anchorOrigin={{
+          vertical:"bottom",
+          horizontal:"center"
         }}
       >
         <Alert

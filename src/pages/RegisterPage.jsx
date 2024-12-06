@@ -115,20 +115,23 @@ export function RegisterPage() {
 
       <Snackbar
         open={openSnackbar}
-        autoHideDuration={3000}
+        autoHideDuration={3000000}
         onClose={() => setOpenSnackbar(false)}
         sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-          margin: "auto",
+          width: {xs: "100%",
+                  md: "75%",
+                  lg: "61%"
+          }
+        }}
+        anchorOrigin={{
+          vertical:"bottom",
+          horizontal:"center"
         }}
       >
         <Alert
           onClose={() => setOpenSnackbar(false)}
           severity="error"
-          sx={{ width: "50%" }}
+          sx={{ width: "60%" }}
         >
           <ul>
             {error.map((err, index) => (

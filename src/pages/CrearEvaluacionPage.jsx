@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Box, List, ListItem, ListItemText, Paper } from "@mui/material";
+import { Box, List, ListItem, ListItemText, Paper, Snackbar, Alert } from "@mui/material";
 import Button from "../components/Button";
 import { postEvaluacionYPreguntas } from "../services/EvaluacionService";
 import { useDocente } from "../context/DocenteContext";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
+
 
 
 export function CrearEvaluacionPage() {
@@ -16,12 +17,21 @@ export function CrearEvaluacionPage() {
   const [titulo, setTitulo] = useState("");
   const navigate = useNavigate();
   const { docenteContext } = useDocente();
+  const [error, setError] = useState([]);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
 
   const evaluacionData = { titulo, docente: docenteContext.id, preguntas };
 
   const agregarCriterio = () => {
     if (!nuevoCriterio.trim()) {
       setErrorCriterio("La pregunta no puede estar vacía.");
+      return;
+    } else if (nuevoCriterio.length < 5) {
+      setErrorCriterio("La pregunta debe tener al menos 5 caracteres.");
+      return;
+    } else if (nuevoCriterio.length > 100) {
+      setErrorCriterio("La pregunta no puede tener más de 100 caracteres.");
       return;
     } else {
       setErrorCriterio("");
@@ -63,9 +73,11 @@ export function CrearEvaluacionPage() {
       await postEvaluacionYPreguntas(evaluacionData);
       navigate("/crearEvaluacionExito");
     } catch (error) {
-      const data = error.response?.data || ["Ocurrió un error inesperado"];
-
-      let mensajes;
+      const mensajeError =
+        error.response?.data?.message || "Error al registrar docente";
+      setError(mensajeError);
+      setOpenSnackbar(true);
+      /*let mensajes;
       if (Array.isArray(data)) {
         mensajes = data;
       } else if (typeof data === "object" && data !== null) {
@@ -74,7 +86,7 @@ export function CrearEvaluacionPage() {
         mensajes = [data || "Ocurrió un error inesperado"];
       }
 
-      alert(mensajes.join("\n"));
+      alert(mensajes.join("\n"));*/
     }
   };
 
@@ -181,6 +193,32 @@ export function CrearEvaluacionPage() {
           className="botonClaro"
           style={{ marginTop: "20px" }}
         />
+      </Box>
+      <Box sx={{display:"flex", alignItems:"center", justifyItems:"center", backgroundColor:"red"}}>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        sx={{
+          width: "100%",
+        }}
+        anchorOrigin={{
+          vertical:"bottom",
+          horizontal:"center"
+        }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity="error"
+          sx={{ width: "50%" }}
+        >
+          <ul>
+            {error.map((err, index) => (
+              <li key={index}>{err}</li>
+            ))}
+          </ul>
+        </Alert>
+      </Snackbar>
       </Box>
     </Box>
   );
