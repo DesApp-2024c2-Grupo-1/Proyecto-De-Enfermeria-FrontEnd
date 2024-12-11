@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Filtro from "../components/Filtro";
+//import Filtro from "../components/Filtro";
 import Lista from "../components/Lista";
 import { getAlumnoByDni } from "../services/alumnoService";
 
