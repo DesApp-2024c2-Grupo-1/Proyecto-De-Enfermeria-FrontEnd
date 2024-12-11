@@ -48,7 +48,7 @@ export function AlumnoPerfilPage() {
       <h1>{alumno ? `${alumno.nombre} ${alumno.apellido}` : "Cargando..."}</h1>
 
       <div style={{ margin: "10px 120px" }}>
-        <Filtro />
+        {/*<Filtro /> Aca hay que hacer cosas de frontendero*/}
         <div>
           {examenes.map((examen, index) => (
             <Lista
