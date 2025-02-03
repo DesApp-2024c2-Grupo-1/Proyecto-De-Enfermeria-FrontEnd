@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDocente } from "../context/DocenteContext";
 import Button from "../components/Button";
-import { getAllAlumnos } from "../services/alumnoService";
+import { getAllAlumnos } from "../services/AlumnoService";
 
 export function Evaluacion({
   preguntas,

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput"
 import Button from "../components/Button"
-import { registrarAlumno } from "../services/alumnoService";
+import { registrarAlumno } from "../services/AlumnoService";
 import { Snackbar, Alert } from "@mui/material";
 
 export function RegisterPageAlumnos() {
@@ -33,7 +33,7 @@ const handleRegister = async () => {
 
     return <>
     <div className="alineacion">
-    <img src="../assets/profile.png" className="bordePerfil"/> 
+    <img src="/assets/profile.png" className="bordePerfil"/> 
       <div className="recuadroTexto">
       <FormInput
         type="name"
@@ -74,7 +74,7 @@ const handleRegister = async () => {
     
 
     <div>
-    <img src="../assets/unahur-logo-figma-sf.png" className="unahur-logo" alt="Logo UNAHUR"/> 
+    <img src="/assets/unahur-logo-figma-sf.png" className="unahur-logo" alt="Logo UNAHUR"/> 
     </div>
     </div>
 
