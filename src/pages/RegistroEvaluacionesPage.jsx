@@ -1,4 +1,4 @@
-import Busqueda from "../components/busqueda";
+import Busqueda from "../components/Busqueda";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";

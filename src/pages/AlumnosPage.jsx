@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import Busqueda from "../components/busqueda";
+import Busqueda from "../components/Busqueda";
 import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
-import { getAllAlumnos } from "../services/alumnoService";
+import { getAllAlumnos } from "../services/AlumnoService";
 
 export function AlumnosPage() {
   const [searchTerm, setSearchTerm] = useState(""); 

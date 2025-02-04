@@ -4,7 +4,7 @@ import { ListaPreguntas } from "../components/ListaPreguntas";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDocente } from "../context/DocenteContext";
-import { getAllAlumnos } from "../services/alumnoService";
+import { getAllAlumnos } from "../services/AlumnoService";
 
 export function Evaluacion({
   preguntas,

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput";
-import { registrarAlumno } from "../services/alumnoService";
+import { registrarAlumno } from "../services/AlumnoService";
 import { Snackbar, Alert } from "@mui/material";
 
 export function RegisterPageAlumnos() {
@@ -73,7 +73,7 @@ export function RegisterPageAlumnos() {
 
         <div>
           <img
-            src="../assets/unahur-logo-figma-sf.png"
+            src="/assets/unahur-logo-figma-sf.png"
             className="unahur-logo"
             alt="Logo UNAHUR"
           />
