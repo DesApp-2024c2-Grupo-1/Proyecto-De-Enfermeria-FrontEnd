@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput";
-import Button from "../components/Button";
 import { registrarDocente } from "../services/DocenteService";
 import { Snackbar, Alert } from "@mui/material";
 
@@ -98,11 +97,10 @@ export function RegisterPage() {
             icono="lock"
           />
           <div id="espaciojaja"></div>
-          <Button
-            text="Registrarse"
-            onClick={handleRegister}
-            className="botonClaro"
-          />
+
+          <button onClick={handleRegister} className="botonClaro">
+            Registrate
+          </button>
         </div>
         <div>
           <img
@@ -118,14 +116,11 @@ export function RegisterPage() {
         autoHideDuration={3000000}
         onClose={() => setOpenSnackbar(false)}
         sx={{
-          width: {xs: "100%",
-                  md: "75%",
-                  lg: "61%"
-          }
+          width: { xs: "100%", md: "75%", lg: "61%" },
         }}
         anchorOrigin={{
-          vertical:"bottom",
-          horizontal:"center"
+          vertical: "bottom",
+          horizontal: "center",
         }}
       >
         <Alert

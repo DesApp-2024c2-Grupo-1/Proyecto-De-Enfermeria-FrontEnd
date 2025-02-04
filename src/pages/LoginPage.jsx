@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput";
 import "../index.css";
@@ -63,11 +62,10 @@ export function LoginPage() {
             className="recuadroInputs"
             icono="lock"
           />
-          <Button
-            text={"Iniciar sesión"}
-            onClick={handleLogin}
-            className="botonClaro"
-          />
+
+          <button onClick={handleLogin} className="botonClaro">
+            Iniciar sesión
+          </button>
 
           <div className="alineacion-texto">
             <p className="texto">
@@ -80,11 +78,9 @@ export function LoginPage() {
               </a>
             </p>
             <p id="espacio">¿No tenés cuenta?</p>
-            <Button
-              text="Registrate"
-              onClick={handleRegister}
-              className="botonClaro"
-            />
+            <button onClick={handleRegister} className="botonClaro">
+              Registrate
+            </button>
           </div>
         </div>
 
@@ -102,14 +98,11 @@ export function LoginPage() {
         autoHideDuration={3000}
         onClose={() => setOpenSnackbar(false)}
         sx={{
-          width: {xs: "100%",
-                  sm: "75%",
-                  md: "50%"
-          }
+          width: { xs: "100%", sm: "75%", md: "50%" },
         }}
         anchorOrigin={{
-          vertical:"bottom",
-          horizontal:"center"
+          vertical: "bottom",
+          horizontal: "center",
         }}
       >
         <Alert

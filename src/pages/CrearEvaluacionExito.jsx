@@ -1,8 +1,4 @@
-import {
-  Box,
-  Paper,
-} from "@mui/material";
-import Button from "../components/Button";
+import { Box, Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export function CrearEvaluacionExitoPage() {
@@ -10,7 +6,9 @@ export function CrearEvaluacionExitoPage() {
 
   return (
     <Box>
-      <h2 style={{textAlign: 'center', marginTop: '7vh'}}>Crear Evaluación</h2>      
+      <h2 style={{ textAlign: "center", marginTop: "7vh" }}>
+        Crear Evaluación
+      </h2>
       <Box
         sx={{
           display: "flex",
@@ -22,30 +20,38 @@ export function CrearEvaluacionExitoPage() {
       >
         <Paper
           elevation={3}
-          sx={{ width: "100%", maxWidth: 600, padding: 3, borderRadius: 7, backgroundColor: '#DDF0E7' }}
+          sx={{
+            width: "100%",
+            maxWidth: 600,
+            padding: 3,
+            borderRadius: 7,
+            backgroundColor: "#DDF0E7",
+          }}
         >
-        <h1>¡La evaluación fue registrada con éxito!</h1>
-        <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginTop: 3,
-          gap: 2
-        }}
-      >
-        <Button
-          text="Ir al inicio"
-          onClick={() => navigate("/home")}
-          className="botonClaro"
-          style={{borderRadius: 8}}
-        />
-        <Button
-          text="Crear otra"
-          onClick={() => navigate("/crearEvaluacion")}
-          className="botonClaro"
-          style={{borderRadius: 8}}
-        />
-      </Box>
+          <h1>¡La evaluación fue registrada con éxito!</h1>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: 3,
+              gap: 2,
+            }}
+          >
+            <button
+              onClick={() => navigate("/home")}
+              className="botonClaro"
+              style={{ borderRadius: 8 }}
+            >
+              Ir al inicio
+            </button>
+            <button
+              onClick={() => navigate("/home")}
+              className="botonClaro"
+              style={{ borderRadius: 8 }}
+            >
+              Crear otra
+            </button>
+          </Box>
         </Paper>
       </Box>
     </Box>

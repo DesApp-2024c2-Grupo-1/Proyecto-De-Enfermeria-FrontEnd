@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { Box, List, ListItem, ListItemText, Paper, Snackbar, Alert } from "@mui/material";
-import Button from "../components/Button";
+import {
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import { postEvaluacionYPreguntas } from "../services/EvaluacionService";
 import { useDocente } from "../context/DocenteContext";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
-
-
 
 export function CrearEvaluacionPage() {
   const [preguntas, setPreguntas] = useState([]);
@@ -19,7 +24,6 @@ export function CrearEvaluacionPage() {
   const { docenteContext } = useDocente();
   const [error, setError] = useState([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
-
 
   const evaluacionData = { titulo, docente: docenteContext.id, preguntas };
 
@@ -122,11 +126,8 @@ export function CrearEvaluacionPage() {
             helperTextColor="gray"
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
-
             margin="normal"
-           
           />
-
 
           <p style={{ marginBottom: 1, fontSize: "17px", fontWeight: "bold" }}>
             Criterio de Evaluación
@@ -136,11 +137,12 @@ export function CrearEvaluacionPage() {
               <ListItem
                 key={indice}
                 secondaryAction={
-                  <Button
-                    text="Borrar"
+                  <button
                     onClick={() => eliminarCriterio(indice)}
                     className="botonClaro"
-                  />
+                  >
+                    Borrar
+                  </button>
                 }
               >
                 <ListItemText
@@ -178,51 +180,57 @@ export function CrearEvaluacionPage() {
               onChange={(e) => setNuevoPuntaje(e.target.value)}
             />
             <Box sx={{ alignSelf: "flex-start" }}>
-              <Button
-                text="Añadir"
+              <button
                 onClick={agregarCriterio}
                 className="botonClaro"
                 style={{ marginTop: "28px" }}
-              />
+              >
+                Añadir
+              </button>
             </Box>
           </Box>
         </Paper>
-        <Button
-          text="Guardar"
+        <button
           onClick={manejarEnvio}
           className="botonClaro"
           style={{ marginTop: "20px" }}
-        />
+        >
+          Guardar
+        </button>
       </Box>
-      <Box sx={{display:"flex", alignItems:"center", justifyItems:"center", backgroundColor:"red"}}>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={3000}
-        onClose={() => setOpenSnackbar(false)}
+      <Box
         sx={{
-          width: "100%",
-        }}
-        anchorOrigin={{
-          vertical:"bottom",
-          horizontal:"center"
+          display: "flex",
+          alignItems: "center",
+          justifyItems: "center",
+          backgroundColor: "red",
         }}
       >
-        <Alert
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={3000}
           onClose={() => setOpenSnackbar(false)}
-          severity="error"
-          sx={{ width: "50%" }}
+          sx={{
+            width: "100%",
+          }}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
         >
-          <ul>
-            {error.map((err, index) => (
-              <li key={index}>{err}</li>
-            ))}
-          </ul>
-        </Alert>
-      </Snackbar>
+          <Alert
+            onClose={() => setOpenSnackbar(false)}
+            severity="error"
+            sx={{ width: "50%" }}
+          >
+            <ul>
+              {error.map((err, index) => (
+                <li key={index}>{err}</li>
+              ))}
+            </ul>
+          </Alert>
+        </Snackbar>
       </Box>
     </Box>
   );
-
 }
-
-

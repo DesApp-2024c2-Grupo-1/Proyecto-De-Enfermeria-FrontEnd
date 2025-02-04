@@ -1,17 +1,8 @@
-import Button from "../components/Button";
 import { Box, Typography, Paper, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 function Carpeta({ titulo, id }) {
   const navigate = useNavigate();
-
-  /*
-  const handleNavigateRegistrar = (id) => {
-    navigate(`/registrarEvaluacion/${id}`);
-  };
-  */
-
-  
 
   return (
     <Stack
@@ -48,25 +39,26 @@ function Carpeta({ titulo, id }) {
         <Stack
           sx={{
             flexDirection: "column",
-            justifyContent: "center", 
-            alignItems: "center", 
-            height: "100%", 
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
             gap: "10px",
           }}
         >
-          <Button
-            text="Evaluar"
+          <button
             className="botonClaro"
             onClick={() => navigate(`/registrarEvaluacion/${id}`)}
-            style={{borderRadius: 5}}
-          />
-          <Button
-            text="Ver"
+            style={{ borderRadius: 5 }}
+          >
+            Evaluar
+          </button>
+          <button
             className="botonClaro"
-            onClick={() => navigate("/registroEvaluaciones")}
-            style={{borderRadius: 5}}
-          />
-          
+            onClick={() => navigate(`/registrarEvaluacion/${id}`)}
+            style={{ borderRadius: 5 }}
+          >
+            Ver
+          </button>
         </Stack>
       </Paper>
 

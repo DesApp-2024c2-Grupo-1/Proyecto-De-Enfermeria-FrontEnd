@@ -1,5 +1,4 @@
-import { Box, Typography, Paper, Stack, IconButton } from "@mui/material";
-import { red } from "@mui/material/colors";
+import { Box, Typography, Paper, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { AiFillPlusCircle } from "react-icons/ai";
 

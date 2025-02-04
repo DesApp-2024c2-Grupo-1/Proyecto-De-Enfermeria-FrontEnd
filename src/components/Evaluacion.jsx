@@ -4,7 +4,6 @@ import { ListaPreguntas } from "../components/ListaPreguntas";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDocente } from "../context/DocenteContext";
-import Button from "../components/Button";
 import { getAllAlumnos } from "../services/alumnoService";
 
 export function Evaluacion({
@@ -89,12 +88,9 @@ export function Evaluacion({
         />
       </Stack>
       {alumno === "Alumno no encontrado" && (
-        <Button
-          text="Registrar"
-          className="botonClaro"
-          onClick={handleRegister}
-          style={{ borderRadius: 5 }}
-        />
+        <button className="botonClaro" onClick={handleRegister}>
+            Registrar
+        </button>
       )}
       <Box>
         <ListaPreguntas preguntas={preguntas} disabled={disabled} />
