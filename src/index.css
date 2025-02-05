@@ -117,18 +117,8 @@ align-items: center;
 
 /* Registro Evaluaciones */
 
-.registroEvaluacionesContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
 
-.registroEvaluaciones {
-  width: 80%;
-  text-align: justify;
-}
+
 
 .listItem {
   display: flex;

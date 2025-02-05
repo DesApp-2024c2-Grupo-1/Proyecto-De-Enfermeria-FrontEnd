@@ -2,6 +2,7 @@ import Busqueda from "../components/Busqueda";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
+import { Stack, Box } from "@mui/material";
 
 const datos = [
   { nombre: "Maria Gonzalez", documento: "12345369" },
@@ -13,18 +14,20 @@ const datos = [
 
 export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState(""); 
-  
+  const [searchTerm, setSearchTerm] = useState("");
+
   const keys = ["nombre", "documento"];
-  const listaFiltrada = searchTerm.length >= 7 ? datos.filter((dato) => 
-    String(dato.documento).includes(searchTerm)) : datos;
+  const listaFiltrada =
+    searchTerm.length >= 7
+      ? datos.filter((dato) => String(dato.documento).includes(searchTerm))
+      : datos;
 
   return (
     <>
-      <div className="registroEvaluacionesContainer">
+      <Stack sx={{ alignItems: "center" }}>
         <h1>Lavado de manos</h1>
-        <div className="registroEvaluaciones">
-          <Busqueda 
+        <Stack sx={{ width: "80%"}}>
+          <Busqueda
             placeholder="Buscar por DNI..."
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -33,8 +36,8 @@ export function RegistroEvaluacionesPage() {
             keys={keys}
             buttonOnClick={() => navigate("/evaluacionesPorAlumno")}
           />
-        </div>
-      </div>
+        </Stack>
+      </Stack>
     </>
   );
 }

@@ -54,7 +54,7 @@ function Carpeta({ titulo, id }) {
           </button>
           <button
             className="botonClaro"
-            onClick={() => navigate(`/registrarEvaluacion/${id}`)}
+            onClick={() => navigate(`/registroEvaluaciones`)}
             style={{ borderRadius: 5 }}
           >
             Ver

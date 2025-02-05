@@ -3,7 +3,7 @@ import Busqueda from "../components/Busqueda";
 import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
 import { getAllAlumnos } from "../services/AlumnoService";
-import { Stack, Box } from "@mui/material";
+import { Stack } from "@mui/material";
 
 export function AlumnosPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -31,28 +31,23 @@ export function AlumnosPage() {
 
   return (
     <>
-      <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
+      <Stack sx={{ alignItems: "center" }}>
         <h1>Alumnos</h1>
         <Stack
           sx={{
             width: "80%",
-            justifyContent: "center",
           }}
-          spacing={2}
         >
-          <Box>
-            <Busqueda
-              placeholder="Buscar por DNI..."
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </Box>
-          <Box>
-            <Lista
-              lista={listaFiltrada}
-              keys={keys}
-              buttonOnClick={handleNavigate}
-            />
-          </Box>
+          <Busqueda
+            placeholder="Buscar por DNI..."
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+
+          <Lista
+            lista={listaFiltrada}
+            keys={keys}
+            buttonOnClick={handleNavigate}
+          />
         </Stack>
       </Stack>
     </>
