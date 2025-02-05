@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 //import Filtro from "../components/Filtro";
 import Lista from "../components/Lista";
 import { getAlumnoByDni } from "../services/AlumnoService";
+import { Stack, Box } from "@mui/material";
 
 const examenes = [
   {
@@ -37,19 +38,18 @@ export function AlumnoPerfilPage() {
     setAlumno(data);
   };
 
- 
   useEffect(() => {
     fetchAlumnoByDni(id);
   }, [id]);
 
   return (
     <>
-      
-      <h1>{alumno ? `${alumno.nombre} ${alumno.apellido}` : "Cargando..."}</h1>
+      <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
+        <h1>
+          {alumno ? `${alumno.nombre} ${alumno.apellido}` : "Cargando..."}
+        </h1>
 
-      <div style={{ margin: "10px 120px" }}>
-        {/*<Filtro /> Aca hay que hacer cosas de frontendero*/}
-        <div>
+        <Box sx={{ width: "80%", display: "flex", flexDirection: "column" }}>
           {examenes.map((examen, index) => (
             <Lista
               key={index}
@@ -59,8 +59,8 @@ export function AlumnoPerfilPage() {
               buttonOnClick={() => navigate("/verEvaluacion")}
             />
           ))}
-        </div>
-      </div>
+        </Box>
+      </Stack>
     </>
   );
 }

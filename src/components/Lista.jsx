@@ -1,8 +1,8 @@
 import ListItem from "./ListItem";
 
-function Lista({ titulo,  lista, keys, buttonOnClick }) {
+function Lista({ titulo,  lista, keys, buttonOnClick, className}) {
   return (
-    <div className="lista">
+    <div className={className}>
       <h2>{titulo}</h2>
       {lista.map((item, index) => (
         <ListItem
