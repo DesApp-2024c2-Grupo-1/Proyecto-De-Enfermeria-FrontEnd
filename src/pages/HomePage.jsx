@@ -27,14 +27,14 @@ export function HomePage() {
       }}
     >
       <h1>
-      ¡Bienvenido/a, {docenteContext.nombre} {docenteContext.apellido}!
+        ¡Bienvenido/a, {docenteContext.nombre} {docenteContext.apellido}!
       </h1>
       <div className="gridCarpetas">
         <Grid container spacing={10}>
-        <Grid item xs={12} sm={6} md={4}>
-          <CarpetaFake />
-        </Grid>          
-        {carpetas.map((evaluacion, index) => (
+          <Grid item xs={12} sm={6} md={4}>
+            <CarpetaFake />
+          </Grid>
+          {carpetas.map((evaluacion, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Carpeta titulo={evaluacion.titulo} id={evaluacion.id} />
             </Grid>
