@@ -50,10 +50,7 @@ export function Input({
         InputProps={{
           startAdornment: icon ? (
             <InputAdornment position="start">
-              <i
-                className={`fa fa-${icon}`}
-                style={{ marginRight: "8px" }}
-              ></i>
+              <i className={`fa fa-${icon}`} style={{ marginRight: "8px" }}></i>
             </InputAdornment>
           ) : null,
         }}

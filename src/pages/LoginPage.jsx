@@ -7,8 +7,6 @@ import { getDocenteByDni } from "../services/DocenteService";
 import { useDocente } from "../context/DocenteContext";
 import { Stack, Box, Snackbar, Alert } from "@mui/material";
 
-
-
 export function LoginPage() {
   const navigate = useNavigate();
   const [dni, setDni] = useState("");
@@ -100,49 +98,58 @@ export function LoginPage() {
         </div>
       </div>*/}
 
-<Stack
+      <Stack
         sx={{
-          height: "100vh",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "red",
-          position: "relative",
-       
-        }}
-      >
-        <Box
-        sx={{
-          position: "absolute", 
-          top: "0%", 
-          left: "50%",
-          transform: "translateX(-50%)", 
-          width: "120px",
-          height: "120px",
-          backgroundColor: "yellow",
-          borderRadius: "50%", 
-          zIndex: "1",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-        }}>
 
-<i className="fa fa-user" style={{ fontSize: "40px", color: "white" }}></i>
-        </Box>
-
+          height: "100vh",
+        }}
+      >
         <Stack
           sx={{
-            width: "550px",
-            height: "100%",
-            margin: "50px",
+            height: "700px",
+            width: "450px",
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "#77c4a0",
+            backgroundColor: "rgba(255, 255, 255, 0.87)",
             borderRadius: "20px",
-            position: "relative",
+
+            boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
           }}
+          spacing={2}
         >
-          <Input placeholder={"Ingresar DNI"} icon={"address-card"}/>
-          <Input placeholder={"Ingresar Contraseña"} icon={"lock"} />
+          <Box
+            sx={{
+              width: "130px",
+              height: "130px",
+              backgroundColor: "#429870",
+              borderRadius: "50%",
+              zIndex: "1",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: "-330px",
+              boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
+              color: "rgba(255, 255, 255, 0.87)",
+            }}
+          >
+            <i className="fa fa-user" style={{ fontSize: "60px" }}></i>
+          </Box>
+
+          <Input
+            placeholder={"Ingresar DNI"}
+            value={dni}
+            onChange={(e) => setDni(e.target.value)}
+            icon={"address-card"}
+          />
+          <Input
+            placeholder={"Ingresar Contraseña"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+           
+          />
           <button onClick={handleLogin} className="botonClaro">
             Iniciar sesión
           </button>
@@ -153,12 +160,11 @@ export function LoginPage() {
             ¿Olvidaste la contraseña?
           </a>
           <p>¿No tenés cuenta?</p>
-          <button onClick={handleRegister} className="botonClaro">Registrate</button>
+          <button onClick={handleRegister} className="botonClaro">
+            Registrate
+          </button>
         </Stack>
-
-
       </Stack>
-
 
       <Snackbar
         open={openSnackbar}
