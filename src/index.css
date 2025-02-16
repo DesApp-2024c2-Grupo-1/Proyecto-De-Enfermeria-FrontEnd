@@ -336,3 +336,19 @@ align-items: center;
   margin: auto;
 }
 
+/* Animación copada de Login a Register */
+
+.stack-animacion {
+  transition: width 0.5s ease, height 0.5s ease;
+}
+
+.stack-inicial {
+  width: 450px;
+  height: 700px;
+}
+
+.stack-target {
+  width: 600px;
+  height: 700px;
+}
+

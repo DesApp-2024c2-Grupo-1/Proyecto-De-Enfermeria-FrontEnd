@@ -40,12 +40,17 @@ export function LoginPage() {
   };
 
   const handleRegister = () => {
-    navigate("register");
+    const stackElement = document.querySelector(".stack-animacion");
+    stackElement.classList.remove("stack-inicial");
+    stackElement.classList.add("stack-target");
+    setTimeout(() => {
+      navigate("register");
+    }, 500);
   };
 
   return (
     <>
-      {/*
+    {/*
      <div className="alineacion">
         <div className="alineacion">
           <img src="../assets/profile.png" className="bordePerfil" />
@@ -103,19 +108,16 @@ export function LoginPage() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-
           height: "100vh",
         }}
       >
         <Stack
+          className="stack-animacion stack-inicial"
           sx={{
-            height: "700px",
-            width: "450px",
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: "rgba(255, 255, 255, 0.87)",
             borderRadius: "20px",
-
             boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
           }}
           spacing={2}
@@ -148,7 +150,7 @@ export function LoginPage() {
             placeholder={"Ingresar Contraseña"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-           
+            // icon={"key"}
           />
           <button onClick={handleLogin} className="botonClaro">
             Iniciar sesión

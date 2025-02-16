@@ -2,7 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormInput from "../components/FormInput";
 import { registrarDocente } from "../services/DocenteService";
-import { Snackbar, Alert } from "@mui/material";
+import { Stack, Box, Snackbar, Grid, Alert } from "@mui/material";
+import { Input } from "../components/Input";
+import "../index.css";
 
 export function RegisterPage() {
   const navigate = useNavigate();
@@ -45,7 +47,7 @@ export function RegisterPage() {
 
   return (
     <>
-      <div className="alineacion">
+      {/* <div className="alineacion">
         <img src="../assets/profile.png" className="bordePerfil" />
         <div className="recuadroTexto2">
           <FormInput
@@ -110,7 +112,102 @@ export function RegisterPage() {
           />
         </div>
       </div>
+      */}
 
+<Stack
+  sx={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+  }}
+>
+  <Stack
+    className="stack-animacion stack-target"
+    sx={{
+      height: "700px",
+      width: "600px",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "rgba(255, 255, 255, 0.87)",
+      borderRadius: "20px",
+      boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
+    }}
+    spacing={2}
+  >
+    <Box
+      sx={{
+        width: "130px",
+        height: "130px",
+        backgroundColor: "#429870",
+        borderRadius: "50%",
+        zIndex: "1",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
+        color: "rgba(255, 255, 255, 0.87)",
+      }}
+    >
+      <i className="fa fa-user" style={{ fontSize: "60px" }}></i>
+    </Box>
+
+    <Grid container spacing={1.65} sx={{ width: "80%"}}>
+      <Grid item xs={12} sm={5.86}>
+        <Input
+          placeholder={"Ingrese su nombre"}
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+          icon={"user"}
+        />
+      </Grid>
+      <Grid item xs={12} sm={5.86}>
+        <Input
+          placeholder={"Ingrese su apellido"}
+          value={apellido}
+          onChange={(e) => setApellido(e.target.value)}
+          icon={"user"}
+        />
+      </Grid>
+      <Grid item xs={12} sm={5.86}>
+        <Input
+          placeholder={"Ingrese su DNI"}
+          value={dni}
+          onChange={(e) => setDni(e.target.value)}
+          icon={"id-card"}
+        />
+      </Grid>
+      <Grid item xs={12} sm={5.86}>
+        <Input
+          placeholder={"Ingrese su email"}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          icon={"envelope"}
+        />
+      </Grid>
+      <Grid item xs={12} sm={5.86}>
+        <Input
+          placeholder={"Ingrese su contraseña"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          icon={"key"}
+        />
+      </Grid>
+      <Grid item xs={12} sm={5.86}>
+        <Input
+          placeholder={"Repita su contraseña"}
+          value={confirmarPassword}
+          onChange={(e) => setConfirmarPassword(e.target.value)}
+          icon={"key"}
+        />
+      </Grid>
+    </Grid>
+
+    <button onClick={handleRegister} className="botonClaro">
+      Registrarme
+    </button>
+  </Stack>
+</Stack>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000000}
