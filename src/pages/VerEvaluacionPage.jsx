@@ -3,7 +3,7 @@ import { Evaluacion } from "../components/Evaluacion";
 const preguntas = [
   { pregunta: "Lorem ipsum dolor sit amet?", respuesta: true },
   { pregunta: "Consectetur adipiscing elit?", respuesta: false },
-  { pregunta: "Sed do eiusmod tempor incididunt?", respuesta: true },
+  { pregunta: "Sed do eiusmod tempor incididunt?", respuesta: false },
   { pregunta: "Ut labore et dolore magna aliqua?", respuesta: false },
   { pregunta: "Ut enim ad minim veniam?", respuesta: true },
   { pregunta: "Duis aute irure dolor in reprehenderit?", respuesta: false },

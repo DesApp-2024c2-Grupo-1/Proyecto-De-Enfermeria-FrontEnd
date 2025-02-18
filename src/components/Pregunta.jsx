@@ -23,15 +23,16 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            border: "2px solid black",
+            border: "2px solid",
+            borderColor: disabled ? "#B0B0B0" : "black",
             borderRadius: "100px",
             width: "25px",
             height: "25px",
             textAlign: "center",
             lineHeight: "23px",
             cursor: disabled ? "not-allowed" : "pointer",
-            backgroundColor: respuesta === true ? "black" : "transparent",
-            color: respuesta === true ? "white" : "black",
+            backgroundColor: respuesta === true ? (disabled ? "#E8E8E8" : "black") : "transparent",
+            color: disabled ? "#B0B0B0" : (respuesta === true ? "white" : "black"),
           }}
         >
           <input
@@ -44,24 +45,23 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
             onChange={() => onChange(true)}
             style={{ display: "none" }}
           />
-          <label htmlFor={`si-${pregunta}`}>
-            ✓
-          </label>
+          <label htmlFor={`si-${pregunta}`}>✓</label>
         </Box>
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            border: "2px solid black",
+            border: "2px solid",
+            borderColor: disabled ? "#B0B0B0" : "black",
             borderRadius: "100px",
             width: "25px",
             height: "25px",
             textAlign: "center",
             lineHeight: "23px",
             cursor: disabled ? "not-allowed" : "pointer",
-            backgroundColor: respuesta === false ? "black" : "transparent",
-            color: respuesta === false ? "white" : "black",
+            backgroundColor: respuesta === false ? (disabled ? "#E8E8E8" : "black") : "transparent",
+            color: disabled ? "#B0B0B0" : (respuesta === false ? "white" : "black"),
           }}
         >
           <input
@@ -74,13 +74,9 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
             onChange={() => onChange(false)}
             style={{ display: "none" }}
           />
-          <label htmlFor={`no-${pregunta}`}>
-            ✗
-          </label>
+          <label htmlFor={`no-${pregunta}`}>✗</label>
         </Box>
       </Stack>
     </Stack>
   );
 }
-
-
