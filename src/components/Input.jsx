@@ -1,4 +1,4 @@
-import { TextField, Typography,Box } from "@mui/material";
+import { TextField, Typography, Box, InputAdornment } from "@mui/material";
 
 export function Input({
   disabled,
@@ -12,8 +12,9 @@ export function Input({
   color,
   onChange,
   helperTextWidth,
-  value
-
+  value,
+  type,
+  icon,
 }) {
   return (
     <div>
@@ -22,7 +23,6 @@ export function Input({
         sx={{
           width: width,
           backgroundColor: backgroundColor,
-
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
               borderColor: "#429870",
@@ -35,18 +35,34 @@ export function Input({
             },
           },
           "& .MuiInputLabel-root": {
-            color: "color",
+            color: color,
             "&.Mui-focused": {
               color: "#429870",
             },
           },
+          "&:focus-within .fa": {
+            color: "#55B589", 
+          },
         }}
+        type={type}
         disabled={disabled}
         value={value}
         id={texto}
         label={placeholder}
         variant="outlined"
         onChange={onChange}
+        InputProps={{
+          startAdornment: icon ? (
+            <InputAdornment position="start">
+              <i
+                className={`fa fa-${icon}`}
+                style={{
+                  marginRight: "8px"
+                }}
+              ></i>
+            </InputAdornment>
+          ) : null,
+        }}
       />
       <Box sx={{ minHeight: "1.5em", marginTop: "8px" }}>
         {!disabled && (
