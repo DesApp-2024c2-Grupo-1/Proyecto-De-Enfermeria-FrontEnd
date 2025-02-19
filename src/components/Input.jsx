@@ -13,6 +13,7 @@ export function Input({
   onChange,
   helperTextWidth,
   value,
+  type,
   icon,
 }) {
   return (
@@ -22,7 +23,6 @@ export function Input({
         sx={{
           width: width,
           backgroundColor: backgroundColor,
-
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
               borderColor: "#429870",
@@ -35,12 +35,16 @@ export function Input({
             },
           },
           "& .MuiInputLabel-root": {
-            color: "color",
+            color: color,
             "&.Mui-focused": {
               color: "#429870",
             },
           },
+          "&:focus-within .fa": {
+            color: "#55B589", 
+          },
         }}
+        type={type}
         disabled={disabled}
         value={value}
         id={texto}
@@ -50,7 +54,12 @@ export function Input({
         InputProps={{
           startAdornment: icon ? (
             <InputAdornment position="start">
-              <i className={`fa fa-${icon}`} style={{ marginRight: "8px" }}></i>
+              <i
+                className={`fa fa-${icon}`}
+                style={{
+                  marginRight: "8px"
+                }}
+              ></i>
             </InputAdornment>
           ) : null,
         }}

@@ -50,59 +50,6 @@ export function LoginPage() {
 
   return (
     <>
-    {/*
-     <div className="alineacion">
-        <div className="alineacion">
-          <img src="../assets/profile.png" className="bordePerfil" />
-          <div className="recuadroTexto">
-            <FormInput
-              placeholder="Ingrese su DNI"
-              value={dni}
-              onChange={(e) => setDni(e.target.value)}
-              className="recuadroInputs"
-              icono="address-card"
-            />
-
-            <FormInput
-              type="password"
-              placeholder="Contraseña"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="recuadroInputs"
-              icono="lock"
-            />
-
-            <button onClick={handleLogin} className="botonClaro">
-              Iniciar sesión
-            </button>
-
-            <div className="alineacion-texto">
-              <p className="texto">
-                <a
-                  className="texto"
-                  href="https://ar.pinterest.com/pin/369084131975098694/"
-                  target="_blank"
-                >
-                  ¿Olvidaste la contraseña?
-                </a>
-              </p>
-              <p id="espacio">¿No tenés cuenta?</p>
-              <button onClick={handleRegister} className="botonClaro">
-                Registrate
-              </button>
-            </div>
-          </div>
-
-          <div>
-            <img
-              src="../assets/unahur-logo-figma-sf.png"
-              className="unahur-logo"
-              alt="Logo UNAHUR"
-            />
-          </div>
-        </div>
-      </div>*/}
-
       <Stack
         sx={{
           display: "flex",
@@ -150,7 +97,7 @@ export function LoginPage() {
             placeholder={"Ingresar Contraseña"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            // icon={"key"}
+            icon={"key"}
           />
           <button onClick={handleLogin} className="botonClaro">
             Iniciar sesión
@@ -158,6 +105,7 @@ export function LoginPage() {
           <a
             href="https://ar.pinterest.com/pin/369084131975098694/"
             target="_blank"
+            style={{ color: "#55B589"}}
           >
             ¿Olvidaste la contraseña?
           </a>
