@@ -7,7 +7,7 @@ import { Observacion } from "../components/Observacion";
 export function ListaPreguntas({ preguntas, disabled }) {
 
   const [respuestas, setRespuestas] = useState(
-    preguntas.map((pregunta) => pregunta.respuesta || null)
+    preguntas.map((pregunta) => pregunta.respuesta ?? null)
   );
 
   const [registrado, setRegistrado] = useState(disabled);
