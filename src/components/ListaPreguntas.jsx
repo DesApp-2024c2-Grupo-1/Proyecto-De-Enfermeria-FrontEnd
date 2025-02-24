@@ -4,9 +4,12 @@ import { Stack } from "@mui/material";
 import { Lugar } from "../components/Lugar";
 import { Observacion } from "../components/Observacion";
 import { registrarEvaluacionRealizada } from "../services/EvaluacionRealizadaService";
+import { useDocente } from "../context/DocenteContext";
+import { useEvaluacion } from "../context/EvaluacionContext";
 
-export function ListaPreguntas({ preguntas, disabled }) {
+export function ListaPreguntas({ preguntas, disabled, alumno }) {
   const { docenteContext } = useDocente();
+  const { evaluacionContext } = useEvaluacion();
   const [respuestas, setRespuestas] = useState(
     preguntas.map((pregunta) => pregunta.respuesta ?? null)
   );
@@ -14,10 +17,11 @@ export function ListaPreguntas({ preguntas, disabled }) {
   const [registrado, setRegistrado] = useState(disabled);
 
   const docenteData = docenteContext;
+  const evaluacionData = evaluacionContext;
   const evaluacionRealizadaData = {
     alumno: alumno.id,
     docente: docenteData.id,
-    evaluacion: evaluacion.id,
+    evaluacion: evaluacionData.id,
     respuestas,
     fecha: new Date(),
   };
