@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FormInput from "../components/FormInput";
 import { Input } from "../components/Input";
 import "../index.css";
 import { getDocenteByDni } from "../services/DocenteService";
@@ -105,7 +104,7 @@ export function LoginPage() {
           <a
             href="https://ar.pinterest.com/pin/369084131975098694/"
             target="_blank"
-            style={{ color: "#55B589"}}
+            style={{ color: "#55B589" }}
           >
             ¿Olvidaste la contraseña?
           </a>

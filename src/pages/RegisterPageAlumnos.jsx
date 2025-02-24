@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FormInput from "../components/FormInput";
 import { registrarAlumno } from "../services/AlumnoService";
 import { Stack, Box, Snackbar, Grid, Alert } from "@mui/material";
 import { Input } from "../components/Input";
@@ -101,7 +100,7 @@ export function RegisterPageAlumnos() {
                 onChange={(e) => setEmail(e.target.value)}
                 icon={"envelope"}
               />
-            </Grid>            
+            </Grid>
           </Grid>
 
           <button onClick={handleRegister} className="botonClaro">
