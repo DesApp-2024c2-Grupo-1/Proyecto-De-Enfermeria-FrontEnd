@@ -1,8 +1,21 @@
 import { Box, Typography, Paper, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useEvaluacion } from "../context/EvaluacionContext";
+import { getEvaluacionById } from "../services/EvaluacionService";
 
 function Carpeta({ titulo, id }) {
+  const { setEvaluacionContext } = useEvaluacion();
   const navigate = useNavigate();
+
+const fetchEvaluacion = async (id) => {
+    const data = await getEvaluacionById(Number(id));
+    setEvaluacionContext(data);
+  };
+
+  useEffect(() => {
+    fetchEvaluacion(id);
+  }, [id]);
 
   return (
     <Stack
