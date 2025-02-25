@@ -19,7 +19,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
   const docenteData = docenteContext;
   const evaluacionData = evaluacionContext;
   const evaluacionRealizadaData = {
-    alumno: alumno.id,
+    alumno: alumno?.id || null,
     docente: docenteData.id,
     evaluacion: evaluacionData.id,
     respuestas,

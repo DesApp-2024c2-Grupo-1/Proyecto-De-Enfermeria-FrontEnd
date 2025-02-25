@@ -15,7 +15,7 @@ export function Evaluacion({
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [alumno, setAlumno] = useState("");
-  const [alumnoEvaluado, setAlumnoEvaluado] = useState({})
+  const [alumnoEvaluado, setAlumnoEvaluado] = useState(null);
   const [alumnos, setAlumnos] = useState([]);
   const { docenteContext } = useDocente();
 
@@ -32,16 +32,16 @@ export function Evaluacion({
     fetchAlumnos();
   }, []);
 
-
   const handleOnChange = (event) => {
     const inputDNI = event.target.value;
     setSearchTerm(inputDNI);
     console.log("DNI ingresado:", inputDNI);
-
-    setAlumnoEvaluado(alumnos.find((dato) => String(dato.dni) === inputDNI));
-    console.log(alumnoEvaluado);
-    if (alumnoEvaluado) {
-      setAlumno(`Evaluando a ${alumnoEvaluado.nombre} ${alumnoEvaluado.apellido}`);
+  
+    const encontrado = alumnos.find((dato) => String(dato.dni) === inputDNI) || null;
+    setAlumnoEvaluado(encontrado);
+  
+    if (encontrado) {
+      setAlumno(`Evaluando a ${encontrado.nombre} ${encontrado.apellido}`);
     } else {
       setAlumno(inputDNI.length >= 7 ? "Alumno no encontrado" : "");
     }
