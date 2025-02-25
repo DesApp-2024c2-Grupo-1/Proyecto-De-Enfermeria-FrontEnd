@@ -7,20 +7,19 @@ export function RegistrarEvaluacionPage() {
   const [evaluacion, setEvaluacion] = useState(null);
   const { id } = useParams();
 
-
   const fetchEvaluacion = async (idDeEvaluacion) => {
     const data = await getEvaluacionById(idDeEvaluacion);
-    setEvaluacion(data)
+    setEvaluacion(data);
   };
   useEffect(() => {
-   fetchEvaluacion(id)
+    fetchEvaluacion(id);
   }, [id]);
 
-  const preguntas = evaluacion?.pregunta || []
+  const preguntas = evaluacion?.preguntas || [];
 
   return (
     <>
-    <Evaluacion preguntas={preguntas} /> 
+      <Evaluacion preguntas={preguntas} />
     </>
   );
 }

@@ -8,8 +8,8 @@ function Carpeta({ titulo, id }) {
   const { setEvaluacionContext } = useEvaluacion();
   const navigate = useNavigate();
 
-const fetchEvaluacion = async (id) => {
-    const data = await getEvaluacionById(Number(id));
+  const fetchEvaluacion = async (id) => {
+    const data = await getEvaluacionById(id);
     setEvaluacionContext(data);
   };
 

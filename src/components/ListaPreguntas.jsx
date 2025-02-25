@@ -17,25 +17,29 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
 
   const [registrado, setRegistrado] = useState(disabled);
 
-  const docenteData = docenteContext;
-  const evaluacionData = evaluacionContext;
-  const evaluacionRealizadaData = {
-    alumno: alumno?.id || null,
-    docente: docenteData.id,
-    evaluacion: evaluacionData.id,
-    respuestas,
-    fecha: new Date(),
-  };
-
   const handleRespuestaChange = (index, nuevaRespuesta) => {
     const nuevasRespuestas = [...respuestas];
     nuevasRespuestas[index] = nuevaRespuesta;
     setRespuestas(nuevasRespuestas);
   };
 
+  const docenteData = docenteContext;
+  const evaluacionData = evaluacionContext;
+  const evaluacionRealizadaData = {
+    alumno: alumno?.id || null,
+    docente: docenteData.id,
+    evaluacion: evaluacionData.id,
+    preguntaRespondida: respuestas,
+    fecha: new Date(),
+  };
+
   const handleOnClick = async () => {
     setRegistrado(!registrado);
+    console.log(respuestas.length);
     console.log(respuestas);
+    console.log(evaluacionData.preguntas.length);
+    console.log(evaluacionData.preguntas);
+
     try {
       await registrarEvaluacionRealizada(evaluacionRealizadaData);
       console.log("Registro exitoso");
