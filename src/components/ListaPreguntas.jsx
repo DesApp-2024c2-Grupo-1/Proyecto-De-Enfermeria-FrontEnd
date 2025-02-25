@@ -10,6 +10,7 @@ import { useEvaluacion } from "../context/EvaluacionContext";
 export function ListaPreguntas({ preguntas, disabled, alumno }) {
   const { docenteContext } = useDocente();
   const { evaluacionContext } = useEvaluacion();
+  const [error, setError] = useState();
   const [respuestas, setRespuestas] = useState(
     preguntas.map((pregunta) => pregunta.respuesta ?? null)
   );
@@ -43,7 +44,6 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
       const mensajeError =
         error.response?.data?.message || "Error al registrar uan evaluacion";
       setError(mensajeError);
-      setOpenSnackbar(true);
     }
   };
 
