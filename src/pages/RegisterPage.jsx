@@ -59,13 +59,13 @@ export function RegisterPage() {
         <Stack
           className="stack-animacion stack-target"
           sx={{
-            height: "700px",
-            width: "600px",
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "rgba(255, 255, 255, 0.87)",
+            backgroundColor: "red",
             borderRadius: "20px",
             boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
+            width: { sx: "100%", sm: "600px" },
+            height: { sx: "100%", sm: "700px" },
           }}
           spacing={2}
         >

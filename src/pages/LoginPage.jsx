@@ -14,6 +14,7 @@ export function LoginPage() {
   const { setDocenteContext } = useDocente();
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const [docente, setDocente] = useState(null);
 
@@ -40,9 +41,7 @@ export function LoginPage() {
   };
 
   const handleRegister = () => {
-    const stackElement = document.querySelector(".stack-animacion");
-    stackElement.classList.remove("stack-inicial");
-    stackElement.classList.add("stack-target");
+    setIsExpanded(true);
     setTimeout(() => {
       navigate("register");
     }, 500);
@@ -59,15 +58,22 @@ export function LoginPage() {
         }}
       >
         <Stack
-          className="stack-animacion stack-inicial"
           sx={{
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: "rgba(255, 255, 255, 0.87)",
-            borderRadius: "20px",
+            borderRadius: { xs: "0px", sm: "20px" },
             boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
+            transition: "width 0.5s ease, height 0.5s ease",
+            width: {xs: "100%", sm: "500px"},
+            height: {xs: "100%", sm: "700px"},
+            "&.expanded": {
+              width: "600px",
+              height: "700px",
+            },
           }}
           spacing={2}
+          className={isExpanded ? "expanded" : ""}
         >
           <Box
             sx={{
@@ -105,7 +111,7 @@ export function LoginPage() {
           <a
             href="https://ar.pinterest.com/pin/369084131975098694/"
             target="_blank"
-            style={{ color: "#55B589"}}
+            style={{ color: "#55B589" }}
           >
             ¿Olvidaste la contraseña?
           </a>
