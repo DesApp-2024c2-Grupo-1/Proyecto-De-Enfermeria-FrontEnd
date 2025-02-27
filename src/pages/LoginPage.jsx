@@ -105,6 +105,7 @@ export function LoginPage() {
             icon={"address-card"}
           />
           <Input
+            type="password"
             placeholder={"Ingresar Contraseña"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
