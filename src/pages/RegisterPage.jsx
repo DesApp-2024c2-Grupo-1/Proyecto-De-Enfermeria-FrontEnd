@@ -85,7 +85,7 @@ export function RegisterPage() {
             <i className="fa fa-user" style={{ fontSize: "60px" }}></i>
           </Box>
 
-          <Grid container spacing={1.65} sx={{ width: "80%" }}>
+          <Grid container spacing={1.6} sx={{ width: "80%" }}>
             <Grid item xs={12} sm={5.86}>
               <Input
                 placeholder={"Ingrese su nombre"}
