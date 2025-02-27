@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import FormInput from "../components/FormInput";
 import { Input } from "../components/Input";
 import "../index.css";
 import { getDocenteByDni } from "../services/DocenteService";
 import { useDocente } from "../context/DocenteContext";
-import { Stack, Box, Snackbar, Alert } from "@mui/material";
+import { Stack, Box, Snackbar, Alert, useMediaQuery } from "@mui/material";
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -14,8 +13,11 @@ export function LoginPage() {
   const { setDocenteContext } = useDocente();
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const [docente, setDocente] = useState(null);
+
+  const isDesktop = useMediaQuery("(min-width:600px)");
 
   const fetchDocente = async (dni) => {
     const data = await getDocenteByDni(Number(dni));
@@ -40,12 +42,14 @@ export function LoginPage() {
   };
 
   const handleRegister = () => {
-    const stackElement = document.querySelector(".stack-animacion");
-    stackElement.classList.remove("stack-inicial");
-    stackElement.classList.add("stack-target");
-    setTimeout(() => {
+    setIsExpanded(true);
+    if (isDesktop) {
+      setTimeout(() => {
+        navigate("register");
+      }, 500);
+    } else {
       navigate("register");
-    }, 500);
+    }
   };
 
   return (
@@ -59,15 +63,22 @@ export function LoginPage() {
         }}
       >
         <Stack
-          className="stack-animacion stack-inicial"
           sx={{
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: "rgba(255, 255, 255, 0.87)",
-            borderRadius: "20px",
+            borderRadius: { xs: "0px", sm: "20px" },
             boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
+            transition: "width 0.5s ease, height 0.5s ease",
+            width: {xs: "100%", sm: "500px"},
+            height: {xs: "100%", sm: "700px"},
+            "&.expanded": {
+              width: {xs: "100%", sm: "600px"},
+              height: {xs: "100%", sm: "700px"},
+            },
           }}
           spacing={2}
+          className={isExpanded ? "expanded" : ""}
         >
           <Box
             sx={{
@@ -105,7 +116,7 @@ export function LoginPage() {
           <a
             href="https://ar.pinterest.com/pin/369084131975098694/"
             target="_blank"
-            style={{ color: "#55B589"}}
+            style={{ color: "#55B589" }}
           >
             ¿Olvidaste la contraseña?
           </a>
