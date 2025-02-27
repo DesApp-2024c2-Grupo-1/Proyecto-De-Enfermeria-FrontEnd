@@ -68,8 +68,8 @@ export function LoginPage() {
             width: {xs: "100%", sm: "500px"},
             height: {xs: "100%", sm: "700px"},
             "&.expanded": {
-              width: "600px",
-              height: "700px",
+              width: {xs: "100%", sm: "600px"},
+              height: {xs: "100%", sm: "700px"},
             },
           }}
           spacing={2}

@@ -57,26 +57,25 @@ export function RegisterPage() {
         }}
       >
         <Stack
-          className="stack-animacion stack-target"
           sx={{
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "red",
-            borderRadius: "20px",
+            backgroundColor: "rgba(255, 255, 255, 0.87)",
+            borderRadius: { xs: "0px", sm: "20px" },
             boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
-            width: { sx: "100%", sm: "600px" },
-            height: { sx: "100%", sm: "700px" },
+            width: { xs: "100%", sm: "600px" },
+            height: { xs: "100%", sm: "700px" },
           }}
           spacing={2}
         >
           <Box
             sx={{
-              width: "130px",
-              height: "130px",
+              width: "130px" ,
+              height: "130px" ,
               backgroundColor: "#429870",
               borderRadius: "50%",
               zIndex: "1",
-              display: "flex",
+              display: {xs: "none", sm: "flex"},
               justifyContent: "center",
               alignItems: "center",
               boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
@@ -93,6 +92,7 @@ export function RegisterPage() {
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
                 icon={"user"}
+                width={"100%"}
               />
             </Grid>
             <Grid item xs={12} sm={5.86}>
@@ -101,6 +101,7 @@ export function RegisterPage() {
                 value={apellido}
                 onChange={(e) => setApellido(e.target.value)}
                 icon={"user"}
+                width={"100%"}
               />
             </Grid>
             <Grid item xs={12} sm={5.86}>
@@ -109,6 +110,7 @@ export function RegisterPage() {
                 value={dni}
                 onChange={(e) => setDni(e.target.value)}
                 icon={"id-card"}
+                width={"100%"}
               />
             </Grid>
             <Grid item xs={12} sm={5.86}>
@@ -118,6 +120,7 @@ export function RegisterPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 icon={"envelope"}
+                width={"100%"}
               />
             </Grid>
             <Grid item xs={12} sm={5.86}>
@@ -127,6 +130,7 @@ export function RegisterPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 icon={"key"}
+                width={"100%"}
               />
             </Grid>
             <Grid item xs={12} sm={5.86}>
@@ -136,6 +140,7 @@ export function RegisterPage() {
                 value={confirmarPassword}
                 onChange={(e) => setConfirmarPassword(e.target.value)}
                 icon={"key"}
+                width={"100%"}
               />
             </Grid>
           </Grid>
