@@ -29,8 +29,8 @@ export function HomePage() {
       <h1>
         ¡Bienvenido/a, {docenteContext.nombre} {docenteContext.apellido}!
       </h1>
-      <div className="gridCarpetas">
-        <Grid container spacing={10}>
+   
+        <Grid container spacing={10} sx={{ padding: "20px" }}>
           <Grid item xs={12} sm={6} md={4}>
             <CarpetaFake />
           </Grid>
@@ -40,7 +40,7 @@ export function HomePage() {
             </Grid>
           ))}
         </Grid>
-      </div>
+   
     </div>
   );
 }

@@ -8,13 +8,11 @@ import { useNavigate } from "react-router-dom";
 export function PerfilDocentePage() {
   const [editando, setEditando] = useState(true);
   const { docenteContext, setDocenteContext } = useDocente();
-  const [nombre, setNombre] = useState(docenteContext.nombre)
-  const [apellido, setApellido] = useState(docenteContext.apellido)
-  const [openSnackbar, setOpenSnackbar] = useState(false)
-  const [error, setError] = useState([])
+  const [nombre, setNombre] = useState(docenteContext.nombre);
+  const [apellido, setApellido] = useState(docenteContext.apellido);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [error, setError] = useState([]);
   const navigate = useNavigate();
-
-
 
   const docenteData = docenteContext
     ? {
@@ -24,21 +22,22 @@ export function PerfilDocentePage() {
       }
     : null;
 
-
   const handleClick = async () => {
     if (!docenteContext?.id) return;
 
     const updatedData = { nombre, apellido };
     try {
-      if(editando){
-        setEditando(!editando)
-      }
-      else{
-        console.log(docenteContext)
-        const updatedDocente = await modificarDocente(docenteContext.id, updatedData);      
+      if (editando) {
+        setEditando(!editando);
+      } else {
+        console.log(docenteContext);
+        const updatedDocente = await modificarDocente(
+          docenteContext.id,
+          updatedData
+        );
         setDocenteContext(updatedDocente);
-        setEditando(!editando)
-        navigate("/")
+        setEditando(!editando);
+        navigate("/");
       }
     } catch (error) {
       const mensajeError =
@@ -55,7 +54,21 @@ export function PerfilDocentePage() {
         spacing={3}
         sx={{ display: "flex", alignItems: "center", my: "2rem" }}
       >
-        <Box className="perfilCirculo">
+        <Box
+          sx={{
+            height: "6rem",
+            width: "6rem",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: "100%",
+            backgroundColor: "#DDF0E7",
+            color: "#429870",
+            fontSize: "3rem",
+            fontWeight: "500",
+            boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+          }}
+        >
           {docenteData?.nombre?.charAt(0)}
           {docenteData?.apellido?.charAt(0)}
         </Box>
@@ -64,22 +77,19 @@ export function PerfilDocentePage() {
           key="nombre"
           width="25rem"
           backgroundColor={"#DDF0E7"}
-          disabled={editando} 
-          placeholder={docenteContext?.nombre}
+          disabled={editando}
           value={nombre}
-          onChange={(e) => setNombre(e.target.value) }
+          onChange={(e) => setNombre(e.target.value)}
           titulo="Nombre"
-          
         />
 
         <Input
           key="apellido"
           width="25rem"
           backgroundColor={"#DDF0E7"}
-          disabled={editando} 
-          placeholder={docenteContext?.apellido}
+          disabled={editando}
           value={apellido}
-          onChange={(e) => setApellido(e.target.value) }
+          onChange={(e) => setApellido(e.target.value)}
           titulo="Apellido"
         />
 
