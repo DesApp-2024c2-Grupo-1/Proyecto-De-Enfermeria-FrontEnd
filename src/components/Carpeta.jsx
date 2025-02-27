@@ -7,15 +7,23 @@ import { getEvaluacionById } from "../services/EvaluacionService";
 function Carpeta({ titulo, id }) {
   const { setEvaluacionContext } = useEvaluacion();
   const navigate = useNavigate();
+  const [evaluacion, setEvaluacion] = useState();
 
   const fetchEvaluacion = async (id) => {
     const data = await getEvaluacionById(id);
-    setEvaluacionContext(data);
+    setEvaluacion(data);
   };
 
   useEffect(() => {
     fetchEvaluacion(id);
   }, [id]);
+
+  const handleOnClick = async () => {
+    if (evaluacion) {
+      setEvaluacionContext(evaluacion);
+      navigate(`/registrarEvaluacion/${id}`);
+    }
+  };
 
   return (
     <Stack
@@ -60,7 +68,7 @@ function Carpeta({ titulo, id }) {
         >
           <button
             className="botonClaro"
-            onClick={() => navigate(`/registrarEvaluacion/${id}`)}
+            onClick={handleOnClick}
             style={{ borderRadius: 5 }}
           >
             Evaluar

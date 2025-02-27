@@ -23,22 +23,26 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
     setRespuestas(nuevasRespuestas);
   };
 
+  const respuestasMaquetadas = [
+    { respuesta: true },
+    { respuesta: false },
+    { respuesta: true },
+    { respuesta: false },
+    { respuesta: true },
+    { respuesta: false },
+  ];
+
   const docenteData = docenteContext;
   const evaluacionData = evaluacionContext;
   const evaluacionRealizadaData = {
-    alumno: alumno?.id || null,
-    docente: docenteData.id,
-    evaluacion: evaluacionData.id,
-    preguntaRespondida: respuestas,
-    fecha: new Date(),
+    alumno: { id: alumno?.id || null },
+    docente: { id: docenteData.id },
+    evaluacion: { id: evaluacionData.id },
+    preguntaRespondida: respuestasMaquetadas,
   };
 
   const handleOnClick = async () => {
     setRegistrado(!registrado);
-    console.log(respuestas.length);
-    console.log(respuestas);
-    console.log(evaluacionData.preguntas.length);
-    console.log(evaluacionData.preguntas);
 
     try {
       await registrarEvaluacionRealizada(evaluacionRealizadaData);
