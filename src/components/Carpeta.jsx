@@ -1,8 +1,29 @@
 import { Box, Typography, Paper, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useEvaluacion } from "../context/EvaluacionContext";
+import { getEvaluacionById } from "../services/EvaluacionService";
 
 function Carpeta({ titulo, id }) {
+  const { setEvaluacionContext } = useEvaluacion();
   const navigate = useNavigate();
+  const [evaluacion, setEvaluacion] = useState();
+
+  const fetchEvaluacion = async (id) => {
+    const data = await getEvaluacionById(id);
+    setEvaluacion(data);
+  };
+
+  useEffect(() => {
+    fetchEvaluacion(id);
+  }, [id]);
+
+  const handleOnClick = async () => {
+    if (evaluacion) {
+      setEvaluacionContext(evaluacion);
+      navigate(`/registrarEvaluacion/${id}`);
+    }
+  };
 
   return (
     <Stack
@@ -47,7 +68,7 @@ function Carpeta({ titulo, id }) {
         >
           <button
             className="botonClaro"
-            onClick={() => navigate(`/registrarEvaluacion/${id}`)}
+            onClick={handleOnClick}
             style={{ borderRadius: 5 }}
           >
             Evaluar

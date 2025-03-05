@@ -3,9 +3,14 @@ import { Pregunta } from "../components/Pregunta";
 import { Stack } from "@mui/material";
 import { Lugar } from "../components/Lugar";
 import { Observacion } from "../components/Observacion";
+import { registrarEvaluacionRealizada } from "../services/EvaluacionRealizadaService";
+import { useDocente } from "../context/DocenteContext";
+import { useEvaluacion } from "../context/EvaluacionContext";
 
-export function ListaPreguntas({ preguntas, disabled }) {
-
+export function ListaPreguntas({ preguntas, disabled, alumno }) {
+  const { docenteContext } = useDocente();
+  const { evaluacionContext } = useEvaluacion();
+  const [error, setError] = useState();
   const [respuestas, setRespuestas] = useState(
     preguntas.map((pregunta) => pregunta.respuesta ?? null)
   );
@@ -18,9 +23,36 @@ export function ListaPreguntas({ preguntas, disabled }) {
     setRespuestas(nuevasRespuestas);
   };
 
-  const handleOnClick = () => {
+  const respuestasMaquetadas = [
+    { respuesta: true },
+    { respuesta: false },
+    { respuesta: true },
+    { respuesta: false },
+    { respuesta: true },
+    { respuesta: false },
+  ];
+
+  const docenteData = docenteContext;
+  const evaluacionData = evaluacionContext;
+  const evaluacionRealizadaData = {
+    alumno: { id: alumno?.id || null },
+    docente: { id: docenteData.id },
+    evaluacion: { id: evaluacionData.id },
+    preguntaRespondida: respuestasMaquetadas,
+  };
+
+  const handleOnClick = async () => {
     setRegistrado(!registrado);
-    console.log(respuestas);
+
+    try {
+      await registrarEvaluacionRealizada(evaluacionRealizadaData);
+      console.log("Registro exitoso");
+    } catch (error) {
+      console.log(error.response?.data?.message);
+      const mensajeError =
+        error.response?.data?.message || "Error al registrar uan evaluacion";
+      setError(mensajeError);
+    }
   };
 
   return (

@@ -15,6 +15,7 @@ export function Evaluacion({
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [alumno, setAlumno] = useState("");
+  const [alumnoEvaluado, setAlumnoEvaluado] = useState(null);
   const [alumnos, setAlumnos] = useState([]);
   const { docenteContext } = useDocente();
 
@@ -35,11 +36,12 @@ export function Evaluacion({
     const inputDNI = event.target.value;
     setSearchTerm(inputDNI);
     console.log("DNI ingresado:", inputDNI);
-
-    const foundAlumno = alumnos.find((dato) => String(dato.dni) === inputDNI);
-    console.log(foundAlumno);
-    if (foundAlumno) {
-      setAlumno(`Evaluando a ${foundAlumno.nombre} ${foundAlumno.apellido}`);
+  
+    const encontrado = alumnos.find((dato) => String(dato.dni) === inputDNI) || null;
+    setAlumnoEvaluado(encontrado);
+  
+    if (encontrado) {
+      setAlumno(`Evaluando a ${encontrado.nombre} ${encontrado.apellido}`);
     } else {
       setAlumno(inputDNI.length >= 7 ? "Alumno no encontrado" : "");
     }
@@ -93,7 +95,7 @@ export function Evaluacion({
         </button>
       )}
       <Box>
-        <ListaPreguntas preguntas={preguntas} disabled={disabled} />
+        <ListaPreguntas preguntas={preguntas} disabled={disabled} alumno={alumnoEvaluado} />
       </Box>
     </Stack>
   );
