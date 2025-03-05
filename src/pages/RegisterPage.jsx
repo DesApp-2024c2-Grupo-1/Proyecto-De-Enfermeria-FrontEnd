@@ -41,7 +41,7 @@ export function RegisterPage() {
       /*console.log(error.response?.data?.message);*/
       const mensajeError =
         error.response?.data?.message || "Error al registrar docente";
-      setError([mensajeError]);
+      setError(mensajeError);
       setOpenSnackbar(true);
     }
   };
