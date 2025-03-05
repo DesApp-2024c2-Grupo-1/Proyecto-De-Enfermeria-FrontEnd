@@ -4,7 +4,7 @@ import { Input } from "../components/Input";
 import "../index.css";
 import { getDocenteByDni } from "../services/DocenteService";
 import { useDocente } from "../context/DocenteContext";
-import { Stack, Box, Snackbar, Alert } from "@mui/material";
+import { Stack, Box, Snackbar, Alert, useMediaQuery } from "@mui/material";
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -16,6 +16,8 @@ export function LoginPage() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const [docente, setDocente] = useState(null);
+
+  const isDesktop = useMediaQuery("(min-width:600px)");
 
   const fetchDocente = async (dni) => {
     const data = await getDocenteByDni(Number(dni));
@@ -41,9 +43,13 @@ export function LoginPage() {
 
   const handleRegister = () => {
     setIsExpanded(true);
-    setTimeout(() => {
+    if (isDesktop) {
+      setTimeout(() => {
+        navigate("register");
+      }, 500);
+    } else {
       navigate("register");
-    }, 500);
+    }
   };
 
   return (
@@ -99,6 +105,7 @@ export function LoginPage() {
             icon={"address-card"}
           />
           <Input
+            type="password"
             placeholder={"Ingresar Contraseña"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
