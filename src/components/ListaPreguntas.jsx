@@ -41,9 +41,9 @@ export function ListaPreguntas({ preguntas, disabled }) {
         <Lugar disabled={registrado} />
         <Observacion disabled={registrado} />
         {!registrado ? (
-          <div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
             <button
-              className="botonVerde flex-center"
+              className="botonVerde"
               style={{ marginTop: "3rem" }}
               onClick={handleOnClick}
             >

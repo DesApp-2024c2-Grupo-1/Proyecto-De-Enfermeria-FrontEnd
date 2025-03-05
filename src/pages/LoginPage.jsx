@@ -70,11 +70,11 @@ export function LoginPage() {
             borderRadius: { xs: "0px", sm: "20px" },
             boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
             transition: "width 0.5s ease, height 0.5s ease",
-            width: {xs: "100%", sm: "500px"},
-            height: {xs: "100%", sm: "700px"},
+            width: { xs: "100%", sm: "500px" },
+            height: { xs: "100%", sm: "700px" },
             "&.expanded": {
-              width: {xs: "100%", sm: "600px"},
-              height: {xs: "100%", sm: "700px"},
+              width: { xs: "100%", sm: "600px" },
+              height: { xs: "100%", sm: "700px" },
             },
           }}
           spacing={2}
@@ -117,7 +117,6 @@ export function LoginPage() {
           <a
             href="https://ar.pinterest.com/pin/369084131975098694/"
             target="_blank"
-            style={{ color: "#55B589" }}
           >
             ¿Olvidaste la contraseña?
           </a>

@@ -16,11 +16,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #55B589;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #67d7a4;
 }
 
 body {
@@ -55,7 +55,6 @@ h1 {
 /* Menú */
 
 .menu {
-  height: 13vh;
   width: 100%;
   background-color: #31614b;
 }
@@ -68,56 +67,6 @@ h1 {
 }
 
 /* Home */
-
-.gridCarpetas {
-  padding: 20vh;
-}
-
-/*.carpeta {
-display: flex;
-flex-direction: column;
-align-items: center;
-
-}
-
-.carpeta h2 {
-  margin: 10px 0 0 0;
-  text-align: center; 
-}
-
-.carpetaFondo {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  width: 15rem;
-  background-color: #daf2e3;
-  position: relative;
-  border-radius: 5px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
-}
-
-.carpetaPestaña {
-  width: 80px;
-  height: 20px;
-  background-color: #daf2e3;
-  position: absolute;
-  top: -15px;
-  border-bottom: none;
-  border-radius: 5px 5px 0 0;
-}
-
-.botonesContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin: 12px;
-}
-*/
-
-/* Registro Evaluaciones */
-
-
 
 
 .listItem {
@@ -157,197 +106,9 @@ align-items: center;
 
 }
 
-/* Evaluaciones por alumno*/
-
-.evaluacionesPorAlumnoNombre {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-/* Ver evaluacion */
-
-.grupoInput {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  gap: 2;
-}
-
-.listaPreguntas {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.pregunta {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-/* Recuadro del login y register */
-
-.alineacion {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
-
-.recuadroTexto {
-  width: 350px;
-  height: 350px;
-  background-color: #77c4a0;
-  color: #145236;
-  position: relative;
-  border-radius: 30px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-}
-
-.recuadroTexto2 {
-  width: 350px;
-  height: 430px;
-  background-color: #77c4a0;
-  position: relative;
-  border-radius: 30px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
-}
-
-.recuadroInputs {
-  display: flex;
-  align-items: center;
-  background-color: #ddf0e7;
-  border-radius: 4px;
-  margin-top: 8px;
-  width: 225px;
-}
-
-.recuadroInputs i {
-  margin-right: 8px;
-  color: #fff;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  background-color: #429870;
-  padding: 8px;
-}
-
-.recuadroInputs input {
-  width: 100%;
-  border: none;
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-}
-
-.recuadroInputs input::placeholder {
-  color: grey;
-  font-size: 14px;
-  font-style: italic;
-}
-
-.bordePerfil {
-  margin-bottom: -60px;
-  z-index: 1;
-  width: 60px;
-  height: 60px;
-  border-radius: 45px;
-  padding: 15px;
-  background-color: #429870;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
 .unahur-logo {
   width: 190px;
   margin-top: 10px;
 }
 
-.alineacion-texto {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 15px;
-}
 
-#espacio {
-  margin-top: -11px;
-}
-
-.texto {
-  color: #242424;
-  font-weight: 400;
-}
-
-#espaciojaja {
-  margin-top: 5px;
-}
-
-/* Perfil Docente */
-
-.perfilCirculo {
-  height: 6rem;
-  width: 6rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100%;
-  background-color: #DDF0E7;
-  color: #429870;
-  font-size: 3rem;
-  font-weight: 500;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.alineacionIzquierda {
-  text-align: justify;
-}
-
-/* Perfil Alumno */
-
-.helperTextRegister {
-  color: #fe0000;
-  background-color: #145236;
-  font-size: 14px;
-  font-weight: 400;
-  margin: auto;
-}
-
-/* Animación copada de Login a Register */
-
-.stack-animacion {
-  transition: width 0.5s ease, height 0.5s ease;
-}
-
-.stack-inicial {
-  width: 500px;
-  height: 700px;
-}
-
-.stack-target {
-  width: 600px;
-  height: 700px;
-}
