@@ -1,12 +1,14 @@
 import { Input } from "../components/Input";
 import { TextField } from "@mui/material";
 
-
-export function Observacion({ disabled }) {
- 
+export function Observacion({ disabled, onChange }) {
   return (
     <div>
-      <Input titulo="Modificación de puntaje" disabled={disabled} backgroundColor={"#DDF0E7"}  />
+      <Input
+        titulo="Modificación de puntaje"
+        disabled={disabled}
+        backgroundColor={"#DDF0E7"}
+      />
       <h2>Observaciones</h2>
       <TextField
         disabled={disabled}
@@ -36,6 +38,7 @@ export function Observacion({ disabled }) {
             },
           },
         }}
+        onChange={(e) => onChange(e.target.value)}
       />
     </div>
   );

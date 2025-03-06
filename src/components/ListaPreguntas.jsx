@@ -11,6 +11,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
   const { docenteContext } = useDocente();
   const { evaluacionContext } = useEvaluacion();
   const [error, setError] = useState();
+  const [observacion, setObservacion] = useState("");
   const [respuestas, setRespuestas] = useState(
     preguntas.map((pregunta) => pregunta.respuesta ?? null)
   );
@@ -23,6 +24,10 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
     setRespuestas(nuevasRespuestas);
   };
 
+  const handleObservacionChange = (nuevoTexto) => {
+    setObservacion(nuevoTexto);
+  };
+
   const respuestasFormateadas = respuestas.map((respuesta) => ({ respuesta }));
 
   const docenteData = docenteContext;
@@ -31,6 +36,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
     alumno: { id: alumno?.id || null },
     docente: { id: docenteData.id },
     evaluacion: { id: evaluacionData.id },
+    observacion: observacion || null,
     preguntaRespondida: respuestasFormateadas,
   };
 
@@ -64,7 +70,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
           />
         ))}
         <Lugar disabled={registrado} />
-        <Observacion disabled={registrado} />
+        <Observacion disabled={registrado} onChange={handleObservacionChange} />
         {!registrado ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
             <button
