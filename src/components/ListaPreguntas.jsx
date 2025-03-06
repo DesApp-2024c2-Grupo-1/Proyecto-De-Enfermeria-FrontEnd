@@ -23,14 +23,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
     setRespuestas(nuevasRespuestas);
   };
 
-  const respuestasMaquetadas = [
-    { respuesta: true },
-    { respuesta: false },
-    { respuesta: true },
-    { respuesta: false },
-    { respuesta: true },
-    { respuesta: false },
-  ];
+  const respuestasFormateadas = respuestas.map((respuesta) => ({ respuesta }));
 
   const docenteData = docenteContext;
   const evaluacionData = evaluacionContext;
@@ -38,7 +31,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
     alumno: { id: alumno?.id || null },
     docente: { id: docenteData.id },
     evaluacion: { id: evaluacionData.id },
-    preguntaRespondida: respuestasMaquetadas,
+    preguntaRespondida: respuestasFormateadas,
   };
 
   const handleOnClick = async () => {
