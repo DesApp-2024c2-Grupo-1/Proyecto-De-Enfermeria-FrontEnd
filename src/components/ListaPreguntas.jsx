@@ -38,8 +38,8 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
     alumno: { id: alumno?.id || null },
     docente: { id: docenteData.id },
     evaluacion: { id: evaluacionData.id },
-    observacion: observacion || null,
-    lugar: lugarSeleccionado,
+    observacion: { observacion: String(observacion) || null },
+    lugar: { lugarPractica: String(lugarSeleccionado) },
     preguntaRespondida: respuestasFormateadas,
   };
 
@@ -47,6 +47,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
     setRegistrado(!registrado);
 
     try {
+      console.log(observacion);
       await registrarEvaluacionRealizada(evaluacionRealizadaData);
       console.log("Registro exitoso");
     } catch (error) {
@@ -72,8 +73,16 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
             }
           />
         ))}
-        <Lugar disabled={registrado} selected={lugarSeleccionado} onChange={setLugarSeleccionado} />
-        <Observacion disabled={registrado} onChange={handleObservacionChange} modificacionPuntaje={modificacionPuntaje}/>
+        <Lugar
+          disabled={registrado}
+          selected={lugarSeleccionado}
+          onChange={setLugarSeleccionado}
+        />
+        <Observacion
+          disabled={registrado}
+          onChange={handleObservacionChange}
+          modificacionPuntaje={modificacionPuntaje}
+        />
         {!registrado ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
             <button
