@@ -13,6 +13,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
   const [error, setError] = useState();
   const [observacion, setObservacion] = useState("");
   const [lugarSeleccionado, setLugarSeleccionado] = useState(null);
+  const [modificacionPuntaje, setModificacionPuntaje] = useState(0);
   const [respuestas, setRespuestas] = useState(
     preguntas.map((pregunta) => pregunta.respuesta ?? null)
   );
@@ -72,7 +73,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
           />
         ))}
         <Lugar disabled={registrado} selected={lugarSeleccionado} onChange={setLugarSeleccionado} />
-        <Observacion disabled={registrado} onChange={handleObservacionChange} />
+        <Observacion disabled={registrado} onChange={handleObservacionChange} modificacionPuntaje={modificacionPuntaje}/>
         {!registrado ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
             <button
