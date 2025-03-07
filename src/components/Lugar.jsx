@@ -1,7 +1,7 @@
 import { Stack, Box } from "@mui/material";
 import { useState } from "react";
 
-export function Lugar({ disabled }) {
+export function Lugar({ disabled, selected, onChange}) {
   const [selected, setSelected] = useState(null);
 
   const onChange = (value) => {
