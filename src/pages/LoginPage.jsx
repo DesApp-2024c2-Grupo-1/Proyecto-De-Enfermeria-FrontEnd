@@ -71,10 +71,10 @@ export function LoginPage() {
             boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
             transition: "width 0.5s ease, height 0.5s ease",
             width: { xs: "100%", sm: "500px" },
-            height: { xs: "100%", sm: "700px" },
+            height: { xs: "100%", sm: "800px" },
             "&.expanded": {
               width: { xs: "100%", sm: "600px" },
-              height: { xs: "100%", sm: "700px" },
+              height: { xs: "100%", sm: "800px" },
             },
           }}
           spacing={2}
@@ -90,7 +90,6 @@ export function LoginPage() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginTop: "-330px",
               boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
               color: "rgba(255, 255, 255, 0.87)",
             }}

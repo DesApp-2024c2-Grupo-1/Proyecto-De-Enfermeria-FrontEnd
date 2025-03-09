@@ -64,7 +64,7 @@ export function RegisterPage() {
             borderRadius: { xs: "0px", sm: "20px" },
             boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
             width: { xs: "100%", sm: "600px" },
-            height: { xs: "100%", sm: "700px" },
+            height: { xs: "100%", sm: "800px" },
           }}
           spacing={2}
         >
@@ -85,8 +85,8 @@ export function RegisterPage() {
             <i className="fa fa-user" style={{ fontSize: "60px" }}></i>
           </Box>
 
-          <Grid container spacing={1.6} sx={{ width: "80%" }}>
-            <Grid item xs={12} sm={5.86}>
+          <Grid container sx={{ width: "80%" }}>
+            <Grid item xs={12} sm={5.8} >  
               <Input
                 placeholder={"Ingrese su nombre"}
                 value={nombre}
@@ -95,7 +95,7 @@ export function RegisterPage() {
                 width={"100%"}
               />
             </Grid>
-            <Grid item xs={12} sm={5.86}>
+            <Grid item xs={12} sm={5.8} sx={{marginLeft: "auto"}}>
               <Input
                 placeholder={"Ingrese su apellido"}
                 value={apellido}
@@ -104,7 +104,7 @@ export function RegisterPage() {
                 width={"100%"}
               />
             </Grid>
-            <Grid item xs={12} sm={5.86}>
+            <Grid item xs={12} sm={12}>
               <Input
                 placeholder={"Ingrese su DNI"}
                 value={dni}
@@ -113,7 +113,7 @@ export function RegisterPage() {
                 width={"100%"}
               />
             </Grid>
-            <Grid item xs={12} sm={5.86}>
+            <Grid item xs={12} sm={12}>
               <Input
                 type="email"
                 placeholder={"Ingrese su email"}
@@ -123,7 +123,7 @@ export function RegisterPage() {
                 width={"100%"}
               />
             </Grid>
-            <Grid item xs={12} sm={5.86}>
+            <Grid item xs={12} sm={12}>
               <Input
                 type="password"
                 placeholder={"Ingrese su contraseña"}
@@ -133,7 +133,7 @@ export function RegisterPage() {
                 width={"100%"}
               />
             </Grid>
-            <Grid item xs={12} sm={5.86}>
+            <Grid item xs={12} sm={12}>
               <Input
                 type="password"
                 placeholder={"Repita su contraseña"}

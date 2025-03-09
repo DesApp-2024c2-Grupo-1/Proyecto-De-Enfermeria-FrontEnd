@@ -92,10 +92,10 @@ h1 {
   background-color: #31614b;
   color: white;
   border: none;
-  padding: 12px 50px;
+  padding: 10px 50px;
   border-radius: 50px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   transition: background-color 0.3s ease;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
@@ -112,3 +112,15 @@ h1 {
 }
 
 
+.botonCerrarSesion {
+  background-color: #31614b;
+  color: white;
+  border: none;
+  padding: 12px 50px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
