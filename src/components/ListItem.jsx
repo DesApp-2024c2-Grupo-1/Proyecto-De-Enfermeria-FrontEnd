@@ -18,7 +18,7 @@ function ListItem({ textos, buttonOnClick }) {
           justifyContent: "space-between",
         }}
       >
-        <Stack direction={"row"} spacing={1}>
+        <Stack direction={"row"} spacing={4}>
           {textos.map((texto, index) => (
             <div>
               <p key={index}>{texto}</p>

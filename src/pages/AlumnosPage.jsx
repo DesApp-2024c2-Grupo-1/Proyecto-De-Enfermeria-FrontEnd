@@ -35,7 +35,7 @@ export function AlumnosPage() {
         <h1>Alumnos</h1>
         <Stack
           sx={{
-            width: "80%",
+            width: "70%",
           }}
         >
           <Busqueda
