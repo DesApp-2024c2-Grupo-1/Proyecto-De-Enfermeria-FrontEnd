@@ -8,7 +8,12 @@ import { useDocente } from "../context/DocenteContext";
 
 export function HomePage() {
   const [carpetas, setCarpetas] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const { docenteContext } = useDocente();
+
+  const listaFiltrada = carpetas.filter((carpeta) =>
+    carpeta.titulo.toLowerCase().includes(searchTerm)
+  );
   const fetchCarpetas = async () => {
     const data = await getAllEvaluaciones();
     setCarpetas(data);
@@ -23,18 +28,19 @@ export function HomePage() {
       <h1>
         ¡Bienvenido/a, {docenteContext.nombre} {docenteContext.apellido}!
       </h1>
-      <Stack sx={{display:"flex", alignItems:"center"}} >
+      <Stack sx={{ display: "flex", alignItems: "center" }}>
         <Busqueda
           placeholder="Buscar por título..."
           width={"350px"}
           height={"100px"}
           margin={"0 0 60px 0"}
+          onChange={(e) => setSearchTerm((e.target.value).toLowerCase())}
         />
         <Grid container spacing={10}>
           <Grid item xs={12} sm={6} md={4}>
             <CarpetaFake />
           </Grid>
-          {carpetas.map((evaluacion, index) => (
+          {listaFiltrada.map((evaluacion, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Carpeta titulo={evaluacion.titulo} id={evaluacion.id} />
             </Grid>
