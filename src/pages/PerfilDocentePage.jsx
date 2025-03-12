@@ -1,6 +1,17 @@
 import { useState } from "react";
 import { Input } from "../components/Input";
-import { Box, Stack, Snackbar, Alert } from "@mui/material";
+import {
+  Button,
+  Box,
+  Stack,
+  Snackbar,
+  Alert,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@mui/material";
 import { useDocente } from "../context/DocenteContext";
 import { modificarDocente } from "../services/DocenteService";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +23,7 @@ export function PerfilDocentePage() {
   const [apellido, setApellido] = useState(docenteContext.apellido);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [error, setError] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
   const navigate = useNavigate();
 
   const docenteData = docenteContext
@@ -21,6 +33,14 @@ export function PerfilDocentePage() {
         modificable: true,
       }
     : null;
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
 
   const handleClick = async () => {
     if (!docenteContext?.id) return;
@@ -51,7 +71,7 @@ export function PerfilDocentePage() {
     <>
       <Stack
         direction="column"
-        spacing={3}
+        spacing={2}
         sx={{ display: "flex", alignItems: "center", my: "2rem" }}
       >
         <Box
@@ -102,10 +122,49 @@ export function PerfilDocentePage() {
           titulo="Email"
         />
 
-        <button className="botonVerde" onClick={handleClick}>
+        <button
+          style={{ width: "15rem" }}
+          className="botonVerde"
+          onClick={handleClick}
+        >
           {editando ? "Editar" : "Guardar"}
         </button>
+        <Button
+          sx={{
+            width: "15rem",
+            borderRadius: "100px",
+            fontWeight: "600",
+            boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.3)",
+          }}
+          variant="outlined"
+          color="error"
+          onClick={handleOpenDialog}
+        >
+          Cerrar Sesión
+        </Button>
       </Stack>
+
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+
+          "& .MuiDialog-paper": { padding: "2rem" },
+        }}
+      >
+        <DialogTitle id="alert-dialog-title">{"¿Cerrar sesión?"}</DialogTitle>
+
+        <DialogActions>
+          <Button color="error" onClick={handleCloseDialog}>
+            Cancelar
+          </Button>
+          <Button color="success" onClick={() => navigate("/")} autoFocus>
+            Continuar
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       <Snackbar
         open={openSnackbar}
