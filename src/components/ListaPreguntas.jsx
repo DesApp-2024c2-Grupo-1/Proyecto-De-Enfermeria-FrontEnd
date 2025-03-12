@@ -13,7 +13,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
   const [error, setError] = useState();
   const [observacion, setObservacion] = useState("");
   const [lugarSeleccionado, setLugarSeleccionado] = useState(null);
-  const [modificacionPuntaje, setModificacionPuntaje] = useState(0);
+  const [modificacionPuntaje, setModificacionPuntaje] = useState();
   const [respuestas, setRespuestas] = useState(
     preguntas.map((pregunta) => pregunta.respuesta ?? null)
   );
@@ -38,8 +38,8 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
     alumno: { id: alumno?.id || null },
     docente: { id: docenteData.id },
     evaluacion: { id: evaluacionData.id },
-    observacion: { observacion: String(observacion) || null },
-    lugar: { lugarPractica: String(lugarSeleccionado) },
+    observacion: String(observacion) || null ,
+    lugarPractica: String(lugarSeleccionado) ,
     preguntaRespondida: respuestasFormateadas,
   };
 
@@ -48,6 +48,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
 
     try {
       console.log(observacion);
+      console.log(evaluacionRealizadaData)
       await registrarEvaluacionRealizada(evaluacionRealizadaData);
       console.log("Registro exitoso");
     } catch (error) {
@@ -55,6 +56,10 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
       const mensajeError =
         error.response?.data?.message || "Error al registrar uan evaluacion";
       setError(mensajeError);
+      console.log(error.response);
+console.log(error.response?.data);
+console.log(error.response?.data?.message);
+
     }
   };
 
