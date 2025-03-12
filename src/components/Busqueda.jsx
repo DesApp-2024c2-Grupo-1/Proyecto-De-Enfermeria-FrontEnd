@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TextField, InputAdornment } from "@mui/material";
 
-const Busqueda = ({ placeholder, onChange }) => {
+const Busqueda = ({ placeholder, onChange, width, height, margin }) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleFocus = () => setIsFocused(true);
@@ -9,7 +9,6 @@ const Busqueda = ({ placeholder, onChange }) => {
 
   return (
     <TextField
-      fullWidth
       placeholder={placeholder || "Buscar..."}
       variant="outlined"
       onFocus={handleFocus}
@@ -31,7 +30,9 @@ const Busqueda = ({ placeholder, onChange }) => {
         ),
       }}
       sx={{
-        width: 200,
+        width: width || "200px",
+        height: height || "50px",
+        margin: margin || "0",
         "& .MuiOutlinedInput-root": {
           borderRadius: "50px",
           "&.Mui-focused fieldset": {
