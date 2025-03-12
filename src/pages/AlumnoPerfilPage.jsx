@@ -49,7 +49,7 @@ export function AlumnoPerfilPage() {
           {alumno ? `${alumno.nombre} ${alumno.apellido}` : "Cargando..."}
         </h1>
 
-        <Box sx={{ width: "80%", display: "flex", flexDirection: "column" }}>
+        <Box sx={{ width: "70%", display: "flex", flexDirection: "column" }}>
           {examenes.map((examen, index) => (
             <Lista
               key={index}

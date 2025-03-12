@@ -26,7 +26,7 @@ export function RegistroEvaluacionesPage() {
     <>
       <Stack sx={{ alignItems: "center" }}>
         <h1>Lavado de manos</h1>
-        <Stack sx={{ width: "80%"}}>
+        <Stack sx={{ width: "70%", }}>
           <Busqueda
             placeholder="Buscar por DNI..."
             onChange={(e) => setSearchTerm(e.target.value)}
