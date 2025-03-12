@@ -1,7 +1,7 @@
 import { Input } from "../components/Input";
 import { TextField } from "@mui/material";
 
-export function Observacion({ disabled, onChange, modificacionPuntaje }) {
+export function Observacion({ disabled, onObservacionChange, onPuntajeChange, modificacionPuntaje }) {
   return (
     <div>
       <Input
@@ -9,7 +9,7 @@ export function Observacion({ disabled, onChange, modificacionPuntaje }) {
         disabled={disabled}
         backgroundColor={"#DDF0E7"}
         value={modificacionPuntaje}
-        onChange={(e) => onChange(parseInt(e.target.value) || 0)}
+        onChange={(e) => onPuntajeChange(parseInt(e.target.value) || 0)}
       />
       <h2>Observaciones</h2>
       <TextField
@@ -40,7 +40,7 @@ export function Observacion({ disabled, onChange, modificacionPuntaje }) {
             },
           },
         }}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onObservacionChange(e.target.value)}
       />
     </div>
   );

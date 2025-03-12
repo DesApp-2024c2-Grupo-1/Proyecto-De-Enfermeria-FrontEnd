@@ -29,6 +29,10 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
   const handleObservacionChange = (nuevoTexto) => {
     setObservacion(nuevoTexto);
   };
+  
+  const handlePuntajeChange = (nuevoPuntaje) => {
+    setModificacionPuntaje(nuevoPuntaje);
+  };
 
   const respuestasFormateadas = respuestas.map((respuesta) => ({ respuesta }));
 
@@ -40,6 +44,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
     evaluacion: { id: evaluacionData.id },
     observacion: String(observacion) || null ,
     lugarPractica: String(lugarSeleccionado) ,
+    modificacionPuntaje: Number(modificacionPuntaje) || null ,
     preguntaRespondida: respuestasFormateadas,
   };
 
@@ -85,8 +90,9 @@ console.log(error.response?.data?.message);
         />
         <Observacion
           disabled={registrado}
-          onChange={handleObservacionChange}
-          modificacionPuntaje={modificacionPuntaje}
+          onObservacionChange={handleObservacionChange}
+  onPuntajeChange={handlePuntajeChange}
+  modificacionPuntaje={modificacionPuntaje}
         />
         {!registrado ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
