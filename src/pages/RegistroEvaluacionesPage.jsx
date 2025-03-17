@@ -26,8 +26,9 @@ export function RegistroEvaluacionesPage() {
   };
 
   const fetchAlumnosPorId = async (id) => {
-    const data = await findAllAlumnosPorEvaluacion(Number(id));
-    console.log("Alumnos obtenidos:", data);
+    const data = await findAllAlumnosPorEvaluacion(id);
+    console.log(data);
+
     setAlumnos(data);
   };
 

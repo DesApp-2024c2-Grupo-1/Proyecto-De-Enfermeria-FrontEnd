@@ -11,11 +11,11 @@ export const registrarEvaluacionRealizada = async (docenteData) => {
   };
 
   export const getAllEvaluacionesRegistradasPorTitulo = async (titulo) => {
-    const response = await axios.get(`http://localhost:3000/evaluacion-realzada/${titulo}`);
+    const response = await axios.get(`http://localhost:3000/evaluacion-realizada/${titulo}`);
     return response.data;
   };
 
   export const findAllAlumnosPorEvaluacion = async (id) => {
-    const response = await axios.get(`http://localhost:3000/evaluacion-realzada/${id}`);
+    const response = await axios.get(`http://localhost:3000/evaluacion-realizada/${id}`);
     return response.data;
   };
