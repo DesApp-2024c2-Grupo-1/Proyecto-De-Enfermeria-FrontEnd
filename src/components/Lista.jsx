@@ -1,13 +1,13 @@
 import ListItem from "./ListItem";
 
-function Lista({ titulo, lista, keys, buttonOnClick, className }) {
+function Lista({ titulo, lista, keys, buttonOnClick, className, paramOnClick }) {
   return (
     <div className={className}>
       <h2>{titulo}</h2>
       {lista.map((item) => (
         <ListItem
           textos={keys.map((key) => item[key])}
-          buttonOnClick={() => buttonOnClick(item.dni)}
+          buttonOnClick={() => buttonOnClick(item[paramOnClick])}
         />
       ))}
     </div>

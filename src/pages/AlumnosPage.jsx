@@ -47,6 +47,7 @@ export function AlumnosPage() {
             lista={listaFiltrada}
             keys={keys}
             buttonOnClick={handleNavigate}
+            paramOnClick="dni"
           />
         </Stack>
       </Stack>

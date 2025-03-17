@@ -1,8 +1,9 @@
 import Busqueda from "../components/Busqueda";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Lista from "../components/Lista";
 import { Stack, Box } from "@mui/material";
+import { getEvaluacionById } from "../services/EvaluacionService";
 
 const datos = [
   { nombre: "Maria Gonzalez", documento: "12345369" },
@@ -15,18 +16,34 @@ const datos = [
 export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
+  const [evaluacion, setEvaluacion] = useState();
 
   const keys = ["nombre", "documento"];
+  const { id } = useParams();
+
   const listaFiltrada =
     searchTerm.length >= 7
       ? datos.filter((dato) => String(dato.documento).includes(searchTerm))
       : datos;
 
+  const fetchEvaluacionById = async (id) => {
+    const data = await getEvaluacionById(id);
+    setEvaluacion(data);
+  };
+
+  useEffect(() => {
+    fetchEvaluacionById(id);
+  }, [id]);
+
+  const handleNavigate = (id) => {
+    navigate(`/registroEvaluacion/${id}`);
+  };
+
   return (
     <>
       <Stack sx={{ alignItems: "center" }}>
-        <h1>Lavado de manos</h1>
-        <Stack sx={{ width: "70%", }}>
+        <h1>{evaluacion ? `${evaluacion.titulo}` : "Cargando..."}</h1>
+        <Stack sx={{ width: "70%" }}>
           <Busqueda
             placeholder="Buscar por DNI..."
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -34,7 +51,8 @@ export function RegistroEvaluacionesPage() {
           <Lista
             lista={listaFiltrada}
             keys={keys}
-            buttonOnClick={() => navigate("/evaluacionesPorAlumno")}
+            buttonOnClick={handleNavigate}
+            paramOnClick={"id"}
           />
         </Stack>
       </Stack>

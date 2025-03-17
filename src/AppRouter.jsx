@@ -40,6 +40,10 @@ export function AppRouter() {
         path="/registroEvaluaciones"
         element={<RegistroEvaluacionesPage />}
       />
+            <Route
+        path="/registroEvaluaciones/:id"
+        element={<RegistroEvaluacionesPage />}
+      />
       <Route
         path="/crearEvaluacion"
         element={<CrearEvaluacionPage />}
