@@ -10,9 +10,12 @@ export const getDocenteByEmail = async (email) => {
   return response.data
 }
 
-export const getDocenteByDni = async (dni) => {
-  const response = await axios.get(`http://localhost:3000/docente/dni/${dni}`)
-  return response.data
+export const loginDocente = async (dni, password) => {
+  const response = await axios.post(`http://localhost:3000/docente/login`, {
+    dni,
+    password,
+  });
+  return response.data;
 }
 
 export const modificarDocente = async (id, docenteData) => {

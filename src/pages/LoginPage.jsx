@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
 import "../index.css";
-import { getDocenteByDni } from "../services/DocenteService";
+import { loginDocente } from "../services/DocenteService";
 import { useDocente } from "../context/DocenteContext";
 import { Stack, Box, Snackbar, Alert, useMediaQuery } from "@mui/material";
 
@@ -15,27 +15,14 @@ export function LoginPage() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const [docente, setDocente] = useState(null);
-
   const isDesktop = useMediaQuery("(min-width:600px)");
 
-  const fetchDocente = async (dni) => {
-    const data = await getDocenteByDni(Number(dni));
-    setDocente(data);
-  };
-
-  useEffect(() => {
-    fetchDocente(dni);
-  }, [dni]);
-
   const handleLogin = async () => {
-    if (!docente) {
-      setError("Datos incorrectos");
-      setOpenSnackbar(true);
-    } else if (password === docente.password) {
-      setDocenteContext(docente);
+    try {
+      const docente = await loginDocente(dni, password);
+      setDocenteContext(docente);  
       navigate("home");
-    } else {
+    } catch (error) {
       setError("Datos incorrectos");
       setOpenSnackbar(true);
     }
