@@ -41,7 +41,7 @@ export function Input({
             },
           },
           "&:focus-within .fa": {
-            color: "#55B589", 
+            color: "#55B589",
           },
         }}
         type={type}
@@ -64,9 +64,16 @@ export function Input({
           ) : null,
         }}
       />
-      <Box sx={{ minHeight: "1.5em", marginTop: "8px" }}>
+      <Box
+        sx={{
+          minHeight: "1.5em",
+          marginTop: "8px",
+          maxWidth: "100px",
+          whiteSpace: "nowrap",
+        }}
+      >
         {!disabled && (
-          <Typography sx={{ color: helperTextColor, width: helperTextWidth }}>
+          <Typography sx={{ color: helperTextColor }}>
             {helperText || " "}
           </Typography>
         )}
