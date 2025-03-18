@@ -10,6 +10,7 @@ export function VerEvaluacionPage() {
   const [preguntas, setPreguntas] = useState([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
+
   const fetchEvaluacionById = async (id) => {
     const data = await getEvaluacionById(id);
     setEvaluacionRealizada(data);
@@ -27,6 +28,7 @@ export function VerEvaluacionPage() {
   return (
     <>
       <Evaluacion
+        lugar={evaluacionRealizada.lugarPractica}
         preguntas={preguntas}
         disabled={true}
         alumnoDisabled={true}

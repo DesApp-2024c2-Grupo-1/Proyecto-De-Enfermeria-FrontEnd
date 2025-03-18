@@ -7,12 +7,12 @@ import { registrarEvaluacionRealizada } from "../services/EvaluacionRealizadaSer
 import { useDocente } from "../context/DocenteContext";
 import { useEvaluacion } from "../context/EvaluacionContext";
 
-export function ListaPreguntas({ preguntas, disabled, alumno }) {
+export function ListaPreguntas({ preguntas, disabled, alumno, lugar }) {
   const { docenteContext } = useDocente();
   const { evaluacionContext } = useEvaluacion();
   const [error, setError] = useState();
   const [observacion, setObservacion] = useState("");
-  const [lugarSeleccionado, setLugarSeleccionado] = useState(null);
+  const [lugarSeleccionado, setLugarSeleccionado] = useState("");
   const [modificacionPuntaje, setModificacionPuntaje] = useState();
   const [respuestas, setRespuestas] = useState([]);
 
@@ -26,6 +26,13 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
     const nuevasRespuestas = [...respuestas];
     nuevasRespuestas[index] = nuevaRespuesta;
     setRespuestas(nuevasRespuestas);
+  };
+
+  const handleLugarChange = (lugarSeleccionado) => {
+    console.log(lugarSeleccionado);
+    if (!lugar) {
+      setLugarSeleccionado(lugarSeleccionado);
+    }
   };
 
   const handleObservacionChange = (nuevoTexto) => {
@@ -86,8 +93,8 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
         ))}
         <Lugar
           disabled={registrado}
-          selected={lugarSeleccionado}
-          onChange={setLugarSeleccionado}
+          selected={lugar ? lugar : lugarSeleccionado}
+          onChange={handleLugarChange}
         />
         <Observacion
           disabled={registrado}

@@ -11,6 +11,7 @@ export function Evaluacion({
   disabled,
   alumnoDisabled,
   alumnoPlaceholder,
+  lugar
 }) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -95,7 +96,7 @@ export function Evaluacion({
         </button>
       )}
       <Box>
-        <ListaPreguntas preguntas={preguntas} disabled={disabled} alumno={alumnoEvaluado} />
+        <ListaPreguntas preguntas={preguntas} disabled={disabled} alumno={alumnoEvaluado} lugar={lugar} />
       </Box>
     </Stack>
   );
