@@ -28,6 +28,10 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
     setRespuestas(nuevasRespuestas);
   };
 
+  const handleLugarChange = (lugar) => {
+    setLugarSeleccionado(lugar);
+  };
+
   const handleObservacionChange = (nuevoTexto) => {
     setObservacion(nuevoTexto);
   };
@@ -90,7 +94,7 @@ console.log(error.response?.data?.message);
         <Lugar
           disabled={registrado}
           selected={lugarSeleccionado}
-          onChange={setLugarSeleccionado}
+          onChange={handleLugarChange}
         />
         <Observacion
           disabled={registrado}

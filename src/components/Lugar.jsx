@@ -2,10 +2,7 @@ import { Stack, Box } from "@mui/material";
 import { useState } from "react";
 
 export function Lugar({ disabled, selected, onChange }) {
-  const [lugarSeleccionado, setLugarSeleccionado] = useState(null);
-
   const handleOnChange = (value) => {
-    setLugarSeleccionado(value);
     if (onChange) {
       onChange(value);
     }
@@ -42,7 +39,7 @@ export function Lugar({ disabled, selected, onChange }) {
             type="radio"
             id="1"
             name="lugar"
-            checked={lugarSeleccionado === "1"}
+            checked={selected === "1"}
             onChange={() => handleOnChange("1")}
           />
           <label htmlFor="1"> Campo Practico</label>
@@ -53,7 +50,7 @@ export function Lugar({ disabled, selected, onChange }) {
             type="radio"
             id="2"
             name="lugar"
-            checked={lugarSeleccionado === "2"}
+            checked={selected === "2"}
             onChange={() => handleOnChange("2")}
           />
           <label htmlFor="2"> Centro de Simulación</label>
