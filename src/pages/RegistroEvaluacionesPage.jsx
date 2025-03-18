@@ -24,7 +24,6 @@ export function RegistroEvaluacionesPage() {
 
   const fetchAlumnosPorId = async (id) => {
     const data = await findAllAlumnosPorEvaluacion(id);
-    console.log(data);
     setAlumnos(data);
   };
 
@@ -32,15 +31,17 @@ export function RegistroEvaluacionesPage() {
     fetchAlumnosPorId(id);
   }, [id]);
 
-  console.log("id", id);
-
   const handleNavigate = (alumnoId) => {
     const alumno = listaFiltrada.find((alumno) => alumno.alumnoId === alumnoId);
-    console.log(listaFiltrada);
-    console.log(alumno);
-    
+
     navigate(`/evaluacionesPorAlumno/${id}/${alumno.alumnoId}`, {
-      state: { evaluacionTitulo: evaluacionTitulo, evaluacionId: id, alumnoNombre: alumno.nombre, alumnoApellido: alumno.apellido, alumnoId: alumnoId },
+      state: {
+        evaluacionTitulo: evaluacionTitulo,
+        evaluacionId: id,
+        alumnoNombre: alumno.nombre,
+        alumnoApellido: alumno.apellido,
+        alumnoId: alumnoId,
+      },
     });
   };
 
