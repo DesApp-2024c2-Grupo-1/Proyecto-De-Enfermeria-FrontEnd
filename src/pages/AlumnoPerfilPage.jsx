@@ -5,86 +5,36 @@ import Lista from "../components/Lista";
 import { getAllEvaluacionesRealizadasPorAlumno } from "../services/EvaluacionRealizadaService";
 import { Stack, Box } from "@mui/material";
 
-/*const examenes = [
-  {
-    titulo: "Lavado de manos",
-    instancias: [
-      { fecha: "12/10/24", porcentaje: "50%" },
-      { fecha: "13/10/24", porcentaje: "80%" },
-      { fecha: "11/10/24", porcentaje: "95%" },
-    ],
-  },
-  {
-    titulo: "Tomar la presión",
-    instancias: [
-      { fecha: "14/10/24", porcentaje: "70%" },
-      { fecha: "15/10/24", porcentaje: "95%" },
-    ],
-  },
-  {
-    titulo: "Primeros auxilios",
-    instancias: [{ fecha: "16/10/24", porcentaje: "100%" }],
-  },
-]; 
-*/
-
 export function AlumnoPerfilPage() {
-  const [alumno, setAlumno] = useState(null);
   const [evaluaciones, setEvaluaciones] = useState([]);
-  const keys = ["fecha", "porcentaje"];
+  const keys = ["fecha", "nota", "id"];
   const navigate = useNavigate();
   const location = useLocation();
   const alumnoNombre = location.state.alumnoNombre;
   const alumnoApellido = location.state.alumnoApellido;
-  const { id } = useParams();
+  const { idAlumno } = useParams();
 
- 
+  const evaluacionesTitulos = Array.from(
+    new Set(evaluaciones.map((evaluacion) => evaluacion.evaluacion.titulo))
+  );
 
-  /*evaluaciones.map((evaluacion) => {
-    if (!evaluacionesTitulos.includes(evaluacion.evaluacion.titulo)) {
-      evaluacionesTitulos.push(evaluacion.evaluacion.titulo);
-    }
-  });*/
-
-  const evaluacionesFiltradas = [
-    { titulo: "" },
-    { instancias: [{ fecha: "", porcentaje: "" }] },
-  ];
- 
-  const evaluacionesTitulos = Array.from(new Set(evaluaciones.map((evaluacion) => evaluacion.evaluacion.titulo)));
-
-  evaluaciones.forEach((evaluacion, index) => {
-    if(!evaluacionesTitulos.includes(evaluacion.evaluacion.titulo)){
-      evaluacionesFiltradas.push({titulo:evaluacion.evaluacion.titulo, instancias: {...index}});
-    }
+  const evaluacionesFiltradas = evaluacionesTitulos.map((titulo) => {
+    return {
+      titulo: titulo,
+      instancias: evaluaciones.filter(
+        (evaluacion) => evaluacion.evaluacion.titulo === titulo
+      ),
+    };
   });
-
-
-  console.log(evaluacionesTitulos);
-  console.log(evaluacionesFiltradas);
-
-  /* 
-  const { id } = useParams();
-
-  const fetchAlumnoById = async (id) => {
-    const data = await getAlumnoById(id);
-    setAlumno(data);
-  };
-
-  useEffect(() => {
-    fetchAlumnoById(id);
-  }, [id]);
-*/
 
   const fetchEvaluacionesPorAlumno = async (id) => {
     const data = await getAllEvaluacionesRealizadasPorAlumno(id);
-    console.log(data);
     setEvaluaciones(data);
   };
 
   useEffect(() => {
-    fetchEvaluacionesPorAlumno(id);
-  }, [id]);
+    fetchEvaluacionesPorAlumno(idAlumno);
+  }, [idAlumno]);
 
   return (
     <>
@@ -98,9 +48,11 @@ export function AlumnoPerfilPage() {
             <Lista
               key={index}
               titulo={evaluacion.titulo}
-              lista={[]}
+              lista={evaluacion.instancias}
               keys={keys}
-              buttonOnClick={() => navigate("/verEvaluacion")}
+              /*!!!!!!!!!!!!!!! Cuando pasas un buttonOnClick es necesario que le pases el parametro en la funcion, sino no lo va a leer. Si pasas la funcion directo se pone ahi y sino en el handle !!!!!!!!!!!!!!!*/
+              buttonOnClick={(id) => navigate(`/verEvaluacion/${id}`)}
+              paramOnClick="id"
             />
           ))}
         </Box>
