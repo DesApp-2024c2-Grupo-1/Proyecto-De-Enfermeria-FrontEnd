@@ -7,7 +7,7 @@ import { Stack, Box } from "@mui/material";
 
 export function AlumnoPerfilPage() {
   const [evaluaciones, setEvaluaciones] = useState([]);
-  const keys = ["fecha", "nota", "id"];
+  const keys = ["fecha", "nota"];
   const navigate = useNavigate();
   const location = useLocation();
   const alumnoNombre = location.state.alumnoNombre;
