@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Pregunta } from "../components/Pregunta";
 import { Stack } from "@mui/material";
 import { Lugar } from "../components/Lugar";
@@ -14,9 +14,11 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
   const [observacion, setObservacion] = useState("");
   const [lugarSeleccionado, setLugarSeleccionado] = useState(null);
   const [modificacionPuntaje, setModificacionPuntaje] = useState();
-  const [respuestas, setRespuestas] = useState(
-    preguntas.map((pregunta) => pregunta.respuesta ?? null)
-  );
+  const [respuestas, setRespuestas] = useState([]);
+
+  useEffect(() => {
+    setRespuestas(preguntas.map((pregunta) => pregunta.respuesta ?? null));
+  }, [preguntas]);
 
   const [registrado, setRegistrado] = useState(disabled);
 
@@ -47,6 +49,8 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
     modificacionPuntaje: Number(modificacionPuntaje) || null ,
     preguntaRespondida: respuestasFormateadas,
   };
+
+  
 
   const handleOnClick = async () => {
     setRegistrado(!registrado);

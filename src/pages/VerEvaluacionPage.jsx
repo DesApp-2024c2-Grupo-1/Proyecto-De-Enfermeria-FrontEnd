@@ -23,26 +23,28 @@ import { getEvaluacionById } from "../services/EvaluacionRealizadaService";
 export function VerEvaluacionPage() {
   const { id } = useParams();
   const [evaluacionRealizada, setEvaluacionRealizada] = useState({});
+  const [preguntas, setPreguntas] = useState([]);
 
   const fetchEvaluacionById = async (id) => {
     const data = await getEvaluacionById(id);
+    console.log(data);
 
     setEvaluacionRealizada(data);
-    console.log(evaluacionRealizada);
-    console.log(evaluacionRealizada.preguntaRespondida);
+    setPreguntas(data.preguntaRespondida);
   };
 
   useEffect(() => {
     fetchEvaluacionById(id);
   }, [id]);
   
+
   return (
     <>
       <Evaluacion
-        preguntas={[]}
+        preguntas={preguntas}
         disabled={true}
         alumnoDisabled={true}
-        alumnoPlaceholder={"Alumno"}
+        alumnoPlaceholder={`${evaluacionRealizada.alumno?.nombre} ${evaluacionRealizada.alumno?.apellido}`}
       />
     </>
   );
