@@ -54,6 +54,7 @@ export function RegistroEvaluacionesPage() {
             placeholder="Buscar por DNI..."
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+
           {listaFiltrada.length > 0 ? (
             <Lista
               lista={listaFiltrada}

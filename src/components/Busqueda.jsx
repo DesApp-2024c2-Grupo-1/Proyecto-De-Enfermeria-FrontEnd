@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TextField, InputAdornment } from "@mui/material";
 
+
 const Busqueda = ({ placeholder, onChange, width, height, margin }) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -17,15 +18,8 @@ const Busqueda = ({ placeholder, onChange, width, height, margin }) => {
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <img
-              src={
-                isFocused
-                  ? "assets/busqueda-focused.png"
-                  : "assets/busqueda.png"
-              }
-              alt="busqueda-icon"
-              style={{ width: 25, height: 25 }}
-            />
+             {/* #e6e6e6 es el gris del logo y del borde cuando no esta focused*/}
+            <i className="fa fa-search" style={{ fontSize: "25px", color: isFocused ? "#55B589" : "#e6e6e6" }}></i>
           </InputAdornment>
         ),
       }}
