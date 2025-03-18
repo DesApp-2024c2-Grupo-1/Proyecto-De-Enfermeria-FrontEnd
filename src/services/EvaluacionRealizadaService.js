@@ -16,6 +16,6 @@ export const registrarEvaluacionRealizada = async (docenteData) => {
   };
 
   export const findAllAlumnosPorEvaluacion = async (id) => {
-    const response = await axios.get(`http://localhost:3000/evaluacion-realizada/${id}`);
+    const response = await axios.get(`http://localhost:3000/evaluacion-realizada/evaluaciones-realizadas/${id}`);
     return response.data;
   };

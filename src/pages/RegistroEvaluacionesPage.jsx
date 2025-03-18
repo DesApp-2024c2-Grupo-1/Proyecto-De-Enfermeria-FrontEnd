@@ -12,7 +12,7 @@ export function RegistroEvaluacionesPage() {
   const [evaluacion, setEvaluacion] = useState();
   const [alumnos, setAlumnos] = useState([]);
 
-  const keys = ["nombre", "documento"];
+  const keys = ["nombre", "apellido", "dni"];
   const { id } = useParams();
 
   const listaFiltrada =
@@ -27,8 +27,6 @@ export function RegistroEvaluacionesPage() {
 
   const fetchAlumnosPorId = async (id) => {
     const data = await findAllAlumnosPorEvaluacion(id);
-    console.log(data);
-
     setAlumnos(data);
   };
 

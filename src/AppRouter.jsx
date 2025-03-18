@@ -41,7 +41,7 @@ export function AppRouter() {
         element={<RegistroEvaluacionesPage />}
       />
             <Route
-        path="/registroEvaluaciones/:id"
+        path="/registroEvaluaciones/evaluaciones-realizadas/:id"
         element={<RegistroEvaluacionesPage />}
       />
       <Route
