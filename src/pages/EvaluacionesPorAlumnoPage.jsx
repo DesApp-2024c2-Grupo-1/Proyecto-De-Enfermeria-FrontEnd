@@ -56,7 +56,10 @@ export function EvaluacionesPorAlumno() {
           <Lista
             lista={evaluaciones}
             keys={keys}
-            buttonOnClick={() => navigate("/verEvaluacion")}
+            buttonOnClick={(evaluacionId) =>
+              navigate(`/verEvaluacion/${evaluacionId}`)
+            }
+            paramOnClick={"id"}
           />
         </Stack>
       </Stack>

@@ -29,7 +29,7 @@ export function AppRouter() {
         path="/evaluacionesPorAlumno/:idEvaluacion/:idAlumno"
         element={<EvaluacionesPorAlumno />}
       />
-      <Route path="/verEvaluacion" element={<VerEvaluacionPage />} />
+      <Route path="/verEvaluacion/:id" element={<VerEvaluacionPage />} />
       <Route path="/perfilAlumno" element={<AlumnoPerfilPage />} />
       <Route path="/perfilAlumno/:id" element={<AlumnoPerfilPage />} />
       <Route path="/perfilDocente" element={<PerfilDocentePage />} />
