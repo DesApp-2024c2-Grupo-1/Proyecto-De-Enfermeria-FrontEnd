@@ -1,32 +1,55 @@
 import Busqueda from "../components/Busqueda";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Lista from "../components/Lista";
 import { Stack, Box } from "@mui/material";
-
-const datos = [
-  { nombre: "Maria Gonzalez", documento: "12345369" },
-  { nombre: "Juan Perez", documento: "98765432" },
-  { nombre: "Ana López", documento: "23456789" },
-  { nombre: "Luis Rodríguez", documento: "34567890" },
-  { nombre: "Sofia Torres", documento: "45678901" },
-];
+import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
 
 export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
+  const [alumnos, setAlumnos] = useState([]);
+  const location = useLocation();
+  const evaluacionTitulo = location.state
+    ? location.state.evaluacionTitulo
+    : "Título no disponible";
 
-  const keys = ["nombre", "documento"];
+  const keys = ["nombre", "apellido", "dni"];
+  const { id } = useParams();
+
   const listaFiltrada =
     searchTerm.length >= 7
-      ? datos.filter((dato) => String(dato.documento).includes(searchTerm))
-      : datos;
+      ? alumnos.filter((alumno) => String(alumno.dni).includes(searchTerm))
+      : alumnos;
+
+  const fetchAlumnosPorId = async (id) => {
+    const data = await findAllAlumnosPorEvaluacion(id);
+    setAlumnos(data);
+  };
+
+  useEffect(() => {
+    fetchAlumnosPorId(id);
+  }, [id]);
+
+  const handleNavigate = (alumnoId) => {
+    const alumno = listaFiltrada.find((alumno) => alumno.alumnoId === alumnoId);
+
+    navigate(`/evaluacionesPorAlumno/${id}/${alumno.alumnoId}`, {
+      state: {
+        evaluacionTitulo: evaluacionTitulo,
+        evaluacionId: id,
+        alumnoNombre: alumno.nombre,
+        alumnoApellido: alumno.apellido,
+        alumnoId: alumnoId,
+      },
+    });
+  };
 
   return (
     <>
       <Stack sx={{ alignItems: "center" }}>
-        <h1>Lavado de manos</h1>
-        <Stack sx={{ width: "70%", }}>
+        <h1>{evaluacionTitulo}</h1>
+        <Stack sx={{ width: "70%" }}>
           <Busqueda
             placeholder="Buscar por DNI..."
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -34,7 +57,8 @@ export function RegistroEvaluacionesPage() {
           <Lista
             lista={listaFiltrada}
             keys={keys}
-            buttonOnClick={() => navigate("/evaluacionesPorAlumno")}
+            buttonOnClick={handleNavigate}
+            paramOnClick={"alumnoId"}
           />
         </Stack>
       </Stack>

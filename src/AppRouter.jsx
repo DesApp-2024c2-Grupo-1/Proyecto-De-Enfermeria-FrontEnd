@@ -25,7 +25,11 @@ export function AppRouter() {
         path="/evaluacionesPorAlumno"
         element={<EvaluacionesPorAlumno />}
       />
-      <Route path="/verEvaluacion" element={<VerEvaluacionPage />} />
+      <Route
+        path="/evaluacionesPorAlumno/:idEvaluacion/:idAlumno"
+        element={<EvaluacionesPorAlumno />}
+      />
+      <Route path="/verEvaluacion/:id" element={<VerEvaluacionPage />} />
       <Route path="/perfilAlumno" element={<AlumnoPerfilPage />} />
       <Route path="/perfilAlumno/:id" element={<AlumnoPerfilPage />} />
       <Route path="/perfilDocente" element={<PerfilDocentePage />} />
@@ -35,19 +39,32 @@ export function AppRouter() {
         path="/registrarEvaluacion"
         element={<RegistrarEvaluacionPage />}
       />
-      <Route path="/registrarEvaluacion/:id" element={<RegistrarEvaluacionPage />} />
+      <Route
+        path="/registrarEvaluacion/:id"
+        element={<RegistrarEvaluacionPage />}
+      />
       <Route
         path="/registroEvaluaciones"
         element={<RegistroEvaluacionesPage />}
       />
       <Route
-        path="/crearEvaluacion"
-        element={<CrearEvaluacionPage />}
+        path="/registroEvaluaciones/evaluaciones-realizadas/:id"
+        element={<RegistroEvaluacionesPage />}
       />
-      <Route path="/registroAlumnoExitoso" element={<RegistroAlumnoExitoso />} />
-      <Route path="/registroDocenteExitoso" element={<RegistroDocenteExitoso />} />
+      <Route path="/crearEvaluacion" element={<CrearEvaluacionPage />} />
+      <Route
+        path="/registroAlumnoExitoso"
+        element={<RegistroAlumnoExitoso />}
+      />
+      <Route
+        path="/registroDocenteExitoso"
+        element={<RegistroDocenteExitoso />}
+      />
       <Route path="/verEvaluacion" element={<VerEvaluacionPage />} />
-      <Route path="/crearEvaluacionExito" element={<CrearEvaluacionExitoPage />} />
+      <Route
+        path="/crearEvaluacionExito"
+        element={<CrearEvaluacionExitoPage />}
+      />
     </Routes>
   );
 }
