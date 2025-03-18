@@ -14,7 +14,7 @@ export const registrarEvaluacionRealizada = async (docenteData) => {
     return response.data;
   }; /* Por ahora no se usa*/
 
-  export const getAllEvaluacionesRegistradasPorAlumno = async (id) => {
+  export const getAllEvaluacionesRealizadasPorAlumno = async (id) => {
     const response = await axios.get(`http://localhost:3000/evaluacion-realizada/evaluaciones-realizadas-por-alumno/${id}`);
     return response.data;
   } /* Trae todas las evaluaciones realizadas por un alumno, independientmente del modelo de evaluación*/
