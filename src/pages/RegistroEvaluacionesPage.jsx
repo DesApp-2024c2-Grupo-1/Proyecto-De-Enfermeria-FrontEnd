@@ -1,6 +1,6 @@
 import Busqueda from "../components/Busqueda";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Lista from "../components/Lista";
 import { Stack, Box } from "@mui/material";
 import { getEvaluacionById } from "../services/EvaluacionService";
@@ -9,8 +9,12 @@ import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaServ
 export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  const [evaluacion, setEvaluacion] = useState();
+ 
   const [alumnos, setAlumnos] = useState([]);
+  const location = useLocation();
+  const evaluacionTitulo = location.state
+    ? location.state.evaluacionTitulo
+    : "Título no disponible";
 
   const keys = ["nombre", "apellido", "dni"];
   const { id } = useParams();
@@ -20,32 +24,26 @@ export function RegistroEvaluacionesPage() {
       ? alumnos.filter((alumno) => String(alumno.dni).includes(searchTerm))
       : alumnos;
 
-  const fetchEvaluacionById = async (id) => {
-    const data = await getEvaluacionById(id);
-    setEvaluacion(data);
-  };
-
   const fetchAlumnosPorId = async (id) => {
     const data = await findAllAlumnosPorEvaluacion(id);
     setAlumnos(data);
   };
 
   useEffect(() => {
-    fetchEvaluacionById(id);
-  }, [id]);
-
-  useEffect(() => {
     fetchAlumnosPorId(id);
   }, [id]);
 
-  const handleNavigate = (id) => {
-    navigate(`/registroEvaluacion/${id}`);
+  const handleNavigate = (alumnoId) => {
+    const alumno = listaFiltrada.find((alumno) => alumno.alumnoId === alumnoId);
+    navigate(`/evaluacionesPorAlumno/${alumnoId}`, {
+      state: { evaluacionTitulo: evaluacionTitulo, alumnoNombre: alumno.nombre, alumnoApellido: alumno.apellido },
+    });
   };
 
   return (
     <>
       <Stack sx={{ alignItems: "center" }}>
-        <h1>{evaluacion ? `${evaluacion.titulo}` : "Cargando..."}</h1>
+        <h1>{evaluacionTitulo}</h1>
         <Stack sx={{ width: "70%" }}>
           <Busqueda
             placeholder="Buscar por DNI..."
@@ -55,7 +53,7 @@ export function RegistroEvaluacionesPage() {
             lista={listaFiltrada}
             keys={keys}
             buttonOnClick={handleNavigate}
-            paramOnClick={"id"}
+            paramOnClick={"alumnoId"}
           />
         </Stack>
       </Stack>
