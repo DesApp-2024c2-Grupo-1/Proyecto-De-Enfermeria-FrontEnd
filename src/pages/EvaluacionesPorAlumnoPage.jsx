@@ -1,28 +1,41 @@
 import Busqueda from "../components/Busqueda";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import Lista from "../components/Lista";
 import { Stack, Box } from "@mui/material";
-import { useEffect } from "react";
-import { getEvaluacionById } from "../services/EvaluacionService";
+import { useEffect, useState } from "react";
+import { findEvaluacionesDeUnAlumno } from "../services/EvaluacionRealizadaService";
 
 export function EvaluacionesPorAlumno() {
   const navigate = useNavigate();
-  const keys = ["fecha", "porcentaje"];
+  const keys = ["fecha", "nota"];
+  const [evaluaciones, setEvaluaciones] = useState([]);
+  const { idAlumno } = useParams();
   const location = useLocation();
+
   const evaluacionTitulo = location.state
     ? location.state.evaluacionTitulo
     : "Título no disponible";
+
+  const evaluacionId = location.state
+    ? location.state.evaluacionId
+    : "Id no disponible";
+
   const alumnoNombre = location.state
     ? location.state.alumnoNombre
     : "Nombre no disponible";
+
   const alumnoApellido = location.state
     ? location.state.alumnoApellido
     : "Apellido no disponible";
 
-  const fetchEvaluacionById = async (id) => {
-    const data = await getEvaluacionById(id);
-    setEvaluacion(data);
+  const fetchEvaluacionesPorAlumno = async (evaluacionId, idAlumno) => {
+    const data = await findEvaluacionesDeUnAlumno(evaluacionId, idAlumno);
+    setEvaluaciones(data);
   };
+
+  useEffect(() => {
+    fetchEvaluacionesPorAlumno(evaluacionId, idAlumno);
+  }, [evaluacionId, idAlumno]);
 
   return (
     <>
@@ -35,14 +48,13 @@ export function EvaluacionesPorAlumno() {
             spacing={2}
           >
             <h2>
-              {" "}
               {alumnoNombre} {alumnoApellido}
             </h2>
             <Busqueda />
           </Stack>
 
           <Lista
-            lista={datos}
+            lista={evaluaciones}
             keys={keys}
             buttonOnClick={() => navigate("/verEvaluacion")}
           />

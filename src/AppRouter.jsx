@@ -26,7 +26,7 @@ export function AppRouter() {
         element={<EvaluacionesPorAlumno />}
       />
       <Route
-        path="/evaluacionesPorAlumno/:id"
+        path="/evaluacionesPorAlumno/:idEvaluacion/:idAlumno"
         element={<EvaluacionesPorAlumno />}
       />
       <Route path="/verEvaluacion" element={<VerEvaluacionPage />} />

@@ -76,7 +76,7 @@ function Carpeta({ titulo, id }) {
           <button
             className="botonClaro"
             onClick={() => navigate(`/registroEvaluaciones/evaluaciones-realizadas/${id}`, {
-              state: { evaluacionTitulo: evaluacion ? evaluacion.titulo : '' },  
+              state: { evaluacionTitulo: evaluacion ? evaluacion.titulo : '', evaluacionId: id },  
             })}
             style={{ borderRadius: 5 }}
           >

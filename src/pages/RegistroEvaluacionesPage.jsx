@@ -3,13 +3,11 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Lista from "../components/Lista";
 import { Stack, Box } from "@mui/material";
-import { getEvaluacionById } from "../services/EvaluacionService";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
 
 export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
- 
   const [alumnos, setAlumnos] = useState([]);
   const location = useLocation();
   const evaluacionTitulo = location.state
@@ -26,6 +24,7 @@ export function RegistroEvaluacionesPage() {
 
   const fetchAlumnosPorId = async (id) => {
     const data = await findAllAlumnosPorEvaluacion(id);
+    console.log(data);
     setAlumnos(data);
   };
 
@@ -33,10 +32,15 @@ export function RegistroEvaluacionesPage() {
     fetchAlumnosPorId(id);
   }, [id]);
 
+  console.log("id", id);
+
   const handleNavigate = (alumnoId) => {
     const alumno = listaFiltrada.find((alumno) => alumno.alumnoId === alumnoId);
-    navigate(`/evaluacionesPorAlumno/${alumnoId}`, {
-      state: { evaluacionTitulo: evaluacionTitulo, alumnoNombre: alumno.nombre, alumnoApellido: alumno.apellido },
+    console.log(listaFiltrada);
+    console.log(alumno);
+    
+    navigate(`/evaluacionesPorAlumno/${id}/${alumno.alumnoId}`, {
+      state: { evaluacionTitulo: evaluacionTitulo, evaluacionId: id, alumnoNombre: alumno.nombre, alumnoApellido: alumno.apellido, alumnoId: alumnoId },
     });
   };
 
