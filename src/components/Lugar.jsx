@@ -1,13 +1,7 @@
 import { Stack, Box } from "@mui/material";
-import { useState } from "react";
 
-export function Lugar({ disabled, selected, onChange }) {
-  const handleOnChange = (value) => {
-    if (onChange) {
-      onChange(value);
-    }
-  };
-
+export function Lugar({ disabled, selected, onChange}) {
+  console.log(selected)
   return (
     <Stack
       direction={{ xs: "column", sm: "row" }}
@@ -40,7 +34,8 @@ export function Lugar({ disabled, selected, onChange }) {
             id="1"
             name="lugar"
             checked={selected === "1"}
-            onChange={() => handleOnChange("1")}
+            value="Campo Practico"
+            onChange={onChange ? () => onChange("1") : null}
           />
           <label htmlFor="1"> Campo Practico</label>
         </div>
@@ -51,7 +46,8 @@ export function Lugar({ disabled, selected, onChange }) {
             id="2"
             name="lugar"
             checked={selected === "2"}
-            onChange={() => handleOnChange("2")}
+            value="Centro de Simulación"
+            onChange={onChange ? () => onChange("2") : null}
           />
           <label htmlFor="2"> Centro de Simulación</label>
         </div>
