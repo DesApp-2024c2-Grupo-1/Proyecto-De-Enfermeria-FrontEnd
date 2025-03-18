@@ -25,8 +25,13 @@ export function AlumnosPage() {
     fetchAlumnos();
   }, []);
 
-  const handleNavigate = (dni) => {
-    navigate(`/perfilAlumno/${dni}`);
+  const handleNavigate = (id) => {
+    navigate(`/perfilAlumno/${id}`, {
+      state: {
+        alumnoNombre: alumnos.find((alumno) => alumno.id === id).nombre,
+        alumnoApellido: alumnos.find((alumno) => alumno.id === id).apellido,
+      },
+    });
   };
 
   return (
@@ -47,7 +52,7 @@ export function AlumnosPage() {
             lista={listaFiltrada}
             keys={keys}
             buttonOnClick={handleNavigate}
-            paramOnClick="dni"
+            paramOnClick="id"
           />
         </Stack>
       </Stack>

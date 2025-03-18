@@ -36,8 +36,8 @@ export function HomePage() {
           margin={"0 0 60px 0"}
           onChange={(e) => setSearchTerm((e.target.value).toLowerCase())}
         />
-        <Grid container spacing={10}>
-          <Grid item xs={12} sm={6} md={4}>
+        <Grid container spacing={10} sx={{ pb: "60px" }}>
+          <Grid item xs={12} sm={6} md={4} >
             <CarpetaFake />
           </Grid>
           {listaFiltrada.map((evaluacion, index) => (

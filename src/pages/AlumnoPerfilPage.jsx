@@ -1,62 +1,58 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 //import Filtro from "../components/Filtro";
 import Lista from "../components/Lista";
-import { getAlumnoByDni } from "../services/AlumnoService";
+import { getAllEvaluacionesRealizadasPorAlumno } from "../services/EvaluacionRealizadaService";
 import { Stack, Box } from "@mui/material";
 
-const examenes = [
-  {
-    titulo: "Lavado de manos",
-    instancias: [
-      { fecha: "12/10/24", porcentaje: "50%" },
-      { fecha: "13/10/24", porcentaje: "80%" },
-      { fecha: "11/10/24", porcentaje: "95%" },
-    ],
-  },
-  {
-    titulo: "Tomar la presión",
-    instancias: [
-      { fecha: "14/10/24", porcentaje: "70%" },
-      { fecha: "15/10/24", porcentaje: "95%" },
-    ],
-  },
-  {
-    titulo: "Primeros auxilios",
-    instancias: [{ fecha: "16/10/24", porcentaje: "100%" }],
-  },
-];
-
 export function AlumnoPerfilPage() {
-  const [alumno, setAlumno] = useState(null);
-  const keys = ["fecha", "porcentaje"];
+  const [evaluaciones, setEvaluaciones] = useState([]);
+  const keys = ["fecha", "nota"];
   const navigate = useNavigate();
-  const { id } = useParams();
+  const location = useLocation();
+  const alumnoNombre = location.state.alumnoNombre;
+  const alumnoApellido = location.state.alumnoApellido;
+  const { idAlumno } = useParams();
 
-  const fetchAlumnoByDni = async (id) => {
-    const data = await getAlumnoByDni(id);
-    setAlumno(data);
+  const evaluacionesTitulos = Array.from(
+    new Set(evaluaciones.map((evaluacion) => evaluacion.evaluacion.titulo))
+  );
+
+  const evaluacionesFiltradas = evaluacionesTitulos.map((titulo) => {
+    return {
+      titulo: titulo,
+      instancias: evaluaciones.filter(
+        (evaluacion) => evaluacion.evaluacion.titulo === titulo
+      ),
+    };
+  });
+
+  const fetchEvaluacionesPorAlumno = async (id) => {
+    const data = await getAllEvaluacionesRealizadasPorAlumno(id);
+    setEvaluaciones(data);
   };
 
   useEffect(() => {
-    fetchAlumnoByDni(id);
-  }, [id]);
+    fetchEvaluacionesPorAlumno(idAlumno);
+  }, [idAlumno]);
 
   return (
     <>
       <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
         <h1>
-          {alumno ? `${alumno.nombre} ${alumno.apellido}` : "Cargando..."}
+          {alumnoNombre} {alumnoApellido}
         </h1>
 
         <Box sx={{ width: "70%", display: "flex", flexDirection: "column" }}>
-          {examenes.map((examen, index) => (
+          {evaluacionesFiltradas.map((evaluacion, index) => (
             <Lista
               key={index}
-              titulo={examen.titulo}
-              lista={examen.instancias}
+              titulo={evaluacion.titulo}
+              lista={evaluacion.instancias}
               keys={keys}
-              buttonOnClick={() => navigate("/verEvaluacion")}
+              /*!!!!!!!!!!!!!!! Cuando pasas un buttonOnClick es necesario que le pases el parametro en la funcion, sino no lo va a leer. Si pasas la funcion directo se pone ahi y sino en el handle !!!!!!!!!!!!!!!*/
+              buttonOnClick={(id) => navigate(`/verEvaluacion/${id}`)}
+              paramOnClick="id"
             />
           ))}
         </Box>

@@ -1,7 +1,6 @@
 import { Stack, Box } from "@mui/material";
 
-export function Lugar({ disabled, selected, onChange}) {
-  console.log(selected)
+export function Lugar({ disabled, selected, onChange }) {
   return (
     <Stack
       direction={{ xs: "column", sm: "row" }}

@@ -29,7 +29,6 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar }) {
   };
 
   const handleLugarChange = (lugarSeleccionado) => {
-    console.log(lugarSeleccionado);
     if (!lugar) {
       setLugarSeleccionado(lugarSeleccionado);
     }

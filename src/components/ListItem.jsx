@@ -21,8 +21,8 @@ function ListItem({ textos, buttonOnClick }) {
       >
         <Stack direction={"row"} spacing={4}>
           {textos.map((texto, index) => (
-            <div>
-              <p key={index}>{texto}</p>
+            <div key={index}>
+              <p >{texto}</p>
             </div>
           ))}
         </Stack>

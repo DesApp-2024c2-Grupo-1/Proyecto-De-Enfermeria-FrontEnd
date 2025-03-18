@@ -54,12 +54,17 @@ export function RegistroEvaluacionesPage() {
             placeholder="Buscar por DNI..."
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <Lista
-            lista={listaFiltrada}
-            keys={keys}
-            buttonOnClick={handleNavigate}
-            paramOnClick={"alumnoId"}
-          />
+
+          {listaFiltrada.length > 0 ? (
+            <Lista
+              lista={listaFiltrada}
+              keys={keys}
+              buttonOnClick={handleNavigate}
+              paramOnClick={"alumnoId"}
+            />
+          ) : (
+            <p>No hay alumnos que hayan tomado esta evaluación.</p>
+          )}
         </Stack>
       </Stack>
     </>
