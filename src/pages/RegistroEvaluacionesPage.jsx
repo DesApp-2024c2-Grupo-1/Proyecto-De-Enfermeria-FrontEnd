@@ -63,7 +63,7 @@ export function RegistroEvaluacionesPage() {
               paramOnClick={"alumnoId"}
             />
           ) : (
-            <h2>No hay alumnos que hayan tomado esta evaluación.</h2>
+            <p>No hay alumnos que hayan tomado esta evaluación.</p>
           )}
         </Stack>
       </Stack>
