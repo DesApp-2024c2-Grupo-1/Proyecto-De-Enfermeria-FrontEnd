@@ -31,7 +31,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
   const handleObservacionChange = (nuevoTexto) => {
     setObservacion(nuevoTexto);
   };
-  
+
   const handlePuntajeChange = (nuevoPuntaje) => {
     setModificacionPuntaje(nuevoPuntaje);
   };
@@ -44,31 +44,28 @@ export function ListaPreguntas({ preguntas, disabled, alumno }) {
     alumno: { id: alumno?.id || null },
     docente: { id: docenteData.id },
     evaluacion: { id: evaluacionData.id },
-    observacion: String(observacion) || null ,
-    lugarPractica: String(lugarSeleccionado) ,
-    modificacionPuntaje: Number(modificacionPuntaje) || null ,
+    observacion: String(observacion) || null,
+    lugarPractica: String(lugarSeleccionado),
+    modificacionPuntaje: Number(modificacionPuntaje) || null,
     preguntaRespondida: respuestasFormateadas,
   };
-
-  
 
   const handleOnClick = async () => {
     setRegistrado(!registrado);
 
     try {
       console.log(observacion);
-      console.log(evaluacionRealizadaData)
+      console.log(evaluacionRealizadaData);
       await registrarEvaluacionRealizada(evaluacionRealizadaData);
       console.log("Registro exitoso");
     } catch (error) {
       console.log(error.response?.data?.message);
       const mensajeError =
-        error.response?.data?.message || "Error al registrar uan evaluacion";
+        error.response?.data?.message || "Error al registrar una evaluación.";
       setError(mensajeError);
       console.log(error.response);
-console.log(error.response?.data);
-console.log(error.response?.data?.message);
-
+      console.log(error.response?.data);
+      console.log(error.response?.data?.message);
     }
   };
 
@@ -95,8 +92,8 @@ console.log(error.response?.data?.message);
         <Observacion
           disabled={registrado}
           onObservacionChange={handleObservacionChange}
-  onPuntajeChange={handlePuntajeChange}
-  modificacionPuntaje={modificacionPuntaje}
+          onPuntajeChange={handlePuntajeChange}
+          modificacionPuntaje={modificacionPuntaje}
         />
         {!registrado ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
