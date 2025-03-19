@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
 import { getAllAlumnos } from "../services/AlumnoService";
 import { Stack } from "@mui/material";
+import IrArribaBoton from "../components/irArribaBoton";
 
 export function AlumnosPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -36,6 +37,7 @@ export function AlumnosPage() {
 
   return (
     <>
+    <IrArribaBoton/>
       <Stack sx={{ alignItems: "center" }}>
         <h1>Alumnos</h1>
         <Stack

@@ -2,6 +2,7 @@ import { Grid, Stack } from "@mui/material";
 import Carpeta from "../components/Carpeta";
 import CarpetaFake from "../components/CarpetaFake";
 import Busqueda from "../components/Busqueda";
+import IrArribaBoton from "../components/irArribaBoton";
 import { useEffect, useState } from "react";
 import { getAllEvaluaciones } from "../services/EvaluacionService";
 import { useDocente } from "../context/DocenteContext";
@@ -25,6 +26,7 @@ export function HomePage() {
 
   return (
     <>
+    <IrArribaBoton />
       <h1>
         ¡Bienvenido/a, {docenteContext.nombre} {docenteContext.apellido}!
       </h1>
@@ -47,6 +49,7 @@ export function HomePage() {
           ))}
         </Grid>
       </Stack>
+
     </>
   );
 }

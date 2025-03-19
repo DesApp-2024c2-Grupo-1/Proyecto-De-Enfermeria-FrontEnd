@@ -1,5 +1,6 @@
 import Busqueda from "../components/Busqueda";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
+import IrArribaBoton from "../components/irArribaBoton";
 import Lista from "../components/Lista";
 import { Stack, Box } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -39,6 +40,7 @@ export function EvaluacionesPorAlumno() {
 
   return (
     <>
+      <IrArribaBoton />
       <Stack sx={{ alignItems: "center" }}>
         <h1>{evaluacionTitulo}</h1>
         <Stack sx={{ width: "80%" }}>

@@ -3,10 +3,20 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 //import Filtro from "../components/Filtro";
 import Lista from "../components/Lista";
 import { getAllEvaluacionesRealizadasPorAlumno } from "../services/EvaluacionRealizadaService";
-import { Stack, Box } from "@mui/material";
+import {
+  Stack,
+  Box,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@mui/material";
 
 export function AlumnoPerfilPage() {
   const [evaluaciones, setEvaluaciones] = useState([]);
+  const [openDialog, setOpenDialog] = useState(true);
   const keys = ["fecha", "nota"];
   const navigate = useNavigate();
   const location = useLocation();
@@ -42,20 +52,39 @@ export function AlumnoPerfilPage() {
         <h1>
           {alumnoNombre} {alumnoApellido}
         </h1>
+        {evaluacionesFiltradas.length > 0 ? (
+          <Box sx={{ width: "70%", display: "flex", flexDirection: "column" }}>
+            {evaluacionesFiltradas.map((evaluacion, index) => (
+              <Lista
+                key={index}
+                titulo={evaluacion.titulo}
+                lista={evaluacion.instancias}
+                keys={keys}
+                buttonOnClick={(id) => navigate(`/verEvaluacion/${id}`)}
+                paramOnClick="id"
+              />
+            ))}
+          </Box>
+        ) : (
+          <Dialog
+            open={openDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            sx={{
+              "& .MuiDialog-paper": { padding: "2rem" },
+            }}
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"El o la estudiante no ha tomado ninguna evaluación."}
+            </DialogTitle>
 
-        <Box sx={{ width: "70%", display: "flex", flexDirection: "column" }}>
-          {evaluacionesFiltradas.map((evaluacion, index) => (
-            <Lista
-              key={index}
-              titulo={evaluacion.titulo}
-              lista={evaluacion.instancias}
-              keys={keys}
-              /*!!!!!!!!!!!!!!! Cuando pasas un buttonOnClick es necesario que le pases el parametro en la funcion, sino no lo va a leer. Si pasas la funcion directo se pone ahi y sino en el handle !!!!!!!!!!!!!!!*/
-              buttonOnClick={(id) => navigate(`/verEvaluacion/${id}`)}
-              paramOnClick="id"
-            />
-          ))}
-        </Box>
+            <DialogActions>
+              <Button color="success" onClick={() => navigate("/alumnos")}>
+                Volver atrás
+              </Button>
+            </DialogActions>
+          </Dialog>
+        )}
       </Stack>
     </>
   );

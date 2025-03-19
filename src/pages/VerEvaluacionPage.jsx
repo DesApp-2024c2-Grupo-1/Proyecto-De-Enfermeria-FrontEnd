@@ -14,7 +14,7 @@ export function VerEvaluacionPage() {
   const fetchEvaluacionById = async (id) => {
     const data = await getEvaluacionById(id);
     setEvaluacionRealizada(data);
-    if (data.preguntaRespondida) {
+    if (data.preguntaRespondida.length > 0) {
       setPreguntas(data.preguntaRespondida);
     } else {
       setOpenSnackbar(true);

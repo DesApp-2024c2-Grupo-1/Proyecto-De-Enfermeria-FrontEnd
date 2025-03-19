@@ -2,13 +2,23 @@ import Busqueda from "../components/Busqueda";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Lista from "../components/Lista";
-import { Stack, Box } from "@mui/material";
+import {
+  Button,
+  Stack,
+  Box,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+} from "@mui/material";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
 
 export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [alumnos, setAlumnos] = useState([]);
+  const [openDialog, setOpenDialog] = useState(true);
   const location = useLocation();
   const evaluacionTitulo = location.state
     ? location.state.evaluacionTitulo
@@ -63,7 +73,24 @@ export function RegistroEvaluacionesPage() {
               paramOnClick={"alumnoId"}
             />
           ) : (
-            <p>No hay alumnos que hayan tomado esta evaluación.</p>
+            <Dialog
+              open={openDialog}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+              sx={{
+                "& .MuiDialog-paper": { padding: "2rem" },
+              }}
+            >
+              <DialogTitle id="alert-dialog-title">
+                {"No hay alumnos que hayan tomado esta evaluación."}
+              </DialogTitle>
+
+              <DialogActions>
+                <Button color="success" onClick={() => navigate("/home")}>
+                  Volver atrás
+                </Button>
+              </DialogActions>
+            </Dialog>
           )}
         </Stack>
       </Stack>
