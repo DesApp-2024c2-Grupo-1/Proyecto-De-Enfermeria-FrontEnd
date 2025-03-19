@@ -14,7 +14,6 @@ function IrArribaBoton() {
   return (
     <Zoom in={trigger}>
       <Fab
-        color="success"
         size="small"
         onClick={handleClick}
         sx={{
@@ -22,6 +21,8 @@ function IrArribaBoton() {
           bottom: 16,
           right: 16,
           zIndex: 1000,
+          backgroundColor: "#31614b",
+          color: "white"
         }}
       >
         <i class="fa fa-angle-up" aria-hidden="true"></i>
