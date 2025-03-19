@@ -11,7 +11,9 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  useMediaQuery
 } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import { useDocente } from "../context/DocenteContext";
 import { modificarDocente } from "../services/DocenteService";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +27,8 @@ export function PerfilDocentePage() {
   const [error, setError] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const navigate = useNavigate();
+  const theme = createTheme();
+  const xs = useMediaQuery(theme.breakpoints.down("sm"));
 
   const docenteData = docenteContext
     ? {
@@ -61,7 +65,7 @@ export function PerfilDocentePage() {
       }
     } catch (error) {
       const mensajeError =
-        error.response?.data?.message || "Error al modificar docente";
+        error.response?.data?.message || "Error al modificar docente.";
       setError(mensajeError);
       setOpenSnackbar(true);
     }
@@ -69,10 +73,10 @@ export function PerfilDocentePage() {
 
   return (
     <>
-      <Stack
+    <Stack
         direction="column"
         spacing={2}
-        sx={{ display: "flex", alignItems: "center", my: "2rem" }}
+        sx={{ display: "flex", alignItems: "center", my: "2rem"  }}
       >
         <Box
           sx={{
@@ -95,7 +99,7 @@ export function PerfilDocentePage() {
 
         <Input
           key="nombre"
-          width="25rem"
+          width= {xs ? "17rem" : "25rem"}
           backgroundColor={"#DDF0E7"}
           disabled={editando}
           value={nombre}
@@ -105,7 +109,7 @@ export function PerfilDocentePage() {
 
         <Input
           key="apellido"
-          width="25rem"
+          width={xs ? "17rem" : "25rem"}
           backgroundColor={"#DDF0E7"}
           disabled={editando}
           value={apellido}
@@ -114,7 +118,7 @@ export function PerfilDocentePage() {
         />
 
         <Input
-          width="25rem"
+          width={xs ? "17rem" : "25rem"}
           backgroundColor={"#DDF0E7"}
           key="email"
           disabled={true}

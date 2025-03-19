@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
 import { getAllAlumnos } from "../services/AlumnoService";
 import { createTheme } from "@mui/material/styles";
-import { Stack, useMediaQuery} from "@mui/material";
+import { Stack, useMediaQuery } from "@mui/material";
 import IrArribaBoton from "../components/irArribaBoton";
 
 
