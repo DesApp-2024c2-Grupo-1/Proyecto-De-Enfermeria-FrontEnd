@@ -56,8 +56,8 @@ export function Menu() {
   return (
     <>
       {isDesktop ? (
-        <><Stack direction="row" alignItems="center" justifyContent="flex-end" sx={{ width: "100%", height: "40px", backgroundColor: "#449b73" }}>
-          <Button  sx={{marginRight: "3vh", color:"white"}}  onClick={() => navigate("/perfilDocente")} endIcon={<i class="fa-solid fa-user" style={{fontSize: "20px", marginLeft: "0.25vh", color: "white"}}></i>}>
+        <><Stack direction="row" alignItems="center" justifyContent="flex-end" sx={{ width: "100%", height: "50px", backgroundColor: "#449b73" }}>
+          <Button  sx={{marginRight: "3vh", color:"white", marginRight: "48px", paddingRight: "15px", fontSize: "15px"}}  onClick={() => navigate("/perfilDocente")} endIcon={<i class="fa-solid fa-user" style={{fontSize: "25px", marginLeft: "0.25vh", color: "white"}}></i>}>
             {docenteContext.nombre} {docenteContext.apellido}
           </Button>
         </Stack><Stack

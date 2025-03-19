@@ -42,7 +42,7 @@ function ListItem({ textos, buttonOnClick }) {
           variant="contained"
           onClick={buttonOnClick}
         >
-          <i class="fa-regular fa-eye"></i>
+          Ver
         </Button> : <Button
           sx={{
             px: { xs: "20px", sm: "20px", md: "50px" },
