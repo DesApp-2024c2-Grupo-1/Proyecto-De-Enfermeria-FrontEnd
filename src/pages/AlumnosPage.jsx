@@ -3,12 +3,16 @@ import Busqueda from "../components/Busqueda";
 import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
 import { getAllAlumnos } from "../services/AlumnoService";
-import { Stack } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { Stack, useMediaQuery} from "@mui/material";
 import IrArribaBoton from "../components/irArribaBoton";
+
 
 export function AlumnosPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const theme = createTheme();
+  const xs = useMediaQuery(theme.breakpoints.down("sm"));
 
   const keys = ["nombre", "apellido", "dni"];
   const [alumnos, setAlumnos] = useState([]);
@@ -48,6 +52,7 @@ export function AlumnosPage() {
           <Busqueda
             placeholder="Buscar por DNI..."
             onChange={(e) => setSearchTerm(e.target.value)}
+            width={xs ? "100%" : "200px"}
           />
 
           <Lista
