@@ -1,9 +1,6 @@
-import { Stack, Button, Box, useMediaQuery } from "@mui/material";
-import { createTheme } from "@mui/material/styles";
+import { Stack, Button, Box } from "@mui/material";
 
 function ListItem({ textos, buttonOnClick }) {
-  const theme = createTheme();
-  const xs = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <>
@@ -29,7 +26,7 @@ function ListItem({ textos, buttonOnClick }) {
             </div>
           ))}
         </Stack>
-        { xs ? <Button
+        <Button
           sx={{
             px: { xs: "20px", sm: "20px", md: "50px" },
             borderRadius: "100px",
@@ -43,21 +40,7 @@ function ListItem({ textos, buttonOnClick }) {
           onClick={buttonOnClick}
         >
           Ver
-        </Button> : <Button
-          sx={{
-            px: { xs: "20px", sm: "20px", md: "50px" },
-            borderRadius: "100px",
-            boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.3)",
-            backgroundColor: "#31614b",
-            "&:hover": {
-              backgroundColor: "#234637",
-            },
-          }}
-          variant="contained"
-          onClick={buttonOnClick}
-        >
-          Ver
-        </Button>}       
+        </Button>       
       </Stack>
     </>
   );
