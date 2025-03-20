@@ -22,10 +22,13 @@ function IrArribaBoton() {
           right: 16,
           zIndex: 1000,
           backgroundColor: "#31614b",
-          color: "white"
+          color: "white",
+          "&:hover": {
+            backgroundColor: "#3e7d5d", 
+          },
         }}
       >
-        <i class="fa fa-angle-up" aria-hidden="true"></i>
+        <i className="fa fa-angle-up" aria-hidden="true"></i>
       </Fab>
     </Zoom>
   );
