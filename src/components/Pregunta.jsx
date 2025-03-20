@@ -47,7 +47,7 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
               justifyContent: "center",
               alignItems: "center",
               border: "2px solid",
-              borderColor: disabled ? "#B0B0B0" : "black",
+              borderColor: disabled ? "#B0B0B0" : "#1A3D2D",
               borderRadius: "100px",
               width: "25px",
               height: "25px",
@@ -58,13 +58,13 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
                 respuesta === true
                   ? disabled
                     ? "#E8E8E8"
-                    : "black"
+                    : "#1A3D2D"
                   : "transparent",
               color: disabled
                 ? "#B0B0B0"
                 : respuesta === true
                 ? "white"
-                : "black",
+                : "#1A3D2D",
             }}
           >
             <input
@@ -85,7 +85,7 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
               justifyContent: "center",
               alignItems: "center",
               border: "2px solid",
-              borderColor: disabled ? "#B0B0B0" : "black",
+              borderColor: disabled ? "#B0B0B0" : "#1A3D2D",
               borderRadius: "100px",
               width: "25px",
               height: "25px",
@@ -96,13 +96,13 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
                 respuesta === false
                   ? disabled
                     ? "#E8E8E8"
-                    : "black"
+                    : "#1A3D2D"
                   : "transparent",
               color: disabled
                 ? "#B0B0B0"
                 : respuesta === false
                 ? "white"
-                : "black",
+                : "#1A3D2D",
             }}
           >
             <input
@@ -127,7 +127,7 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
         justifyContent: "space-between",
         alignItems: "center",
         my: "1rem",
-        borderBottom: "1px solid black",
+        borderBottom: "1px solid #1A3D2D",
       }}
     >
       <Box sx={{ maxWidth: "60%", textAlign: "justify" }}>
@@ -143,7 +143,7 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
             justifyContent: "center",
             alignItems: "center",
             border: "2px solid",
-            borderColor: disabled ? "#B0B0B0" : "black",
+            borderColor: disabled ? "#B0B0B0" : "#1A3D2D",
             borderRadius: "100px",
             width: "25px",
             height: "25px",
@@ -154,13 +154,13 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
               respuesta === true
                 ? disabled
                   ? "#E8E8E8"
-                  : "black"
+                  : "#1A3D2D"
                 : "transparent",
             color: disabled
               ? "#B0B0B0"
               : respuesta === true
               ? "white"
-              : "black",
+              : "#1A3D2D",
           }}
         >
           <input
@@ -181,7 +181,7 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
             justifyContent: "center",
             alignItems: "center",
             border: "2px solid",
-            borderColor: disabled ? "#B0B0B0" : "black",
+            borderColor: disabled ? "#B0B0B0" : "#1A3D2D",
             borderRadius: "100px",
             width: "25px",
             height: "25px",
@@ -192,13 +192,13 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
               respuesta === false
                 ? disabled
                   ? "#E8E8E8"
-                  : "black"
+                  : "#1A3D2D"
                 : "transparent",
             color: disabled
               ? "#B0B0B0"
               : respuesta === false
               ? "white"
-              : "black",
+              : "#1A3D2D",
           }}
         >
           <input
