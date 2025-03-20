@@ -5,13 +5,16 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDocente } from "../context/DocenteContext";
 import { getAllAlumnos } from "../services/AlumnoService";
+import { Observacion } from './Observacion';
 
 export function Evaluacion({
   preguntas,
   disabled,
   alumnoDisabled,
   alumnoPlaceholder,
-  lugar
+  lugar,
+  modificacionPuntaje,
+  observacion
 }) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -95,7 +98,7 @@ export function Evaluacion({
         </button>
       )}
       <Box>
-        <ListaPreguntas preguntas={preguntas} disabled={disabled} alumno={alumnoEvaluado} lugar={lugar} />
+        <ListaPreguntas preguntas={preguntas} disabled={disabled} alumno={alumnoEvaluado} lugar={lugar} modificacionPuntajeValue={modificacionPuntaje} observacionValue={observacion}/>
       </Box>
     </Stack>
   );

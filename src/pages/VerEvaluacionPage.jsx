@@ -32,6 +32,8 @@ export function VerEvaluacionPage() {
         disabled={true}
         alumnoDisabled={true}
         alumnoPlaceholder={`${evaluacionRealizada.alumno?.nombre} ${evaluacionRealizada.alumno?.apellido}`}
+        modificacionPuntaje={evaluacionRealizada.modificacionPuntaje}
+        observacion={evaluacionRealizada.observacion}
       />
 
       <Snackbar

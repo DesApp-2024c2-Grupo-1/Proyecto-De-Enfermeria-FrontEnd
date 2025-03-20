@@ -7,7 +7,7 @@ import { registrarEvaluacionRealizada } from "../services/EvaluacionRealizadaSer
 import { useDocente } from "../context/DocenteContext";
 import { useEvaluacion } from "../context/EvaluacionContext";
 
-export function ListaPreguntas({ preguntas, disabled, alumno, lugar }) {
+export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacionPuntajeValue, observacionValue }) {
   const { docenteContext } = useDocente();
   const { evaluacionContext } = useEvaluacion();
   const [error, setError] = useState();
@@ -35,11 +35,15 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar }) {
   };
 
   const handleObservacionChange = (nuevoTexto) => {
-    setObservacion(nuevoTexto);
+    if (!observacionValue) {
+      setObservacion(nuevoTexto);
+    }
   };
 
   const handlePuntajeChange = (nuevoPuntaje) => {
-    setModificacionPuntaje(nuevoPuntaje);
+    if (!modificacionPuntajeValue) {
+      setModificacionPuntaje(nuevoPuntaje);
+    }
   };
 
   const respuestasFormateadas = respuestas.map((respuesta) => ({ respuesta }));
@@ -61,6 +65,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar }) {
 
     try {
       console.log(observacion);
+      console.log(modificacionPuntaje);
       console.log(evaluacionRealizadaData);
       await registrarEvaluacionRealizada(evaluacionRealizadaData);
     } catch (error) {
@@ -98,7 +103,8 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar }) {
           disabled={registrado}
           onObservacionChange={handleObservacionChange}
           onPuntajeChange={handlePuntajeChange}
-          modificacionPuntaje={modificacionPuntaje}
+          modificacionPuntajeValue={modificacionPuntajeValue ? modificacionPuntajeValue : modificacionPuntaje}
+          observacionValue={observacionValue ? observacionValue : observacion}
         />
         {!registrado ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
