@@ -45,7 +45,7 @@ export function CrearEvaluacionExitoPage() {
               Ir al inicio
             </button>
             <button
-              onClick={() => navigate("/home")}
+              onClick={() => navigate("/crearEvaluacion")}
               className="botonClaro"
               style={{ borderRadius: 8 }}
             >
