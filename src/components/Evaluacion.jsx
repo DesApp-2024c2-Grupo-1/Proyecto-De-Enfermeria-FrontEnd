@@ -36,7 +36,6 @@ export function Evaluacion({
   const handleOnChange = (event) => {
     const inputDNI = event.target.value;
     setSearchTerm(inputDNI);
-    console.log("DNI ingresado:", inputDNI);
   
     const encontrado = alumnos.find((dato) => String(dato.dni) === inputDNI) || null;
     setAlumnoEvaluado(encontrado);
