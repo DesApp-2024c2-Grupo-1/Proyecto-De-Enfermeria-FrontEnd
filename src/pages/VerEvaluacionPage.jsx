@@ -10,7 +10,6 @@ export function VerEvaluacionPage() {
   const [preguntas, setPreguntas] = useState([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
-
   const fetchEvaluacionById = async (id) => {
     const data = await getEvaluacionById(id);
     setEvaluacionRealizada(data);
@@ -52,10 +51,8 @@ export function VerEvaluacionPage() {
           severity="error"
           sx={{ width: "50%" }}
         >
-          <p>
-            ¡Ocurrió un problema con la información de esta página!</p><p>Por favor, contacta a un
-            administrador.
-          </p>
+          <p>¡Ocurrió un problema con la información de esta página!</p>
+          <p>Por favor, contacta a un administrador.</p>
         </Alert>
       </Snackbar>
     </>

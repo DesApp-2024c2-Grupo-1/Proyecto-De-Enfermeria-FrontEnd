@@ -1,9 +1,18 @@
 import React from "react";
-import { Box, Stack, Drawer, IconButton, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Stack,
+  Drawer,
+  IconButton,
+  useMediaQuery,
+  Button,
+} from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import HomeIcon from "/assets/home.png";
 import ProfileIcon from "/assets/profile.png";
 import AlumnosIcon from "/assets/alumnos.png";
+import { useDocente } from "../context/DocenteContext";
+import IrAtrasBoton from "./irAtrasBoton";
 
 function MenuOption({ path, label, icon, onClick }) {
   const navigate = useNavigate();
@@ -33,6 +42,8 @@ function MenuOption({ path, label, icon, onClick }) {
 export function Menu() {
   const isDesktop = useMediaQuery("(min-width:1024px)");
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { docenteContext } = useDocente();
+  const navigate = useNavigate();
 
   const toggleDrawer = () => {
     setMobileOpen(!mobileOpen);
@@ -41,35 +52,71 @@ export function Menu() {
   const opcionesMenu = [
     { path: "/home", label: "Inicio", icon: HomeIcon },
     { path: "/alumnos", label: "Alumnos", icon: AlumnosIcon },
-        { path: "/perfilDocente", label: "Perfil", icon: ProfileIcon },
+  ];
+
+  const opcionesMenuMovil = [
+    { path: "/home", label: "Inicio", icon: HomeIcon },
+    { path: "/alumnos", label: "Alumnos", icon: AlumnosIcon },
+    { path: "/perfilDocente", label: "Perfil", icon: ProfileIcon },
   ];
 
   return (
     <>
       {isDesktop ? (
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          className="menu"
-        >
-          <Stack direction="row" spacing={10} sx={{marginLeft: 6}}>
-            {opcionesMenu.map((option) => (
-              <MenuOption
-                key={option.path}
-                path={option.path}
-                label={option.label}
-                icon={option.icon}
-              />
-            ))}
+        <>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ width: "100%", height: "50px", backgroundColor: "#1A3D2D" }}
+          >
+            <IrAtrasBoton />
+            <Button
+              sx={{
+                color: "white",
+                marginRight: "48px",
+                paddingRight: "15px",
+                fontSize: "15px",
+              }}
+              onClick={() => navigate("/perfilDocente")}
+              endIcon={
+                <i
+                  class="fa-solid fa-user"
+                  style={{
+                    fontSize: "25px",
+                    marginLeft: "0.25vh",
+                    color: "white",
+                  }}
+                ></i>
+              }
+            >
+              {docenteContext.nombre} {docenteContext.apellido}
+            </Button>
           </Stack>
-          <img
-            src="../assets/unahur-logo-figma-sf.png"
-            className="logo"
-            alt="Logo"
-            style={{marginRight: 35, marginBottom: 10}}
-          />
-        </Stack>
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            className="menu"
+          >
+            <Stack direction="row" spacing={10} sx={{ marginLeft: 8 }}>
+              {opcionesMenu.map((option) => (
+                <MenuOption
+                  key={option.path}
+                  path={option.path}
+                  label={option.label}
+                  icon={option.icon}
+                />
+              ))}
+            </Stack>
+            <img
+              src="../assets/unahur-logo-figma-sf.png"
+              className="logo"
+              alt="Logo"
+              style={{ marginRight: 35, marginBottom: 10 }}
+            />
+          </Stack>
+        </>
       ) : (
         // Menú móvil
         <>
@@ -101,7 +148,7 @@ export function Menu() {
               >
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
               </IconButton>
-              {opcionesMenu.map((option) => (
+              {opcionesMenuMovil.map((option) => (
                 <MenuOption
                   key={option.path}
                   path={option.path}

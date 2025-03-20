@@ -1,6 +1,7 @@
 import Busqueda from "../components/Busqueda";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { createTheme } from "@mui/material/styles";
 import Lista from "../components/Lista";
 import {
   Button,
@@ -11,6 +12,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  useMediaQuery
 } from "@mui/material";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
 
@@ -20,6 +22,8 @@ export function RegistroEvaluacionesPage() {
   const [alumnos, setAlumnos] = useState([]);
   const [openDialog, setOpenDialog] = useState(true);
   const location = useLocation();
+  const theme = createTheme();
+  const xs = useMediaQuery(theme.breakpoints.down("sm"));
   const evaluacionTitulo = location.state
     ? location.state.evaluacionTitulo
     : "Título no disponible";
@@ -63,6 +67,7 @@ export function RegistroEvaluacionesPage() {
           <Busqueda
             placeholder="Buscar por DNI..."
             onChange={(e) => setSearchTerm(e.target.value)}
+            width={xs ? "100%" : "200px"}
           />
 
           {listaFiltrada.length > 0 ? (

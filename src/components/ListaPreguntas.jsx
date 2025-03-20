@@ -63,7 +63,6 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar }) {
       console.log(observacion);
       console.log(evaluacionRealizadaData);
       await registrarEvaluacionRealizada(evaluacionRealizadaData);
-      console.log("Registro exitoso");
     } catch (error) {
       console.log(error.response?.data?.message);
       const mensajeError =
