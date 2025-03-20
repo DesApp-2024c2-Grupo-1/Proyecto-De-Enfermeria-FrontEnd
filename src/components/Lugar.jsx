@@ -11,7 +11,7 @@ export function Lugar({ disabled, selected, onChange }) {
     >
       <Box
         sx={{
-          maxWidth: "60%",
+          maxWidth: "100%",
           textAlign: "center" /* backgroundColor: "green" */,
         }}
       >
