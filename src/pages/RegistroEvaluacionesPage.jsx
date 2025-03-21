@@ -91,7 +91,7 @@ export function RegistroEvaluacionesPage() {
               </DialogTitle>
 
               <DialogActions>
-                <Button color="success" onClick={() => navigate("/home")}>
+                <Button sx={{color: "#1A3D2D"}} onClick={() => navigate("/home")}>
                   Volver atrás
                 </Button>
               </DialogActions>

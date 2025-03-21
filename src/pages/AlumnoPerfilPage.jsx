@@ -79,7 +79,7 @@ export function AlumnoPerfilPage() {
             </DialogTitle>
 
             <DialogActions>
-              <Button color="success" onClick={() => navigate("/alumnos")}>
+              <Button sx={{color: "#1A3D2D"}} onClick={() => navigate("/alumnos")}>
                 Volver atrás
               </Button>
             </DialogActions>
