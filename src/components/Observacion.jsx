@@ -5,7 +5,7 @@ import { createMuiTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createMuiTheme({
   palette: {
     text: {
-      disabled: 'dark-grey'
+      disabled: 'grey'
     }
   },
 });
@@ -63,7 +63,7 @@ export function Observacion({
           },
           "& .Mui-disabled": {
             "& input::placeholder, & textarea::placeholder": {
-              color: "dark-grey",
+              color: "grey",
               opacity: 1,
             },
           },

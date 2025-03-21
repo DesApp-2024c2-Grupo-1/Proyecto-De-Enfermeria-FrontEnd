@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  Stack,
   Box,
   List,
   ListItem,
@@ -7,11 +8,14 @@ import {
   Paper,
   Snackbar,
   Alert,
+  useMediaQuery,
 } from "@mui/material";
 import { postEvaluacionYPreguntas } from "../services/EvaluacionService";
 import { useDocente } from "../context/DocenteContext";
 import { useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
+import { createTheme } from "@mui/material/styles";
+import { AiFillPlusCircle } from "react-icons/ai";
 
 export function CrearEvaluacionPage() {
   const [preguntas, setPreguntas] = useState([]);
@@ -24,6 +28,8 @@ export function CrearEvaluacionPage() {
   const { docenteContext } = useDocente();
   const [error, setError] = useState([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const theme = createTheme();
+  const xs = useMediaQuery(theme.breakpoints.down("sm"));
 
   const evaluacionData = { titulo, docente: docenteContext.id, preguntas };
 
@@ -78,7 +84,7 @@ export function CrearEvaluacionPage() {
       navigate("/crearEvaluacionExito");
     } catch (error) {
       const mensajeError =
-        error.response?.data?.message || "Error al registrar docente";
+        error.response?.data?.message || "Error al registrar la evaluación.";
       setError(mensajeError);
       setOpenSnackbar(true);
       /*let mensajes;
@@ -152,7 +158,46 @@ export function CrearEvaluacionPage() {
               </ListItem>
             ))}
           </List>
-          <Box
+          {xs ? <Stack
+            direction=  "column"
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              gap: 2,
+              marginTop: 2,
+            }}
+          >
+            <Input
+              placeholder="Nueva pregunta"
+              texto="nuevaPregunta"
+              width="100%"
+              helperText={errorCriterio || " "}
+              helperTextColor="red"
+              value={nuevoCriterio}
+              onChange={(e) => setNuevoCriterio(e.target.value)}
+            />
+            <Stack direction="row" spacing={2} justifyContent="space-between">
+            <Input
+              width="200px"
+              placeholder="Puntaje"
+              texto="puntaje"
+              helperText={errorPuntaje || " "}
+              helperTextColor="red"
+              helperTextWidth="200px"
+              value={puntaje}
+              onChange={(e) => setNuevoPuntaje(e.target.value)}
+            />
+            <Box sx={{ alignSelf: "flex-center" }}>
+              <button
+                onClick={agregarCriterio}
+                className="botonClaro"
+                style={{ marginTop: "28px", width:"100%" }}
+              >
+                Añadir
+              </button>
+            </Box>
+            </Stack>
+          </Stack> : <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
@@ -188,7 +233,7 @@ export function CrearEvaluacionPage() {
                 Añadir
               </button>
             </Box>
-          </Box>
+          </Box>}
         </Paper>
         <button
           onClick={manejarEnvio}
