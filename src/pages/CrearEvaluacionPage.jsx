@@ -115,13 +115,13 @@ export function CrearEvaluacionPage() {
         }}
       >
         <Paper
-          elevation={3}
+          elevation={{ xs: 0, md: 3 }}
           sx={{
             width: "100%",
             maxWidth: 600,
             padding: 3,
             borderRadius: 7,
-            backgroundColor: "#DDF0E7",
+            backgroundColor: xs ? "white" : "#DDF0E7",
           }}
         >
           <Input
