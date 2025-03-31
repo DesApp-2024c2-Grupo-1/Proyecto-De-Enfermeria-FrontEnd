@@ -12,7 +12,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-  useMediaQuery
+  useMediaQuery,
 } from "@mui/material";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
 
@@ -39,6 +39,7 @@ export function RegistroEvaluacionesPage() {
   const fetchAlumnosPorId = async (id) => {
     const data = await findAllAlumnosPorEvaluacion(id);
     setAlumnos(data);
+    console.log(data);
   };
 
   useEffect(() => {
@@ -59,6 +60,7 @@ export function RegistroEvaluacionesPage() {
     });
   };
 
+
   return (
     <>
       <Stack sx={{ alignItems: "center" }}>
@@ -74,8 +76,7 @@ export function RegistroEvaluacionesPage() {
             <Lista
               lista={listaFiltrada}
               keys={keys}
-              buttonOnClick={handleNavigate}
-              paramOnClick={"alumnoId"}
+              dropdown={true}
             />
           ) : (
             <Dialog
@@ -91,7 +92,10 @@ export function RegistroEvaluacionesPage() {
               </DialogTitle>
 
               <DialogActions>
-                <Button sx={{color: "#1A3D2D"}} onClick={() => navigate("/home")}>
+                <Button
+                  sx={{ color: "#1A3D2D" }}
+                  onClick={() => navigate("/home")}
+                >
                   Volver atrás
                 </Button>
               </DialogActions>
