@@ -29,11 +29,15 @@ function Lista({
               key={index}
               textos={textos}
               contenidoDropdown={
-                Array.isArray(contenidoDropdown) ? (
+                Array.isArray(contenidoDropdown) && contenidoDropdown[index] ? (
                   <Lista lista={contenidoDropdown[index]} keys={["nombre"]} />
                 ) : (
-                  <p>{contenidoDropdown}</p>
-                )
+                  <p>
+                    Ocurrió un error al intentar mostrar las evaluaciones de
+                    el o la estudiante. Por favor, contactá a un
+                    administrador.
+                  </p>
+                ) // Lo pongo así porque si aparece este ListItem quiere decir que el o la estudiante tomó evaluaciones, pero por alguna razón no le llega el contenido al dropdown.
               }
             />
           ) : (

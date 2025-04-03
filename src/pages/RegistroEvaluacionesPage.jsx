@@ -15,7 +15,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
-import ListaConDropdown from "../components/ListaConDropdown";
+import ListItemConDropdown from "../components/ListItemConDropdown";
 
 export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
