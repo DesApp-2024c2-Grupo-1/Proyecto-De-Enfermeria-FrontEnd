@@ -6,11 +6,13 @@ useState;
 function ListItemConDropdown({ textos, buttonOnClick, contenidoDropdown }) {
   const theme = createTheme();
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const handleOpenDropdown = () => {
+    console.log("Dropdown abierto");
     setOpenDropdown(!openDropdown);
-  };
+  }
 
   return (
     <>
@@ -52,7 +54,7 @@ function ListItemConDropdown({ textos, buttonOnClick, contenidoDropdown }) {
                 },
               }}
               variant="contained"
-              onClick={buttonOnClick}
+              onClick={handleOpenDropdown}
             >
               <i
                 class="fa-solid fa-chevron-right"
@@ -80,7 +82,7 @@ function ListItemConDropdown({ textos, buttonOnClick, contenidoDropdown }) {
         {openDropdown && (
           <Box>
             <p>Contenido del dropdown</p>
-            {contenidoDropdown}
+           {contenidoDropdown}
             <Button onClick={handleOpenDropdown}>Cerrar</Button>
           </Box>
         )}

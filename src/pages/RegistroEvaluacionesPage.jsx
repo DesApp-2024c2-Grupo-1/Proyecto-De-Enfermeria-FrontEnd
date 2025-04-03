@@ -15,6 +15,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
+import ListaConDropdown from "../components/ListaConDropdown";
 
 export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
@@ -59,13 +60,45 @@ export function RegistroEvaluacionesPage() {
     });
   };
 
-  const obtenerEvaluaciones = (alumnoId) => {
-    const alumno = listaFiltrada.find((alumno) => alumno.alumnoId === alumnoId);
+const listaPrueba = [
+  {
+    nombre: "Juan",
+    apellido: "Pérez",
+    dni: 12345678,
+    evaluaciones: [
+      { id: 1, nombre: "Evaluación 1" },
+      { id: 2, nombre: "Evaluación 2" },
+    ],  
 
-    if (alumno) {
-      
-    }
-  }
+  },
+  {
+    nombre: "María",
+    apellido: "Gómez",
+    dni: 87654321,
+    evaluaciones: [
+      { id: 3, nombre: "Evaluación 3" },
+      { id: 4, nombre: "Evaluación 4" },
+    ],
+  },
+  {
+    nombre: "Pedro",
+    apellido: "López",
+    dni: 11223344,
+    evaluaciones: [
+      { id: 5, nombre: "Evaluación 5" },
+      { id: 6, nombre: "Evaluación 6" },
+    ],
+  },
+  {
+    nombre: "Ana",
+    apellido: "Martínez",
+    dni: 55667788,
+    evaluaciones: [
+      { id: 7, nombre: "Evaluación 7" },
+      { id: 8, nombre: "Evaluación 8" },
+    ],
+  },
+]
 
   return (
     <>
@@ -79,16 +112,7 @@ export function RegistroEvaluacionesPage() {
           />
 
           {listaFiltrada.length > 0 ? (
-            <Lista
-              lista={listaFiltrada}
-              keys={keys}
-              dropdown={true}
-              contenidoDropdown={
-                <div>
-                  <Lista lista={listaFiltrada} keys={keys} dropdown={false} />
-                </div>
-              }
-            />
+            <ListaConDropdown lista={listaFiltrada} keys={keys} contenidoDropdown={listaPrueba.map((item) => item.evaluaciones)}/>
           ) : (
             <Dialog
               open={openDialog}
