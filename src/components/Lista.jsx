@@ -25,7 +25,17 @@ function Lista({
         {lista.map((item, index) => {
           const textos = keys.map((key) => item[key]);
           return dropdown ? (
-            <ListItemConDropdown key={index} textos={textos} />
+            <ListItemConDropdown
+              key={index}
+              textos={textos}
+              contenidoDropdown={
+                Array.isArray(contenidoDropdown) ? (
+                  <Lista lista={contenidoDropdown[index]} keys={["nombre"]} />
+                ) : (
+                  <p>{contenidoDropdown}</p>
+                )
+              }
+            />
           ) : (
             <ListItem
               key={index}

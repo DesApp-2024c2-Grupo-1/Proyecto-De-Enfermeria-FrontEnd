@@ -112,7 +112,7 @@ const listaPrueba = [
           />
 
           {listaFiltrada.length > 0 ? (
-            <ListaConDropdown lista={listaFiltrada} keys={keys} contenidoDropdown={listaPrueba.map((item) => item.evaluaciones)}/>
+            <Lista dropdown={true} lista={listaFiltrada} keys={keys} contenidoDropdown={listaPrueba.map((item) => item.evaluaciones)}/>
           ) : (
             <Dialog
               open={openDialog}
