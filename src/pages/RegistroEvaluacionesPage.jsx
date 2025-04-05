@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { createTheme } from "@mui/material/styles";
 import Lista from "../components/Lista";
+
 import {
   Button,
   Stack,
@@ -15,6 +16,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
+
 
 export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
