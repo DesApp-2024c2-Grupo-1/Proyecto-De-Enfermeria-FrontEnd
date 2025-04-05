@@ -16,7 +16,6 @@ import {
 } from "@mui/material";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
 
-
 export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");

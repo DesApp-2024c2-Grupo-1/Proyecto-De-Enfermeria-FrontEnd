@@ -1,7 +1,6 @@
-import { Stack, Button, Box, useMediaQuery } from "@mui/material";
+import { Stack, Button, Box, useMediaQuery, Collapse } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { useState } from "react";
-useState;
 
 function ListItemConDropdown({ textos, buttonOnClick, contenidoDropdown }) {
   const theme = createTheme();
@@ -12,7 +11,7 @@ function ListItemConDropdown({ textos, buttonOnClick, contenidoDropdown }) {
   const handleOpenDropdown = () => {
     console.log("Dropdown abierto");
     setOpenDropdown(!openDropdown);
-  }
+  };
 
   return (
     <>
@@ -56,10 +55,7 @@ function ListItemConDropdown({ textos, buttonOnClick, contenidoDropdown }) {
               variant="contained"
               onClick={handleOpenDropdown}
             >
-              <i
-                class="fa-solid fa-chevron-right"
-                style={{ color: "white" }}
-              ></i>
+              <i className="fa-solid fa-chevron-right" style={{ color: "white" }}></i>
             </Button>
           ) : (
             <Button
@@ -79,13 +75,22 @@ function ListItemConDropdown({ textos, buttonOnClick, contenidoDropdown }) {
             </Button>
           )}
         </Stack>
-        {openDropdown && (
-          <Box>
-            <p>Contenido del dropdown</p>
-           {contenidoDropdown}
-            <Button onClick={handleOpenDropdown}>Cerrar</Button>
+        <Collapse in={openDropdown} timeout="auto">
+          <Box
+            sx={{
+              backgroundColor: "#daf2e3",
+              mt: 2,
+              mb: 2,
+              p: 2,
+              borderRadius: "30px",
+              boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.3)",
+            }}
+          >
+            <p>Evaluaciones:</p>
+            {contenidoDropdown}
+            <Button sx={{color:"#234637"}} onClick={handleOpenDropdown}>Cerrar</Button>
           </Box>
-        )}
+        </Collapse>
       </Stack>
     </>
   );
