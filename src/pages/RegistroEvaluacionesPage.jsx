@@ -22,6 +22,8 @@ export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [alumnos, setAlumnos] = useState([]);
+  const [alumnosFiltrados, setAlumnosFiltrados] = useState([]);
+  const [filtrado, setFiltrado] = useState(false);
   const [openDialog, setOpenDialog] = useState(true);
   const location = useLocation();
   const theme = createTheme();
@@ -46,6 +48,26 @@ export function RegistroEvaluacionesPage() {
   useEffect(() => {
     fetchAlumnosPorId(id);
   }, [id]);
+
+  const handleBusqueda = (e) => {
+    let valor = e.target.value.toLowerCase();
+    setSearchTerm(valor);
+    if (valor === "") {
+      setAlumnosFiltrados(alumnos);
+      setFiltrado(false);
+      return;
+    }
+    setAlumnosFiltrados(
+      alumnos.filter(
+        (alumno) =>
+          String(alumno.nombre).toLowerCase().includes(valor) ||
+          String(alumno.apellido).toLowerCase().includes(valor) ||
+          String(alumno.dni).toLowerCase().includes(valor)
+      )
+    );
+    setFiltrado(true);
+  };
+
 
   const handleNavigate = (alumnoId) => {
     const alumno = listaFiltrada.find((alumno) => alumno.alumnoId === alumnoId);
@@ -108,12 +130,12 @@ const listaPrueba = [
         <Stack sx={{ width: "70%" }}>
           <Busqueda
             placeholder="Buscar por DNI..."
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleBusqueda}
             width={xs ? "100%" : "200px"}
           />
 
-          {listaFiltrada.length > 0 ? (
-            <Lista dropdown={true} lista={listaFiltrada} keys={keys} contenidoDropdown={listaPrueba.map((item) => item.evaluaciones)}/>
+          {alumnos.length > 0 ? (
+            <Lista dropdown={true} lista={alumnosFiltrados.length > 0 ? alumnosFiltrados : alumnos} keys={keys} contenidoDropdown={listaPrueba.map((item) => item.evaluaciones)}/>
           ) : (
             <Dialog
               open={openDialog}
