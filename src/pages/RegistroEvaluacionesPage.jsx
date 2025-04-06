@@ -17,7 +17,6 @@ import {
 } from "@mui/material";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
 
-
 export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -31,14 +30,7 @@ export function RegistroEvaluacionesPage() {
   const evaluacionTitulo = location.state
     ? location.state.evaluacionTitulo
     : "Título no disponible";
-
-  const keys = ["nombre", "apellido", "dni"];
   const { id } = useParams();
-
-  const listaFiltrada =
-    searchTerm.length >= 7
-      ? alumnos.filter((alumno) => String(alumno.dni).includes(searchTerm))
-      : alumnos;
 
   const fetchAlumnosPorId = async (id) => {
     const data = await findAllAlumnosPorEvaluacion(id);
@@ -68,7 +60,9 @@ export function RegistroEvaluacionesPage() {
     setFiltrado(true);
   };
 
-
+  {
+    /*
+  
   const handleNavigate = (alumnoId) => {
     const alumno = listaFiltrada.find((alumno) => alumno.alumnoId === alumnoId);
 
@@ -82,46 +76,47 @@ export function RegistroEvaluacionesPage() {
       },
     });
   };
+  */
+  }
 
-const listaPrueba = [
-  {
-    nombre: "Juan",
-    apellido: "Pérez",
-    dni: 12345678,
-    evaluaciones: [
-      { id: 1, nombre: "Evaluación 1" },
-      { id: 2, nombre: "Evaluación 2" },
-    ],  
-
-  },
-  {
-    nombre: "María",
-    apellido: "Gómez",
-    dni: 87654321,
-    evaluaciones: [
-      { id: 3, nombre: "Evaluación 3" },
-      { id: 4, nombre: "Evaluación 4" },
-    ],
-  },
-  {
-    nombre: "Pedro",
-    apellido: "López",
-    dni: 11223344,
-    evaluaciones: [
-      { id: 5, nombre: "Evaluación 5" },
-      { id: 6, nombre: "Evaluación 6" },
-    ],
-  },
-  {
-    nombre: "Ana",
-    apellido: "Martínez",
-    dni: 55667788,
-    evaluaciones: [
-      { id: 7, nombre: "Evaluación 7" },
-      { id: 8, nombre: "Evaluación 8" },
-    ],
-  },
-]
+  const listaPrueba = [
+    {
+      nombre: "Juan",
+      apellido: "Pérez",
+      dni: 12345678,
+      evaluaciones: [
+        { id: 1, nombre: "Evaluación 1" },
+        { id: 2, nombre: "Evaluación 2" },
+      ],
+    },
+    {
+      nombre: "María",
+      apellido: "Gómez",
+      dni: 87654321,
+      evaluaciones: [
+        { id: 3, nombre: "Evaluación 3" },
+        { id: 4, nombre: "Evaluación 4" },
+      ],
+    },
+    {
+      nombre: "Pedro",
+      apellido: "López",
+      dni: 11223344,
+      evaluaciones: [
+        { id: 5, nombre: "Evaluación 5" },
+        { id: 6, nombre: "Evaluación 6" },
+      ],
+    },
+    {
+      nombre: "Ana",
+      apellido: "Martínez",
+      dni: 55667788,
+      evaluaciones: [
+        { id: 7, nombre: "Evaluación 7" },
+        { id: 8, nombre: "Evaluación 8" },
+      ],
+    },
+  ];
 
   return (
     <>
@@ -135,7 +130,28 @@ const listaPrueba = [
           />
 
           {alumnos.length > 0 ? (
-            <Lista dropdown={true} lista={alumnosFiltrados.length > 0 ? alumnosFiltrados : alumnos} keys={keys} contenidoDropdown={listaPrueba.map((item) => item.evaluaciones)}/>
+            <>
+              {!(filtrado && alumnosFiltrados.length === 0) ? (
+                <Lista
+                  dropdown={true}
+                  lista={
+                    alumnosFiltrados.length > 0 ? alumnosFiltrados : alumnos
+                  }
+                  keys={["nombre", "apellido", "dni"]}
+                  contenidoDropdown={listaPrueba.map(
+                    (item) => item.evaluaciones
+                  )}
+                />
+              ) : (
+                <div>
+                  <h2>No se encontraron resultados...</h2>
+                  <p>¿Necesita evaluar a un alumno?</p>
+                  <button className="botonClaro" onClick={() => navigate("/evaluaciones")}>
+                    Evaluar
+                  </button>
+                </div>
+              )}
+            </>
           ) : (
             <Dialog
               open={openDialog}
