@@ -13,13 +13,24 @@ export function AlumnosPage() {
   const navigate = useNavigate();
   const theme = createTheme();
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
-
   const keys = ["nombre", "apellido", "dni"];
   const [alumnos, setAlumnos] = useState([]);
-  const listaFiltrada =
-    searchTerm.length >= 7
-      ? alumnos.filter((alumno) => String(alumno.dni).includes(searchTerm))
-      : alumnos;
+  const [alumnosFiltrados, setAlumnosFiltrados] = useState([]);
+  const [filtrado, setFiltrado] = useState(false);
+  
+ 
+  const handleBusqueda = (e) => {
+    let valor = (e.target.value).toLowerCase();
+    setSearchTerm(valor);
+    if (valor === "") {
+      setAlumnosFiltrados([]);
+      setFiltrado(false);
+      return;
+    }
+    setAlumnosFiltrados(alumnos.filter((alumno) => String(alumno.nombre).toLowerCase().includes(valor) || String(alumno.apellido).toLowerCase().includes(valor) || String(alumno.dni).toLowerCase().includes(valor)));
+    setFiltrado(true);
+  }
+
 
   const fetchAlumnos = async () => {
     const data = await getAllAlumnos();
@@ -50,13 +61,13 @@ export function AlumnosPage() {
           }}
         >
           <Busqueda
-            placeholder="Buscar por DNI..."
-            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Buscar alumno..."
+            onChange={handleBusqueda}
             width={xs ? "100%" : "200px"}
           />
 
           <Lista
-            lista={listaFiltrada}
+            lista={filtrado ? alumnosFiltrados : alumnos}
             keys={keys}
             buttonOnClick={handleNavigate}
             paramOnClick="id"
