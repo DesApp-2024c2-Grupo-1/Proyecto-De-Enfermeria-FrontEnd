@@ -46,6 +46,11 @@ export function PerfilDocentePage() {
     setOpenDialog(false);
   };
 
+  const handleCerrarSesion = () => {
+    setDocenteContext(null);
+    navigate("/");
+  }
+
   const handleClick = async () => {
     if (!docenteContext?.id) return;
 
@@ -164,7 +169,7 @@ export function PerfilDocentePage() {
           <Button color="error" onClick={handleCloseDialog}>
             Cancelar
           </Button>
-          <Button color="success" onClick={() => navigate("/")} autoFocus>
+          <Button color="success" onClick={handleCerrarSesion} autoFocus>
             Continuar
           </Button>
         </DialogActions>
