@@ -146,7 +146,7 @@ export function RegistroEvaluacionesPage() {
                 <div>
                   <h2>No se encontraron resultados...</h2>
                   <p>¿Necesita evaluar a un alumno?</p>
-                  <button className="botonClaro" onClick={() => navigate("/evaluaciones")}>
+                  <button className="botonClaro" onClick={() => navigate(`/registrarEvaluacion/${id}`)}>
                     Evaluar
                   </button>
                 </div>
