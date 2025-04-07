@@ -35,6 +35,7 @@ export function RegistroEvaluacionesPage() {
   const fetchAlumnosPorId = async (id) => {
     const data = await findAllAlumnosPorEvaluacion(id);
     setAlumnos(data);
+    setAlumnosFiltrados(data);
   };
 
   useEffect(() => {
@@ -60,64 +61,6 @@ export function RegistroEvaluacionesPage() {
     setFiltrado(true);
   };
 
-  {
-    /*
-  
-  const handleNavigate = (alumnoId) => {
-    const alumno = listaFiltrada.find((alumno) => alumno.alumnoId === alumnoId);
-
-    navigate(`/evaluacionesPorAlumno/${id}/${alumno.alumnoId}`, {
-      state: {
-        evaluacionTitulo: evaluacionTitulo,
-        evaluacionId: id,
-        alumnoNombre: alumno.nombre,
-        alumnoApellido: alumno.apellido,
-        alumnoId: alumnoId,
-      },
-    });
-  };
-  */
-  }
-
-  const listaPrueba = [
-    {
-      nombre: "Juan",
-      apellido: "Pérez",
-      dni: 12345678,
-      evaluaciones: [
-        { id: 1, nombre: "Evaluación 1" },
-        { id: 2, nombre: "Evaluación 2" },
-      ],
-    },
-    {
-      nombre: "María",
-      apellido: "Gómez",
-      dni: 87654321,
-      evaluaciones: [
-        { id: 3, nombre: "Evaluación 3" },
-        { id: 4, nombre: "Evaluación 4" },
-      ],
-    },
-    {
-      nombre: "Pedro",
-      apellido: "López",
-      dni: 11223344,
-      evaluaciones: [
-        { id: 5, nombre: "Evaluación 5" },
-        { id: 6, nombre: "Evaluación 6" },
-      ],
-    },
-    {
-      nombre: "Ana",
-      apellido: "Martínez",
-      dni: 55667788,
-      evaluaciones: [
-        { id: 7, nombre: "Evaluación 7" },
-        { id: 8, nombre: "Evaluación 8" },
-      ],
-    },
-  ];
-
   return (
     <>
       <Stack sx={{ alignItems: "center" }}>
@@ -138,15 +81,23 @@ export function RegistroEvaluacionesPage() {
                     alumnosFiltrados.length > 0 ? alumnosFiltrados : alumnos
                   }
                   keys={["nombre", "apellido", "dni"]}
-                  contenidoDropdown={listaPrueba.map(
-                    (item) => item.evaluaciones
+                  contenidoDropdown={alumnosFiltrados.map(
+                    (item) => item.evaluacionesRealizadas
                   )}
+                  keysDropdown={["fecha", "nota"]}
+                  buttonOnClick={(evaluacionId) =>
+                    navigate(`/verEvaluacion/${evaluacionId}`)
+                  }
+                  paramOnClick={"id"}
                 />
               ) : (
                 <div>
                   <h2>No se encontraron resultados...</h2>
                   <p>¿Necesita evaluar a un alumno?</p>
-                  <button className="botonClaro" onClick={() => navigate(`/registrarEvaluacion/${id}`)}>
+                  <button
+                    className="botonClaro"
+                    onClick={() => navigate(`/registrarEvaluacion/${id}`)}
+                  >
                     Evaluar
                   </button>
                 </div>

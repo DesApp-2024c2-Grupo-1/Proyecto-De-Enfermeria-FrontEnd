@@ -12,11 +12,10 @@ function Lista({
   paramOnClick,
   dropdown,
   contenidoDropdown,
+  keysDropdown,
 }) {
   const theme = createTheme();
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
-
-  console.log(contenidoDropdown);
 
   return (
     <>
@@ -30,12 +29,16 @@ function Lista({
               textos={textos}
               contenidoDropdown={
                 Array.isArray(contenidoDropdown) && contenidoDropdown[index] ? (
-                  <Lista lista={contenidoDropdown[index]} keys={["nombre"]} />
+                  <Lista
+                    lista={contenidoDropdown[index]}
+                    keys={keysDropdown}
+                    buttonOnClick={buttonOnClick}
+                    paramOnClick={paramOnClick}
+                  />
                 ) : (
                   <p>
-                    Ocurrió un error al intentar mostrar las evaluaciones de
-                    el o la estudiante. Por favor, contactá a un
-                    administrador.
+                    Ocurrió un error al intentar mostrar las evaluaciones de el
+                    o la estudiante. Por favor, contactá a un administrador.
                   </p>
                 ) // Lo pongo así porque si aparece este ListItem quiere decir que el o la estudiante tomó evaluaciones, pero por alguna razón no le llega el contenido al dropdown.
               }
