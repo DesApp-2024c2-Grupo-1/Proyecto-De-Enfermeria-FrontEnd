@@ -32,9 +32,9 @@ function ListItemConDropdown({ textos, buttonOnClick, contenidoDropdown }) {
           }}
         >
           <Stack direction={"row"} spacing={{ xs: 1, sm: 4 }}>
-            {textos.map((texto, index) => (
+            {textos.map(({ key, value }, index) => (
               <div key={index}>
-                <p>{texto}</p>
+                <p>{xs && key === "nombre" ? `${value.charAt(0)}.` : value}</p>
               </div>
             ))}
           </Stack>
@@ -88,7 +88,7 @@ function ListItemConDropdown({ textos, buttonOnClick, contenidoDropdown }) {
           >
             <p>Evaluaciones:</p>
             {contenidoDropdown}
-            <Button sx={{color:"#234637"}} onClick={handleOpenDropdown}>Cerrar</Button>
+            <Button sx={{ color: "#234637" }} onClick={handleOpenDropdown}>Cerrar</Button>
           </Box>
         </Collapse>
       </Stack>

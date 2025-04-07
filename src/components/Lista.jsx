@@ -22,7 +22,7 @@ function Lista({
       <div className={className}>
         {titulo && <h1>{titulo}</h1>}
         {lista.map((item, index) => {
-          const textos = keys.map((key) => item[key]);
+          const textos = keys.map((key) => ({ key, value: item[key] }));
           return dropdown ? (
             <ListItemConDropdown
               key={index}
