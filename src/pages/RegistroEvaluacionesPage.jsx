@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { createTheme } from "@mui/material/styles";
 import Lista from "../components/Lista";
+
 import {
   Button,
   Stack,
@@ -12,7 +13,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-  useMediaQuery
+  useMediaQuery,
 } from "@mui/material";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
 
@@ -20,6 +21,8 @@ export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [alumnos, setAlumnos] = useState([]);
+  const [alumnosFiltrados, setAlumnosFiltrados] = useState([]);
+  const [filtrado, setFiltrado] = useState(false);
   const [openDialog, setOpenDialog] = useState(true);
   const location = useLocation();
   const theme = createTheme();
@@ -27,36 +30,35 @@ export function RegistroEvaluacionesPage() {
   const evaluacionTitulo = location.state
     ? location.state.evaluacionTitulo
     : "Título no disponible";
-
-  const keys = ["nombre", "apellido", "dni"];
   const { id } = useParams();
-
-  const listaFiltrada =
-    searchTerm.length >= 7
-      ? alumnos.filter((alumno) => String(alumno.dni).includes(searchTerm))
-      : alumnos;
 
   const fetchAlumnosPorId = async (id) => {
     const data = await findAllAlumnosPorEvaluacion(id);
     setAlumnos(data);
+    setAlumnosFiltrados(data);
   };
 
   useEffect(() => {
     fetchAlumnosPorId(id);
   }, [id]);
 
-  const handleNavigate = (alumnoId) => {
-    const alumno = listaFiltrada.find((alumno) => alumno.alumnoId === alumnoId);
-
-    navigate(`/evaluacionesPorAlumno/${id}/${alumno.alumnoId}`, {
-      state: {
-        evaluacionTitulo: evaluacionTitulo,
-        evaluacionId: id,
-        alumnoNombre: alumno.nombre,
-        alumnoApellido: alumno.apellido,
-        alumnoId: alumnoId,
-      },
-    });
+  const handleBusqueda = (e) => {
+    let valor = e.target.value.toLowerCase();
+    setSearchTerm(valor);
+    if (valor === "") {
+      setAlumnosFiltrados(alumnos);
+      setFiltrado(false);
+      return;
+    }
+    setAlumnosFiltrados(
+      alumnos.filter(
+        (alumno) =>
+          String(alumno.nombre).toLowerCase().includes(valor) ||
+          String(alumno.apellido).toLowerCase().includes(valor) ||
+          String(alumno.dni).toLowerCase().includes(valor)
+      )
+    );
+    setFiltrado(true);
   };
 
   return (
@@ -66,17 +68,41 @@ export function RegistroEvaluacionesPage() {
         <Stack sx={{ width: "70%" }}>
           <Busqueda
             placeholder="Buscar por DNI..."
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleBusqueda}
             width={xs ? "100%" : "200px"}
           />
 
-          {listaFiltrada.length > 0 ? (
-            <Lista
-              lista={listaFiltrada}
-              keys={keys}
-              buttonOnClick={handleNavigate}
-              paramOnClick={"alumnoId"}
-            />
+          {alumnos.length > 0 ? (
+            <>
+              {!(filtrado && alumnosFiltrados.length === 0) ? (
+                <Lista
+                  dropdown={true}
+                  lista={
+                    alumnosFiltrados.length > 0 ? alumnosFiltrados : alumnos
+                  }
+                  keys={["nombre", "apellido", "dni"]}
+                  contenidoDropdown={alumnosFiltrados.map(
+                    (item) => item.evaluacionesRealizadas
+                  )}
+                  keysDropdown={["fecha", "nota"]}
+                  buttonOnClick={(evaluacionId) =>
+                    navigate(`/verEvaluacion/${evaluacionId}`)
+                  }
+                  paramOnClick={"id"}
+                />
+              ) : (
+                <div>
+                  <h2>No se encontraron resultados...</h2>
+                  <p>¿Necesita evaluar a un alumno?</p>
+                  <button
+                    className="botonClaro"
+                    onClick={() => navigate(`/registrarEvaluacion/${id}`)}
+                  >
+                    Evaluar
+                  </button>
+                </div>
+              )}
+            </>
           ) : (
             <Dialog
               open={openDialog}
@@ -91,7 +117,10 @@ export function RegistroEvaluacionesPage() {
               </DialogTitle>
 
               <DialogActions>
-                <Button sx={{color: "#1A3D2D"}} onClick={() => navigate("/home")}>
+                <Button
+                  sx={{ color: "#1A3D2D" }}
+                  onClick={() => navigate("/home")}
+                >
                   Volver atrás
                 </Button>
               </DialogActions>

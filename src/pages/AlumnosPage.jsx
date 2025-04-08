@@ -7,7 +7,6 @@ import { createTheme } from "@mui/material/styles";
 import { Stack, useMediaQuery } from "@mui/material";
 import IrArribaBoton from "../components/irArribaBoton";
 
-
 export function AlumnosPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
@@ -17,24 +16,35 @@ export function AlumnosPage() {
   const [alumnos, setAlumnos] = useState([]);
   const [alumnosFiltrados, setAlumnosFiltrados] = useState([]);
   const [filtrado, setFiltrado] = useState(false);
-  
- 
+
   const handleBusqueda = (e) => {
-    let valor = (e.target.value).toLowerCase();
+    let valor = e.target.value.toLowerCase();
     setSearchTerm(valor);
     if (valor === "") {
       setAlumnosFiltrados([]);
       setFiltrado(false);
       return;
     }
-    setAlumnosFiltrados(alumnos.filter((alumno) => String(alumno.nombre).toLowerCase().includes(valor) || String(alumno.apellido).toLowerCase().includes(valor) || String(alumno.dni).toLowerCase().includes(valor)));
+    setAlumnosFiltrados(
+      alumnos.filter(
+        (alumno) =>
+          String(alumno.nombre).toLowerCase().includes(valor) ||
+          String(alumno.apellido).toLowerCase().includes(valor) ||
+          String(alumno.dni).toLowerCase().includes(valor)
+      )
+    );
     setFiltrado(true);
-  }
+  };
+
+  const handleRegisterAlumno = async () => {
+    navigate("/registerAlumnos");
+  };
 
 
   const fetchAlumnos = async () => {
     const data = await getAllAlumnos();
     setAlumnos(data);
+    setAlumnosFiltrados(data);
   };
 
   useEffect(() => {
@@ -52,7 +62,7 @@ export function AlumnosPage() {
 
   return (
     <>
-    <IrArribaBoton/>
+      <IrArribaBoton />
       <Stack sx={{ alignItems: "center" }}>
         <h1>Alumnos</h1>
         <Stack
@@ -65,13 +75,22 @@ export function AlumnosPage() {
             onChange={handleBusqueda}
             width={xs ? "100%" : "200px"}
           />
-
-          <Lista
-            lista={filtrado ? alumnosFiltrados : alumnos}
-            keys={keys}
-            buttonOnClick={handleNavigate}
-            paramOnClick="id"
-          />
+          {!(filtrado && alumnosFiltrados.length === 0) ? (
+            <Lista
+              lista={alumnosFiltrados.length > 0 ? alumnosFiltrados : alumnos}
+              keys={keys}
+              buttonOnClick={handleNavigate}
+              paramOnClick="id"
+            />
+          ) : (
+            <div>
+              <h2>No se encontraron resultados...</h2>
+              <p>¿Necesita registrar un nuevo alumno?</p>
+              <button className="botonClaro" onClick={handleRegisterAlumno}>
+                Registrar
+              </button>
+            </div>
+          )}
         </Stack>
       </Stack>
     </>

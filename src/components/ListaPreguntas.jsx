@@ -1,20 +1,30 @@
 import { useState, useEffect } from "react";
 import { Pregunta } from "../components/Pregunta";
-import { Stack } from "@mui/material";
+import {
+  Stack, Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button
+} from "@mui/material";
 import { Lugar } from "../components/Lugar";
 import { Observacion } from "../components/Observacion";
 import { registrarEvaluacionRealizada } from "../services/EvaluacionRealizadaService";
 import { useDocente } from "../context/DocenteContext";
 import { useEvaluacion } from "../context/EvaluacionContext";
+import { useNavigate } from "react-router-dom";
 
 export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacionPuntajeValue, observacionValue }) {
   const { docenteContext } = useDocente();
   const { evaluacionContext } = useEvaluacion();
   const [error, setError] = useState();
   const [observacion, setObservacion] = useState("");
+  const [openDialog, setOpenDialog] = useState(false);
   const [lugarSeleccionado, setLugarSeleccionado] = useState("");
   const [modificacionPuntaje, setModificacionPuntaje] = useState();
   const [respuestas, setRespuestas] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setRespuestas(preguntas.map((pregunta) => pregunta.respuesta ?? null));
@@ -44,6 +54,14 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacio
     if (!modificacionPuntajeValue) {
       setModificacionPuntaje(nuevoPuntaje);
     }
+  };
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
   };
 
   const respuestasFormateadas = respuestas.map((respuesta) => ({ respuesta }));
@@ -77,6 +95,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacio
       console.log(error.response?.data);
       console.log(error.response?.data?.message);
     }
+    navigate("/home");
   };
 
   return (
@@ -111,7 +130,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacio
             <button
               className="botonVerde"
               style={{ marginTop: "3rem" }}
-              onClick={handleOnClick}
+              onClick={handleOpenDialog}
             >
               {" "}
               Registrar{" "}
@@ -121,6 +140,27 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacio
           <div></div>
         )}
       </Stack>
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+
+          "& .MuiDialog-paper": { padding: "2rem" },
+        }}
+      >
+        <DialogTitle id="alert-dialog-title">{"¿Confirmar registro de evaluación?"}</DialogTitle>
+
+        <DialogActions>
+        <Button color="success" onClick={handleOnClick} autoFocus>
+            Sí
+          </Button>
+          <Button color="error" onClick={handleCloseDialog}>
+            No
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
