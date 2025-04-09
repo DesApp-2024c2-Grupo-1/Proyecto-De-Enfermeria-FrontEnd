@@ -102,16 +102,18 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacio
     <div>
       <Stack>
         {preguntas.map((pregunta, index) => (
-          <Pregunta
-            key={index}
-            pregunta={pregunta.pregunta}
-            puntaje={pregunta.puntaje}
-            respuesta={respuestas[index]}
-            disabled={registrado || pregunta.respuesta !== undefined}
-            onChange={(nuevaRespuesta) =>
-              handleRespuestaChange(index, nuevaRespuesta)
-            }
-          />
+          <div className="evitar-corte" key={index}>
+            <Pregunta
+              key={index}
+              pregunta={pregunta.pregunta}
+              puntaje={pregunta.puntaje}
+              respuesta={respuestas[index]}
+              disabled={registrado || pregunta.respuesta !== undefined}
+              onChange={(nuevaRespuesta) =>
+                handleRespuestaChange(index, nuevaRespuesta)
+              }
+            />
+          </div>
         ))}
         <Lugar
           disabled={registrado}
@@ -153,7 +155,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacio
         <DialogTitle id="alert-dialog-title">{"¿Confirmar registro de evaluación?"}</DialogTitle>
 
         <DialogActions>
-        <Button color="success" onClick={handleOnClick} autoFocus>
+          <Button color="success" onClick={handleOnClick} autoFocus>
             Sí
           </Button>
           <Button color="error" onClick={handleCloseDialog}>

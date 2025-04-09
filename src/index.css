@@ -110,3 +110,10 @@ h1 {
   width: 190px;
   margin-top: 10px;
 }
+
+/* PDF */
+
+.evitar-corte {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}

@@ -2,7 +2,30 @@ import { useState, useEffect } from "react";
 import { Evaluacion } from "../components/Evaluacion";
 import { useParams } from "react-router-dom";
 import { getEvaluacionById } from "../services/EvaluacionRealizadaService";
-import { Snackbar, Alert } from "@mui/material";
+import { Snackbar, Alert, Button } from "@mui/material";
+import html2pdf from 'html2pdf.js';
+
+
+const exportarEvaluacionComoPDF = () => {
+  const element = document.getElementById('evaluacion-container');
+
+  const opt = {
+    margin:       10,
+    filename:     'Evaluación.pdf',
+    image:        { type: 'jpeg', quality: 1 },
+    html2canvas:  {
+      scale: 2,
+      useCORS: true,
+      windowWidth: element.scrollWidth,
+      windowHeight: element.scrollHeight,
+    },
+    jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(element).save();
+};
+
+
 
 export function VerEvaluacionPage() {
   const { id } = useParams();
@@ -26,16 +49,27 @@ export function VerEvaluacionPage() {
 
   return (
     <>
-      <Evaluacion
-        lugar={evaluacionRealizada.lugarPractica}
-        preguntas={preguntas}
-        disabled={true}
-        alumnoDisabled={true}
-        alumnoPlaceholder={`${evaluacionRealizada.alumno?.nombre} ${evaluacionRealizada.alumno?.apellido}`}
-        modificacionPuntaje={evaluacionRealizada.modificacionPuntaje}
-        observacion={evaluacionRealizada.observacion}
-      />
-
+      <div id="evaluacion-container" style={{ paddingBottom: "2rem" }}>
+        <Evaluacion
+          lugar={evaluacionRealizada.lugarPractica}
+          preguntas={preguntas}
+          disabled={true}
+          alumnoDisabled={true}
+          alumnoPlaceholder={`${evaluacionRealizada.alumno?.nombre} ${evaluacionRealizada.alumno?.apellido}`}
+          modificacionPuntaje={evaluacionRealizada.modificacionPuntaje}
+          observacion={evaluacionRealizada.observacion}
+        />
+      </div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <button
+          className="botonVerde"
+          style={{ marginTop: "3rem" }}
+          onClick={exportarEvaluacionComoPDF}
+        >
+          {" "}
+          Descargar{" "}
+        </button>
+      </div>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}
