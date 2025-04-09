@@ -115,11 +115,14 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacio
             />
           </div>
         ))}
+        <div className="evitar-corte">
         <Lugar
           disabled={registrado}
           selected={lugar ? lugar : lugarSeleccionado}
           onChange={handleLugarChange}
         />
+        </div>
+        <div className="evitar-corte">
         <Observacion
           disabled={registrado}
           onObservacionChange={handleObservacionChange}
@@ -127,6 +130,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacio
           modificacionPuntajeValue={modificacionPuntajeValue ? modificacionPuntajeValue : modificacionPuntaje}
           observacionValue={observacionValue ? observacionValue : observacion}
         />
+        </div>
         {!registrado ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
             <button

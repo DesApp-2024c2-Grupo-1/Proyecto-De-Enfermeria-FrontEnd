@@ -10,13 +10,13 @@ const exportarEvaluacionComoPDF = () => {
   const element = document.getElementById('evaluacion-container');
 
   const opt = {
-    margin:       10,
+    margin:       [10,-25, 10, -25],
     filename:     'Evaluación.pdf',
     image:        { type: 'jpeg', quality: 1 },
     html2canvas:  {
       scale: 2,
       useCORS: true,
-      windowWidth: element.scrollWidth,
+      windowWidth: element.scrollWidth * 2,
       windowHeight: element.scrollHeight,
     },
     jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -24,7 +24,6 @@ const exportarEvaluacionComoPDF = () => {
 
   html2pdf().set(opt).from(element).save();
 };
-
 
 
 export function VerEvaluacionPage() {
