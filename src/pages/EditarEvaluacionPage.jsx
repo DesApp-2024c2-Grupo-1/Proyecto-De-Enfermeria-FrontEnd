@@ -1,0 +1,297 @@
+import { useEffect, useState } from "react";
+import {
+  Button,
+  Stack,
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  Snackbar,
+  Alert,
+  useMediaQuery,
+} from "@mui/material";
+import {
+  postEvaluacionYPreguntas,
+  getEvaluacionById,
+} from "../services/EvaluacionService";
+import { useDocente } from "../context/DocenteContext";
+import { useNavigate } from "react-router-dom";
+import { Input } from "../components/Input";
+import { createTheme } from "@mui/material/styles";
+import { useParams } from "react-router";
+
+export function EditarEvaluacionPage() {
+  const [preguntas, setPreguntas] = useState([]);
+  const [nuevoCriterio, setNuevoCriterio] = useState("");
+  const [puntaje, setNuevoPuntaje] = useState("");
+  const [errorCriterio, setErrorCriterio] = useState("");
+  const [errorPuntaje, setErrorPuntaje] = useState("");
+  const [titulo, setTitulo] = useState("");
+  const navigate = useNavigate();
+  const { docenteContext } = useDocente();
+  const [error, setError] = useState([]);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const theme = createTheme();
+  const xs = useMediaQuery(theme.breakpoints.down("sm"));
+  const { id } = useParams();
+
+  const evaluacionData = { titulo, docente: docenteContext.id, preguntas };
+
+  const agregarCriterio = () => {
+    if (!nuevoCriterio.trim()) {
+      setErrorCriterio("La pregunta no puede estar vacía.");
+      return;
+    } else if (nuevoCriterio.length < 5) {
+      setErrorCriterio("La pregunta debe tener al menos 5 caracteres.");
+      return;
+    } else if (nuevoCriterio.length > 100) {
+      setErrorCriterio("La pregunta no puede tener más de 100 caracteres.");
+      return;
+    } else {
+      setErrorCriterio("");
+    }
+
+    if (!puntaje.trim()) {
+      setErrorPuntaje("El puntaje no puede estar vacío.");
+      return;
+    } else if (isNaN(puntaje) || Number(puntaje) <= 0) {
+      setErrorPuntaje("El puntaje debe ser un número mayor a 0.");
+      return;
+    } else {
+      setErrorPuntaje("");
+    }
+
+    const existePregunta = preguntas.some(
+      (criterio) =>
+        criterio.pregunta.trim().toLowerCase() ===
+        nuevoCriterio.trim().toLowerCase()
+    );
+    if (existePregunta) {
+      setErrorCriterio("La pregunta ya está en la lista.");
+      return;
+    }
+
+    setPreguntas([
+      ...preguntas,
+      { pregunta: nuevoCriterio.trim(), puntaje: Number(puntaje) },
+    ]);
+    setNuevoCriterio("");
+    setNuevoPuntaje("");
+  };
+  const eliminarCriterio = (indice) => {
+    setPreguntas(preguntas.filter((_, i) => i !== indice));
+  };
+
+  const manejarEdicion = async () => {
+    console.log(preguntas);
+  };
+
+  useEffect(() => {
+    const fetchEvaluacion = async () => {
+      try {
+        const evaluacion = await getEvaluacionById(id);
+        setTitulo(evaluacion.titulo);
+        setPreguntas(evaluacion.preguntas);
+      } catch (error) {
+        console.error("Error fetching evaluacion:", error);
+      }
+    };
+    fetchEvaluacion();
+  }, []);
+
+  return (
+    <Box>
+      <h2 style={{ textAlign: "center", marginTop: "7vh" }}>
+        Editar Evaluación
+      </h2>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 4,
+        }}
+      >
+        <Paper
+          elevation={{ xs: 0, md: 3 }}
+          sx={{
+            width: "100%",
+            maxWidth: 800,
+            padding: 3,
+            borderRadius: 7,
+            backgroundColor: xs ? "white" : "#DDF0E7",
+          }}
+        >
+          <Input
+            placeholder="Título de evaluación"
+            texto="titulo"
+            width="100%"
+            helperText=""
+            helperTextColor="gray"
+            value={titulo}
+            onChange={(e) => setTitulo(e.target.value)}
+            margin="normal"
+          />
+
+          <p style={{ marginBottom: 1, fontSize: "17px", fontWeight: "bold" }}>
+            Criterio de Evaluación
+          </p>
+          <List sx={{ marginBottom: 3 }}>
+            {preguntas.map((criterio, indice) => (
+              <ListItem
+                key={indice}
+                secondaryAction={
+                  <Stack direction="row" spacing={2}>
+                    <Button variant="outlined" color="success">
+                      <i className="fa-solid fa-edit"></i>
+                    </Button>
+                    <Button variant="outlined" color="error" onClick={() => eliminarCriterio(indice)}>
+                      <i className="fa-solid fa-trash"></i>
+                    </Button>
+                  </Stack>
+                }
+              >
+                <ListItemText
+                  primary={criterio.pregunta}
+                  secondary={`Puntaje: ${criterio.puntaje}`}
+                  sx={{
+                    maxWidth: "600px",
+                  }}
+                />
+              </ListItem>
+            ))}
+          </List>
+
+          {xs ? (
+            /* VERSIÓN MÓVIL */
+            <Stack
+              direction="column"
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: 2,
+                marginTop: 2,
+              }}
+            >
+              <Input
+                placeholder="Nueva pregunta"
+                texto="nuevaPregunta"
+                width="100%"
+                helperText={errorCriterio || " "}
+                helperTextColor="red"
+                value={nuevoCriterio}
+                onChange={(e) => setNuevoCriterio(e.target.value)}
+              />
+              <Stack direction="row" spacing={2} justifyContent="space-between">
+                <Input
+                  width="200px"
+                  placeholder="Puntaje"
+                  texto="puntaje"
+                  helperText={errorPuntaje || " "}
+                  helperTextColor="red"
+                  helperTextWidth="200px"
+                  value={puntaje}
+                  onChange={(e) => setNuevoPuntaje(e.target.value)}
+                />
+                <Box sx={{ alignSelf: "flex-center" }}>
+                  <button
+                    onClick={agregarCriterio}
+                    className="botonClaro"
+                    style={{ marginTop: "28px", width: "100%" }}
+                  >
+                    Añadir
+                  </button>
+                </Box>
+              </Stack>
+            </Stack>
+          ) : (
+            /* VERSIÓN DESKTOP */
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                gap: 2,
+                marginTop: 2,
+              }}
+            >
+              <Stack direction="row" width="100%" spacing={2}>
+                <Input
+                  sx={{ flexGrow: 1 }}
+                  placeholder="Nueva pregunta"
+                  texto="nuevaPregunta"
+                  helperText={errorCriterio || " "}
+                  helperTextColor="red"
+                  value={nuevoCriterio}
+                  onChange={(e) => setNuevoCriterio(e.target.value)}
+                />
+                <Input
+                  width="100px"
+                  placeholder="Puntaje"
+                  texto="puntaje"
+                  helperText={errorPuntaje || " "}
+                  helperTextColor="red"
+                  helperTextWidth="200px"
+                  value={puntaje}
+                  onChange={(e) => setNuevoPuntaje(e.target.value)}
+                />
+              </Stack>
+              <Box sx={{ alignSelf: "flex-start" }}>
+                <button
+                  onClick={agregarCriterio}
+                  className="botonClaro"
+                  style={{ marginTop: "28px" }}
+                >
+                  Añadir
+                </button>
+              </Box>
+            </Box>
+          )}
+        </Paper>
+        <button
+          onClick={manejarEdicion}
+          className="botonClaro"
+          style={{ marginTop: "20px" }}
+        >
+          Guardar cambios
+        </button>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyItems: "center",
+          backgroundColor: "red",
+        }}
+      >
+        {/* Snackbar para mostrar errores */}
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={3000}
+          onClose={() => setOpenSnackbar(false)}
+          sx={{
+            width: "100%",
+          }}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
+        >
+          <Alert
+            onClose={() => setOpenSnackbar(false)}
+            severity="error"
+            sx={{ width: "50%" }}
+          >
+            <ul>
+              {error.map((err, index) => (
+                <li key={index}>{err}</li>
+              ))}
+            </ul>
+          </Alert>
+        </Snackbar>
+      </Box>
+    </Box>
+  );
+}

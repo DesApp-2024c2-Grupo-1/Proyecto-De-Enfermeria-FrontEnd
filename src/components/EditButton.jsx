@@ -6,11 +6,13 @@ import {
   ListItemText,
 } from "@mui/material";
 
-import { useState } from "react";
+import { use, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function EditButton() {
+function EditButton( { id }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -51,7 +53,7 @@ function EditButton() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem>
+        <MenuItem onClick={() => navigate(`/editarEvaluacion/${id}`)}>
           <ListItemIcon>
             <i className="fa-solid fa-edit"></i>
           </ListItemIcon>

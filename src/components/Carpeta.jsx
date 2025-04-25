@@ -100,7 +100,7 @@ function Carpeta({ titulo, id }) {
             >
               Ver
             </button>
-            <EditButton />
+            <EditButton id={id} />
           </Stack>
         </Paper>
 
