@@ -24,7 +24,7 @@ function IrArribaBoton() {
           backgroundColor: "#31614b",
           color: "white",
           "&:hover": {
-            backgroundColor: "#3e7d5d", 
+            backgroundColor: "#3e7d5d",
           },
         }}
       >
