@@ -57,7 +57,7 @@ export function Input({
               <i
                 className={`fa fa-${icon}`}
                 style={{
-                  marginRight: "8px"
+                  marginRight: "8px",
                 }}
               ></i>
             </InputAdornment>

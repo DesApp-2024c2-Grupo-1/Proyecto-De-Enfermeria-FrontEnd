@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Evaluacion } from "../components/Evaluacion";
 import { useParams } from "react-router-dom";
 import { getEvaluacionById } from "../services/EvaluacionRealizadaService";
-import { Snackbar, Alert } from "@mui/material";
+import { Snackbar, Alert, Button } from "@mui/material";
 
 export function VerEvaluacionPage() {
   const { id } = useParams();
@@ -24,18 +24,48 @@ export function VerEvaluacionPage() {
     fetchEvaluacionById(id);
   }, [id]);
 
+  const descargarEvaluacionComoPDF = () => {
+    const element = document.getElementById("evaluacion-div");
+    element.classList.add("printable");
+
+    html2pdf()
+      .from(element)
+      .set({
+        html2canvas: {
+          width: 1080,
+          scale: 2,
+          scrollX: 0,
+          scrollY: 0,
+        },
+      })
+      .save("Evaluacion.pdf")
+      .then(() => {
+        element.classList.remove("printable");
+      });
+  };
+
   return (
     <>
-      <Evaluacion
-        lugar={evaluacionRealizada.lugarPractica}
-        preguntas={preguntas}
-        disabled={true}
-        alumnoDisabled={true}
-        alumnoPlaceholder={`${evaluacionRealizada.alumno?.nombre} ${evaluacionRealizada.alumno?.apellido}`}
-        modificacionPuntaje={evaluacionRealizada.modificacionPuntaje}
-        observacion={evaluacionRealizada.observacion}
-      />
-
+      <div id="evaluacion-div">
+        <Evaluacion
+          lugar={evaluacionRealizada.lugarPractica}
+          preguntas={preguntas}
+          disabled={true}
+          alumnoDisabled={true}
+          alumnoPlaceholder={`${evaluacionRealizada.alumno?.nombre} ${evaluacionRealizada.alumno?.apellido}`}
+          modificacionPuntaje={evaluacionRealizada.modificacionPuntaje}
+          observacion={evaluacionRealizada.observacion}
+        />
+      </div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <button
+          className="botonVerde"
+          style={{ marginTop: "1rem" }}
+          onClick={descargarEvaluacionComoPDF}
+        >
+          Descargar
+        </button>
+      </div>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}
