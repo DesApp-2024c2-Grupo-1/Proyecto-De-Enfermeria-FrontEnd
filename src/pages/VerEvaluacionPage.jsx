@@ -2,13 +2,16 @@ import { useState, useEffect } from "react";
 import { Evaluacion } from "../components/Evaluacion";
 import { useParams } from "react-router-dom";
 import { getEvaluacionById } from "../services/EvaluacionRealizadaService";
-import { Snackbar, Alert, Button } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { Snackbar, Alert, useMediaQuery, Button, Box } from "@mui/material";
 
 export function VerEvaluacionPage() {
   const { id } = useParams();
   const [evaluacionRealizada, setEvaluacionRealizada] = useState({});
   const [preguntas, setPreguntas] = useState([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const theme = createTheme();
+  const xs = useMediaQuery(theme.breakpoints.down("sm"));
 
   const fetchEvaluacionById = async (id) => {
     const data = await getEvaluacionById(id);
@@ -57,15 +60,16 @@ export function VerEvaluacionPage() {
           observacion={evaluacionRealizada.observacion}
         />
       </div>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <button
-          className="botonVerde"
-          style={{ marginTop: "1rem" }}
-          onClick={descargarEvaluacionComoPDF}
-        >
+      <Box
+        sx={{
+          display: { xs: "none", md: "flex" },
+          justifyContent: "center",
+        }}
+      >
+        <button className="botonVerde" style={{marginTop: "-30px"}} onClick={descargarEvaluacionComoPDF}>
           Descargar
         </button>
-      </div>
+      </Box>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}

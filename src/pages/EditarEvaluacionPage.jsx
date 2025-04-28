@@ -10,6 +10,11 @@ import {
   Snackbar,
   Alert,
   useMediaQuery,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from "@mui/material";
 import {
   postEvaluacionYPreguntas,
@@ -31,6 +36,7 @@ export function EditarEvaluacionPage() {
   const navigate = useNavigate();
   const { docenteContext } = useDocente();
   const [error, setError] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const theme = createTheme();
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
@@ -86,6 +92,10 @@ export function EditarEvaluacionPage() {
   const manejarEdicion = async () => {
     console.log(preguntas);
   };
+
+  const handleEditarPregunta = () => {
+
+  }
 
   useEffect(() => {
     const fetchEvaluacion = async () => {
@@ -144,7 +154,7 @@ export function EditarEvaluacionPage() {
                 key={indice}
                 secondaryAction={
                   <Stack direction="row" spacing={2}>
-                    <Button variant="outlined" color="success">
+                    <Button variant="outlined" color="success" onClick={() => setOpenDialog(true)}>
                       <i className="fa-solid fa-edit"></i>
                     </Button>
                     <Button variant="outlined" color="error" onClick={() => eliminarCriterio(indice)}>
@@ -258,14 +268,29 @@ export function EditarEvaluacionPage() {
           Guardar cambios
         </button>
       </Box>
-      <Box
+
+      <Dialog
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
         sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyItems: "center",
-          backgroundColor: "red",
+
+          "& .MuiDialog-paper": { padding: "2rem" },
         }}
       >
+        <DialogTitle id="alert-dialog-title">{"¿Cerrar sesión?"}</DialogTitle>
+
+        <DialogActions>
+          <Button color="error" onClick={() => setOpenDialog(false)}>
+            Cancelar
+          </Button>
+          <Button color="success" onClick={handleEditarPregunta} autoFocus>
+            Continuar
+          </Button>
+        </DialogActions>
+      </Dialog>
+
         {/* Snackbar para mostrar errores */}
         <Snackbar
           open={openSnackbar}
@@ -292,6 +317,6 @@ export function EditarEvaluacionPage() {
           </Alert>
         </Snackbar>
       </Box>
-    </Box>
+
   );
 }
