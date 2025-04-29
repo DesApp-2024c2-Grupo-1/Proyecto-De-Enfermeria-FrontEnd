@@ -15,6 +15,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  TextField,
 } from "@mui/material";
 import {
   postEvaluacionYPreguntas,
@@ -28,6 +29,7 @@ import { useParams } from "react-router";
 
 export function EditarEvaluacionPage() {
   const [preguntas, setPreguntas] = useState([]);
+  const [preguntaAEditar, setPreguntaAEditar] = useState("");
   const [nuevoCriterio, setNuevoCriterio] = useState("");
   const [puntaje, setNuevoPuntaje] = useState("");
   const [errorCriterio, setErrorCriterio] = useState("");
@@ -93,9 +95,13 @@ export function EditarEvaluacionPage() {
     console.log(preguntas);
   };
 
-  const handleEditarPregunta = () => {
+  const handleEditarPregunta = (indice) => {
+    setOpenDialog(true);
+    console.log(indice);
+    setPreguntaAEditar(preguntas[indice]);
+  };
 
-  }
+  const handleGuardarPregunta = () => {};
 
   useEffect(() => {
     const fetchEvaluacion = async () => {
@@ -125,7 +131,7 @@ export function EditarEvaluacionPage() {
         }}
       >
         <Paper
-          elevation={{ xs: 0, md: 3 }}
+          elevation={3}
           sx={{
             width: "100%",
             maxWidth: 800,
@@ -154,10 +160,18 @@ export function EditarEvaluacionPage() {
                 key={indice}
                 secondaryAction={
                   <Stack direction="row" spacing={2}>
-                    <Button variant="outlined" color="success" onClick={() => setOpenDialog(true)}>
+                    <Button
+                      variant="outlined"
+                      color="success"
+                      onClick={() => handleEditarPregunta(indice)}
+                    >
                       <i className="fa-solid fa-edit"></i>
                     </Button>
-                    <Button variant="outlined" color="error" onClick={() => eliminarCriterio(indice)}>
+                    <Button
+                      variant="outlined"
+                      color="error"
+                      onClick={() => eliminarCriterio(indice)}
+                    >
                       <i className="fa-solid fa-trash"></i>
                     </Button>
                   </Stack>
@@ -275,48 +289,85 @@ export function EditarEvaluacionPage() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
-
-          "& .MuiDialog-paper": { padding: "2rem" },
+          "& .MuiDialog-paper": { padding: "5rem" },
         }}
       >
-        <DialogTitle id="alert-dialog-title">{"¿Cerrar sesión?"}</DialogTitle>
+        <DialogTitle
+          id="alert-dialog-title"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {"Editar criterio"}
+        </DialogTitle>
+        <DialogContent>
+          <Stack
+            direction="column"
+            spacing={2}
+            sx={{
+              display: "flex",
+              gap: 2,
+              marginTop: 2,
+            }}
+          >
+            <TextField
+              sx={{ width: "400px" }}
+              id="outlined-multiline-static"
+              label="Criterio"
+              multiline
+              rows={5}
+              defaultValue={preguntaAEditar.pregunta}
+            />
+            <TextField
+              sx={{ width: "100px", marginLeft: "20px" }}
+              id="outlined-multiline-static"
+              label="Puntaje"
+              defaultValue={preguntaAEditar.puntaje}
+              type="number"
+            />
+          </Stack>
+        </DialogContent>
 
-        <DialogActions>
+        <DialogActions
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          padding: "0 2rem 2rem 2rem"}}>
           <Button color="error" onClick={() => setOpenDialog(false)}>
             Cancelar
           </Button>
-          <Button color="success" onClick={handleEditarPregunta} autoFocus>
-            Continuar
+          <Button color="success" onClick={handleGuardarPregunta} autoFocus>
+            Guardar cambios
           </Button>
         </DialogActions>
       </Dialog>
 
-        {/* Snackbar para mostrar errores */}
-        <Snackbar
-          open={openSnackbar}
-          autoHideDuration={3000}
+      {/* Snackbar para mostrar errores */}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        sx={{
+          width: "100%",
+        }}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+      >
+        <Alert
           onClose={() => setOpenSnackbar(false)}
-          sx={{
-            width: "100%",
-          }}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center",
-          }}
+          severity="error"
+          sx={{ width: "50%" }}
         >
-          <Alert
-            onClose={() => setOpenSnackbar(false)}
-            severity="error"
-            sx={{ width: "50%" }}
-          >
-            <ul>
-              {error.map((err, index) => (
-                <li key={index}>{err}</li>
-              ))}
-            </ul>
-          </Alert>
-        </Snackbar>
-      </Box>
-
+          <ul>
+            {error.map((err, index) => (
+              <li key={index}>{err}</li>
+            ))}
+          </ul>
+        </Alert>
+      </Snackbar>
+    </Box>
   );
 }
