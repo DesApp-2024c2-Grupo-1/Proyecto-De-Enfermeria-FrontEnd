@@ -7,13 +7,11 @@ import Lista from "../components/Lista";
 import {
   Button,
   Stack,
-  Box,
   Dialog,
   DialogTitle,
-  DialogContent,
-  DialogContentText,
   DialogActions,
   useMediaQuery,
+  Pagination
 } from "@mui/material";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
 
@@ -31,6 +29,8 @@ export function RegistroEvaluacionesPage() {
     ? location.state.evaluacionTitulo
     : "Título no disponible";
   const { id } = useParams();
+  const [paginaActual, setPaginaActual] = useState(1);
+  const itemsPorPagina = 8;
 
   const fetchAlumnosPorId = async (id) => {
     const data = await findAllAlumnosPorEvaluacion(id);
@@ -43,6 +43,7 @@ export function RegistroEvaluacionesPage() {
   }, [id]);
 
   const handleBusqueda = (e) => {
+    setPaginaActual(1);
     let valor = e.target.value.toLowerCase();
     setSearchTerm(valor);
     if (valor === "") {
@@ -61,6 +62,17 @@ export function RegistroEvaluacionesPage() {
     setFiltrado(true);
   };
 
+  const listaAMostrar = filtrado ? alumnosFiltrados : alumnos;
+  const paginasTotales = Math.ceil(listaAMostrar.length / itemsPorPagina);
+  const alumnosPaginados = listaAMostrar.slice(
+    (paginaActual - 1) * itemsPorPagina,
+    paginaActual * itemsPorPagina
+  );
+
+  const handleCambioPagina = (event, value) => {
+    setPaginaActual(value);
+  };
+
   return (
     <>
       <Stack sx={{ alignItems: "center" }}>
@@ -75,24 +87,33 @@ export function RegistroEvaluacionesPage() {
           {alumnos.length > 0 ? (
             <>
               {!(filtrado && alumnosFiltrados.length === 0) ? (
-                <Lista
-                  dropdown={true}
-                  lista={
-                    alumnosFiltrados.length > 0 ? alumnosFiltrados : alumnos
-                  }
-                  keys={["nombre", "apellido", "dni"]}
-                  contenidoDropdown={alumnosFiltrados.map(
-                    (item) => item.evaluacionesRealizadas
+                <>
+                  <Lista
+                    dropdown={true}
+                    lista={alumnosPaginados}
+                    keys={["nombre", "apellido", "dni"]}
+                    contenidoDropdown={alumnosPaginados.map(
+                      (item) => item.evaluacionesRealizadas
+                    )}
+                    keysDropdown={["fecha", "nota"]}
+                    buttonOnClick={(evaluacionId) =>
+                      navigate(`/verEvaluacion/${evaluacionId}`)
+                    }
+                    paramOnClick={"id"}
+                  />
+                  {listaAMostrar.length > itemsPorPagina && (
+                    <Stack mt={2} alignItems="center">
+                      <Pagination
+                        count={paginasTotales}
+                        page={paginaActual}
+                        onChange={handleCambioPagina}
+                      />
+                    </Stack>
                   )}
-                  keysDropdown={["fecha", "nota"]}
-                  buttonOnClick={(evaluacionId) =>
-                    navigate(`/verEvaluacion/${evaluacionId}`)
-                  }
-                  paramOnClick={"id"}
-                />
+                </>
               ) : (
                 <div>
-                  <h2>No se encontraron resultados...</h2>
+                  <h2>No se encontraron resultados</h2>
                   <p>¿Necesita evaluar a un alumno?</p>
                   <button
                     className="botonClaro"

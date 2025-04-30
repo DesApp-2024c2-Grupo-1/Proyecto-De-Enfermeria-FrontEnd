@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-//import Filtro from "../components/Filtro";
 import Lista from "../components/Lista";
 import { getAllEvaluacionesRealizadasPorAlumno } from "../services/EvaluacionRealizadaService";
 import {
@@ -9,8 +8,6 @@ import {
   Button,
   Dialog,
   DialogTitle,
-  DialogContent,
-  DialogContentText,
   DialogActions,
 } from "@mui/material";
 

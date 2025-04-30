@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
 import { getAllAlumnos } from "../services/AlumnoService";
 import { createTheme } from "@mui/material/styles";
-import { Stack, useMediaQuery } from "@mui/material";
+import { Stack, useMediaQuery, Pagination } from "@mui/material";
 import IrArribaBoton from "../components/irArribaBoton";
 
 export function AlumnosPage() {
@@ -16,9 +16,12 @@ export function AlumnosPage() {
   const [alumnos, setAlumnos] = useState([]);
   const [alumnosFiltrados, setAlumnosFiltrados] = useState([]);
   const [filtrado, setFiltrado] = useState(false);
+  const [paginaActual, setPaginaActual] = useState(1);
+  const itemsPorPagina = 8;
 
   const handleBusqueda = (e) => {
     let valor = e.target.value.toLowerCase();
+    setPaginaActual(1);
     setSearchTerm(valor);
     if (valor === "") {
       setAlumnosFiltrados([]);
@@ -40,7 +43,6 @@ export function AlumnosPage() {
     navigate("/registerAlumnos");
   };
 
-
   const fetchAlumnos = async () => {
     const data = await getAllAlumnos();
     setAlumnos(data);
@@ -60,6 +62,17 @@ export function AlumnosPage() {
     });
   };
 
+  const listaAMostrar = filtrado ? alumnosFiltrados : alumnos;
+  const paginasTotales = Math.ceil(listaAMostrar.length / itemsPorPagina);
+  const alumnosPaginados = listaAMostrar.slice(
+    (paginaActual - 1) * itemsPorPagina,
+    paginaActual * itemsPorPagina
+  );
+
+  const handleCambioPagina = (event, value) => {
+    setPaginaActual(value);
+  };
+
   return (
     <>
       <IrArribaBoton />
@@ -76,15 +89,26 @@ export function AlumnosPage() {
             width={xs ? "100%" : "200px"}
           />
           {!(filtrado && alumnosFiltrados.length === 0) ? (
-            <Lista
-              lista={alumnosFiltrados.length > 0 ? alumnosFiltrados : alumnos}
-              keys={keys}
-              buttonOnClick={handleNavigate}
-              paramOnClick="id"
-            />
+            <>
+              <Lista
+                lista={alumnosPaginados}
+                keys={keys}
+                buttonOnClick={handleNavigate}
+                paramOnClick="id"
+              />
+              {listaAMostrar.length > itemsPorPagina && (
+                <Stack mt={2} alignItems="center">
+                  <Pagination
+                    count={paginasTotales}
+                    page={paginaActual}
+                    onChange={handleCambioPagina}
+                  />
+                </Stack>
+              )}
+            </>
           ) : (
             <div>
-              <h2>No se encontraron resultados...</h2>
+              <h2>No se encontraron resultados</h2>
               <p>¿Necesita registrar un nuevo alumno?</p>
               <button className="botonClaro" onClick={handleRegisterAlumno}>
                 Registrar
