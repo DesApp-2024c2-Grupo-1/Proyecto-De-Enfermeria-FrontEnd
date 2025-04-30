@@ -107,7 +107,7 @@ export function LoginPage() {
             ¿Olvidaste la contraseña?
           </a>
           <p>¿No tenés cuenta?</p>
-          <button onClick={handleRegister} className="botonClaro">
+          <button onClick={handleRegister} className="botonClaroInvertido">
             Registrate
           </button>
         </Stack>

@@ -52,6 +52,19 @@ h1 {
   background-color: #3d8a66;
 }
 
+.botonClaroInvertido {
+  background-color: white;
+  color: #449b73;
+  border-color: #449b73;
+  padding: 10px 20px;
+  border: 1px solid rgba(0, 128, 0, 0.2);
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 9rem;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
 /* Menú */
 
 .menu {
