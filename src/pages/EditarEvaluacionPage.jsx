@@ -101,7 +101,11 @@ export function EditarEvaluacionPage() {
     setPreguntaAEditar(preguntas[indice]);
   };
 
-  const handleGuardarPregunta = () => {};
+  const handleGuardarPregunta = (nuevaPregunta) => {
+    preguntas.find(
+      (pregunta) => pregunta.pregunta === preguntaAEditar.pregunta
+    );
+  };
 
   useEffect(() => {
     const fetchEvaluacion = async () => {
@@ -140,23 +144,15 @@ export function EditarEvaluacionPage() {
             backgroundColor: xs ? "white" : "#DDF0E7",
           }}
         >
-          <Stack direction="row" justifyContent="space-between">
-            <Input
-              placeholder="Título de evaluación"
-              texto="titulo"
-              helperText=""
-              helperTextColor="gray"
-              value={titulo}
-              margin="normal"
-            />
-            <Button
-              variant="outlined"
-              color="success"
-              onClick={(e) => setTitulo(e.target.value)}
-            >
-              <i className="fa-solid fa-save"></i>
-            </Button>
-          </Stack>
+          <Input
+            texto="titulo"
+            width="100%"
+            helperText=""
+            helperTextColor="gray"
+            value={titulo}
+            onChange={(e) => setTitulo(e.target.value)}
+            margin="normal"
+          />
 
           <p style={{ marginBottom: 1, fontSize: "17px", fontWeight: "bold" }}>
             Criterio de Evaluación
@@ -166,7 +162,7 @@ export function EditarEvaluacionPage() {
               <ListItem
                 key={indice}
                 secondaryAction={
-                  <Stack direction="row" spacing={2}>
+                  <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
                     <Button
                       variant="outlined"
                       color="success"
@@ -188,7 +184,12 @@ export function EditarEvaluacionPage() {
                   primary={criterio.pregunta}
                   secondary={`Puntaje: ${criterio.puntaje}`}
                   sx={{
-                    maxWidth: "600px",
+                    maxWidth: {
+                      xs: "300px",
+                      sm: "400px",
+                      md: "500px",
+                      lg: "600px",
+                    },
                   }}
                 />
               </ListItem>
@@ -250,7 +251,7 @@ export function EditarEvaluacionPage() {
             >
               <Stack direction="row" width="100%" spacing={2}>
                 <Input
-                  sx={{ flexGrow: 1 }}
+                  sx={{ width: { xs: "10px", sm: "400px", md:"500px" } }}
                   placeholder="Nueva pregunta"
                   texto="nuevaPregunta"
                   helperText={errorCriterio || " "}
@@ -259,7 +260,8 @@ export function EditarEvaluacionPage() {
                   onChange={(e) => setNuevoCriterio(e.target.value)}
                 />
                 <Input
-                  width="100px"
+                
+                  width="120px"
                   placeholder="Puntaje"
                   texto="puntaje"
                   helperText={errorPuntaje || " "}
@@ -268,8 +270,7 @@ export function EditarEvaluacionPage() {
                   value={puntaje}
                   onChange={(e) => setNuevoPuntaje(e.target.value)}
                 />
-              </Stack>
-              <Box sx={{ alignSelf: "flex-start" }}>
+                <Box sx={{ marginLeft: "0" }}>
                 <button
                   onClick={agregarCriterio}
                   className="botonClaro"
@@ -278,6 +279,8 @@ export function EditarEvaluacionPage() {
                   Añadir
                 </button>
               </Box>
+              </Stack>
+              
             </Box>
           )}
         </Paper>
@@ -348,7 +351,11 @@ export function EditarEvaluacionPage() {
           <Button color="error" onClick={() => setOpenDialog(false)}>
             Cancelar
           </Button>
-          <Button color="success" onClick={handleGuardarPregunta} autoFocus>
+          <Button
+            color="success"
+            onClick={(e) => handleEditarPregunta}
+            autoFocus
+          >
             Guardar cambios
           </Button>
         </DialogActions>
