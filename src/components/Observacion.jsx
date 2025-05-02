@@ -1,7 +1,9 @@
 import { Input } from "../components/Input";
+
 import { useRef, useEffect } from "react";
 import { createMuiTheme, ThemeProvider } from "@mui/material/styles";
 import "../index.css";
+import { Button, Stack } from "@mui/material";
 
 const theme = createMuiTheme({
   palette: {
@@ -29,15 +31,28 @@ export function Observacion({
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Input
-          titulo="Modificación de puntaje"
-          disabled={disabled}
-          backgroundColor={"#DDF0E7"}
-          placeholder={
-            disabled ? modificacionPuntajeValue : "Escribe un número aquí..."
-          }
-          onChange={(e) => onPuntajeChange(parseInt(e.target.value) || 0)}
-        />
+        <Stack direction="row" spacing={2} alignItems="flex-end">
+          <Input
+          sx={{ marginBottom: "0" }}
+       
+            titulo="Modificación de puntaje"
+            disabled={disabled}
+            type={"number"}
+            backgroundColor={"#DDF0E7"}
+            placeholder={
+              disabled ? modificacionPuntajeValue : "Escribe un número aquí..."
+            }
+            onChange={(e) => onPuntajeChange(parseInt(e.target.value) || 0)}
+          />
+          <Stack>
+            <Button variant="outlined">
+              <i className="fa-solid fa-edit"></i>
+            </Button>
+            <Button variant="outlined">
+              <i className="fa-solid fa-edit"></i>
+            </Button>
+          </Stack>
+        </Stack>
         <h2>Observaciones</h2>
         <div style={{ position: "relative", width: "100%" }}>
           <div

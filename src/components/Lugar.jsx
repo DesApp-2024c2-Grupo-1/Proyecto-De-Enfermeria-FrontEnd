@@ -1,56 +1,58 @@
-import { Stack, Box } from "@mui/material";
+import { Stack, Box, Autocomplete, TextField } from "@mui/material";
+import { useState, useEffect } from "react";
+
+const opciones = [
+  { label: "Campo Práctico", value: "1" },
+  { label: "Centro de Simulación", value: "2" },
+];
 
 export function Lugar({ disabled, selected, onChange }) {
+  const [value, setValue] = useState(null);
+
+  useEffect(() => {
+    const selectedOption = opciones.find((op) => op.value === selected);
+    setValue(selectedOption || null);
+  }, [selected]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    if (onChange && newValue) {
+      onChange(newValue.value);
+    }
+  };
+
   return (
     <Stack
       direction={{ xs: "column", sm: "row" }}
+      spacing={2}
       sx={{
         justifyContent: "space-between",
         alignItems: "center",
       }}
     >
-      <Box
-        sx={{
-          maxWidth: "100%",
-          textAlign: "center" /* backgroundColor: "green" */,
-        }}
-      >
+      <Box sx={{ maxWidth: "100%", textAlign: "center" }}>
         <p>¿Dónde fue realizada esta práctica?</p>
       </Box>
-      <Stack
-        direction={"row"}
-        spacing={5}
-        sx={
-          {
-            /*backgroundColor: "yellow" */
-          }
-        }
-      >
-        <div>
-          <input
-            disabled={disabled}
-            type="radio"
-            id="1"
-            name="lugar"
-            checked={selected === "1"}
-            value="Campo Practico"
-            onChange={onChange ? () => onChange("1") : null}
-          />
-          <label htmlFor="1"> Campo Practico</label>
-        </div>
-        <div>
-          <input
-            disabled={disabled}
-            type="radio"
-            id="2"
-            name="lugar"
-            checked={selected === "2"}
-            value="Centro de Simulación"
-            onChange={onChange ? () => onChange("2") : null}
-          />
-          <label htmlFor="2"> Centro de Simulación</label>
-        </div>
-      </Stack>
+      <Autocomplete
+        disabled={disabled}
+        value={value}
+        onChange={handleChange}
+        options={opciones}
+        getOptionLabel={(option) => option.label}
+        isOptionEqualToValue={(option, value) => option.value === value.value}
+        sx={{
+          width: 300,
+          "& .MuiOutlinedInput-root": {
+            "&:hover fieldset": {
+              borderColor: "#429870",
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "#429870",
+            },
+          },
+        }}
+        renderInput={(params) => <TextField {...params} />}
+      />
     </Stack>
   );
 }
