@@ -140,16 +140,23 @@ export function EditarEvaluacionPage() {
             backgroundColor: xs ? "white" : "#DDF0E7",
           }}
         >
-          <Input
-            placeholder="Título de evaluación"
-            texto="titulo"
-            width="100%"
-            helperText=""
-            helperTextColor="gray"
-            value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
-            margin="normal"
-          />
+          <Stack direction="row" justifyContent="space-between">
+            <Input
+              placeholder="Título de evaluación"
+              texto="titulo"
+              helperText=""
+              helperTextColor="gray"
+              value={titulo}
+              margin="normal"
+            />
+            <Button
+              variant="outlined"
+              color="success"
+              onClick={(e) => setTitulo(e.target.value)}
+            >
+              <i className="fa-solid fa-save"></i>
+            </Button>
+          </Stack>
 
           <p style={{ marginBottom: 1, fontSize: "17px", fontWeight: "bold" }}>
             Criterio de Evaluación
@@ -315,6 +322,7 @@ export function EditarEvaluacionPage() {
               sx={{ width: "400px" }}
               id="outlined-multiline-static"
               label="Criterio"
+              color="success"
               multiline
               rows={5}
               defaultValue={preguntaAEditar.pregunta}
@@ -322,6 +330,7 @@ export function EditarEvaluacionPage() {
             <TextField
               sx={{ width: "100px", marginLeft: "20px" }}
               id="outlined-multiline-static"
+              color="success"
               label="Puntaje"
               defaultValue={preguntaAEditar.puntaje}
               type="number"
@@ -330,10 +339,12 @@ export function EditarEvaluacionPage() {
         </DialogContent>
 
         <DialogActions
-        sx={{
-          display: "flex",
-          justifyContent: "flex-end",
-          padding: "0 2rem 2rem 2rem"}}>
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: "0 2rem 2rem 2rem",
+          }}
+        >
           <Button color="error" onClick={() => setOpenDialog(false)}>
             Cancelar
           </Button>
