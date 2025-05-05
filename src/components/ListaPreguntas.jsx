@@ -32,7 +32,21 @@ export function ListaPreguntas({
   const [lugarSeleccionado, setLugarSeleccionado] = useState("");
   const [modificacionPuntaje, setModificacionPuntaje] = useState();
   const [respuestas, setRespuestas] = useState([]);
+  const [notaModificada, setnotaModificada] = useState(0);
+  const [alerta, setAlerta] = useState(false);
   const navigate = useNavigate();
+
+  const puntajeTotal = preguntas.reduce(
+    (total, pregunta) => total + (pregunta.puntaje || 0),
+    0
+  );
+
+  const puntajeObtenido = respuestas.filter(respuesta => respuesta == true).reduce(
+    (total, respuesta) => total + (preguntas[respuestas.indexOf(respuesta)].puntaje || 0),
+    0
+  )
+ 
+  const notaFinal = (puntajeObtenido + modificacionPuntaje) * 100 / puntajeTotal;
 
   useEffect(() => {
     setRespuestas(preguntas.map((pregunta) => pregunta.respuesta ?? null));
@@ -61,6 +75,7 @@ export function ListaPreguntas({
   const handlePuntajeChange = (nuevoPuntaje) => {
     if (!modificacionPuntajeValue) {
       setModificacionPuntaje(nuevoPuntaje);
+      setAlerta(true);
     }
   };
 
@@ -103,7 +118,7 @@ export function ListaPreguntas({
       console.log(error.response?.data);
       console.log(error.response?.data?.message);
     }
-    navigate("/home");
+    
   };
 
   return (
@@ -142,6 +157,8 @@ export function ListaPreguntas({
                 : modificacionPuntaje
             }
             observacionValue={observacionValue ? observacionValue : observacion}
+            notaFinal={notaFinal}
+            alerta={alerta}
           />
         </div>
         {!registrado ? (
