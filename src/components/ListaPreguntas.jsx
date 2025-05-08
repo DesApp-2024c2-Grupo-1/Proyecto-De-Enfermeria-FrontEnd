@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { Pregunta } from "../components/Pregunta";
 import {
-  Stack, Dialog,
+  Stack,
+  Dialog,
   DialogTitle,
   DialogContent,
   DialogContentText,
   DialogActions,
-  Button
+  Button,
 } from "@mui/material";
 import { Lugar } from "../components/Lugar";
 import { Observacion } from "../components/Observacion";
@@ -15,7 +16,14 @@ import { useDocente } from "../context/DocenteContext";
 import { useEvaluacion } from "../context/EvaluacionContext";
 import { useNavigate } from "react-router-dom";
 
-export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacionPuntajeValue, observacionValue }) {
+export function ListaPreguntas({
+  preguntas,
+  disabled,
+  alumno,
+  lugar,
+  modificacionPuntajeValue,
+  observacionValue,
+}) {
   const { docenteContext } = useDocente();
   const { evaluacionContext } = useEvaluacion();
   const [error, setError] = useState();
@@ -24,7 +32,21 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacio
   const [lugarSeleccionado, setLugarSeleccionado] = useState("");
   const [modificacionPuntaje, setModificacionPuntaje] = useState();
   const [respuestas, setRespuestas] = useState([]);
+  const [notaModificada, setnotaModificada] = useState(0);
+  const [alerta, setAlerta] = useState(false);
   const navigate = useNavigate();
+
+  const puntajeTotal = preguntas.reduce(
+    (total, pregunta) => total + (pregunta.puntaje || 0),
+    0
+  );
+
+  const puntajeObtenido = respuestas.filter(respuesta => respuesta == true).reduce(
+    (total, respuesta) => total + (preguntas[respuestas.indexOf(respuesta)].puntaje || 0),
+    0
+  )
+ 
+  const notaFinal = (puntajeObtenido + modificacionPuntaje) * 100 / puntajeTotal;
 
   useEffect(() => {
     setRespuestas(preguntas.map((pregunta) => pregunta.respuesta ?? null));
@@ -53,6 +75,7 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacio
   const handlePuntajeChange = (nuevoPuntaje) => {
     if (!modificacionPuntajeValue) {
       setModificacionPuntaje(nuevoPuntaje);
+      setAlerta(true);
     }
   };
 
@@ -95,36 +118,49 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacio
       console.log(error.response?.data);
       console.log(error.response?.data?.message);
     }
-    navigate("/home");
+    
   };
 
   return (
     <div>
       <Stack>
         {preguntas.map((pregunta, index) => (
-          <Pregunta
-            key={index}
-            pregunta={pregunta.pregunta}
-            puntaje={pregunta.puntaje}
-            respuesta={respuestas[index]}
-            disabled={registrado || pregunta.respuesta !== undefined}
-            onChange={(nuevaRespuesta) =>
-              handleRespuestaChange(index, nuevaRespuesta)
-            }
-          />
+          <div key={index}>
+            <div className="no-break-inside">
+              <Pregunta
+                pregunta={pregunta.pregunta}
+                puntaje={pregunta.puntaje}
+                respuesta={respuestas[index]}
+                disabled={registrado || pregunta.respuesta !== undefined}
+                onChange={(nuevaRespuesta) =>
+                  handleRespuestaChange(index, nuevaRespuesta)
+                }
+              />
+            </div>
+          </div>
         ))}
-        <Lugar
-          disabled={registrado}
-          selected={lugar ? lugar : lugarSeleccionado}
-          onChange={handleLugarChange}
-        />
-        <Observacion
-          disabled={registrado}
-          onObservacionChange={handleObservacionChange}
-          onPuntajeChange={handlePuntajeChange}
-          modificacionPuntajeValue={modificacionPuntajeValue ? modificacionPuntajeValue : modificacionPuntaje}
-          observacionValue={observacionValue ? observacionValue : observacion}
-        />
+        <div className="no-break-inside">
+          <Lugar
+            disabled={registrado}
+            selected={lugar ? lugar : lugarSeleccionado}
+            onChange={handleLugarChange}
+          />
+        </div>
+        <div className="no-break-inside">
+          <Observacion
+            disabled={registrado}
+            onObservacionChange={handleObservacionChange}
+            onPuntajeChange={handlePuntajeChange}
+            modificacionPuntajeValue={
+              modificacionPuntajeValue
+                ? modificacionPuntajeValue
+                : modificacionPuntaje
+            }
+            observacionValue={observacionValue ? observacionValue : observacion}
+            notaFinal={notaFinal}
+            alerta={alerta}
+          />
+        </div>
         {!registrado ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
             <button
@@ -132,28 +168,29 @@ export function ListaPreguntas({ preguntas, disabled, alumno, lugar, modificacio
               style={{ marginTop: "3rem" }}
               onClick={handleOpenDialog}
             >
-              {" "}
-              Registrar{" "}
+              Registrar
             </button>
           </div>
         ) : (
           <div></div>
         )}
       </Stack>
+
       <Dialog
         open={openDialog}
         onClose={handleCloseDialog}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
-
           "& .MuiDialog-paper": { padding: "2rem" },
         }}
       >
-        <DialogTitle id="alert-dialog-title">{"¿Confirmar registro de evaluación?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">
+          {"¿Confirmar registro de evaluación?"}
+        </DialogTitle>
 
         <DialogActions>
-        <Button color="success" onClick={handleOnClick} autoFocus>
+          <Button color="success" onClick={handleOnClick} autoFocus>
             Sí
           </Button>
           <Button color="error" onClick={handleCloseDialog}>

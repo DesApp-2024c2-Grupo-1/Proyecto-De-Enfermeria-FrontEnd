@@ -6,15 +6,18 @@ export function Input({
   texto,
   titulo,
   width,
+  label,
   helperText,
   helperTextColor,
   backgroundColor,
   color,
   onChange,
   helperTextWidth,
+  defaultValue,
   value,
   type,
   icon,
+  sx,
 }) {
   return (
     <div>
@@ -43,10 +46,12 @@ export function Input({
           "&:focus-within .fa": {
             color: "#55B589",
           },
+          ...sx,
         }}
         type={type}
         disabled={disabled}
         value={value}
+        defaultValue={defaultValue}
         id={texto}
         label={placeholder}
         variant="outlined"
@@ -57,7 +62,7 @@ export function Input({
               <i
                 className={`fa fa-${icon}`}
                 style={{
-                  marginRight: "8px"
+                  marginRight: "8px",
                 }}
               ></i>
             </InputAdornment>

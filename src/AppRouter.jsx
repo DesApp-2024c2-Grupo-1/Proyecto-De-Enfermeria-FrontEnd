@@ -14,6 +14,7 @@ import { AlumnoPerfilPage } from "./pages/AlumnoPerfilPage";
 import { AlumnosPage } from "./pages/AlumnosPage";
 import { CrearEvaluacionPage } from "./pages/CrearEvaluacionPage";
 import { CrearEvaluacionExitoPage } from "./pages/CrearEvaluacionExito";
+import { EditarEvaluacionPage } from "./pages/EditarEvaluacionPage";
 
 export function AppRouter() {
   return (
@@ -64,6 +65,10 @@ export function AppRouter() {
       <Route
         path="/crearEvaluacionExito"
         element={<CrearEvaluacionExitoPage />}
+      />
+            <Route
+        path="/editarEvaluacion/:id"
+        element={<EditarEvaluacionPage />}
       />
     </Routes>
   );
