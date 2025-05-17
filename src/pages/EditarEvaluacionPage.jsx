@@ -97,14 +97,14 @@ export function EditarEvaluacionPage() {
 
   const handleEditarPregunta = (indice) => {
     setOpenDialog(true);
-    console.log(indice);
     setPreguntaAEditar(preguntas[indice]);
   };
 
-  const handleGuardarPregunta = (nuevaPregunta) => {
-    preguntas.find(
-      (pregunta) => pregunta.pregunta === preguntaAEditar.pregunta
-    );
+  const handleGuardarPregunta = () => {
+      console.log(preguntaAEditar);
+      preguntaAEditar.pregunta = document.getElementById("outlined-multiline-static").value;
+      preguntaAEditar.puntaje = document.getElementById("outlined-multiline-static-puntaje").value;
+      setOpenDialog(false);
   };
 
   useEffect(() => {
@@ -332,7 +332,7 @@ export function EditarEvaluacionPage() {
             />
             <TextField
               sx={{ width: "100px", marginLeft: "20px" }}
-              id="outlined-multiline-static"
+              id="outlined-multiline-static-puntaje"
               color="success"
               label="Puntaje"
               defaultValue={preguntaAEditar.puntaje}
@@ -353,7 +353,7 @@ export function EditarEvaluacionPage() {
           </Button>
           <Button
             color="success"
-            onClick={(e) => handleEditarPregunta}
+            onClick={handleGuardarPregunta}
             autoFocus
           >
             Guardar cambios

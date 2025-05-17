@@ -76,6 +76,7 @@ export function ListaPreguntas({
     if (!modificacionPuntajeValue) {
       setModificacionPuntaje(nuevoPuntaje);
       setAlerta(true);
+      console.log(puntajeObtenido)
     }
   };
 

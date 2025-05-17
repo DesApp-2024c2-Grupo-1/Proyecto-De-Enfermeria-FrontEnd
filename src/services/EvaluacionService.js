@@ -14,3 +14,8 @@ export const postEvaluacionYPreguntas = async (evaluacionYPreguntasData) => {
     const response = await axios.post(`http://localhost:3000/evaluacion`, evaluacionYPreguntasData);
     return response.data;
 };
+
+export const putEvaluacion = async (evaluacionYPreguntasData) => {
+    const response = await axios.post(`http://localhost:3000/evaluacion`, evaluacionYPreguntasData);
+    return response.data;
+};
