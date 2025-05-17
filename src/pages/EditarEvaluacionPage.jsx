@@ -18,7 +18,7 @@ import {
   TextField,
 } from "@mui/material";
 import {
-  postEvaluacionYPreguntas,
+  putEvaluacionYPreguntas,
   getEvaluacionById,
 } from "../services/EvaluacionService";
 import { useDocente } from "../context/DocenteContext";
@@ -44,7 +44,7 @@ export function EditarEvaluacionPage() {
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
   const { id } = useParams();
 
-  const evaluacionData = { titulo, docente: docenteContext.id, preguntas };
+  const evaluacionData = { docente: docenteContext.id, preguntas };
 
   const agregarCriterio = () => {
     if (!nuevoCriterio.trim()) {
@@ -92,7 +92,15 @@ export function EditarEvaluacionPage() {
   };
 
   const manejarEdicion = async () => {
-    console.log(preguntas);
+    try {
+      await putEvaluacionYPreguntas(evaluacionData, id);
+      navigate("/home");
+    } catch (error) {
+      const mensajeError =
+        error.response?.data?.message || "Error al modificar la evaluación.";
+      setError(mensajeError);
+      setOpenSnackbar(true);
+    }
   };
 
   const handleEditarPregunta = (indice) => {
@@ -101,10 +109,14 @@ export function EditarEvaluacionPage() {
   };
 
   const handleGuardarPregunta = () => {
-      console.log(preguntaAEditar);
-      preguntaAEditar.pregunta = document.getElementById("outlined-multiline-static").value;
-      preguntaAEditar.puntaje = document.getElementById("outlined-multiline-static-puntaje").value;
-      setOpenDialog(false);
+    console.log(preguntaAEditar);
+    preguntaAEditar.pregunta = document.getElementById(
+      "outlined-multiline-static"
+    ).value;
+    preguntaAEditar.puntaje = document.getElementById(
+      "outlined-multiline-static-puntaje"
+    ).value;
+    setOpenDialog(false);
   };
 
   useEffect(() => {
@@ -251,7 +263,7 @@ export function EditarEvaluacionPage() {
             >
               <Stack direction="row" width="100%" spacing={2}>
                 <Input
-                  sx={{ width: { xs: "10px", sm: "400px", md:"500px" } }}
+                  sx={{ width: { xs: "10px", sm: "400px", md: "500px" } }}
                   placeholder="Nueva pregunta"
                   texto="nuevaPregunta"
                   helperText={errorCriterio || " "}
@@ -260,7 +272,6 @@ export function EditarEvaluacionPage() {
                   onChange={(e) => setNuevoCriterio(e.target.value)}
                 />
                 <Input
-                
                   width="120px"
                   placeholder="Puntaje"
                   texto="puntaje"
@@ -271,16 +282,15 @@ export function EditarEvaluacionPage() {
                   onChange={(e) => setNuevoPuntaje(e.target.value)}
                 />
                 <Box sx={{ marginLeft: "0" }}>
-                <button
-                  onClick={agregarCriterio}
-                  className="botonClaro"
-                  style={{ marginTop: "28px" }}
-                >
-                  Añadir
-                </button>
-              </Box>
+                  <button
+                    onClick={agregarCriterio}
+                    className="botonClaro"
+                    style={{ marginTop: "28px" }}
+                  >
+                    Añadir
+                  </button>
+                </Box>
               </Stack>
-              
             </Box>
           )}
         </Paper>
@@ -351,11 +361,7 @@ export function EditarEvaluacionPage() {
           <Button color="error" onClick={() => setOpenDialog(false)}>
             Cancelar
           </Button>
-          <Button
-            color="success"
-            onClick={handleGuardarPregunta}
-            autoFocus
-          >
+          <Button color="success" onClick={handleGuardarPregunta} autoFocus>
             Guardar cambios
           </Button>
         </DialogActions>

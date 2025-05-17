@@ -15,7 +15,7 @@ export const postEvaluacionYPreguntas = async (evaluacionYPreguntasData) => {
     return response.data;
 };
 
-export const putEvaluacion = async (evaluacionYPreguntasData) => {
-    const response = await axios.post(`http://localhost:3000/evaluacion`, evaluacionYPreguntasData);
+export const putEvaluacionYPreguntas = async (evaluacionYPreguntasData, id) => {
+    const response = await axios.put(`http://localhost:3000/evaluacion/modificar-evaluacion/${id}`, evaluacionYPreguntasData);
     return response.data;
 };
