@@ -65,7 +65,7 @@ export function Observacion({
             />
 
             {
-              alerta && (
+              (alerta && modificacionPuntajeValue != 0) && (
                 <Alert variant="outlined" severity="warning">
                   La nota final será: {notaFinal}% al aplicar la modificación.
                 </Alert>

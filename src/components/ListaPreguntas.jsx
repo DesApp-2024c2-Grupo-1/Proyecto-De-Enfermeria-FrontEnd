@@ -41,12 +41,23 @@ export function ListaPreguntas({
     0
   );
 
-  const puntajeObtenido = respuestas.filter(respuesta => respuesta == true).reduce(
-    (total, respuesta) => total + (preguntas[respuestas.indexOf(respuesta)].puntaje || 0),
-    0
-  )
- 
-  const notaFinal = (puntajeObtenido + modificacionPuntaje) * 100 / puntajeTotal;
+  const puntajeObtenido = respuestas
+    .map((resp, index) => {
+      if (resp) {
+        return preguntas[index].puntaje;
+      } else return 0;
+    })
+    .reduce((total, puntaje) => total + puntaje, 0);
+
+  const notaFinal = Math.max(
+    0,
+    Math.min(
+      Math.round(
+        ((puntajeObtenido + modificacionPuntaje) * 100) / puntajeTotal
+      ),
+      100
+    )
+  );
 
   useEffect(() => {
     setRespuestas(preguntas.map((pregunta) => pregunta.respuesta ?? null));
@@ -76,7 +87,6 @@ export function ListaPreguntas({
     if (!modificacionPuntajeValue) {
       setModificacionPuntaje(nuevoPuntaje);
       setAlerta(true);
-      console.log(puntajeObtenido)
     }
   };
 
@@ -121,7 +131,6 @@ export function ListaPreguntas({
     }
 
     navigate("/home");
-    
   };
 
   return (
