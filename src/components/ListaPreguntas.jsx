@@ -119,6 +119,8 @@ export function ListaPreguntas({
       console.log(error.response?.data);
       console.log(error.response?.data?.message);
     }
+
+    navigate("/home");
     
   };
 
