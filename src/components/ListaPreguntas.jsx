@@ -107,7 +107,7 @@ export function ListaPreguntas({
     docente: { id: docenteData.id },
     evaluacion: { id: evaluacionData.id },
     observacion: String(observacion) || null,
-    lugarPractica: String(lugarSeleccionado),
+    lugarEvaluacion: Number(lugarSeleccionado),
     modificacionPuntaje: Number(modificacionPuntaje) || null,
     preguntaRespondida: respuestasFormateadas,
   };
