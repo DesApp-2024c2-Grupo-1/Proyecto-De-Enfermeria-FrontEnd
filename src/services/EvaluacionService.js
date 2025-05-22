@@ -24,3 +24,8 @@ export const deshabilitarEvaluacion = async (id) => {
     const response = await axios.put(`http://localhost:3000/evaluacion/${id}`);
     return response.data;
 };
+
+export const getAllLugares = async (id) => {
+    const response = await axios.put(`http://localhost:3000/evaluacion/${id}`);
+    return response.data;
+};

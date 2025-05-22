@@ -27,6 +27,8 @@ export function VerEvaluacionPage() {
     fetchEvaluacionById(id);
   }, [id]);
 
+  console.log(evaluacionRealizada);
+
   const descargarEvaluacionComoPDF = () => {
     const element = document.getElementById("evaluacion-div");
     element.classList.add("printable");
@@ -51,7 +53,7 @@ export function VerEvaluacionPage() {
     <>
       <div id="evaluacion-div">
         <Evaluacion
-          lugar={evaluacionRealizada.lugarPractica}
+          lugar={evaluacionRealizada.lugarEvaluacion?.id}
           preguntas={preguntas}
           disabled={true}
           alumnoDisabled={true}
@@ -66,7 +68,11 @@ export function VerEvaluacionPage() {
           justifyContent: "center",
         }}
       >
-        <button className="botonVerde" style={{marginTop: "-30px"}} onClick={descargarEvaluacionComoPDF}>
+        <button
+          className="botonVerde"
+          style={{ marginTop: "-30px" }}
+          onClick={descargarEvaluacionComoPDF}
+        >
           Descargar
         </button>
       </Box>

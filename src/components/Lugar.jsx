@@ -2,8 +2,8 @@ import { Stack, Box, Autocomplete, TextField } from "@mui/material";
 import { useState, useEffect } from "react";
 
 const opciones = [
-  { label: "Campo Práctico", value: "1" },
-  { label: "Centro de Simulación", value: "2" },
+  { label: "Campo Práctico", value: 1 },
+  { label: "Centro de Simulación", value: 2 },
 ];
 
 export function Lugar({ disabled, selected, onChange }) {
@@ -12,8 +12,10 @@ export function Lugar({ disabled, selected, onChange }) {
   useEffect(() => {
     const selectedOption = opciones.find((op) => op.value === selected);
     setValue(selectedOption || null);
+    console.log("selectedOption", selectedOption);
   }, [selected]);
 
+  console.log("value", value);
   const handleChange = (event, newValue) => {
     setValue(newValue);
     if (onChange && newValue) {
