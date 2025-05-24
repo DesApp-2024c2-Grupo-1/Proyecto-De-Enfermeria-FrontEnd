@@ -42,7 +42,7 @@ export function HistorialEvaluacion() {
         <Grid container spacing={10} sx={{ pb: "60px" }}>
           {listaFiltrada.map((evaluacion, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <Carpeta titulo={evaluacion.titulo} id={evaluacion.id} />
+              <Carpeta edicion="false" titulo={evaluacion.titulo} id={evaluacion.id} />
             </Grid>
           ))}
         </Grid>
