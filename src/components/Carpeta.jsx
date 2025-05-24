@@ -23,7 +23,7 @@ function Carpeta({ titulo, id, edicion }) {
     if (evaluacion) {
       setEvaluacionContext(evaluacion);
       navigate(`/registrarEvaluacion/${id}`);
-    }
+    } 
   };
 
   return (
