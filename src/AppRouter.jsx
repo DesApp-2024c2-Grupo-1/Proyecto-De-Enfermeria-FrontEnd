@@ -15,6 +15,7 @@ import { AlumnosPage } from "./pages/AlumnosPage";
 import { CrearEvaluacionPage } from "./pages/CrearEvaluacionPage";
 import { CrearEvaluacionExitoPage } from "./pages/CrearEvaluacionExito";
 import { EditarEvaluacionPage } from "./pages/EditarEvaluacionPage";
+import { HistorialEvaluacion } from "./pages/HistorialEvaluacion";
 
 export function AppRouter() {
   return (
@@ -66,10 +67,9 @@ export function AppRouter() {
         path="/crearEvaluacionExito"
         element={<CrearEvaluacionExitoPage />}
       />
-            <Route
-        path="/editarEvaluacion/:id"
-        element={<EditarEvaluacionPage />}
-      />
+      <Route path="/editarEvaluacion/:id" element={<EditarEvaluacionPage />} />
+
+      <Route path="/historialEvaluacion/:id" element={<HistorialEvaluacion />} />
     </Routes>
   );
 }

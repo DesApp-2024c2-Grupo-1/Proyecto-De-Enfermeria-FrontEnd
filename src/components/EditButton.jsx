@@ -77,7 +77,7 @@ function EditButton({ id }) {
           </ListItemIcon>
           <ListItemText>Editar</ListItemText>
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={() => navigate(`/historialEvaluacion/${id}`)}>
           <ListItemIcon>
             <i className="fa-solid fa-clock"></i>
           </ListItemIcon>
