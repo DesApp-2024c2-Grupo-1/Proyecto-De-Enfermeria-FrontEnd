@@ -7,10 +7,13 @@ import { useEffect, useState } from "react";
 import { getAllEvaluaciones } from "../services/EvaluacionService";
 import { useDocente } from "../context/DocenteContext";
 
+
 export function HomePage() {
   const [carpetas, setCarpetas] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const { docenteContext } = useDocente();
+
+
 
   const listaFiltrada = carpetas.filter((carpeta) =>
     carpeta.titulo.toLowerCase().includes(searchTerm)

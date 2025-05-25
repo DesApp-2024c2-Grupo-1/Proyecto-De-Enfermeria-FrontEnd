@@ -17,6 +17,9 @@ export function RegisterPage() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const handleRegister = async () => {
+    const capitalizar = (str) =>
+      str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
     let errorList = [];
 
     if (password !== confirmarPassword) {
@@ -31,7 +34,7 @@ export function RegisterPage() {
 
     setError([]);
 
-    const docenteData = { nombre, apellido, email, dni: Number(dni), password };
+    const docenteData = { nombre: capitalizar(nombre), apellido: capitalizar(apellido), email, dni: Number(dni), password };
 
     try {
       await registrarDocente(docenteData);
@@ -70,12 +73,12 @@ export function RegisterPage() {
         >
           <Box
             sx={{
-              width: "130px" ,
-              height: "130px" ,
+              width: "130px",
+              height: "130px",
               backgroundColor: "#429870",
               borderRadius: "50%",
               zIndex: "1",
-              display: {xs: "none", sm: "flex"},
+              display: { xs: "none", sm: "flex" },
               justifyContent: "center",
               alignItems: "center",
               boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
@@ -86,7 +89,7 @@ export function RegisterPage() {
           </Box>
 
           <Grid container sx={{ width: "80%" }}>
-            <Grid item xs={12} sm={5.8} >  
+            <Grid item xs={12} sm={5.8}>
               <Input
                 placeholder={"Ingrese su nombre"}
                 value={nombre}
@@ -95,7 +98,7 @@ export function RegisterPage() {
                 width={"100%"}
               />
             </Grid>
-            <Grid item xs={12} sm={5.8} sx={{marginLeft: "auto"}}>
+            <Grid item xs={12} sm={5.8} sx={{ marginLeft: "auto" }}>
               <Input
                 placeholder={"Ingrese su apellido"}
                 value={apellido}
