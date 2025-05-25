@@ -97,7 +97,7 @@ function EditButton({ id }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
-          "& .MuiDialog-paper": { padding: "5rem" },
+          "& .MuiDialog-paper": { padding: "1.75rem", borderRadius: "20px" },
         }}
       >
         <DialogTitle

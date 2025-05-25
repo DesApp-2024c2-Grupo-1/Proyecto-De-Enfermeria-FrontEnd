@@ -80,7 +80,7 @@ function Carpeta({ titulo, id, edicion }) {
               onClick={handleOnClick}
               style={{ borderRadius: 5 }}
             >
-              {edicion === "true" ? "Editar" : "Consultar"}
+              {edicion === "true" ? "Evaluar" : "Consultar"}
             </button>
             <button
               className="botonClaro"

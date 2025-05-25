@@ -309,7 +309,7 @@ export function EditarEvaluacionPage() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
-          "& .MuiDialog-paper": { padding: "5rem" },
+          "& .MuiDialog-paper": { padding: "1.7rem", borderRadius: "20px" },
         }}
       >
         <DialogTitle

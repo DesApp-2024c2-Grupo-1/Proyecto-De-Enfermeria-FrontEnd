@@ -61,7 +61,7 @@ export function PerfilDocentePage() {
       nombre: capitalizar(nombre),
       apellido: capitalizar(apellido),
     };
-    
+
     try {
       if (editando) {
         setEditando(!editando);
@@ -166,7 +166,7 @@ export function PerfilDocentePage() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
-          "& .MuiDialog-paper": { padding: "2rem" },
+          "& .MuiDialog-paper": { paddingLeft: "2.35rem", paddingRight: "2.35rem", paddingBottom: "1.35rem", paddingTop: "1.35rem", borderRadius: "20px" },
         }}
       >
         <DialogTitle id="alert-dialog-title">{"¿Cerrar sesión?"}</DialogTitle>

@@ -194,7 +194,7 @@ export function ListaPreguntas({
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
-          "& .MuiDialog-paper": { padding: "2rem" },
+          "& .MuiDialog-paper": { padding: "1.75rem", borderRadius: "20px" },
         }}
       >
         <DialogTitle id="alert-dialog-title">
