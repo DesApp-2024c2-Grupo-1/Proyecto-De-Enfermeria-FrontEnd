@@ -44,7 +44,7 @@ export function HomePage() {
           </Grid>
           {listaFiltrada.map((evaluacion, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <Carpeta titulo={evaluacion.titulo} id={evaluacion.id} />
+              <Carpeta edicion="true" titulo={evaluacion.titulo} id={evaluacion.id} />
             </Grid>
           ))}
         </Grid>
