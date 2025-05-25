@@ -29,6 +29,9 @@ export function ListaPreguntas({
   const [error, setError] = useState();
   const [observacion, setObservacion] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
+  const [openDialogIncompleto, setOpenDialogIncompleto] = useState(false);
+  const [openDialogFaltaObservacion, setOpenDialogFaltaObservacion] =
+    useState(false);
   const [lugarSeleccionado, setLugarSeleccionado] = useState("");
   const [modificacionPuntaje, setModificacionPuntaje] = useState();
   const [respuestas, setRespuestas] = useState([]);
@@ -98,6 +101,15 @@ export function ListaPreguntas({
     setOpenDialog(false);
   };
 
+  const handleCloseDialogIncompleto = () => {
+    setOpenDialog(false);
+    setOpenDialogIncompleto(false);
+  };
+
+  const handleCloseDialogFaltaObservacion = () => {
+    setOpenDialog(false);
+    setOpenDialogFaltaObservacion(false);
+  };
   const respuestasFormateadas = respuestas.map((respuesta) => ({ respuesta }));
 
   const docenteData = docenteContext;
@@ -113,21 +125,38 @@ export function ListaPreguntas({
   };
 
   const handleOnClick = async () => {
-    setRegistrado(!registrado);
+    if (!registrado) {
+      const alumnoInvalido = !alumno || !alumno.id;
+      const respuestasIncompletas =
+        respuestas.length !== preguntas.length ||
+        respuestas.some((r) => r !== true && r !== false);
+      const lugarNoSeleccionado = !lugar && lugarSeleccionado === "";
+
+      const observacionTexto = observacionValue ?? observacion;
+      const observacionRequerida =
+        Number.isFinite(modificacionPuntaje) &&
+        modificacionPuntaje !== 0 &&
+        (!observacionTexto || observacionTexto.trim() === "");
+
+      if (alumnoInvalido || respuestasIncompletas || lugarNoSeleccionado) {
+        setOpenDialogIncompleto(true);
+        return;
+      }
+
+      if (observacionRequerida) {
+        setOpenDialogFaltaObservacion(true);
+        return;
+      }
+    }
+
+    setRegistrado(true);
 
     try {
-      console.log(observacion);
-      console.log(modificacionPuntaje);
-      console.log(evaluacionRealizadaData);
       await registrarEvaluacionRealizada(evaluacionRealizadaData);
     } catch (error) {
-      console.log(error.response?.data?.message);
       const mensajeError =
         error.response?.data?.message || "Error al registrar una evaluación.";
       setError(mensajeError);
-      console.log(error.response);
-      console.log(error.response?.data);
-      console.log(error.response?.data?.message);
     }
 
     navigate("/home");
@@ -207,6 +236,56 @@ export function ListaPreguntas({
           </Button>
           <Button color="error" onClick={handleCloseDialog}>
             No
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={openDialogIncompleto}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+          "& .MuiDialog-paper": {
+            padding: "1.75rem",
+            borderRadius: "20px",
+          },
+        }}
+      >
+        <DialogTitle id="alert-dialog-title">
+          {
+            "La evaluación no está completa. Por favor, especifica el DNI y marca todas las preguntas para continuar."
+          }
+        </DialogTitle>
+        <DialogActions>
+          <Button
+            sx={{ color: "#1A3D2D" }}
+            onClick={handleCloseDialogIncompleto}
+          >
+            Aceptar
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={openDialogFaltaObservacion}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+          "& .MuiDialog-paper": {
+            padding: "1.75rem",
+            borderRadius: "20px",
+          },
+        }}
+      >
+        <DialogTitle id="alert-dialog-title">
+          {
+            "Cuando se modifica el puntaje, es necesario agregar una observación. Por favor, completa el campo de observación."
+          }
+        </DialogTitle>
+        <DialogActions>
+          <Button
+            sx={{ color: "#1A3D2D" }}
+            onClick={handleCloseDialogFaltaObservacion}
+          >
+            Aceptar
           </Button>
         </DialogActions>
       </Dialog>

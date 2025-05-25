@@ -43,7 +43,7 @@ export function HomePage() {
         />
         <Grid container spacing={10} sx={{ pb: "60px" }}>
           <Grid item xs={12} sm={6} md={4} >
-            <CarpetaFake />
+            <CarpetaFake carpetas={carpetas} />
           </Grid>
           {listaFiltrada.map((evaluacion, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
