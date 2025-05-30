@@ -23,7 +23,7 @@ export function RegisterPage() {
     let errorList = [];
 
     if (password !== confirmarPassword) {
-      errorList.push("Las contraseÃ±as no coinciden");
+      errorList.push("Las contraseñas no coinciden");
     }
 
     if (errorList.length > 0) {
@@ -129,7 +129,7 @@ export function RegisterPage() {
             <Grid item xs={12} sm={12}>
               <Input
                 type="password"
-                placeholder={"Ingrese su contraseÃ±a"}
+                placeholder={"Ingrese su contraseña"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 icon={"key"}
@@ -139,7 +139,7 @@ export function RegisterPage() {
             <Grid item xs={12} sm={12}>
               <Input
                 type="password"
-                placeholder={"Repita su contraseÃ±a"}
+                placeholder={"Repita su contraseña"}
                 value={confirmarPassword}
                 onChange={(e) => setConfirmarPassword(e.target.value)}
                 icon={"key"}

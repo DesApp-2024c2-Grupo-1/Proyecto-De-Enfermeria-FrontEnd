@@ -82,7 +82,7 @@ function Carpeta({ titulo, id, edicion }) {
             >
               {edicion === "true" ? "Evaluar" : "Consultar"}
             </button>
-            <button
+            {edicion === "true" && <button
               className="botonClaro"
               onClick={() =>
                 navigate(
@@ -98,7 +98,7 @@ function Carpeta({ titulo, id, edicion }) {
               style={{ borderRadius: 5 }}
             >
               Ver
-            </button>
+            </button> }
             {edicion === "true" && <EditButton id={id} />}
           </Stack>
         </Paper>
