@@ -5,11 +5,6 @@ export const registrarDocente = async (docenteData) => {
     return response.data;
   };
 
-export const getDocenteByEmail = async (email) => {
-  const response = await axios.get(`http://localhost:3000/docente/email/${email}`)
-  return response.data
-}
-
 export const loginDocente = async (dni, password) => {
   const response = await axios.post(`http://localhost:3000/docente/login`, {
     dni,
