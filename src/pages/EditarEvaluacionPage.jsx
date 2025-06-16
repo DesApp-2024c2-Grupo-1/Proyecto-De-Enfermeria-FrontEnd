@@ -92,6 +92,11 @@ export function EditarEvaluacionPage() {
   };
 
   const manejarEdicion = async () => {
+    if (preguntas.length === 0) {
+      setError(["Debes agregar al menos 1 pregunta"]);
+      setOpenSnackbar(true);
+      return;
+    }
     try {
       await putEvaluacionYPreguntas(evaluacionData, id);
       navigate("/home");
@@ -164,6 +169,7 @@ export function EditarEvaluacionPage() {
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
             margin="normal"
+            disabled={true}
           />
 
           <p style={{ marginBottom: 1, fontSize: "17px", fontWeight: "bold" }}>
@@ -309,7 +315,7 @@ export function EditarEvaluacionPage() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
-          "& .MuiDialog-paper": { padding: "5rem" },
+          "& .MuiDialog-paper": { padding: "1.7rem", borderRadius: "20px" },
         }}
       >
         <DialogTitle

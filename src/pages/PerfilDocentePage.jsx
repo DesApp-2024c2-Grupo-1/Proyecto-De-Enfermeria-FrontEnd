@@ -11,7 +11,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-  useMediaQuery
+  useMediaQuery,
 } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { useDocente } from "../context/DocenteContext";
@@ -49,12 +49,19 @@ export function PerfilDocentePage() {
   const handleCerrarSesion = () => {
     setDocenteContext(null);
     navigate("/");
-  }
+  };
 
   const handleClick = async () => {
     if (!docenteContext?.id) return;
 
-    const updatedData = { nombre, apellido };
+    const capitalizar = (str) =>
+      str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
+    const updatedData = {
+      nombre: capitalizar(nombre),
+      apellido: capitalizar(apellido),
+    };
+
     try {
       if (editando) {
         setEditando(!editando);
@@ -78,10 +85,10 @@ export function PerfilDocentePage() {
 
   return (
     <>
-    <Stack
+      <Stack
         direction="column"
         spacing={2}
-        sx={{ display: "flex", alignItems: "center", my: "2rem"  }}
+        sx={{ display: "flex", alignItems: "center", my: "2rem" }}
       >
         <Box
           sx={{
@@ -98,13 +105,13 @@ export function PerfilDocentePage() {
             boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
           }}
         >
-          {docenteData?.nombre?.charAt(0)}
-          {docenteData?.apellido?.charAt(0)}
+          {docenteData?.nombre?.charAt(0).toUpperCase()}
+          {docenteData?.apellido?.charAt(0).toUpperCase()}
         </Box>
 
         <Input
           key="nombre"
-          width= {xs ? "17rem" : "25rem"}
+          width={xs ? "17rem" : "25rem"}
           backgroundColor={"#DDF0E7"}
           disabled={editando}
           value={nombre}
@@ -159,8 +166,7 @@ export function PerfilDocentePage() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
-
-          "& .MuiDialog-paper": { padding: "2rem" },
+          "& .MuiDialog-paper": { paddingLeft: "2.35rem", paddingRight: "2.35rem", paddingBottom: "1.35rem", paddingTop: "1.35rem", borderRadius: "20px" },
         }}
       >
         <DialogTitle id="alert-dialog-title">{"¿Cerrar sesión?"}</DialogTitle>

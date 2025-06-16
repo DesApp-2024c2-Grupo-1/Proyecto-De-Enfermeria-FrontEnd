@@ -12,10 +12,9 @@ import {
 } from "@mui/material";
 import { postEvaluacionYPreguntas } from "../services/EvaluacionService";
 import { useDocente } from "../context/DocenteContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Input } from "../components/Input";
 import { createTheme } from "@mui/material/styles";
-import { AiFillPlusCircle } from "react-icons/ai";
 
 export function CrearEvaluacionPage() {
   const [preguntas, setPreguntas] = useState([]);
@@ -30,6 +29,9 @@ export function CrearEvaluacionPage() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const theme = createTheme();
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const location = useLocation();
+  const carpetas = location.state?.carpetas || [];
 
   const evaluacionData = { titulo, docente: docenteContext.id, preguntas };
 
@@ -79,6 +81,16 @@ export function CrearEvaluacionPage() {
   };
 
   const manejarEnvio = async () => {
+    const tituloDuplicado = carpetas.some(
+      (evaluacion) =>
+        evaluacion.titulo.trim().toLowerCase() === titulo.trim().toLowerCase()
+    );
+
+    if (tituloDuplicado) {
+      setError(["Ya existe una evaluación con ese título."]);
+      setOpenSnackbar(true);
+      return;
+    }
     try {
       await postEvaluacionYPreguntas(evaluacionData);
       navigate("/crearEvaluacionExito");
@@ -87,16 +99,6 @@ export function CrearEvaluacionPage() {
         error.response?.data?.message || "Error al registrar la evaluación.";
       setError(mensajeError);
       setOpenSnackbar(true);
-      /*let mensajes;
-      if (Array.isArray(data)) {
-        mensajes = data;
-      } else if (typeof data === "object" && data !== null) {
-        mensajes = Object.values(data).flat();
-      } else {
-        mensajes = [data || "Ocurrió un error inesperado"];
-      }
-
-      alert(mensajes.join("\n"));*/
     }
   };
 
@@ -158,82 +160,86 @@ export function CrearEvaluacionPage() {
               </ListItem>
             ))}
           </List>
-          {xs ? <Stack
-            direction=  "column"
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              gap: 2,
-              marginTop: 2,
-            }}
-          >
-            <Input
-              placeholder="Nueva pregunta"
-              texto="nuevaPregunta"
-              width="100%"
-              helperText={errorCriterio || " "}
-              helperTextColor="red"
-              value={nuevoCriterio}
-              onChange={(e) => setNuevoCriterio(e.target.value)}
-            />
-            <Stack direction="row" spacing={2} justifyContent="space-between">
-            <Input
-              width="200px"
-              placeholder="Puntaje"
-              texto="puntaje"
-              helperText={errorPuntaje || " "}
-              helperTextColor="red"
-              helperTextWidth="200px"
-              value={puntaje}
-              onChange={(e) => setNuevoPuntaje(e.target.value)}
-            />
-            <Box sx={{ alignSelf: "flex-center" }}>
-              <button
-                onClick={agregarCriterio}
-                className="botonClaro"
-                style={{ marginTop: "28px", width:"100%" }}
-              >
-                Añadir
-              </button>
-            </Box>
+          {xs ? (
+            <Stack
+              direction="column"
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: 2,
+                marginTop: 2,
+              }}
+            >
+              <Input
+                placeholder="Nueva pregunta"
+                texto="nuevaPregunta"
+                width="100%"
+                helperText={errorCriterio || " "}
+                helperTextColor="red"
+                value={nuevoCriterio}
+                onChange={(e) => setNuevoCriterio(e.target.value)}
+              />
+              <Stack direction="row" spacing={2} justifyContent="space-between">
+                <Input
+                  width="200px"
+                  placeholder="Puntaje"
+                  texto="puntaje"
+                  helperText={errorPuntaje || " "}
+                  helperTextColor="red"
+                  helperTextWidth="200px"
+                  value={puntaje}
+                  onChange={(e) => setNuevoPuntaje(e.target.value)}
+                />
+                <Box sx={{ alignSelf: "flex-center" }}>
+                  <button
+                    onClick={agregarCriterio}
+                    className="botonClaro"
+                    style={{ marginTop: "28px", width: "100%" }}
+                  >
+                    Añadir
+                  </button>
+                </Box>
+              </Stack>
             </Stack>
-          </Stack> : <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-              gap: 2,
-              marginTop: 2,
-            }}
-          >
-            <Input
-              placeholder="Nueva pregunta"
-              texto="nuevaPregunta"
-              helperText={errorCriterio || " "}
-              helperTextColor="red"
-              value={nuevoCriterio}
-              onChange={(e) => setNuevoCriterio(e.target.value)}
-            />
-            <Input
-              width="200px"
-              placeholder="Puntaje"
-              texto="puntaje"
-              helperText={errorPuntaje || " "}
-              helperTextColor="red"
-              helperTextWidth="200px"
-              value={puntaje}
-              onChange={(e) => setNuevoPuntaje(e.target.value)}
-            />
-            <Box sx={{ alignSelf: "flex-start" }}>
-              <button
-                onClick={agregarCriterio}
-                className="botonClaro"
-                style={{ marginTop: "28px" }}
-              >
-                Añadir
-              </button>
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                gap: 2,
+                marginTop: 2,
+              }}
+            >
+              <Input
+                placeholder="Nueva pregunta"
+                texto="nuevaPregunta"
+                helperText={errorCriterio || " "}
+                helperTextColor="red"
+                value={nuevoCriterio}
+                onChange={(e) => setNuevoCriterio(e.target.value)}
+              />
+              <Input
+                width="200px"
+                placeholder="Puntaje"
+                texto="puntaje"
+                helperText={errorPuntaje || " "}
+                helperTextColor="red"
+                helperTextWidth="200px"
+                value={puntaje}
+                onChange={(e) => setNuevoPuntaje(e.target.value)}
+              />
+              <Box sx={{ alignSelf: "flex-start" }}>
+                <button
+                  onClick={agregarCriterio}
+                  className="botonClaro"
+                  style={{ marginTop: "28px" }}
+                >
+                  Añadir
+                </button>
+              </Box>
             </Box>
-          </Box>}
+          )}
         </Paper>
         <button
           onClick={manejarEnvio}

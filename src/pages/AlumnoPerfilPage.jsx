@@ -68,7 +68,10 @@ export function AlumnoPerfilPage() {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             sx={{
-              "& .MuiDialog-paper": { padding: "2rem" },
+              "& .MuiDialog-paper": {
+                padding: "1.75rem",
+                borderRadius: "20px",
+              },
             }}
           >
             <DialogTitle id="alert-dialog-title">
@@ -76,7 +79,10 @@ export function AlumnoPerfilPage() {
             </DialogTitle>
 
             <DialogActions>
-              <Button sx={{color: "#1A3D2D"}} onClick={() => navigate("/alumnos")}>
+              <Button
+                sx={{ color: "#1A3D2D" }}
+                onClick={() => navigate("/alumnos")}
+              >
                 Volver atrás
               </Button>
             </DialogActions>

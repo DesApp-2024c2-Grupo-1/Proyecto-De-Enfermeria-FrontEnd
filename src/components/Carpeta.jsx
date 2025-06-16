@@ -5,7 +5,7 @@ import { useEvaluacion } from "../context/EvaluacionContext";
 import { getEvaluacionById } from "../services/EvaluacionService";
 import EditButton from "./EditButton";
 
-function Carpeta({ titulo, id }) {
+function Carpeta({ titulo, id, edicion }) {
   const { setEvaluacionContext } = useEvaluacion();
   const navigate = useNavigate();
   const [evaluacion, setEvaluacion] = useState();
@@ -23,7 +23,7 @@ function Carpeta({ titulo, id }) {
     if (evaluacion) {
       setEvaluacionContext(evaluacion);
       navigate(`/registrarEvaluacion/${id}`);
-    }
+    } 
   };
 
   return (
@@ -45,7 +45,7 @@ function Carpeta({ titulo, id }) {
         <Paper
           sx={{
             paddingTop: "4vh",
-            paddingBottom: "2vh",
+            paddingBottom: edicion === "true" ? "2vh" : "4vh",
             width: "15rem",
             backgroundColor: "#daf2e3",
             position: "relative",
@@ -73,7 +73,6 @@ function Carpeta({ titulo, id }) {
               alignItems: "center",
               height: "100%",
               gap: "10px",
-  
             }}
           >
             <button
@@ -81,9 +80,9 @@ function Carpeta({ titulo, id }) {
               onClick={handleOnClick}
               style={{ borderRadius: 5 }}
             >
-              Evaluar
+              {edicion === "true" ? "Evaluar" : "Consultar"}
             </button>
-            <button
+            {edicion === "true" && <button
               className="botonClaro"
               onClick={() =>
                 navigate(
@@ -99,8 +98,8 @@ function Carpeta({ titulo, id }) {
               style={{ borderRadius: 5 }}
             >
               Ver
-            </button>
-            <EditButton id={id} />
+            </button> }
+            {edicion === "true" && <EditButton id={id} />}
           </Stack>
         </Paper>
 

@@ -77,7 +77,7 @@ function EditButton({ id }) {
           </ListItemIcon>
           <ListItemText>Editar</ListItemText>
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={() => navigate(`/historialEvaluacion/${id}`)}>
           <ListItemIcon>
             <i className="fa-solid fa-clock"></i>
           </ListItemIcon>
@@ -97,7 +97,7 @@ function EditButton({ id }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
-          "& .MuiDialog-paper": { padding: "5rem" },
+          "& .MuiDialog-paper": { padding: "1.75rem", borderRadius: "20px" },
         }}
       >
         <DialogTitle
