@@ -11,6 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import HomeIcon from "/assets/home.png";
 import ProfileIcon from "/assets/profile.png";
 import AlumnosIcon from "/assets/alumnos.png";
+import EstadisticasIcon from "/assets/estadisticas.png"
 import { useDocente } from "../context/DocenteContext";
 import IrAtrasBoton from "./irAtrasBoton";
 
@@ -52,12 +53,14 @@ export function Menu() {
   const opcionesMenu = [
     { path: "/home", label: "Inicio", icon: HomeIcon },
     { path: "/alumnos", label: "Alumnos", icon: AlumnosIcon },
+    { path: "/estadisticas", label: "Estadisticas", icon: EstadisticasIcon },
   ];
 
   const opcionesMenuMovil = [
     { path: "/home", label: "Inicio", icon: HomeIcon },
     { path: "/alumnos", label: "Alumnos", icon: AlumnosIcon },
     { path: "/perfilDocente", label: "Perfil", icon: ProfileIcon },
+    { path: "/estadisticas", label: "Estadisticas", icon: EstadisticasIcon },
   ];
 
   return (

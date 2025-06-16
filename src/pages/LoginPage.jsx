@@ -14,10 +14,16 @@ export function LoginPage() {
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [dniError, setDniError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const isDesktop = useMediaQuery("(min-width:600px)");
 
   const handleLogin = async () => {
+
+    setPasswordError(!password.trim() ? "Este campo no puede estar vacío" : "");
+    setDniError(!dni.trim() ? "Este campo no puede estar vacío" : "");
+
     try {
       const docente = await loginDocente(dni, password);
       setDocenteContext(docente);  
@@ -89,12 +95,16 @@ export function LoginPage() {
             value={dni}
             onChange={(e) => setDni(e.target.value)}
             icon={"address-card"}
+            helperText={dniError || " "}
+            helperTextColor="red"
           />
           <Input
             type="password"
             placeholder={"Ingresar Contraseña"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            helperText={passwordError || " "}
+            helperTextColor="red"
             icon={"key"}
           />
           <button onClick={handleLogin} className="botonClaro">

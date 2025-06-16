@@ -16,6 +16,15 @@ export function RegisterPage() {
   const [error, setError] = useState([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
+  const [nombreError, setNombreError] = useState("");
+  const [apellidoError, setApellidoError] = useState("");
+  const [dniError, setDniError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmarPasswordError, setConfirmarPasswordError] = useState("");
+
+
+
   const handleRegister = async () => {
     const capitalizar = (str) =>
       str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -31,6 +40,13 @@ export function RegisterPage() {
       setOpenSnackbar(true);
       return;
     }
+
+    setNombreError(!nombre.trim() ? "Este campo no puede estar vacío" : "");
+    setApellidoError(!apellido.trim() ? "Este campo no puede estar vacío" : "");
+    setEmailError(!email.trim() ? "Este campo no puede estar vacío" : "");
+    setPasswordError(!password.trim() ? "Este campo no puede estar vacío" : "");
+    setConfirmarPasswordError(!confirmarPassword.trim() ? "Este campo no puede estar vacío" : "");
+    setDniError(!dni.trim() ? "Este campo no puede estar vacío" : "");
 
     setError([]);
 
@@ -96,6 +112,8 @@ export function RegisterPage() {
                 onChange={(e) => setNombre(e.target.value)}
                 icon={"user"}
                 width={"100%"}
+                helperText={nombreError || " "}
+                helperTextColor="red"
               />
             </Grid>
             <Grid item xs={12} sm={5.8} sx={{ marginLeft: "auto" }}>
@@ -105,6 +123,8 @@ export function RegisterPage() {
                 onChange={(e) => setApellido(e.target.value)}
                 icon={"user"}
                 width={"100%"}
+                helperText={apellidoError || " "}
+                helperTextColor="red"
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -114,6 +134,8 @@ export function RegisterPage() {
                 onChange={(e) => setDni(e.target.value)}
                 icon={"id-card"}
                 width={"100%"}
+                helperText={dniError || " "}
+                helperTextColor="red"
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -124,6 +146,8 @@ export function RegisterPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 icon={"envelope"}
                 width={"100%"}
+                helperText={emailError || " "}
+                helperTextColor="red"
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -134,6 +158,8 @@ export function RegisterPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 icon={"key"}
                 width={"100%"}
+                helperText={passwordError || " "}
+                helperTextColor="red"
               />
             </Grid>
             <Grid item xs={12} sm={12}>
@@ -144,6 +170,8 @@ export function RegisterPage() {
                 onChange={(e) => setConfirmarPassword(e.target.value)}
                 icon={"key"}
                 width={"100%"}
+                helperText={confirmarPasswordError || " "}
+                helperTextColor="red"
               />
             </Grid>
           </Grid>
