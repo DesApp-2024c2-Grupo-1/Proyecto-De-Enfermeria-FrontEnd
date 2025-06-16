@@ -10,6 +10,11 @@ export const getEvaluacionById = async (id) => {
     return response.data;
 };
 
+export const getAllVersionesDeUnModelo = async (id) => {
+    const response = await axios.get(`http://localhost:3000/evaluacion/versiones/${id}`);
+    return response.data;
+}
+
 export const postEvaluacionYPreguntas = async (evaluacionYPreguntasData) => {
     const response = await axios.post(`http://localhost:3000/evaluacion`, evaluacionYPreguntasData);
     return response.data;
