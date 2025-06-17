@@ -31,13 +31,34 @@ function ListItemConDropdown({ textos, buttonOnClick, contenidoDropdown }) {
             justifyContent: "space-between",
           }}
         >
-          <Stack direction={"row"} spacing={{ xs: 1, sm: 4 }}>
+          {xs ? (
+          <Stack direction="row" spacing={{ xs: 1, sm: 4 }}>
             {textos.map(({ key, value }, index) => (
               <div key={index}>
                 <p>{xs && key === "nombre" ? `${value.charAt(0)}.` : value}</p>
               </div>
             ))}
           </Stack>
+        ) : (
+          <Stack direction="row" spacing={{ xs: 1, sm: 4 }}>
+            {textos.map(({ key, value }, index) => (
+              <Box sx={{ display: "flex", alignItems: "center", height: "55px"}}>
+              <Box
+                key={index}
+                sx={{
+                  width: key === "dni" ? "100px" : "125px",
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                <p style={{ margin: 0 }}>
+                  {xs && key === "nombre" ? `${value.charAt(0)}.` : value}
+                </p>
+              </Box>
+              </Box>
+            ))}
+          </Stack>
+        )}
           {xs ? (
             <Button
               sx={{

@@ -43,7 +43,7 @@ export function EvaluacionesPorAlumno() {
       <IrArribaBoton />
       <Stack sx={{ alignItems: "center" }}>
         <h1>{evaluacionTitulo}</h1>
-        <Stack sx={{ width: "70%" }}>
+        <Stack sx={{ width: "60%" }}>
           <Stack
             direction={"row"}
             display={{ alignItems: "center" }}

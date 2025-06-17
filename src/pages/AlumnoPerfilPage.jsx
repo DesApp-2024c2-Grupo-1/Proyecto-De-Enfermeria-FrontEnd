@@ -50,7 +50,7 @@ export function AlumnoPerfilPage() {
           {alumnoNombre} {alumnoApellido}
         </h1>
         {evaluacionesFiltradas.length > 0 ? (
-          <Box sx={{ width: "70%", display: "flex", flexDirection: "column" }}>
+          <Box sx={{ width: "60%", display: "flex", flexDirection: "column" }}>
             {evaluacionesFiltradas.map((evaluacion, index) => (
               <Lista
                 key={index}
