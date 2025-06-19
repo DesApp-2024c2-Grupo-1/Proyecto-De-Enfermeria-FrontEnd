@@ -6,6 +6,7 @@ import { getAllAlumnos } from "../services/AlumnoService";
 import { createTheme } from "@mui/material/styles";
 import { Stack, useMediaQuery, Pagination } from "@mui/material";
 import IrArribaBoton from "../components/irArribaBoton";
+import ListHeader from "../components/Header";
 
 export function AlumnosPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -18,6 +19,12 @@ export function AlumnosPage() {
   const [filtrado, setFiltrado] = useState(false);
   const [paginaActual, setPaginaActual] = useState(1);
   const itemsPorPagina = 8;
+
+  const textosHeader = [
+    { key: "nombre", value: "Nombre" },
+    { key: "apellido", value: "Apellido" },
+    { key: "dni", value: "DNI" },
+  ];
 
   const handleBusqueda = (e) => {
     let valor = e.target.value.toLowerCase();
@@ -80,7 +87,7 @@ export function AlumnosPage() {
         <h1>Alumnos</h1>
         <Stack
           sx={{
-            width: "55%",
+            width: xs ? "75%" : "60%",
           }}
         >
           <Busqueda
@@ -88,6 +95,7 @@ export function AlumnosPage() {
             onChange={handleBusqueda}
             width={xs ? "100%" : "200px"}
           />
+          <ListHeader key={keys} textos={textosHeader} />
           {!(filtrado && alumnosFiltrados.length === 0) ? (
             <>
               <Lista

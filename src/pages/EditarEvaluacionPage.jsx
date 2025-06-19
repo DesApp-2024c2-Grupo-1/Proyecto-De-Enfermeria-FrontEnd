@@ -302,8 +302,8 @@ export function EditarEvaluacionPage() {
         </Paper>
         <button
           onClick={manejarEdicion}
-          className="botonClaro"
-          style={{ marginTop: "20px" }}
+          className="botonVerde"
+          style={{ marginTop: "60px", marginBottom: "-22px"}}
         >
           Guardar cambios
         </button>

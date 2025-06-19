@@ -28,7 +28,7 @@ const Busqueda = ({ placeholder, onChange, width, height, margin }) => {
         height: height || "50px",
         margin: margin || "0",
         "& .MuiOutlinedInput-root": {
-          borderRadius: "50px",
+          borderRadius: "10px",
           "&.Mui-focused fieldset": {
             borderColor: "#77C4A0",
           },

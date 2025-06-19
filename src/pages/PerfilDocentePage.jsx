@@ -148,9 +148,9 @@ export function PerfilDocentePage() {
         <Button
           sx={{
             width: "15rem",
-            borderRadius: "100px",
+            borderRadius: "10px",
             fontWeight: "600",
-            boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.3)",
+              boxShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
           }}
           variant="outlined"
           color="error"

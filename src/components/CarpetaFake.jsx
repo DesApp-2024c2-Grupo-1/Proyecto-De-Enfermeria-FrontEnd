@@ -20,7 +20,7 @@ function CarpetaFake({ titulo, carpetas }) {
           width: "15rem",
           backgroundColor: "#daf2e3",
           position: "relative",
-          borderRadius: "5px",
+          borderRadius: "10px",
           boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.3)",
         }}
       >
