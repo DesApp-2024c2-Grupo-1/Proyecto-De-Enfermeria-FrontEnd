@@ -9,12 +9,14 @@ import {
   Snackbar,
   Alert,
   useMediaQuery,
+  Button,
 } from "@mui/material";
 import { postEvaluacionYPreguntas } from "../services/EvaluacionService";
 import { useDocente } from "../context/DocenteContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Input } from "../components/Input";
 import { createTheme } from "@mui/material/styles";
+import { AiFillPlusCircle } from "react-icons/ai";
 
 export function CrearEvaluacionPage() {
   const [preguntas, setPreguntas] = useState([]);
@@ -145,12 +147,13 @@ export function CrearEvaluacionPage() {
               <ListItem
                 key={indice}
                 secondaryAction={
-                  <button
+                  <Button
+                    variant="outlined"
+                    color="error"
                     onClick={() => eliminarCriterio(indice)}
-                    className="botonClaro"
                   >
-                    Borrar
-                  </button>
+                    <i className="fa-solid fa-trash"></i>
+                  </Button>
                 }
               >
                 <ListItemText
@@ -191,13 +194,16 @@ export function CrearEvaluacionPage() {
                   onChange={(e) => setNuevoPuntaje(e.target.value)}
                 />
                 <Box sx={{ alignSelf: "flex-center" }}>
-                  <button
+                  <Button
+                    variant="outlined"
+                    color="success"
                     onClick={agregarCriterio}
-                    className="botonClaro"
-                    style={{ marginTop: "28px", width: "100%" }}
+                    style={{
+                      marginTop: "27px",
+                    }}
                   >
-                    Añadir
-                  </button>
+                    <AiFillPlusCircle size="25" color="#275B43" />
+                  </Button>
                 </Box>
               </Stack>
             </Stack>
@@ -211,33 +217,47 @@ export function CrearEvaluacionPage() {
                 marginTop: 2,
               }}
             >
-              <Input
-                placeholder="Nueva pregunta"
-                texto="nuevaPregunta"
-                helperText={errorCriterio || " "}
-                helperTextColor="red"
-                value={nuevoCriterio}
-                onChange={(e) => setNuevoCriterio(e.target.value)}
-              />
-              <Input
-                width="200px"
-                placeholder="Puntaje"
-                texto="puntaje"
-                helperText={errorPuntaje || " "}
-                helperTextColor="red"
-                helperTextWidth="200px"
-                value={puntaje}
-                onChange={(e) => setNuevoPuntaje(e.target.value)}
-              />
-              <Box sx={{ alignSelf: "flex-start" }}>
-                <button
+              <Stack
+                direction="row"
+                width="92.3%"
+                spacing={2}
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                }}
+              >
+                <Input
+                  sx={{ width: { xs: "10px", sm: "412px", md: "412px" } }}
+                  placeholder="Nueva pregunta"
+                  texto="nuevaPregunta"
+                  helperText={errorCriterio || " "}
+                  helperTextColor="red"
+                  value={nuevoCriterio}
+                  onChange={(e) => setNuevoCriterio(e.target.value)}
+                />
+                <Input
+                  width="87px"
+                  placeholder="Puntaje"
+                  texto="puntaje"
+                  helperText={errorPuntaje || " "}
+                  helperTextColor="red"
+                  helperTextWidth="200px"
+                  value={puntaje}
+                  onChange={(e) => setNuevoPuntaje(e.target.value)}
+                />
+
+                <Button
+                  variant="outlined"
+                  color="success"
                   onClick={agregarCriterio}
-                  className="botonClaro"
-                  style={{ marginTop: "28px" }}
+                  style={{
+                    marginTop: "19.6px",
+                  }}
                 >
-                  Añadir
-                </button>
-              </Box>
+                  <AiFillPlusCircle size="44" color="#275B43" />
+                </Button>
+              </Stack>
             </Box>
           )}
         </Paper>

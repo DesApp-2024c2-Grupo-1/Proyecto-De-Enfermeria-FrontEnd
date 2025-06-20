@@ -20,7 +20,7 @@ function Lista({
   return (
     <>
       <div className={className}>
-        {titulo && <h1>{titulo}</h1>}
+        {titulo && <h1 style={{ textAlign: "left" }}>{titulo}</h1>}
         {lista.map((item, index) => {
           const textos = keys.map((key) => ({ key, value: item[key] }));
           return dropdown ? (

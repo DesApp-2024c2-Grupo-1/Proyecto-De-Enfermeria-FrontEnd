@@ -26,6 +26,7 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
 import { createTheme } from "@mui/material/styles";
 import { useParams } from "react-router";
+import { AiFillPlusCircle } from "react-icons/ai";
 
 export function EditarEvaluacionPage() {
   const [preguntas, setPreguntas] = useState([]);
@@ -152,7 +153,7 @@ export function EditarEvaluacionPage() {
         }}
       >
         <Paper
-          elevation={3}
+          elevation={xs ? 0 : 3}
           sx={{
             width: "100%",
             maxWidth: 800,
@@ -246,13 +247,16 @@ export function EditarEvaluacionPage() {
                   onChange={(e) => setNuevoPuntaje(e.target.value)}
                 />
                 <Box sx={{ alignSelf: "flex-center" }}>
-                  <button
-                    onClick={agregarCriterio}
-                    className="botonClaro"
-                    style={{ marginTop: "28px", width: "100%" }}
-                  >
-                    Añadir
-                  </button>
+                  <Button
+                  variant="outlined"
+                  color="success"
+                  onClick={agregarCriterio}
+                  style={{
+                    marginTop: "27px",
+                  }}
+                >
+                  <AiFillPlusCircle size="25" color="#275B43" />
+                </Button>
                 </Box>
               </Stack>
             </Stack>
@@ -267,9 +271,18 @@ export function EditarEvaluacionPage() {
                 marginTop: 2,
               }}
             >
-              <Stack direction="row" width="100%" spacing={2}>
+              <Stack
+                direction="row"
+                width="92.3%"
+                spacing={2}
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                }}
+              >
                 <Input
-                  sx={{ width: { xs: "10px", sm: "400px", md: "500px" } }}
+                  sx={{ width: { xs: "10px", sm: "582px", md: "612px" } }}
                   placeholder="Nueva pregunta"
                   texto="nuevaPregunta"
                   helperText={errorCriterio || " "}
@@ -278,7 +291,7 @@ export function EditarEvaluacionPage() {
                   onChange={(e) => setNuevoCriterio(e.target.value)}
                 />
                 <Input
-                  width="120px"
+                  width="87px"
                   placeholder="Puntaje"
                   texto="puntaje"
                   helperText={errorPuntaje || " "}
@@ -287,15 +300,17 @@ export function EditarEvaluacionPage() {
                   value={puntaje}
                   onChange={(e) => setNuevoPuntaje(e.target.value)}
                 />
-                <Box sx={{ marginLeft: "0" }}>
-                  <button
-                    onClick={agregarCriterio}
-                    className="botonClaro"
-                    style={{ marginTop: "28px" }}
-                  >
-                    Añadir
-                  </button>
-                </Box>
+
+                <Button
+                  variant="outlined"
+                  color="success"
+                  onClick={agregarCriterio}
+                  style={{
+                    marginTop: "19.6px",
+                  }}
+                >
+                  <AiFillPlusCircle size="44" color="#275B43" />
+                </Button>
               </Stack>
             </Box>
           )}
@@ -303,7 +318,7 @@ export function EditarEvaluacionPage() {
         <button
           onClick={manejarEdicion}
           className="botonVerde"
-          style={{ marginTop: "60px", marginBottom: "-22px"}}
+          style={{ marginTop: "60px", marginBottom: "-22px" }}
         >
           Guardar cambios
         </button>
