@@ -107,7 +107,7 @@ function EditButton({ id }) {
             justifyContent: "center",
           }}
         >
-          {"Estás seguro de eliminar la evaluación?"}
+          {"¿Estás seguro/a de eliminar la evaluación?"}
         </DialogTitle>
         <DialogContent>
           Al eliminar la evaluación, se eliminarán todas las preguntas y
@@ -118,7 +118,7 @@ function EditButton({ id }) {
           sx={{
             display: "flex",
             justifyContent: "flex-end",
-            padding: "0 2rem 2rem 2rem",
+            padding: "0 1rem 1rem 1rem",
           }}
         >
           <Button color="error" onClick={() => setOpenDialog(false)}>

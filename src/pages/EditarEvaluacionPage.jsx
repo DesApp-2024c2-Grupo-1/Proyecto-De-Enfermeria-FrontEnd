@@ -40,6 +40,7 @@ export function EditarEvaluacionPage() {
   const { docenteContext } = useDocente();
   const [error, setError] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
+  const [openDialogExito, setOpenDialogExito] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const theme = createTheme();
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
@@ -100,7 +101,10 @@ export function EditarEvaluacionPage() {
     }
     try {
       await putEvaluacionYPreguntas(evaluacionData, id);
-      navigate("/home");
+      setOpenDialogExito(true);
+      setTimeout(() => {
+        navigate("/home");
+      }, 5000);
     } catch (error) {
       const mensajeError =
         error.response?.data?.message || "Error al modificar la evaluación.";
@@ -158,7 +162,7 @@ export function EditarEvaluacionPage() {
             width: "100%",
             maxWidth: 800,
             padding: 3,
-            borderRadius: 7,
+            borderRadius: 3,
             backgroundColor: xs ? "white" : "#DDF0E7",
           }}
         >
@@ -248,15 +252,15 @@ export function EditarEvaluacionPage() {
                 />
                 <Box sx={{ alignSelf: "flex-center" }}>
                   <Button
-                  variant="outlined"
-                  color="success"
-                  onClick={agregarCriterio}
-                  style={{
-                    marginTop: "27px",
-                  }}
-                >
-                  <AiFillPlusCircle size="25" color="#275B43" />
-                </Button>
+                    variant="outlined"
+                    color="success"
+                    onClick={agregarCriterio}
+                    style={{
+                      marginTop: "27px",
+                    }}
+                  >
+                    <AiFillPlusCircle size="25" color="#275B43" />
+                  </Button>
                 </Box>
               </Stack>
             </Stack>
@@ -387,7 +391,29 @@ export function EditarEvaluacionPage() {
           </Button>
         </DialogActions>
       </Dialog>
-
+      <Dialog
+        open={openDialogExito}
+        onClose={() => setOpenDialogExito(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+          "& .MuiDialog-paper": { padding: "1.75rem", borderRadius: "20px" },
+        }}
+      >
+        <DialogTitle
+          id="alert-dialog-exito"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {"¡Éxito!"}
+        </DialogTitle>
+        <DialogContent>
+          El modelo de evaluación fue editado correctamente.
+          Serás redirigido/a al Inicio en unos segundos.
+        </DialogContent>
+      </Dialog>
       {/* Snackbar para mostrar errores */}
       <Snackbar
         open={openSnackbar}

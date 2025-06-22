@@ -124,7 +124,7 @@ export function CrearEvaluacionPage() {
             width: "100%",
             maxWidth: 600,
             padding: 3,
-            borderRadius: 7,
+            borderRadius: 3,
             backgroundColor: xs ? "white" : "#DDF0E7",
           }}
         >
