@@ -16,6 +16,7 @@ import { CrearEvaluacionPage } from "./pages/CrearEvaluacionPage";
 import { CrearEvaluacionExitoPage } from "./pages/CrearEvaluacionExito";
 import { EditarEvaluacionPage } from "./pages/EditarEvaluacionPage";
 import { HistorialEvaluacion } from "./pages/HistorialEvaluacion";
+import { RegistrarEvaluacionExitoPage } from "./pages/RegistrarEvaluacionExito";
 import ChartMockeadoDemo from "./pages/ChartsPage";
 
 export function AppRouter() {
@@ -71,6 +72,10 @@ export function AppRouter() {
       <Route
         path="/estadisticas"
         element={<ChartMockeadoDemo />}
+      />
+      <Route
+        path="/evaluarExito"
+        element={<RegistrarEvaluacionExitoPage />}
       />
       <Route path="/editarEvaluacion/:id" element={<EditarEvaluacionPage />} />
 

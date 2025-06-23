@@ -159,7 +159,7 @@ export function ListaPreguntas({
       setError(mensajeError);
     }
 
-    navigate("/home");
+    navigate("/evaluarExito");
   };
 
   return (

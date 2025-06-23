@@ -60,7 +60,7 @@ function CarpetaFake({ titulo, carpetas }) {
           width: "15rem",
         }}
       >
-        Crear evaluación
+        Crear modelo de evaluación
       </Typography>
     </Stack>
   );

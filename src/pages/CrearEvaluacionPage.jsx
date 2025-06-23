@@ -107,7 +107,7 @@ export function CrearEvaluacionPage() {
   return (
     <Box>
       <h2 style={{ textAlign: "center", marginTop: "7vh" }}>
-        Crear Evaluación
+        Crear Modelo de Evaluación
       </h2>
       <Box
         sx={{

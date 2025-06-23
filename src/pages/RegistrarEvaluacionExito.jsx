@@ -1,13 +1,13 @@
 import { Box, Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export function CrearEvaluacionExitoPage() {
+export function RegistrarEvaluacionExitoPage() {
   const navigate = useNavigate();
 
   return (
     <Box>
       <h2 style={{ textAlign: "center", marginTop: "7vh" }}>
-        Crear Modelo de Evaluación
+        Evaluación
       </h2>
       <Box
         sx={{
@@ -28,7 +28,7 @@ export function CrearEvaluacionExitoPage() {
             backgroundColor: "#DDF0E7",
           }}
         >
-          <h1>¡El Modelo de Evaluación fue creado con éxito!</h1>
+          <h1>¡La evaluación fue registrada con éxito!</h1>
           <Box
             sx={{
               display: "flex",
@@ -45,11 +45,11 @@ export function CrearEvaluacionExitoPage() {
               Ir al inicio
             </button>
             <button
-              onClick={() => navigate("/crearEvaluacion")}
+              onClick={() => navigate(-1)}
               className="botonClaro"
               style={{ borderRadius: 8 }}
             >
-              Crear otro
+              Evaluar nuevamente
             </button>
           </Box>
         </Paper>
