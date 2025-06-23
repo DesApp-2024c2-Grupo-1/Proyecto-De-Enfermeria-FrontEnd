@@ -79,9 +79,9 @@ export function RegistroEvaluacionesPage() {
         <h1>{evaluacionTitulo}</h1>
         <Stack sx={{ width: "70%" }}>
           <Busqueda
-            placeholder="Buscar por DNI..."
+            placeholder="Buscar un alumno..."
             onChange={handleBusqueda}
-            width={xs ? "100%" : "200px"}
+            width={xs ? "100%" : "220px"}
           />
 
           {alumnos.length > 0 ? (
