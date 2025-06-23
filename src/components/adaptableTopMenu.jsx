@@ -53,14 +53,12 @@ export function Menu() {
   const opcionesMenu = [
     { path: "/home", label: "Inicio", icon: HomeIcon },
     { path: "/alumnos", label: "Alumnos", icon: AlumnosIcon },
-    { path: "/estadisticas", label: "Estadisticas", icon: EstadisticasIcon },
   ];
 
   const opcionesMenuMovil = [
     { path: "/home", label: "Inicio", icon: HomeIcon },
     { path: "/alumnos", label: "Alumnos", icon: AlumnosIcon },
     { path: "/perfilDocente", label: "Perfil", icon: ProfileIcon },
-    { path: "/estadisticas", label: "Estadisticas", icon: EstadisticasIcon },
   ];
 
   return (
