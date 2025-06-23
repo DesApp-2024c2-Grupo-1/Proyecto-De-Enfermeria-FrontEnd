@@ -252,7 +252,7 @@ export function ListaPreguntas({
       >
         <DialogTitle id="alert-dialog-title">
           {
-            "La evaluación no está completa. Por favor, especifica el DNI y marca todas las preguntas para continuar."
+            "La evaluación no está completa. Por favor, especifica el DNI, marca todas las preguntas y el lugar para continuar."
           }
         </DialogTitle>
         <DialogActions>
