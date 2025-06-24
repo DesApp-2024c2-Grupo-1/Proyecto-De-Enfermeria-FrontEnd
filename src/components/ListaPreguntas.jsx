@@ -40,6 +40,7 @@ export function ListaPreguntas({
   const [respuestas, setRespuestas] = useState([]);
   const [notaModificada, setnotaModificada] = useState(0);
   const [alerta, setAlerta] = useState(false);
+  const [mensajeIncompleto, setMensajeIncompleto] = useState("");
   const navigate = useNavigate();
   const theme = createTheme();
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
@@ -144,11 +145,21 @@ export function ListaPreguntas({
         (!observacionTexto || observacionTexto.trim() === "");
 
       if (alumnoInvalido || respuestasIncompletas || lugarNoSeleccionado) {
+        let mensaje = "La evaluación no está completa. Por favor, especifica ";
+
+        const partes = [];
+        if (alumnoInvalido) partes.push("el <b>DNI</b>");
+        if (respuestasIncompletas) partes.push("todas las <b>preguntas</b>");
+        if (lugarNoSeleccionado) partes.push("el <b>lugar</b>");
+
+        mensaje +=
+          partes.join(", ").replace(/, ([^,]*)$/, " y $1") + " para continuar.";
+
+        setMensajeIncompleto(mensaje);
         setOpenDialog(false);
         setOpenDialogIncompleto(true);
         return;
       }
-
       if (observacionRequerida) {
         setOpenDialog(false);
         setOpenDialogFaltaObservacion(true);
@@ -298,10 +309,7 @@ export function ListaPreguntas({
           ></dotlottie-wc>
         </DialogTitle>
         <DialogContent>
-          <p style={{ textAlign: "center" }}>
-            La evaluación no está completa. Por favor, especifica el <b>DNI</b>,
-            marca todas las <b>preguntas</b> y el <b>lugar</b> para continuar.
-          </p>
+          <p style={{ textAlign: "center" }} dangerouslySetInnerHTML={{ __html: mensajeIncompleto }} />
         </DialogContent>
         <DialogActions>
           <Button

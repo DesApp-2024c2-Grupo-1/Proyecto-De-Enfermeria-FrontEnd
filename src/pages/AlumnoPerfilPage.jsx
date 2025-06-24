@@ -82,8 +82,8 @@ export function AlumnoPerfilPage() {
               <Button
                 variant="outlined"
                 sx={{
-                  color: "#FFFFFF",
-                  backgroundColor: "#1A3D2D",
+                  color: "#1A3D2D",
+                  backgroundColor: "#FFFFFF",
                   borderColor: "#1A3D2D",
                   borderRadius: "10px",
                   "&:hover": {
