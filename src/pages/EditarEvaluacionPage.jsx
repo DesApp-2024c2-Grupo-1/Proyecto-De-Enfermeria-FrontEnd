@@ -393,7 +393,6 @@ export function EditarEvaluacionPage() {
       </Dialog>
       <Dialog
         open={openDialogExito}
-        onClose={() => setOpenDialogExito(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
@@ -407,11 +406,17 @@ export function EditarEvaluacionPage() {
             justifyContent: "center",
           }}
         >
-          {"¡Éxito!"}
+          <dotlottie-wc
+            src="https://lottie.host/182b34ff-8146-4be2-9cc9-e1ea97d6a04d/u56gM45ANy.lottie"
+            style={{ width: "300px", height: "300px", margin: "-50px" }}
+            autoplay
+          ></dotlottie-wc>
         </DialogTitle>
         <DialogContent>
-          El modelo de evaluación fue editado correctamente.
-          Serás redirigido/a al Inicio en unos segundos.
+          <p style={{ textAlign: "center" }}>
+            El modelo de evaluación fue editado correctamente. Serás
+            redirigido/a al Inicio en unos segundos.
+          </p>
         </DialogContent>
       </Dialog>
       {/* Snackbar para mostrar errores */}

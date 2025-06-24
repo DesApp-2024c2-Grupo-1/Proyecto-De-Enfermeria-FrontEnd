@@ -15,12 +15,12 @@ import {
 
 import { use, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { deshabilitarEvaluacion } from "../services/EvaluacionService";
 
 function EditButton({ id }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
+  const [openDialogExito, setOpenDialogExito] = useState(false);
   const open = Boolean(anchorEl);
   const navigate = useNavigate();
   const handleClick = (event) => {
@@ -34,8 +34,11 @@ function EditButton({ id }) {
     deshabilitarEvaluacion(id);
     handleClose();
     console.log("Evaluación deshabilitada");
-    window.location.reload();
-    setOpenDialog(false);
+    setOpenDialog(false)
+    setOpenDialogExito(true) 
+    setTimeout(() => {
+        window.location.reload();;
+      }, 3000);
   };
 
   return (
@@ -128,6 +131,33 @@ function EditButton({ id }) {
             Confirmar
           </Button>
         </DialogActions>
+      </Dialog>
+      <Dialog
+        open={openDialogExito}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+          "& .MuiDialog-paper": { padding: "1.75rem", borderRadius: "20px" },
+        }}
+      >
+        <DialogTitle
+          id="alert-dialog-exito"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <dotlottie-wc
+            src="https://lottie.host/182b34ff-8146-4be2-9cc9-e1ea97d6a04d/u56gM45ANy.lottie"
+            style={{ width: "300px", height: "300px", margin: "-50px" }}
+            autoplay
+          ></dotlottie-wc>
+        </DialogTitle>
+        <DialogContent>
+          <p style={{ textAlign: "center" }}>
+            El modelo de evaluación fue eliminado correctamente.
+          </p>
+        </DialogContent>
       </Dialog>
     </div>
   );

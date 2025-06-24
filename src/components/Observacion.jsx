@@ -39,7 +39,7 @@ export function Observacion({
             <TextField
               sx={{
                 backgroundColor: "#DDF0E7",
-                width: "230px",
+                width: "260px",
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
                     borderColor: "#c4c4c4",

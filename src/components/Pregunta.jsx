@@ -11,36 +11,49 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
         justifyContent: "space-between",
         alignItems: "center",
         my: "1rem",
+        borderBottom: "1px solid #1A3D2D",
       }}
     >
       <Paper
+        elevation={0}
         sx={{
-          backgroundColor: "#DDF0E7",
+          backgroundColor: "#FFFFFF",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "left",
           justifyContent: "center",
           borderRadius: "10px",
           paddingBottom: "1rem",
+          width: "100%",
         }}
       >
         <Box
           sx={{
-            maxWidth: "70%",
+            maxWidth: "100%",
             textAlign: "justify",
             backgroundColor: "#bbe1d0",
             px: "1rem",
             py: "0.1rem",
             my: "1rem",
-            borderRadius: "10px",
+            borderRadius: "0px 10px 10px 0px",
           }}
         >
           <p>{pregunta}</p>
         </Box>
 
-        <Stack direction={"row"} spacing={2.5}>
-          <p style={{ marginRight: 50 }}>{puntaje} {puntaje > 1 ? "puntos" : "punto"}</p>
-
+        <Stack
+          direction={"row"}
+          spacing={2.5}
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <p>
+            {puntaje} {puntaje > 1 ? "puntos" : "punto"}
+          </p>
+          <Stack direction={"row"} spacing={2.5}>
           <Box
             sx={{
               display: "flex",
@@ -117,6 +130,7 @@ export function Pregunta({ pregunta, puntaje, respuesta, disabled, onChange }) {
             />
             <label htmlFor={`no-${pregunta}`}>✗</label>
           </Box>
+          </Stack>
         </Stack>
       </Paper>
     </Stack>

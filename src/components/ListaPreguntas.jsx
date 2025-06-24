@@ -8,6 +8,7 @@ import {
   DialogContentText,
   DialogActions,
   Button,
+  useMediaQuery,
 } from "@mui/material";
 import { Lugar } from "../components/Lugar";
 import { Observacion } from "../components/Observacion";
@@ -15,6 +16,7 @@ import { registrarEvaluacionRealizada } from "../services/EvaluacionRealizadaSer
 import { useDocente } from "../context/DocenteContext";
 import { useEvaluacion } from "../context/EvaluacionContext";
 import { useNavigate } from "react-router-dom";
+import { createTheme } from "@mui/material/styles";
 
 export function ListaPreguntas({
   preguntas,
@@ -29,6 +31,7 @@ export function ListaPreguntas({
   const [error, setError] = useState();
   const [observacion, setObservacion] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
+  const [openDialogExito, setOpenDialogExito] = useState(false);
   const [openDialogIncompleto, setOpenDialogIncompleto] = useState(false);
   const [openDialogFaltaObservacion, setOpenDialogFaltaObservacion] =
     useState(false);
@@ -38,6 +41,8 @@ export function ListaPreguntas({
   const [notaModificada, setnotaModificada] = useState(0);
   const [alerta, setAlerta] = useState(false);
   const navigate = useNavigate();
+  const theme = createTheme();
+  const xs = useMediaQuery(theme.breakpoints.down("sm"));
 
   const puntajeTotal = preguntas.reduce(
     (total, pregunta) => total + (pregunta.puntaje || 0),
@@ -139,11 +144,13 @@ export function ListaPreguntas({
         (!observacionTexto || observacionTexto.trim() === "");
 
       if (alumnoInvalido || respuestasIncompletas || lugarNoSeleccionado) {
+        setOpenDialog(false);
         setOpenDialogIncompleto(true);
         return;
       }
 
       if (observacionRequerida) {
+        setOpenDialog(false);
         setOpenDialogFaltaObservacion(true);
         return;
       }
@@ -153,13 +160,17 @@ export function ListaPreguntas({
 
     try {
       await registrarEvaluacionRealizada(evaluacionRealizadaData);
+      setOpenDialog(false);
+      setOpenDialogExito(true);
     } catch (error) {
       const mensajeError =
         error.response?.data?.message || "Error al registrar una evaluación.";
       setError(mensajeError);
     }
+  };
 
-    navigate("/evaluarExito");
+  const handleCrearOtro = () => {
+    window.location.reload();
   };
 
   return (
@@ -185,6 +196,7 @@ export function ListaPreguntas({
             disabled={registrado}
             selected={lugar ? lugar : lugarSeleccionado}
             onChange={handleLugarChange}
+            movil={xs ? "true" : "false"}
           />
         </div>
         <div className="no-break-inside">
@@ -251,10 +263,17 @@ export function ListaPreguntas({
         }}
       >
         <DialogTitle id="alert-dialog-title">
-          {
-            "La evaluación no está completa. Por favor, especifica el DNI, marca todas las preguntas y el lugar para continuar."
-          }
+          <dotlottie-wc
+            src="https://lottie.host/3ad3e392-c8df-41de-b9c8-004062231a1a/CK0tyZju6R.lottie"
+            autoplay
+          ></dotlottie-wc>
         </DialogTitle>
+        <DialogContent>
+          <p style={{ textAlign: "center" }}>
+            La evaluación no está completa. Por favor, especifica el <b>DNI</b>,
+            marca todas las <b>preguntas</b> y el <b>lugar</b> para continuar.
+          </p>
+        </DialogContent>
         <DialogActions>
           <Button
             sx={{ color: "#1A3D2D" }}
@@ -276,16 +295,58 @@ export function ListaPreguntas({
         }}
       >
         <DialogTitle id="alert-dialog-title">
-          {
-            "Cuando se modifica el puntaje, es necesario agregar una observación. Por favor, completa el campo de observación."
-          }
+          <dotlottie-wc
+            src="https://lottie.host/3ad3e392-c8df-41de-b9c8-004062231a1a/CK0tyZju6R.lottie"
+            autoplay
+          ></dotlottie-wc>
         </DialogTitle>
+        <DialogContent>
+          <p style={{ textAlign: "center" }}>
+            Cuando se modifica el puntaje, es necesario agregar una{" "}
+            <b>observación</b>. Por favor, completa el campo de observación.
+          </p>
+        </DialogContent>
         <DialogActions>
           <Button
             sx={{ color: "#1A3D2D" }}
             onClick={handleCloseDialogFaltaObservacion}
           >
             Aceptar
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={openDialogExito}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+          "& .MuiDialog-paper": { padding: "1.75rem", borderRadius: "20px" },
+        }}
+      >
+        <DialogTitle
+          id="alert-dialog-exito"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <dotlottie-wc
+            src="https://lottie.host/182b34ff-8146-4be2-9cc9-e1ea97d6a04d/u56gM45ANy.lottie"
+            style={{ width: "300px", height: "300px", margin: "-50px" }}
+            autoplay
+          ></dotlottie-wc>
+        </DialogTitle>
+        <DialogContent>
+          <p style={{ textAlign: "center" }}>
+            La evaluación fue registrada correctamente.
+          </p>
+        </DialogContent>
+        <DialogActions>
+          <Button color="success" onClick={() => navigate("/home")}>
+            Ir al inicio
+          </Button>
+          <Button color="success" onClick={handleCrearOtro} autoFocus>
+            Evaluar nuevamente
           </Button>
         </DialogActions>
       </Dialog>

@@ -10,6 +10,11 @@ import {
   Alert,
   useMediaQuery,
   Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from "@mui/material";
 import { postEvaluacionYPreguntas } from "../services/EvaluacionService";
 import { useDocente } from "../context/DocenteContext";
@@ -24,6 +29,7 @@ export function CrearEvaluacionPage() {
   const [puntaje, setNuevoPuntaje] = useState("");
   const [errorCriterio, setErrorCriterio] = useState("");
   const [errorPuntaje, setErrorPuntaje] = useState("");
+  const [openDialogExito, setOpenDialogExito] = useState(false);
   const [titulo, setTitulo] = useState("");
   const navigate = useNavigate();
   const { docenteContext } = useDocente();
@@ -82,6 +88,10 @@ export function CrearEvaluacionPage() {
     setPreguntas(preguntas.filter((_, i) => i !== indice));
   };
 
+  const handleCrearOtro = () => {
+    window.location.reload();
+  }
+
   const manejarEnvio = async () => {
     const tituloDuplicado = carpetas.some(
       (evaluacion) =>
@@ -95,7 +105,7 @@ export function CrearEvaluacionPage() {
     }
     try {
       await postEvaluacionYPreguntas(evaluacionData);
-      navigate("/crearEvaluacionExito");
+      setOpenDialogExito(true)
     } catch (error) {
       const mensajeError =
         error.response?.data?.message || "Error al registrar la evaluación.";
@@ -269,6 +279,41 @@ export function CrearEvaluacionPage() {
           Guardar
         </button>
       </Box>
+      <Dialog
+        open={openDialogExito}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+          "& .MuiDialog-paper": { padding: "1.75rem", borderRadius: "20px" },
+        }}
+      >
+        <DialogTitle
+          id="alert-dialog-exito"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <dotlottie-wc
+            src="https://lottie.host/182b34ff-8146-4be2-9cc9-e1ea97d6a04d/u56gM45ANy.lottie"
+            style={{ width: "300px", height: "300px", margin: "-50px" }}
+            autoplay
+          ></dotlottie-wc>
+        </DialogTitle>
+        <DialogContent>
+          <p style={{ textAlign: "center" }}>
+            El modelo de evaluación fue creado correctamente.
+          </p>
+        </DialogContent>
+        <DialogActions>
+          <Button color="success" onClick={() => navigate("/home")}>
+            Ir al inicio
+          </Button>
+          <Button color="success" onClick={handleCrearOtro} autoFocus>
+            Crear otro
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Box
         sx={{
           display: "flex",

@@ -30,14 +30,14 @@ export function HomePage() {
       <h1>
         ¡Bienvenido/a, {docenteContext.nombre} {docenteContext.apellido}!
       </h1>
-      <Stack sx={{ display: "flex", alignItems: "center"}}>
+      <Stack sx={{ display: "flex", alignItems: "center" }}>
         <Busqueda
-            placeholder="Buscar por título..."
-            width={"350px"}
-            height={"100px"}
-            margin={"0 0 60px 0"}
-            onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
-          />
+          placeholder="Buscar por título..."
+          width={"350px"}
+          height={"100px"}
+          margin={"0 0 60px 0"}
+          onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
+        />
         <Stack sx={{ width: "80%" }}>
           <Grid container spacing={12} sx={{ pb: "60px" }}>
             <Grid item xs={12} sm={6} md={4}>
