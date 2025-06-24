@@ -383,11 +383,40 @@ export function EditarEvaluacionPage() {
             padding: "0 2rem 2rem 2rem",
           }}
         >
-          <Button color="error" onClick={() => setOpenDialog(false)}>
+          <Button
+            variant="outlined"
+            sx={{
+              color: "#1A3D2D",
+              borderRadius: "10px",
+              borderColor: "#1A3D2D",
+              "&:hover": {
+                backgroundColor: "#FFFFFF",
+                color: "#1A3D2D",
+                borderColor: "#FFFFFF",
+              },
+              width: "100px",
+            }}
+            onClick={() => setOpenDialog(false)}
+          >
             Cancelar
           </Button>
-          <Button color="success" onClick={handleGuardarPregunta} autoFocus>
-            Guardar cambios
+          <Button
+            sx={{
+              color: "#FFFFFF",
+              backgroundColor: "#1A3D2D",
+              borderColor: "#1A3D2D",
+              borderRadius: "10px",
+              "&:hover": {
+                backgroundColor: "#FFFFFF",
+                color: "#1A3D2D",
+                borderColor: "#FFFFFF",
+              },
+              width: "100px",
+            }}
+            onClick={handleGuardarPregunta}
+            autoFocus
+          >
+            Confirmar
           </Button>
         </DialogActions>
       </Dialog>

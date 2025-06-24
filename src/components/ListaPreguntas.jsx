@@ -243,11 +243,40 @@ export function ListaPreguntas({
         </DialogTitle>
 
         <DialogActions>
-          <Button color="success" onClick={handleOnClick} autoFocus>
-            Sí
-          </Button>
-          <Button color="error" onClick={handleCloseDialog}>
+          <Button
+            variant="outlined"
+            sx={{
+              color: "#1A3D2D",
+              borderRadius: "10px",
+              borderColor: "#1A3D2D",
+              "&:hover": {
+                backgroundColor: "#FFFFFF",
+                color: "#1A3D2D",
+                borderColor: "#FFFFFF",
+              },
+              width: "100px",
+            }}
+            onClick={handleCloseDialog}
+          >
             No
+          </Button>
+          <Button
+            sx={{
+              color: "#FFFFFF",
+              backgroundColor: "#1A3D2D",
+              borderColor: "#1A3D2D",
+              borderRadius: "10px",
+              "&:hover": {
+                backgroundColor: "#FFFFFF",
+                color: "#1A3D2D",
+                borderColor: "#FFFFFF",
+              },
+              width: "100px",
+            }}
+            onClick={handleOnClick}
+            autoFocus
+          >
+            Sí
           </Button>
         </DialogActions>
       </Dialog>
@@ -276,8 +305,20 @@ export function ListaPreguntas({
         </DialogContent>
         <DialogActions>
           <Button
-            sx={{ color: "#1A3D2D" }}
+            sx={{
+              color: "#FFFFFF",
+              backgroundColor: "#1A3D2D",
+              borderColor: "#1A3D2D",
+              borderRadius: "10px",
+              "&:hover": {
+                backgroundColor: "#FFFFFF",
+                color: "#1A3D2D",
+                borderColor: "#FFFFFF",
+              },
+              width: "100px",
+            }}
             onClick={handleCloseDialogIncompleto}
+            autoFocus
           >
             Aceptar
           </Button>
@@ -308,8 +349,20 @@ export function ListaPreguntas({
         </DialogContent>
         <DialogActions>
           <Button
-            sx={{ color: "#1A3D2D" }}
+            sx={{
+              color: "#FFFFFF",
+              backgroundColor: "#1A3D2D",
+              borderColor: "#1A3D2D",
+              borderRadius: "10px",
+              "&:hover": {
+                backgroundColor: "#FFFFFF",
+                color: "#1A3D2D",
+                borderColor: "#FFFFFF",
+              },
+              width: "100px",
+            }}
             onClick={handleCloseDialogFaltaObservacion}
+            autoFocus
           >
             Aceptar
           </Button>
@@ -342,11 +395,40 @@ export function ListaPreguntas({
           </p>
         </DialogContent>
         <DialogActions>
-          <Button color="success" onClick={() => navigate("/home")}>
+          <Button
+            variant="outlined"
+            sx={{
+              color: "#1A3D2D",
+              borderRadius: "10px",
+              borderColor: "#1A3D2D",
+              "&:hover": {
+                backgroundColor: "#FFFFFF",
+                color: "#1A3D2D",
+                borderColor: "#FFFFFF",
+              },
+              width: "100px",
+            }}
+            onClick={() => navigate("/home")}
+          >
             Ir al inicio
           </Button>
-          <Button color="success" onClick={handleCrearOtro} autoFocus>
-            Evaluar nuevamente
+          <Button
+            sx={{
+              color: "#FFFFFF",
+              backgroundColor: "#1A3D2D",
+              borderColor: "#1A3D2D",
+              borderRadius: "10px",
+              "&:hover": {
+                backgroundColor: "#FFFFFF",
+                color: "#1A3D2D",
+                borderColor: "#FFFFFF",
+              },
+              width: "120px",
+            }}
+            onClick={handleCrearOtro}
+            autoFocus
+          >
+            Registrar otra
           </Button>
         </DialogActions>
       </Dialog>

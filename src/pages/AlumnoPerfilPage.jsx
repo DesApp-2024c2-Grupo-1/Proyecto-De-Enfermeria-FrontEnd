@@ -80,7 +80,19 @@ export function AlumnoPerfilPage() {
 
             <DialogActions>
               <Button
-                sx={{ color: "#1A3D2D" }}
+                variant="outlined"
+                sx={{
+                  color: "#FFFFFF",
+                  backgroundColor: "#1A3D2D",
+                  borderColor: "#1A3D2D",
+                  borderRadius: "10px",
+                  "&:hover": {
+                    backgroundColor: "#FFFFFF",
+                    color: "#1A3D2D",
+                    borderColor: "#FFFFFF",
+                  },
+                  width: "120px",
+                }}
                 onClick={() => navigate("/alumnos")}
               >
                 Volver atrás

@@ -34,11 +34,11 @@ function EditButton({ id }) {
     deshabilitarEvaluacion(id);
     handleClose();
     console.log("Evaluación deshabilitada");
-    setOpenDialog(false)
-    setOpenDialogExito(true) 
+    setOpenDialog(false);
+    setOpenDialogExito(true);
     setTimeout(() => {
-        window.location.reload();;
-      }, 3000);
+      window.location.reload();
+    }, 3000);
   };
 
   return (
@@ -124,10 +124,39 @@ function EditButton({ id }) {
             padding: "0 1rem 1rem 1rem",
           }}
         >
-          <Button color="error" onClick={() => setOpenDialog(false)}>
+          <Button
+            variant="outlined"
+            sx={{
+              color: "#1A3D2D",
+              borderRadius: "10px",
+              borderColor: "#1A3D2D",
+              "&:hover": {
+                backgroundColor: "#FFFFFF",
+                color: "#1A3D2D",
+                borderColor: "#FFFFFF",
+              },
+              width: "100px",
+            }}
+            onClick={() => setOpenDialog(false)}
+          >
             Cancelar
           </Button>
-          <Button color="success" onClick={handleDeshabilitar} autoFocus>
+          <Button
+            sx={{
+                  color: "#FFFFFF",
+                  backgroundColor: "#1A3D2D",
+                  borderColor: "#1A3D2D",
+                  borderRadius: "10px",
+                  "&:hover": {
+                    backgroundColor: "#FFFFFF",
+                    color: "#1A3D2D",
+                    borderColor: "#FFFFFF",
+                  },
+                  width: "100px",
+                }}
+            onClick={handleDeshabilitar}
+            autoFocus
+          >
             Confirmar
           </Button>
         </DialogActions>

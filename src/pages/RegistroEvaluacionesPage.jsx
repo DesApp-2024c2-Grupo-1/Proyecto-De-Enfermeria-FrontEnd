@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogActions,
   useMediaQuery,
-  Pagination
+  Pagination,
 } from "@mui/material";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
 
@@ -130,8 +130,11 @@ export function RegistroEvaluacionesPage() {
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
               sx={{
-          "& .MuiDialog-paper": { padding: "1.7rem", borderRadius: "20px" },
-        }}
+                "& .MuiDialog-paper": {
+                  padding: "1.7rem",
+                  borderRadius: "20px",
+                },
+              }}
             >
               <DialogTitle id="alert-dialog-title">
                 {"No hay alumnos que hayan tomado esta evaluación."}
@@ -139,7 +142,19 @@ export function RegistroEvaluacionesPage() {
 
               <DialogActions>
                 <Button
-                  sx={{ color: "#1A3D2D" }}
+                  variant="outlined"
+                  sx={{
+                  color: "#FFFFFF",
+                  backgroundColor: "#1A3D2D",
+                  borderColor: "#1A3D2D",
+                  borderRadius: "10px",
+                  "&:hover": {
+                    backgroundColor: "#FFFFFF",
+                    color: "#1A3D2D",
+                    borderColor: "#FFFFFF",
+                  },
+                  width: "120px",
+                }}
                   onClick={() => navigate("/home")}
                 >
                   Volver atrás

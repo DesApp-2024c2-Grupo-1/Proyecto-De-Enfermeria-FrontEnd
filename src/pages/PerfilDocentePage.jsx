@@ -162,7 +162,6 @@ export function PerfilDocentePage() {
 
       <Dialog
         open={openDialog}
-        onClose={handleCloseDialog}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
@@ -172,11 +171,40 @@ export function PerfilDocentePage() {
         <DialogTitle id="alert-dialog-title">{"¿Cerrar sesión?"}</DialogTitle>
 
         <DialogActions>
-          <Button color="error" onClick={handleCloseDialog}>
+          <Button
+            variant="outlined"
+            sx={{
+              color: "#1A3D2D",
+              borderRadius: "10px",
+              borderColor: "#1A3D2D",
+              "&:hover": {
+                backgroundColor: "#FFFFFF",
+                color: "#1A3D2D",
+                borderColor: "#FFFFFF",
+              },
+              width: "100px",
+            }}
+            onClick={handleCloseDialog}
+          >
             Cancelar
           </Button>
-          <Button color="success" onClick={handleCerrarSesion} autoFocus>
-            Continuar
+          <Button
+            sx={{
+              color: "#FFFFFF",
+              backgroundColor: "#1A3D2D",
+              borderColor: "#1A3D2D",
+              borderRadius: "10px",
+              "&:hover": {
+                backgroundColor: "#FFFFFF",
+                color: "#1A3D2D",
+                borderColor: "#FFFFFF",
+              },
+              width: "100px",
+            }}
+            onClick={handleCerrarSesion}
+            autoFocus
+          >
+            Confirmar
           </Button>
         </DialogActions>
       </Dialog>

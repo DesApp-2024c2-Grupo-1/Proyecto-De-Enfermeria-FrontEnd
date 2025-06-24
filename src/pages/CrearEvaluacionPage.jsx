@@ -90,7 +90,7 @@ export function CrearEvaluacionPage() {
 
   const handleCrearOtro = () => {
     window.location.reload();
-  }
+  };
 
   const manejarEnvio = async () => {
     const tituloDuplicado = carpetas.some(
@@ -105,7 +105,7 @@ export function CrearEvaluacionPage() {
     }
     try {
       await postEvaluacionYPreguntas(evaluacionData);
-      setOpenDialogExito(true)
+      setOpenDialogExito(true);
     } catch (error) {
       const mensajeError =
         error.response?.data?.message || "Error al registrar la evaluación.";
@@ -306,12 +306,41 @@ export function CrearEvaluacionPage() {
           </p>
         </DialogContent>
         <DialogActions>
-          <Button color="success" onClick={() => navigate("/home")}>
-            Ir al inicio
-          </Button>
-          <Button color="success" onClick={handleCrearOtro} autoFocus>
-            Crear otro
-          </Button>
+            <Button
+              variant="outlined"
+              sx={{
+                color: "#1A3D2D",
+                borderRadius: "10px",
+                borderColor: "#1A3D2D",
+                "&:hover": {
+                  backgroundColor: "#FFFFFF",
+                  color: "#1A3D2D",
+                  borderColor: "#FFFFFF",
+                },
+                width: "100px"
+              }}
+              onClick={() => navigate("/home")}
+            >
+              Ir al inicio
+            </Button>
+            <Button
+              sx={{
+                  color: "#FFFFFF",
+                  backgroundColor: "#1A3D2D",
+                  borderColor: "#1A3D2D",
+                  borderRadius: "10px",
+                  "&:hover": {
+                    backgroundColor: "#FFFFFF",
+                    color: "#1A3D2D",
+                    borderColor: "#FFFFFF",
+                  },
+                  width: "100px",
+                }}
+              onClick={handleCrearOtro}
+              autoFocus
+            >
+              Crear otro
+            </Button>
         </DialogActions>
       </Dialog>
       <Box
