@@ -1,5 +1,12 @@
 import { useParams } from "react-router-dom";
-import { Button, Stack, TextField, Grid, Pagination, useMediaQuery } from "@mui/material";
+import {
+  Button,
+  Stack,
+  TextField,
+  Grid,
+  Pagination,
+  useMediaQuery,
+} from "@mui/material";
 import ListHeader from "../components/Header";
 import Lista from "../components/Lista";
 import { createTheme } from "@mui/material/styles";
@@ -8,18 +15,19 @@ import Busqueda from "../components/Busqueda";
 import IrArribaBoton from "../components/irArribaBoton";
 import { useEffect, useState } from "react";
 import { getAllVersionesDeUnModelo } from "../services/EvaluacionService";
+import { useNavigate } from "react-router-dom";
 
 export function HistorialEvaluacion() {
   const { id } = useParams();
   const [searchTerm, setSearchTerm] = useState("");
-  const [carpetas, setCarpetas] = useState([]);
-  const keys = ["titulo", "version", "fechaModificacion"];
-    const theme = createTheme();
+  const [evaluaciones, setEvaluaciones] = useState([]);
+  const keys = ["titulo", "version"];
+  const theme = createTheme();
+  const navigate = useNavigate();
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
-  
-  
-  const listaFiltrada = carpetas.filter((carpeta) =>
-    carpeta.titulo.toLowerCase().includes(searchTerm)
+
+  const listaFiltrada = evaluaciones.filter((evaluacion) =>
+    evaluacion.version.toString().toLowerCase().includes(searchTerm)
   );
 
   const textosHeader = [
@@ -28,25 +36,19 @@ export function HistorialEvaluacion() {
     ,
   ];
 
-    const handleNavigate = (id) => {
-    navigate(`/perfilAlumno/${id}`, {
-      state: {
-        alumnoNombre: alumnos.find((alumno) => alumno.id === id).nombre,
-        alumnoApellido: alumnos.find((alumno) => alumno.id === id).apellido,
-      },
-    });
+  const handleNavigate = () => {
+    /*navigate(`/perfilAlumno/${id}`);*/
+    navigate("/evaluacionDeshabilitada");
   };
 
-
-  const fetchCarpetas = async () => {
+  const fetchEvaluaciones = async () => {
     const data = await getAllVersionesDeUnModelo(id);
-    setCarpetas(data);
+    setEvaluaciones(data);
     console.log(data);
   };
 
   useEffect(() => {
-    fetchCarpetas();
-  
+    fetchEvaluaciones();
   }, []);
 
   return (
@@ -56,24 +58,24 @@ export function HistorialEvaluacion() {
 
       <Stack sx={{ display: "flex", alignItems: "center" }}>
         <Busqueda
-          placeholder="Buscar por título..."
+          placeholder="Buscar versión..."
           width={"350px"}
           height={"50px"}
           margin={"0 0 60px 0"}
           onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
         />
-                <Stack
+        <Stack
           sx={{
             width: xs ? "75%" : "70%",
           }}
         >
-        <ListHeader key={keys} textos={textosHeader} />
-        <Lista
-          lista={listaFiltrada}
-          keys={keys}
-          buttonOnClick={handleNavigate}
-          paramOnClick="id"
-        />
+          <ListHeader key={keys} textos={textosHeader} />
+          <Lista
+            lista={listaFiltrada}
+            keys={keys}
+            buttonOnClick={handleNavigate}
+            paramOnClick="id"
+          />
         </Stack>
         {/*
         <Grid container spacing={10} sx={{ pb: "60px" }}>
