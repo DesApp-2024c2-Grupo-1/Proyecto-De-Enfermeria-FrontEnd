@@ -47,6 +47,7 @@ export function EditarEvaluacionPage() {
   const { id } = useParams();
 
   const evaluacionData = { docente: docenteContext.id, preguntas };
+  console.log(evaluacionData);
 
   const agregarCriterio = () => {
     if (!nuevoCriterio.trim()) {
