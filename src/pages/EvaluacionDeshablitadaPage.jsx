@@ -1,13 +1,20 @@
 import { useState, useEffect } from "react";
 import { Evaluacion } from "../components/Evaluacion";
 import { useParams } from "react-router-dom";
-import { getEvaluacionById } from "../services/EvaluacionRealizadaService";
+import { getEvaluacionById } from "../services/EvaluacionService";
 import { createTheme } from "@mui/material/styles";
-import { Snackbar, Alert, useMediaQuery, Button, Box } from "@mui/material";
+import {
+  Snackbar,
+  Alert,
+  useMediaQuery,
+  Button,
+  Box,
+  Stack,
+} from "@mui/material";
 
 export function EvaluacionDeshabilitadaPage() {
   const { id } = useParams();
-  const [evaluacionRealizada, setEvaluacionRealizada] = useState({});
+  const [evaluacion, setEvaluacion] = useState({});
   const [preguntas, setPreguntas] = useState([]);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const theme = createTheme();
@@ -15,9 +22,9 @@ export function EvaluacionDeshabilitadaPage() {
 
   const fetchEvaluacionById = async (id) => {
     const data = await getEvaluacionById(id);
-    setEvaluacionRealizada(data);
-    if (data.preguntaRespondida.length > 0) {
-      setPreguntas(data.preguntaRespondida);
+    setEvaluacion(data);
+    if (data.preguntas.length > 0) {
+      setPreguntas(data.preguntas);
     } else {
       setOpenSnackbar(true);
     }
@@ -27,39 +34,33 @@ export function EvaluacionDeshabilitadaPage() {
     fetchEvaluacionById(id);
   }, [id]);
 
-  console.log(evaluacionRealizada);
-
-  const descargarEvaluacionComoPDF = () => {
-    const element = document.getElementById("evaluacion-div");
-    element.classList.add("printable");
-
-    html2pdf()
-      .from(element)
-      .set({
-        html2canvas: {
-          width: 1080,
-          scale: 2,
-          scrollX: 0,
-          scrollY: 0,
-        },
-      })
-      .save("Evaluacion.pdf")
-      .then(() => {
-        element.classList.remove("printable");
-      });
-  };
+  console.log(evaluacion);
 
   return (
     <>
+      <h1>
+        {evaluacion.titulo} - V{evaluacion.version}
+      </h1>
       <div id="evaluacion-div">
+        <Stack
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          {evaluacion.bajaFecha === null
+            ? "Está es la versión actual."
+            : "Fecha de baja: " + evaluacion.bajaFecha}
+        </Stack>
         <Evaluacion
-          lugar={evaluacionRealizada.lugarEvaluacion?.id}
+          lugar={evaluacion.lugarEvaluacion?.id}
           preguntas={preguntas}
           disabled={true}
           alumnoDisabled={true}
-          alumnoPlaceholder={`${evaluacionRealizada.alumno?.nombre} ${evaluacionRealizada.alumno?.apellido}`}
-          modificacionPuntaje={evaluacionRealizada.modificacionPuntaje}
-          observacion={evaluacionRealizada.observacion}
+          alumnoPlaceholder={"DNI del Alumno"}
+          modificacionPuntaje={""}
+          observacion={""}
         />
       </div>
       <Box
@@ -67,15 +68,7 @@ export function EvaluacionDeshabilitadaPage() {
           display: { xs: "none", md: "flex" },
           justifyContent: "center",
         }}
-      >
-        <button
-          className="botonVerde"
-          style={{ marginTop: "-30px" }}
-          onClick={descargarEvaluacionComoPDF}
-        >
-          Descargar
-        </button>
-      </Box>
+      ></Box>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}

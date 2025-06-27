@@ -36,9 +36,9 @@ export function HistorialEvaluacion() {
     ,
   ];
 
-  const handleNavigate = () => {
-    /*navigate(`/perfilAlumno/${id}`);*/
-    navigate("/evaluacionDeshabilitada");
+  const handleNavigate = (idEval) => {
+    navigate(`/evaluacionDeshabilitada/${idEval}`);
+   /* navigate("/evaluacionDeshabilitada");*/
   };
 
   const fetchEvaluaciones = async () => {

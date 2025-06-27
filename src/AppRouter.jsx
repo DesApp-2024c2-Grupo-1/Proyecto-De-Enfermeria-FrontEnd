@@ -82,7 +82,7 @@ export function AppRouter() {
 
       <Route path="/historialEvaluacion/:id" element={<HistorialEvaluacion />} />
 
-       <Route path="/evaluacionDeshabilitada" element={<EvaluacionDeshabilitadaPage  />} />
+       <Route path="/evaluacionDeshabilitada/:id" element={<EvaluacionDeshabilitadaPage  />} />
     
     </Routes>
   );
