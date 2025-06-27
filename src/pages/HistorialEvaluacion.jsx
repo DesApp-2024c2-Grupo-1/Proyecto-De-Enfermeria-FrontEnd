@@ -41,11 +41,12 @@ export function HistorialEvaluacion() {
   const fetchCarpetas = async () => {
     const data = await getAllVersionesDeUnModelo(id);
     setCarpetas(data);
+    console.log(data);
   };
 
   useEffect(() => {
     fetchCarpetas();
-    console.log(carpetas);
+  
   }, []);
 
   return (
@@ -57,7 +58,7 @@ export function HistorialEvaluacion() {
         <Busqueda
           placeholder="Buscar por título..."
           width={"350px"}
-          height={"100px"}
+          height={"50px"}
           margin={"0 0 60px 0"}
           onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
         />

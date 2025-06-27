@@ -89,7 +89,7 @@ function ListItem({ textos, buttonOnClick }) {
         ) : (
           <Button
             sx={{
-              px: { sm: "20px", md: "20px" },
+              px: { sm: "20px", md: "50px" },
               borderRadius: "10px",
               boxShadow: "1.5px 1.5px 3.5px rgba(0, 0, 0, 0.3)",
               backgroundColor: "#31614b",
