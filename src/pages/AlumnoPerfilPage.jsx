@@ -9,6 +9,8 @@ import {
   Dialog,
   DialogTitle,
   DialogActions,
+  useMediaQuery,
+  createTheme
 } from "@mui/material";
 
 export function AlumnoPerfilPage() {
@@ -19,6 +21,8 @@ export function AlumnoPerfilPage() {
   const location = useLocation();
   const alumnoNombre = location.state.alumnoNombre;
   const alumnoApellido = location.state.alumnoApellido;
+  const theme = createTheme();
+  const xs = useMediaQuery(theme.breakpoints.down("sm"));
   const { idAlumno } = useParams();
 
   const evaluacionesTitulos = Array.from(
@@ -50,7 +54,7 @@ export function AlumnoPerfilPage() {
           {alumnoNombre} {alumnoApellido}
         </h1>
         {evaluacionesFiltradas.length > 0 ? (
-          <Box sx={{ width: "70%", display: "flex", flexDirection: "column" }}>
+          <Box sx={{ width: xs ? "75%" : "60%", display: "flex", flexDirection: "column" }}>
             {evaluacionesFiltradas.map((evaluacion, index) => (
               <Lista
                 key={index}

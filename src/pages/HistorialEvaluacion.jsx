@@ -6,10 +6,10 @@ import {
   Grid,
   Pagination,
   useMediaQuery,
+  createTheme
 } from "@mui/material";
 import ListHeader from "../components/Header";
 import Lista from "../components/Lista";
-import { createTheme } from "@mui/material/styles";
 import Carpeta from "../components/Carpeta";
 import Busqueda from "../components/Busqueda";
 import IrArribaBoton from "../components/irArribaBoton";
@@ -22,12 +22,21 @@ export function HistorialEvaluacion() {
   const [searchTerm, setSearchTerm] = useState("");
   const [evaluaciones, setEvaluaciones] = useState([]);
   const keys = ["titulo", "version"];
-  const theme = createTheme();
   const navigate = useNavigate();
+  const theme = createTheme();
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
+  const [paginaActual, setPaginaActual] = useState(1);
+  const itemsPorPagina = 8;
 
   const listaFiltrada = evaluaciones.filter((evaluacion) =>
     evaluacion.version.toString().toLowerCase().includes(searchTerm)
+  );
+
+  const listaAMostrar = evaluaciones;
+  const paginasTotales = Math.ceil(listaAMostrar.length / itemsPorPagina);
+  const evaluacionesPaginadas = listaAMostrar.slice(
+    (paginaActual - 1) * itemsPorPagina,
+    paginaActual * itemsPorPagina
   );
 
   const textosHeader = [
@@ -38,7 +47,7 @@ export function HistorialEvaluacion() {
 
   const handleNavigate = (idEval) => {
     navigate(`/evaluacionDeshabilitada/${idEval}`);
-   /* navigate("/evaluacionDeshabilitada");*/
+    /* navigate("/evaluacionDeshabilitada");*/
   };
 
   const fetchEvaluaciones = async () => {
@@ -50,6 +59,10 @@ export function HistorialEvaluacion() {
   useEffect(() => {
     fetchEvaluaciones();
   }, []);
+
+  const handleCambioPagina = (event, value) => {
+    setPaginaActual(value);
+  };
 
   return (
     <>
@@ -66,16 +79,25 @@ export function HistorialEvaluacion() {
         />
         <Stack
           sx={{
-            width: xs ? "75%" : "70%",
+            width: xs ? "75%" : "60%"
           }}
         >
           <ListHeader key={keys} textos={textosHeader} />
           <Lista
-            lista={listaFiltrada}
+            lista={evaluacionesPaginadas}
             keys={keys}
             buttonOnClick={handleNavigate}
             paramOnClick="id"
           />
+          {listaAMostrar.length > itemsPorPagina && (
+            <Stack mt={2} alignItems="center">
+              <Pagination
+                count={paginasTotales}
+                page={paginaActual}
+                onChange={handleCambioPagina}
+              />
+            </Stack>
+          )}
         </Stack>
         {/*
         <Grid container spacing={10} sx={{ pb: "60px" }}>
