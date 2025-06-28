@@ -49,9 +49,12 @@ export function EvaluacionDeshabilitadaPage() {
             justifyContent: "center",
           }}
         >
-          {evaluacion.bajaFecha === null
-            ? "Está es la versión actual."
-            : "Fecha de baja: " + evaluacion.bajaFecha}
+          <p>Fecha de alta: {evaluacion.altaFecha}</p>
+          {evaluacion.bajaFecha === "1/1/1970" /* fix provisional */ ? (
+            <p>Esta es la versión actual de la evaluación.</p>
+          ) : (
+           <p> Fecha de baja: {evaluacion.bajaFecha}</p>
+          )}
         </Stack>
         <Evaluacion
           lugar={evaluacion.lugarEvaluacion?.id}

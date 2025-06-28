@@ -32,7 +32,7 @@ export function HistorialEvaluacion() {
     evaluacion.version.toString().toLowerCase().includes(searchTerm)
   );
 
-  const listaAMostrar = evaluaciones;
+  const listaAMostrar = listaFiltrada;
   const paginasTotales = Math.ceil(listaAMostrar.length / itemsPorPagina);
   const evaluacionesPaginadas = listaAMostrar.slice(
     (paginaActual - 1) * itemsPorPagina,
