@@ -29,26 +29,67 @@ export function RegisterPage() {
     const capitalizar = (str) =>
       str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
-    let errorList = [];
+     let errorList = [];
 
-    if (password !== confirmarPassword) {
-      errorList.push("Las contraseñas no coinciden");
-    }
+  setNombreError("");
+  setApellidoError("");
+  setEmailError("");
+  setPasswordError("");
+  setConfirmarPasswordError("");
+  setDniError("");
 
-    if (errorList.length > 0) {
-      setError(errorList);
-      setOpenSnackbar(true);
-      return;
-    }
+  if (!nombre.trim()) {
+    setNombreError("Este campo no puede estar vacío");
+    errorList.push("El nombre no puede estar vacío");
+  } else if (!/^[a-zA-Z\s]+$/.test(nombre)) {
+    setNombreError("El nombre solo puede contener letras y espacios");
+    errorList.push("Nombre inválido");
+  }
 
-    setNombreError(!nombre.trim() ? "Este campo no puede estar vacío" : "");
-    setApellidoError(!apellido.trim() ? "Este campo no puede estar vacío" : "");
-    setEmailError(!email.trim() ? "Este campo no puede estar vacío" : "");
-    setPasswordError(!password.trim() ? "Este campo no puede estar vacío" : "");
-    setConfirmarPasswordError(!confirmarPassword.trim() ? "Este campo no puede estar vacío" : "");
-    setDniError(!dni.trim() ? "Este campo no puede estar vacío" : "");
+  if (!apellido.trim()) {
+    setApellidoError("Este campo no puede estar vacío");
+    errorList.push("El apellido no puede estar vacío");
+  } else if (!/^[a-zA-Z\s]+$/.test(apellido)) {
+    setApellidoError("El apellido solo puede contener letras y espacios");
+    errorList.push("Apellido inválido");
+  }
 
-    setError([]);
+  if (!dni.trim()) {
+    setDniError("Este campo no puede estar vacío");
+    errorList.push("El DNI no puede estar vacío");
+  } else if (!/^\d{7,8}$/.test(dni)) {
+    setDniError("DNI inválido (7 u 8 dígitos)");
+    errorList.push("DNI inválido");
+  }
+
+  if (!email.trim()) {
+    setEmailError("Este campo no puede estar vacío");
+    errorList.push("El email no puede estar vacío");
+  } else if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+    setEmailError("Formato de email inválido");
+    errorList.push("Email inválido");
+  }
+
+  if (!password.trim()) {
+    setPasswordError("Este campo no puede estar vacío");
+    errorList.push("La contraseña no puede estar vacía");
+  } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(password)) {
+    setPasswordError("Debe tener al menos 8 caracteres, una letra y un número");
+    errorList.push("Contraseña insegura");
+  }
+
+  if (!confirmarPassword.trim()) {
+    setConfirmarPasswordError("Este campo no puede estar vacío");
+    errorList.push("Debe confirmar la contraseña");
+  } else if (password !== confirmarPassword) {
+    setConfirmarPasswordError("Las contraseñas no coinciden");
+    errorList.push("Las contraseñas no coinciden");
+  }
+
+  if (errorList.length > 0) {
+    setError(errorList);
+    return;
+  }
 
     const docenteData = { nombre: capitalizar(nombre), apellido: capitalizar(apellido), email, dni: Number(dni), password };
 
@@ -57,7 +98,7 @@ export function RegisterPage() {
       /*console.log("Registro exitoso, navegando...");*/
       navigate("/registroDocenteExitoso");
     } catch (error) {
-      /*console.log(error.response?.data?.message);*/
+      console.log(error.response?.data?.message);
       const mensajeError =
         error.response?.data?.message || "Error al registrar docente";
       setError(mensajeError);

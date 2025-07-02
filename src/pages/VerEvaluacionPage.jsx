@@ -60,6 +60,7 @@ export function VerEvaluacionPage() {
           alumnoPlaceholder={`${evaluacionRealizada.alumno?.nombre} ${evaluacionRealizada.alumno?.apellido}`}
           modificacionPuntaje={evaluacionRealizada.modificacionPuntaje}
           observacion={evaluacionRealizada.observacion}
+          nota={evaluacionRealizada.nota}
         />
       </div>
       <Box

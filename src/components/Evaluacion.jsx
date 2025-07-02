@@ -1,11 +1,11 @@
-import { Stack, Box } from "@mui/material";
+import { Stack, Box, Chip } from "@mui/material";
 import { Input } from "../components/Input";
 import { ListaPreguntas } from "../components/ListaPreguntas";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDocente } from "../context/DocenteContext";
 import { getAllAlumnos } from "../services/AlumnoService";
-import { Observacion } from './Observacion';
+import { Observacion } from "./Observacion";
 
 export function Evaluacion({
   preguntas,
@@ -14,7 +14,8 @@ export function Evaluacion({
   alumnoPlaceholder,
   lugar,
   modificacionPuntaje,
-  observacion
+  observacion,
+  nota,
 }) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -39,10 +40,11 @@ export function Evaluacion({
   const handleOnChange = (event) => {
     const inputDNI = event.target.value;
     setSearchTerm(inputDNI);
-  
-    const encontrado = alumnos.find((dato) => String(dato.dni) === inputDNI) || null;
+
+    const encontrado =
+      alumnos.find((dato) => String(dato.dni) === inputDNI) || null;
     setAlumnoEvaluado(encontrado);
-  
+
     if (encontrado) {
       setAlumno(`Evaluando a ${encontrado.nombre} ${encontrado.apellido}`);
     } else {
@@ -94,12 +96,34 @@ export function Evaluacion({
       </Stack>
       {alumno === "Alumno no encontrado" && (
         <button className="botonClaro" onClick={handleRegister}>
-            Registrar
+          Registrar
         </button>
       )}
-      <Box>
-        <ListaPreguntas preguntas={preguntas} disabled={disabled} alumno={alumnoEvaluado} lugar={lugar} modificacionPuntajeValue={modificacionPuntaje} observacionValue={observacion}/>
-      </Box>
+      <Stack>
+        {disabled && (
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Chip
+              label={`Nota obtenida: ${nota}`}
+              sx={{
+                backgroundColor: "#DDF0E7",
+                color: "#429870",
+                textAlign: "center",
+                
+                fontSize: "1.2rem",
+                mb: 2,
+              }}
+            />
+          </Box>
+        )}
+        <ListaPreguntas
+          preguntas={preguntas}
+          disabled={disabled}
+          alumno={alumnoEvaluado}
+          lugar={lugar}
+          modificacionPuntajeValue={modificacionPuntaje}
+          observacionValue={observacion}
+        />
+      </Stack>
     </Stack>
   );
 }
