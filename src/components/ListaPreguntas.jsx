@@ -25,6 +25,7 @@ export function ListaPreguntas({
   lugar,
   modificacionPuntajeValue,
   observacionValue,
+  viendoHistorial
 }) {
   const { docenteContext } = useDocente();
   const { evaluacionContext } = useEvaluacion();
@@ -202,6 +203,7 @@ export function ListaPreguntas({
             </div>
           </div>
         ))}
+        {viendoHistorial !== "true" && 
         <div className="no-break-inside">
           <Lugar
             disabled={registrado}
@@ -210,6 +212,8 @@ export function ListaPreguntas({
             movil={xs ? "true" : "false"}
           />
         </div>
+        }
+        {viendoHistorial !== "true" && 
         <div className="no-break-inside">
           <Observacion
             disabled={registrado}
@@ -225,6 +229,7 @@ export function ListaPreguntas({
             alerta={alerta}
           />
         </div>
+         }
         {!registrado ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
             <button

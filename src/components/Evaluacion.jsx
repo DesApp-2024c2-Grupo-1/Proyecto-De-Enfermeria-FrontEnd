@@ -86,7 +86,7 @@ export function Evaluacion({
           backgroundColor={"#DDF0E7"}
           disabled={true}
           activo={false}
-          placeholder={`${docenteContext.nombre} ${docenteContext.apellido}`}
+          placeholder={viendoHistorial == "true" ? "Nombre del Docente" : `${docenteContext.nombre} ${docenteContext.apellido}`}
           titulo="Docente"
         />
         <Input
@@ -132,6 +132,7 @@ export function Evaluacion({
           lugar={lugar}
           modificacionPuntajeValue={modificacionPuntaje}
           observacionValue={observacion}
+          viendoHistorial= {viendoHistorial}
         />
       </Stack>
     </Stack>

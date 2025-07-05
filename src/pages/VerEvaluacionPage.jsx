@@ -61,6 +61,7 @@ export function VerEvaluacionPage() {
           modificacionPuntaje={evaluacionRealizada.modificacionPuntaje}
           observacion={evaluacionRealizada.observacion}
           nota={evaluacionRealizada.nota}
+          viendoHistorial={"false"}
         />
       </div>
       <Box
