@@ -53,7 +53,7 @@ export function EvaluacionDeshabilitadaPage() {
           {evaluacion.bajaFecha === "1/1/1970" /* fix provisional */ ? (
             <p>Esta es la versión actual de la evaluación.</p>
           ) : (
-           <p> Fecha de baja: {evaluacion.bajaFecha}</p>
+            <p> Fecha de baja: {evaluacion.bajaFecha}</p>
           )}
         </Stack>
         <Evaluacion
@@ -64,6 +64,7 @@ export function EvaluacionDeshabilitadaPage() {
           alumnoPlaceholder={"DNI del Alumno"}
           modificacionPuntaje={""}
           observacion={""}
+          viendoHistorial={"true"}
         />
       </div>
       <Box

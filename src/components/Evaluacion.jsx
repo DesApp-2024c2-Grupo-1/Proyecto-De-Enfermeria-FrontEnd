@@ -16,6 +16,7 @@ export function Evaluacion({
   modificacionPuntaje,
   observacion,
   nota,
+  viendoHistorial,
 }) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -51,6 +52,8 @@ export function Evaluacion({
       setAlumno(inputDNI.length >= 7 ? "Alumno no encontrado" : "");
     }
   };
+
+  console.log(nota);
 
   return (
     <Stack
@@ -100,15 +103,22 @@ export function Evaluacion({
         </button>
       )}
       <Stack>
-        {disabled && (
+        {disabled && viendoHistorial !== "true" && (
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Chip
               label={`Nota obtenida: ${nota}`}
               sx={{
-                backgroundColor: "#DDF0E7",
-                color: "#429870",
+                backgroundColor:
+                  (nota ? parseFloat(nota.replace("%", "")) : nota) < 60
+                    ? "#FFF5D6"
+                    : "#DDF0E7",
+                color:
+                  (nota ? parseFloat(nota.replace("%", "")) : nota) < 60
+                    ? "#E0A800"
+                    : "#429870",
+
                 textAlign: "center",
-                
+
                 fontSize: "1.2rem",
                 mb: 2,
               }}
