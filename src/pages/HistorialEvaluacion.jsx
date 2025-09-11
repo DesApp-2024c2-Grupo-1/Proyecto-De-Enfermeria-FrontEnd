@@ -79,7 +79,7 @@ export function HistorialEvaluacion() {
         />
         <Stack
           sx={{
-            width: xs ? "75%" : "60%"
+            width: xs ? "88%" : "60%",
           }}
         >
           <ListHeader key={keys} textos={textosHeader} />

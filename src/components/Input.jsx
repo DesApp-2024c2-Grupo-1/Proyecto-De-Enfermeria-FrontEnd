@@ -73,8 +73,8 @@ export function Input({
         sx={{
           minHeight: "1.5em",
           marginTop: "8px",
-          maxWidth: "100px",
-          whiteSpace: "nowrap",
+          maxWidth: "100%",
+          whiteSpace: "break-word",
         }}
       >
         {!disabled && (

@@ -77,7 +77,9 @@ export function RegistroEvaluacionesPage() {
     <>
       <Stack sx={{ alignItems: "center" }}>
         <h1>{evaluacionTitulo}</h1>
-        <Stack sx={{ width: "70%" }}>
+        <Stack sx={{
+            width: xs ? "88%" : "60%",
+          }}>
           <Busqueda
             placeholder="Buscar un alumno..."
             onChange={handleBusqueda}
