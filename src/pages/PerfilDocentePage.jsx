@@ -26,6 +26,7 @@ export function PerfilDocentePage() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [error, setError] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
+  const [openDialogExito, setOpenDialogExito] = useState(false);
   const navigate = useNavigate();
   const theme = createTheme();
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
@@ -73,7 +74,10 @@ export function PerfilDocentePage() {
         );
         setDocenteContext(updatedDocente);
         setEditando(!editando);
-        navigate("/");
+        setOpenDialogExito(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 5000);
       }
     } catch (error) {
       const mensajeError =
@@ -150,7 +154,7 @@ export function PerfilDocentePage() {
             width: "15rem",
             borderRadius: "10px",
             fontWeight: "600",
-              boxShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
+            boxShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
           }}
           variant="outlined"
           color="error"
@@ -165,7 +169,13 @@ export function PerfilDocentePage() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         sx={{
-          "& .MuiDialog-paper": { paddingLeft: "2.35rem", paddingRight: "2.35rem", paddingBottom: "1.35rem", paddingTop: "1.35rem", borderRadius: "20px" },
+          "& .MuiDialog-paper": {
+            paddingLeft: "2.35rem",
+            paddingRight: "2.35rem",
+            paddingBottom: "1.35rem",
+            paddingTop: "1.35rem",
+            borderRadius: "20px",
+          },
         }}
       >
         <DialogTitle id="alert-dialog-title">{"¿Cerrar sesión?"}</DialogTitle>
@@ -208,7 +218,34 @@ export function PerfilDocentePage() {
           </Button>
         </DialogActions>
       </Dialog>
-
+      <Dialog
+        open={openDialogExito}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        sx={{
+          "& .MuiDialog-paper": { padding: "1.75rem", borderRadius: "20px" },
+        }}
+      >
+        <DialogTitle
+          id="alert-dialog-exito"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <dotlottie-wc
+            src="https://lottie.host/182b34ff-8146-4be2-9cc9-e1ea97d6a04d/u56gM45ANy.lottie"
+            style={{ width: "300px", height: "300px", margin: "-50px" }}
+            autoplay
+          ></dotlottie-wc>
+        </DialogTitle>
+        <DialogContent>
+          <p style={{ textAlign: "center" }}>
+            ¡Tus datos fueron editados correctamente! Serás
+            redirigido/a al Inicio de Sesión en unos segundos.
+          </p>
+        </DialogContent>
+      </Dialog>
       <Snackbar
         open={openSnackbar}
         autoHideDuration={3000}

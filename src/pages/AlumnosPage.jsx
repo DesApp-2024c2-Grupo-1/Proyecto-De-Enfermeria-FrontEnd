@@ -8,6 +8,7 @@ import { Stack, useMediaQuery, Pagination } from "@mui/material";
 import IrArribaBoton from "../components/irArribaBoton";
 import ListHeader from "../components/Header";
 
+
 export function AlumnosPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ export function AlumnosPage() {
     { key: "apellido", value: "Apellido" },
     { key: "dni", value: "DNI" },
   ];
+  
 
   const handleBusqueda = (e) => {
     let valor = e.target.value.toLowerCase();
@@ -95,7 +97,8 @@ export function AlumnosPage() {
             onChange={handleBusqueda}
             width={xs ? "100%" : "200px"}
           />
-          <ListHeader key={keys} textos={textosHeader} />
+         {!xs && (
+            <ListHeader key={keys} textos={textosHeader} />) }
           {!(filtrado && alumnosFiltrados.length === 0) ? (
             <>
               <Lista

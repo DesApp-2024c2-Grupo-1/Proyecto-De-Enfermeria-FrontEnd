@@ -35,13 +35,13 @@ function ListHeader({ textos }) {
                 <Box
                   key={index}
                   sx={{
-                    width: key === "dni" ? "50px" : "75px",
+                    width: "150px",
                     overflow: "hidden",
                     whiteSpace: "nowrap",
                   }}
                 >
                   <div key={index}>
-                    <p style={{ margin: 0 }}>{value}</p>
+                    <p>{value}</p>
                   </div>
                 </Box>
               </Box>
@@ -56,13 +56,13 @@ function ListHeader({ textos }) {
                 <Box
                   key={index}
                   sx={{
-                    width: key === "dni" ? "100px" : "125px",
+                    width: "150px",
                     overflow: "hidden",
                     whiteSpace: "nowrap",
                   }}
                 >
                   <div key={index}>
-                    <p style={{ margin: 0 }}>{value}</p>
+                     <p style={{ marginLeft: key === "version" ? "24px" : "0px" }}> {value}</p>
                   </div>
                 </Box>
               </Box>

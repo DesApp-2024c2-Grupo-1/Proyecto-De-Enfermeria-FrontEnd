@@ -17,6 +17,7 @@ import { CrearEvaluacionExitoPage } from "./pages/CrearEvaluacionExito";
 import { EditarEvaluacionPage } from "./pages/EditarEvaluacionPage";
 import { HistorialEvaluacion } from "./pages/HistorialEvaluacion";
 import { RegistrarEvaluacionExitoPage } from "./pages/RegistrarEvaluacionExito";
+import { EvaluacionDeshabilitadaPage } from "./pages/EvaluacionDeshablitadaPage";
 import ChartMockeadoDemo from "./pages/ChartsPage";
 
 export function AppRouter() {
@@ -80,6 +81,9 @@ export function AppRouter() {
       <Route path="/editarEvaluacion/:id" element={<EditarEvaluacionPage />} />
 
       <Route path="/historialEvaluacion/:id" element={<HistorialEvaluacion />} />
+
+       <Route path="/evaluacionDeshabilitada/:id" element={<EvaluacionDeshabilitadaPage  />} />
+    
     </Routes>
   );
 }

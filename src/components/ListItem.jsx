@@ -9,8 +9,9 @@ function ListItem({ textos, buttonOnClick }) {
     <>
       <Stack
         direction="row"
-        spacing={{ sx: 1, sm: 3 }}
+        spacing={{ sx: 1 }}
         sx={{
+
           backgroundColor: "#BBE2D0",
           my: "20px",
           px: "20px",
@@ -31,13 +32,15 @@ function ListItem({ textos, buttonOnClick }) {
                 <Box
                   key={index}
                   sx={{
-                    width: key === "dni" ? "50px" : "75px",
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
+                    width: key === "titulo" ? "150px" : "100%",
+                    overflow: key === "titulo" ? "visible" : "hidden",
+                    whiteSpace: key === "titulo" ? "visible" : "hidden",
                   }}
                 >
                   <div key={index}>
-                    <p style={{ margin: 0 }}>{value}</p>
+                    <p style={{ marginLeft: key === "version" ? "25px" : "0px" }}> 
+                      {xs && key === "nombre" ? `${value.charAt(0)}.` : value}
+                    </p>
                   </div>
                 </Box>
               </Box>
@@ -52,9 +55,9 @@ function ListItem({ textos, buttonOnClick }) {
                 <Box
                   key={index}
                   sx={{
-                    width: key === "dni" ? "100px" : "125px",
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
+                    width: key === "titulo" ? "200px" : "150px",
+                    overflow:  "hidden",
+                    whiteSpace: "hidden",
                   }}
                 >
                   <p style={{ margin: 0 }}>
@@ -70,7 +73,7 @@ function ListItem({ textos, buttonOnClick }) {
             sx={{
               minHeight: 0,
               minWidth: 0,
-              px: { xs: "13px", sm: "20px", md: "50px" },
+              px: { xs: "13px" },
               py: { xs: "10px" },
               borderRadius: "100%",
               backgroundColor: "#31614b",
@@ -86,7 +89,7 @@ function ListItem({ textos, buttonOnClick }) {
         ) : (
           <Button
             sx={{
-              px: { xs: "20px", sm: "20px", md: "50px" },
+              px: { sm: "20px", md: "50px" },
               borderRadius: "10px",
               boxShadow: "1.5px 1.5px 3.5px rgba(0, 0, 0, 0.3)",
               backgroundColor: "#31614b",
