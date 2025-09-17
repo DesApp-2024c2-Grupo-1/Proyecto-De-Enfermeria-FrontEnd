@@ -27,8 +27,9 @@ import { Input } from "../components/Input";
 import { createTheme } from "@mui/material/styles";
 import { useParams } from "react-router";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { autenticacion } from "../components/HandlerNecesidadAuth";
 
-export function EditarEvaluacionPage() {
+const EditarEvaluacionPage = () => {
   const [preguntas, setPreguntas] = useState([]);
   const [preguntaAEditar, setPreguntaAEditar] = useState("");
   const [nuevoCriterio, setNuevoCriterio] = useState("");
@@ -477,3 +478,4 @@ export function EditarEvaluacionPage() {
     </Box>
   );
 }
+export default autenticacion(EditarEvaluacionPage);

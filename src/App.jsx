@@ -1,20 +1,27 @@
-import React, { useEffect } from "react";
-import { Box, Grid, Stack } from "@mui/material";
-import { BrowserRouter, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Box, Stack } from "@mui/material";
+import { BrowserRouter, useLocation, useNavigate } from "react-router-dom";
 import { Menu } from "./components/adaptableTopMenu";
 import { AppRouter } from "./AppRouter";
 import Footer from "./components/Footer";
+import { noAutorizadoCallback } from "./services/_authRequest";
+import HandlerRedireccion from "./components/HandlerRedireccion";
+import { DocenteProvider } from "./context/DocenteContext";
 
 export function App() {
   return (
     <BrowserRouter>
-      <MainLayout />
+      <DocenteProvider>
+        <MainLayout />
+        <HandlerRedireccion/>
+      </DocenteProvider>
     </BrowserRouter>
   );
 }
 
 export function MainLayout() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const menuRoutes = [
     "/",
@@ -22,7 +29,9 @@ export function MainLayout() {
     "/registerAlumnos",
     "/registroAlumnoExitoso",
     "/registroDocenteExitoso",
+    "/401"
   ];
+  
   const shouldHideMenu = menuRoutes.includes(location.pathname);
 
   useEffect(() => {
@@ -34,6 +43,15 @@ export function MainLayout() {
       body.style.backgroundColor = "rgba(255, 255, 255, 0.87)";
     }
   }, [location.pathname]);
+
+  useEffect(() => {
+    noAutorizadoCallback(() => {
+      console.log('Usuario no autorizado');
+      navigate('/401');
+    });
+
+    return () => noAutorizadoCallback(null);
+  }, [navigate]);
 
   return (
     <Stack 

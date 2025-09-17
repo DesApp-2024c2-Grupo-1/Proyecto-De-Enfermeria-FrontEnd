@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Stack,
@@ -11,7 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import HomeIcon from "/assets/home.png";
 import ProfileIcon from "/assets/profile.png";
 import AlumnosIcon from "/assets/alumnos.png";
-import EstadisticasIcon from "/assets/estadisticas.png"
+import EstadisticasIcon from "/assets/estadisticas.png";
 import { useDocente } from "../context/DocenteContext";
 import IrAtrasBoton from "./irAtrasBoton";
 
@@ -45,6 +45,16 @@ export function Menu() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { docenteContext } = useDocente();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!docenteContext) {
+      navigate("/401", { replace: true });
+    }
+  }, [docenteContext, navigate]);
+
+  if (!docenteContext) {
+    return null;
+  }
 
   const toggleDrawer = () => {
     setMobileOpen(!mobileOpen);

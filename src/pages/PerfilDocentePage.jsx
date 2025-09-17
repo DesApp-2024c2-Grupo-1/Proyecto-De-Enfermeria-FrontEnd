@@ -17,8 +17,9 @@ import { createTheme } from "@mui/material/styles";
 import { useDocente } from "../context/DocenteContext";
 import { modificarDocente } from "../services/DocenteService";
 import { useNavigate } from "react-router-dom";
+import { autenticacion } from "../components/HandlerNecesidadAuth";
 
-export function PerfilDocentePage() {
+const PerfilDocentePage = () => {
   const [editando, setEditando] = useState(true);
   const { docenteContext, setDocenteContext } = useDocente();
   const [nombre, setNombre] = useState(docenteContext.nombre);
@@ -273,3 +274,4 @@ export function PerfilDocentePage() {
     </>
   );
 }
+export default autenticacion(PerfilDocentePage);

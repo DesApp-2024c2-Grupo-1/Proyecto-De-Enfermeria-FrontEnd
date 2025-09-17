@@ -1,4 +1,5 @@
 import axios from "axios";
+import { authRequest } from "./_authRequest";
 
 export const registrarDocente = async (docenteData) => {
     const response = await axios.post('http://localhost:3000/docente', docenteData);
@@ -20,6 +21,5 @@ export const loginDocente = async (dni, password) => {
 }
 
 export const modificarDocente = async (id, docenteData) => {
-  const response = await axios.put(`http://localhost:3000/docente/${id}`, docenteData);
-  return response.data
+    return await authRequest('put', `/docente/${id}`, docenteData);
 }

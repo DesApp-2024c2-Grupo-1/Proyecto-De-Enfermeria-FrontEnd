@@ -1,4 +1,5 @@
 import axios from "axios";
+import { authRequest } from "./_authRequest";
 
 export const registrarAlumno = async (alumnoData) => {
     const response = await axios.post('http://localhost:3000/alumno', alumnoData);
@@ -6,11 +7,9 @@ export const registrarAlumno = async (alumnoData) => {
 };
 
 export const getAllAlumnos = async () => {
-    const response = await axios.get('http://localhost:3000/alumno');
-    return response.data;
+    return await authRequest('get', '/alumno');
 };
 
 export const getAlumnoById = async (id) => {
-    const response = await axios.get(`http://localhost:3000/alumno/${id}`);
-    return response.data;
+    return await authRequest('get', `/alumno/${id}`);
 };

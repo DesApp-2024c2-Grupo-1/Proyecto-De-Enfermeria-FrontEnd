@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { PerfilDocentePage } from "./pages/PerfilDocentePage";
-import { HomePage } from "./pages/HomePage";
+import PerfilDocentePage from "./pages/PerfilDocentePage";
+import HomePage from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { RegisterPageAlumnos } from "./pages/RegisterPageAlumnos";
@@ -12,12 +12,13 @@ import { VerEvaluacionPage } from "./pages/VerEvaluacionPage";
 import { EvaluacionesPorAlumno } from "./pages/EvaluacionesPorAlumnoPage";
 import { AlumnoPerfilPage } from "./pages/AlumnoPerfilPage";
 import { AlumnosPage } from "./pages/AlumnosPage";
-import { CrearEvaluacionPage } from "./pages/CrearEvaluacionPage";
+import CrearEvaluacionPage from "./pages/CrearEvaluacionPage";
 import { CrearEvaluacionExitoPage } from "./pages/CrearEvaluacionExito";
-import { EditarEvaluacionPage } from "./pages/EditarEvaluacionPage";
+import EditarEvaluacionPage from "./pages/EditarEvaluacionPage";
 import { HistorialEvaluacion } from "./pages/HistorialEvaluacion";
 import { RegistrarEvaluacionExitoPage } from "./pages/RegistrarEvaluacionExito";
 import { EvaluacionDeshabilitadaPage } from "./pages/EvaluacionDeshablitadaPage";
+import NoAutorizado from "./components/NoAutorizado";
 import ChartMockeadoDemo from "./pages/ChartsPage";
 
 export function AppRouter() {
@@ -83,6 +84,7 @@ export function AppRouter() {
       <Route path="/historialEvaluacion/:id" element={<HistorialEvaluacion />} />
 
        <Route path="/evaluacionDeshabilitada/:id" element={<EvaluacionDeshabilitadaPage  />} />
+       <Route path="/401" element={<NoAutorizado />} />
     
     </Routes>
   );

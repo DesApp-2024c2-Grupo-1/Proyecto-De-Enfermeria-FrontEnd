@@ -22,8 +22,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Input } from "../components/Input";
 import { createTheme } from "@mui/material/styles";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { autenticacion } from "../components/HandlerNecesidadAuth";
 
-export function CrearEvaluacionPage() {
+const CrearEvaluacionPage = () => {
   const [preguntas, setPreguntas] = useState([]);
   const [nuevoCriterio, setNuevoCriterio] = useState("");
   const [puntaje, setNuevoPuntaje] = useState("");
@@ -379,3 +380,5 @@ export function CrearEvaluacionPage() {
     </Box>
   );
 }
+
+export default autenticacion(CrearEvaluacionPage);
