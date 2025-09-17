@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const getAllEvaluaciones = async () => {
-    const response = await axios.get('http://localhost:3000/evaluacion');
+    const token = localStorage.getItem("token");
+    const response = await axios.get('http://localhost:3000/evaluacion', {headers: {Authorization: `Bearer ${token}`,},});
     return response.data;
 };
 

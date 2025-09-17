@@ -10,7 +10,13 @@ export const loginDocente = async (dni, password) => {
     dni,
     password,
   });
-  return response.data;
+
+  const { access_token, docente } = response.data;
+
+  localStorage.setItem("token", access_token)
+  localStorage.setItem("docente", JSON.stringify(docente));
+
+  return docente;
 }
 
 export const modificarDocente = async (id, docenteData) => {
