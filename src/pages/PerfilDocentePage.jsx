@@ -150,7 +150,7 @@ const PerfilDocentePage = () => {
         >
           {editando ? "Editar" : "Guardar"}
         </button>
-        <Button
+        {xs ? <Button
           sx={{
             width: "15rem",
             borderRadius: "10px",
@@ -162,7 +162,7 @@ const PerfilDocentePage = () => {
           onClick={handleOpenDialog}
         >
           Cerrar Sesión
-        </Button>
+        </Button> : null}
       </Stack>
 
       <Dialog

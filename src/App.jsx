@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Stack } from "@mui/material";
+import { Box, Stack, useMediaQuery } from "@mui/material";
 import { BrowserRouter, useLocation, useNavigate } from "react-router-dom";
 import { Menu } from "./components/adaptableTopMenu";
 import { AppRouter } from "./AppRouter";
@@ -7,13 +7,14 @@ import Footer from "./components/Footer";
 import { noAutorizadoCallback } from "./services/_authRequest";
 import HandlerRedireccion from "./components/HandlerRedireccion";
 import { DocenteProvider } from "./context/DocenteContext";
+import { createTheme } from "@mui/material/styles";
 
 export function App() {
   return (
     <BrowserRouter>
       <DocenteProvider>
         <MainLayout />
-        <HandlerRedireccion/>
+        <HandlerRedireccion />
       </DocenteProvider>
     </BrowserRouter>
   );
@@ -22,6 +23,8 @@ export function App() {
 export function MainLayout() {
   const location = useLocation();
   const navigate = useNavigate();
+  const theme = createTheme();
+  const xs = useMediaQuery(theme.breakpoints.down("sm"));
 
   const menuRoutes = [
     "/",
@@ -29,9 +32,9 @@ export function MainLayout() {
     "/registerAlumnos",
     "/registroAlumnoExitoso",
     "/registroDocenteExitoso",
-    "/401"
+    "/401",
   ];
-  
+
   const shouldHideMenu = menuRoutes.includes(location.pathname);
 
   useEffect(() => {
@@ -46,20 +49,17 @@ export function MainLayout() {
 
   useEffect(() => {
     noAutorizadoCallback(() => {
-      console.log('Usuario no autorizado');
-      navigate('/401');
+      console.log("Usuario no autorizado");
+      navigate("/401");
     });
 
     return () => noAutorizadoCallback(null);
   }, [navigate]);
 
   return (
-    <Stack 
-      direction="column" 
-      sx={{ minHeight: "100vh" }}
-    >
+    <Stack direction="column" sx={{ minHeight: "100vh" }}>
       {!shouldHideMenu && <Menu />}
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, paddingLeft: (shouldHideMenu || xs) ? "0px" : "80px" }}>
         <AppRouter />
       </Box>
       {!shouldHideMenu && <Footer />}

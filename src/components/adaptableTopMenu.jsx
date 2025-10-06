@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Stack,
@@ -14,6 +14,7 @@ import AlumnosIcon from "/assets/alumnos.png";
 import EstadisticasIcon from "/assets/estadisticas.png";
 import { useDocente } from "../context/DocenteContext";
 import IrAtrasBoton from "./irAtrasBoton";
+import PerfilMenuButton from "./PerfilDocenteButton";
 
 function MenuOption({ path, label, icon, onClick }) {
   const navigate = useNavigate();
@@ -71,6 +72,7 @@ export function Menu() {
     { path: "/perfilDocente", label: "Perfil", icon: ProfileIcon },
   ];
 
+
   return (
     <>
       {isDesktop ? (
@@ -79,53 +81,57 @@ export function Menu() {
             direction="row"
             alignItems="center"
             justifyContent="space-between"
-            sx={{ width: "100%", height: "50px", backgroundColor: "#1A3D2D" }}
+            sx={{
+              height: "60px",
+              px: 4,
+              backgroundColor: "#fff",
+              borderBottom: "1px solid #E5E7EB",
+              position: "sticky",
+              top: 0,
+              zIndex: 1000,
+            }}
           >
             <IrAtrasBoton />
-            <Button
-              sx={{
-                color: "white",
-                marginRight: "48px",
-                paddingRight: "15px",
-                fontSize: "15px",
-              }}
-              onClick={() => navigate("/perfilDocente")}
-              endIcon={
-                <i
-                  class="fa-solid fa-user"
-                  style={{
-                    fontSize: "25px",
-                    marginLeft: "0.25vh",
-                    color: "white",
-                  }}
-                ></i>
-              }
-            >
-              {docenteContext.nombre} {docenteContext.apellido}
-            </Button>
+            <PerfilMenuButton />
           </Stack>
+
           <Stack
-            direction="row"
+            direction="column"
             alignItems="center"
-            justifyContent="space-between"
-            className="menu"
+            spacing={4}
+            sx={{
+              width: "80px",
+              height: "100vh",
+              backgroundColor: "#1A3D2D",
+              color: "white",
+              py: 4,
+              position: "fixed",
+              left: 0,
+              top: 0,
+              zIndex: 1000,
+            }}
           >
-            <Stack direction="row" spacing={10} sx={{ marginLeft: 8 }}>
-              {opcionesMenu.map((option) => (
-                <MenuOption
-                  key={option.path}
-                  path={option.path}
-                  label={option.label}
-                  icon={option.icon}
-                />
-              ))}
-            </Stack>
             <img
-              src="../assets/unahur-logo-figma-sf.png"
-              className="logo"
+              src="../assets/unahur-logo-cuadrado.png"
               alt="Logo"
-              style={{ marginRight: 35, marginBottom: 10 }}
+              style={{
+                width: 35,
+                height: 35,
+                marginTop: -17,
+                marginBottom: -7,
+              }}
             />
+            {opcionesMenu.map((option) => (
+              <Box
+                key={option.path}
+                sx={{
+                  cursor: "pointer",
+                }}
+                onClick={() => navigate(option.path)}
+              >
+                <img src={option.icon} alt={option.label} width={30} />
+              </Box>
+            ))}
           </Stack>
         </>
       ) : (
