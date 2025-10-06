@@ -18,10 +18,10 @@ function ListItemConDropdown({ textos, buttonOnClick, contenidoDropdown }) {
     <Stack>
       <Stack
         direction="row"
-        spacing={{ sx: 1, sm: 3 }}
+        spacing={{ sx: 1 }}
         sx={{
           backgroundColor: "#BBE2D0",
-          my: "20px",
+          my: "10px",
           px: "20px",
           py: { xs: "10px", sm: "0px" },
           borderRadius: { xs: "10px", sm: "10px" },

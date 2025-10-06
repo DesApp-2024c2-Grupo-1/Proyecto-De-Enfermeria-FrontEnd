@@ -6,6 +6,9 @@ import {
   IconButton,
   useMediaQuery,
   Button,
+  Typography,
+  Chip,
+  Avatar,
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import HomeIcon from "/assets/home.png";
@@ -21,23 +24,32 @@ function MenuOption({ path, label, icon, onClick }) {
   const { pathname } = useLocation();
 
   return (
-    <Box
+    <Stack
+      direction="column"
+      alignItems="center"
+      justifyContent="space-between"
       sx={{
         typography: pathname === path ? "topMenuSelected" : "topMenu",
-        padding: 2,
+        padding: 0.5,
         cursor: "pointer",
         display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
       }}
       onClick={() => {
         navigate(path);
         if (onClick) onClick();
       }}
     >
-      <img src={icon} alt={label} style={{ width: 35, height: 35 }} />
-      {label}
-    </Box>
+      <Chip
+        avatar={
+          <Avatar src={icon} alt={label} sx={{ width: 35, height: 35, paddingLeft: 0.8, borderRadius: 0 }} />
+        }
+        sx={{
+          backgroundColor: pathname === path ? "#285742" : "transparent",
+          paddingLeft: 0.8 
+        }}
+      />
+      <Typography sx={{ fontSize: 14, marginTop: 0.5 }}>{label}</Typography>
+    </Stack>
   );
 }
 
@@ -72,7 +84,6 @@ export function Menu() {
     { path: "/perfilDocente", label: "Perfil", icon: ProfileIcon },
   ];
 
-
   return (
     <>
       {isDesktop ? (
@@ -89,6 +100,8 @@ export function Menu() {
               position: "sticky",
               top: 0,
               zIndex: 1000,
+              overflowY: "none",
+              scrollbarGutter: "stable",
             }}
           >
             <IrAtrasBoton />
@@ -122,15 +135,12 @@ export function Menu() {
               }}
             />
             {opcionesMenu.map((option) => (
-              <Box
+              <MenuOption
                 key={option.path}
-                sx={{
-                  cursor: "pointer",
-                }}
-                onClick={() => navigate(option.path)}
-              >
-                <img src={option.icon} alt={option.label} width={30} />
-              </Box>
+                path={option.path}
+                label={option.label}
+                icon={option.icon}
+              />
             ))}
           </Stack>
         </>

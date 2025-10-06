@@ -12,6 +12,7 @@ import {
   DialogActions,
   useMediaQuery,
   Pagination,
+  Box
 } from "@mui/material";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
 
@@ -90,6 +91,7 @@ export function RegistroEvaluacionesPage() {
             <>
               {!(filtrado && alumnosFiltrados.length === 0) ? (
                 <>
+                <Box sx={{ mt: "15px" }}>
                   <Lista
                     dropdown={true}
                     lista={alumnosPaginados}
@@ -103,6 +105,7 @@ export function RegistroEvaluacionesPage() {
                     }
                     paramOnClick={"id"}
                   />
+                  </Box>
                   {listaAMostrar.length > itemsPorPagina && (
                     <Stack mt={2} alignItems="center">
                       <Pagination

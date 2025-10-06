@@ -8,6 +8,7 @@ import { noAutorizadoCallback } from "./services/_authRequest";
 import HandlerRedireccion from "./components/HandlerRedireccion";
 import { DocenteProvider } from "./context/DocenteContext";
 import { createTheme } from "@mui/material/styles";
+import "./barrascroll.css";
 
 export function App() {
   return (
@@ -59,10 +60,17 @@ export function MainLayout() {
   return (
     <Stack direction="column" sx={{ minHeight: "100vh" }}>
       {!shouldHideMenu && <Menu />}
-      <Box sx={{ flexGrow: 1, paddingLeft: (shouldHideMenu || xs) ? "0px" : "80px" }}>
-        <AppRouter />
-      </Box>
+        <Box
+          sx={{
+            flexGrow: 1,
+            paddingLeft: shouldHideMenu || xs ? "0px" : "80px",
+            overflowY: "none",
+            scrollbarGutter: "stable",
+          }}
+        >
+          <AppRouter />
+        </Box>
       {!shouldHideMenu && <Footer />}
     </Stack>
-  );
+  );  
 }

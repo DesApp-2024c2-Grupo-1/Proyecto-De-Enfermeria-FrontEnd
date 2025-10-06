@@ -8,13 +8,13 @@ function Footer() {
     return (
         <Box
           sx={{
-            marginTop: "60px",
+            marginTop: "40px",
             backgroundColor: "#FFFFFF",
             color: "white",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "30px",
+            height: "10px",
             width: "100%",
             bottom: "0",
           }}

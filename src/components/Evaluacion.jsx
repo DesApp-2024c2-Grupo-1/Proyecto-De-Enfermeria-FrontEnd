@@ -60,7 +60,8 @@ export function Evaluacion({
       spacing={5}
       sx={{
         mx: "20%",
-        my: "5rem",
+        mb: "2rem",
+        mt: "5rem",
         justifyContent: "space-between",
       }}
     >
