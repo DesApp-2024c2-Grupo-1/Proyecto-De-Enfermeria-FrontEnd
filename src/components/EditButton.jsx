@@ -69,6 +69,7 @@ function EditButton({ id }) {
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
+        disableScrollLock
         onClose={handleClose}
         MenuListProps={{
           "aria-labelledby": "basic-button",

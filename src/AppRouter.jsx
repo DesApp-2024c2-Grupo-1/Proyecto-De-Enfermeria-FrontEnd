@@ -34,9 +34,7 @@ export function AppRouter() {
       <Route
         path="/"
         element={
-          <Page>
             <LoginPage />
-          </Page>
         }
       />
       <Route
@@ -106,17 +104,13 @@ export function AppRouter() {
       <Route
         path="/register"
         element={
-          <Page>
             <RegisterPage />
-          </Page>
         }
       />
       <Route
         path="/registerAlumnos"
         element={
-          <Page>
             <RegisterPageAlumnos />
-          </Page>
         }
       />
       <Route
@@ -234,9 +228,7 @@ export function AppRouter() {
       <Route
         path="/401"
         element={
-          <Page>
             <NoAutorizado />
-          </Page>
         }
       />
     </Routes>
