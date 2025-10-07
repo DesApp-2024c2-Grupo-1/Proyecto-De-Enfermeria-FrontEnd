@@ -71,6 +71,7 @@ function PerfilMenuButton() {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        disableScrollLock
         MenuListProps={{
           "aria-labelledby": "perfil-menu-button",
         }}
@@ -102,7 +103,7 @@ function PerfilMenuButton() {
           },
         }}
       >
-        <DialogTitle id="alert-dialog-title">{"¿Cerrar sesión?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title" sx={{alignSelf: "center"}}>{"¿Cerrar sesión?"}</DialogTitle>
 
         <DialogActions>
           <Button

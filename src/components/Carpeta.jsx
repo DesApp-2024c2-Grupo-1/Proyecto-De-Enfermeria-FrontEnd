@@ -30,123 +30,36 @@ function Carpeta({ titulo, id, edicion }) {
   };
 
   return (
-    /*
-    <Stack
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "row",
-        gap: 1,
-      }}
-    >
-      <Stack
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Paper
-          sx={{
-            paddingTop: "4vh",
-            paddingBottom: edicion === "true" ? "2vh" : "4vh",
-            width: "15rem",
-            backgroundColor: "#daf2e3",
-            position: "relative",
-            borderRadius: "10px",
-            boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.3)",
-          }}
-        >
-          <Box
-            sx={{
-              width: "80px",
-              height: "20px",
-              backgroundColor: "#daf2e3",
-              position: "absolute",
-              top: "-15px",
-              borderBottom: "none",
-              borderRadius: "5px 5px 0 0",
-            }}
-          />
-          <Stack
-            sx={{
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-              gap: "10px",
-            }}
-          >
-            <button
-              className="botonClaro"
-              onClick={handleOnClick}
-              style={{ borderRadius: 5 }}
-            >
-              {edicion === "true" ? "Evaluar" : "Consultar"}
-            </button>
-            {edicion === "true" && <button
-              className="botonClaro"
-              onClick={() =>
-                navigate(
-                  `/registroEvaluaciones/evaluaciones-realizadas/${id}`,
-                  {
-                    state: {
-                      evaluacionTitulo: evaluacion ? evaluacion.titulo : "",
-                      evaluacionId: id,
-                    },
-                  }
-                )
-              }
-              style={{ borderRadius: 5 }}
-            >
-              Ver
-            </button> }
-            {edicion === "true" && <EditButton id={id} />}
-          </Stack>
-        </Paper>
-
-        <Typography
-          sx={{
-            fontSize: "1.3rem",
-
-            margin: "10px 0 0 0",
-            textAlign: "center",
-            width: "15rem",
-          }}
-        >
-          {titulo}
-        </Typography>
-      </Stack>
-    </Stack>
-*/
     <Card
       sx={{
-        maxWidth: "23rem",
-        color: "#000",
-        backgroundColor: "#daf2e3",
-        borderRadius: "10px",
-        boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.3)",
+        backgroundColor: "#E8F5E9",
+        borderRadius: "16px",
+        boxShadow: "0px 1px 3px rgba(0,0,0,0.1)",
+        transition: "all 0.3s ease",
+        "&:hover": {
+          boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+        },
       }}
     >
       <CardContent>
+        <Box
+          sx={{
+            height: "8px",
+            background: "linear-gradient(90deg, #1A3D2D, #388E3C)",
+            borderRadius: "16px",
+            marginBottom: "8px",
+          }}
+        />
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-        {edicion === "true" && <EditButton id={id} />}
+          {edicion === "true" && <EditButton id={id} />}
         </Box>
         <Box sx={{ maxHeight: "6rem", minHeight: "6rem", overflow: "hidden" }}>
-          <Typography
-            sx={{
-              fontSize: "1.3rem",
-              margin: "10px 0 0 0",
-              width: "15rem",
-              textAlign: "left",
-            }}
-          >
+          <Typography variant="h6" sx={{ fontWeight: 600, color: "#1A3D2D" }}>
             {titulo}
           </Typography>
-
-          <Typography sx={{ color: "text.secondary", mb: 1.5 }}>
+          <Typography variant="body2" sx={{ color: "#607D8B", mt: 0.5 }}>
             Versión{" "}
-            {evaluacion && evaluacion.version ? evaluacion.version : "1"}
+            {evaluacion && evaluacion.version ? evaluacion.version : "no encontrada."}
           </Typography>
         </Box>
       </CardContent>

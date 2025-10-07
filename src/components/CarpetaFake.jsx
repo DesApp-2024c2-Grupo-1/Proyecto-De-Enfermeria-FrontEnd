@@ -1,8 +1,8 @@
 import { Box, Typography, Paper, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { AiFillPlusCircle } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 
-function CarpetaFake({ titulo, carpetas }) {
+function CarpetaFake({ carpetas }) {
   const navigate = useNavigate();
 
   return (
@@ -13,51 +13,68 @@ function CarpetaFake({ titulo, carpetas }) {
         alignItems: "center",
       }}
     >
+      
       <Paper
+        onClick={() => navigate("/crearEvaluacion", { state: { carpetas } })}
         sx={{
-          paddingTop: "5vh",
-          paddingBottom: "5vh",
-          width: "15rem",
-          backgroundColor: "#daf2e3",
           position: "relative",
-          borderRadius: "10px",
-          boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.3)",
+          maxHeight: "6rem", minHeight: "6rem", overflow: "hidden",
+          width: "23rem",
+          backgroundColor: "#E6F4EC",
+          borderRadius: "16px",
+          boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+          transition: "all 0.25s ease",
+          cursor: "pointer",
+          "&:hover": {
+            boxShadow: "0 6px 15px rgba(0,0,0,0.15)",
+            backgroundColor: "#DFF3E2",
+          },
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          py: 6,
         }}
       >
-        {/* CarpetaPestaña */}
         <Box
           sx={{
-            width: "80px",
-            height: "20px",
-            backgroundColor: "#daf2e3",
             position: "absolute",
-            top: "-15px",
-            borderBottom: "none",
-            borderRadius: "5px 5px 0 0",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "6px",
+            background: "linear-gradient(90deg, #1A3D2D, #4CAF50)",
+            borderTopLeftRadius: "16px",
+            borderTopRightRadius: "16px",
           }}
         />
-        {/* Contenedor de botones */}
         <Box
-          onClick={() => navigate("/crearEvaluacion", { state: { carpetas } })}
           sx={{
             display: "flex",
-            alignContent: "center",
+            alignItems: "center",
             justifyContent: "center",
-            my: 2.5,
+            borderRadius: "50%",
+            backgroundColor: "#1A3D2D",
+            color: "white",
+            width: 64,
+            height: 64,
+            transition: "all 0.25s ease",
+            "&:hover": {
+              backgroundColor: "#2E6547",
+              transform: "scale(1.08)",
+            },
           }}
         >
-          <AiFillPlusCircle size="40" color="#275B43" />
+          <AiOutlinePlus size={32} />
         </Box>
       </Paper>
-
-      {/* Título */}
       <Typography
         sx={{
-          fontSize: "1.3rem",
-
-          margin: "10px 0 0 0",
+          fontSize: "1rem",
+          fontWeight: 500,
+          marginTop: 1.5,
           textAlign: "center",
-          width: "15rem",
+          color: "#1A3D2D",
+          width: "300px",
         }}
       >
         Crear modelo de evaluación
