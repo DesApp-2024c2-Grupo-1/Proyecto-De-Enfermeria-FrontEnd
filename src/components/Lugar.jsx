@@ -43,7 +43,7 @@ export function Lugar({ disabled, selected, onChange, movil }) {
         getOptionLabel={(option) => option.label}
         isOptionEqualToValue={(option, value) => option.value === value.value}
         sx={{
-          width: movil == "true" ? 260 : 300,
+          width: movil == "true" ? "100%" : 300,
           pb: movil == "true" ? 3.5 : 0,
           "& .MuiOutlinedInput-root": {
             "&:hover fieldset": {

@@ -156,17 +156,13 @@ export function AppRouter() {
       <Route
         path="/registroAlumnoExitoso"
         element={
-          <Page>
             <RegistroAlumnoExitoso />
-          </Page>
         }
       />
       <Route
         path="/registroDocenteExitoso"
         element={
-          <Page>
             <RegistroDocenteExitoso />
-          </Page>
         }
       />
       <Route

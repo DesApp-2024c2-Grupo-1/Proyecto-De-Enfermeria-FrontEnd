@@ -1,11 +1,11 @@
-import { Stack, Box, Chip } from "@mui/material";
+import { Stack, Box, Chip, useMediaQuery } from "@mui/material";
 import { Input } from "../components/Input";
 import { ListaPreguntas } from "../components/ListaPreguntas";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDocente } from "../context/DocenteContext";
 import { getAllAlumnos } from "../services/AlumnoService";
-import { Observacion } from "./Observacion";
+import { createTheme } from "@mui/material/styles";
 
 export function Evaluacion({
   preguntas,
@@ -24,6 +24,8 @@ export function Evaluacion({
   const [alumnoEvaluado, setAlumnoEvaluado] = useState(null);
   const [alumnos, setAlumnos] = useState([]);
   const { docenteContext } = useDocente();
+  const theme = createTheme();
+  const xs = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleRegister = async () => {
     navigate("/registerAlumnos");
@@ -87,7 +89,11 @@ export function Evaluacion({
           backgroundColor={"#DDF0E7"}
           disabled={true}
           activo={false}
-          placeholder={viendoHistorial == "true" ? "Nombre del Docente" : `${docenteContext.nombre} ${docenteContext.apellido}`}
+          placeholder={
+            viendoHistorial == "true"
+              ? "Nombre del Docente"
+              : `${docenteContext.nombre} ${docenteContext.apellido}`
+          }
           titulo="Docente"
         />
         <Input
@@ -126,15 +132,38 @@ export function Evaluacion({
             />
           </Box>
         )}
-        <ListaPreguntas
-          preguntas={preguntas}
-          disabled={disabled}
-          alumno={alumnoEvaluado}
-          lugar={lugar}
-          modificacionPuntajeValue={modificacionPuntaje}
-          observacionValue={observacion}
-          viendoHistorial= {viendoHistorial}
-        />
+        {xs ? (
+          <ListaPreguntas
+            preguntas={preguntas}
+            disabled={disabled}
+            alumno={alumnoEvaluado}
+            lugar={lugar}
+            modificacionPuntajeValue={modificacionPuntaje}
+            observacionValue={observacion}
+            viendoHistorial={viendoHistorial}
+          />
+        ) : (
+          <Box
+            sx={{
+              backgroundColor: "#f9fbfa",
+              borderRadius: "16px",
+              p: 4,
+              boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
+              maxWidth: "100%",
+              mt: 3,
+            }}
+          >
+            <ListaPreguntas
+              preguntas={preguntas}
+              disabled={disabled}
+              alumno={alumnoEvaluado}
+              lugar={lugar}
+              modificacionPuntajeValue={modificacionPuntaje}
+              observacionValue={observacion}
+              viendoHistorial={viendoHistorial}
+            />
+          </Box>
+        )}
       </Stack>
     </Stack>
   );

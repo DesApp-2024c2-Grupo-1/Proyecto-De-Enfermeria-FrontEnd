@@ -3,7 +3,8 @@ import { Input } from "../components/Input";
 import { useRef, useEffect } from "react";
 import { createMuiTheme, ThemeProvider } from "@mui/material/styles";
 import "../index.css";
-import { Button, Stack, Alert, TextField } from "@mui/material";
+import { Button, Stack, Alert, TextField, useMediaQuery } from "@mui/material";
+import DividerTexto from "./DividerTitulo";
 
 const theme = createMuiTheme({
   palette: {
@@ -13,6 +14,7 @@ const theme = createMuiTheme({
   },
 });
 
+
 export function Observacion({
   disabled,
   onObservacionChange,
@@ -20,9 +22,10 @@ export function Observacion({
   modificacionPuntajeValue,
   observacionValue,
   notaFinal,
-  alerta
+  alerta,
 }) {
   const editableDivRef = useRef(null);
+  const xs = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     if (editableDivRef.current && !editableDivRef.current.textContent) {
@@ -34,12 +37,12 @@ export function Observacion({
     <ThemeProvider theme={theme}>
       <div>
         <Stack spacing={2}>
-          <h2>Modificación de puntaje</h2>
+          <DividerTexto texto={"Modificación de puntaje"} />
           <Stack spacing={5}>
             <TextField
               sx={{
                 backgroundColor: "#DDF0E7",
-                width: "260px",
+                width: xs ? "100%" : 300,
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
                     borderColor: "#c4c4c4",
@@ -64,18 +67,15 @@ export function Observacion({
               onChange={(e) => onPuntajeChange(parseInt(e.target.value) || 0)}
             />
 
-            {
-              (alerta && modificacionPuntajeValue != 0) && (
-                <Alert variant="outlined" severity="warning">
-                  La nota final será: {notaFinal}% al aplicar la modificación.
-                </Alert>
-              )}
-            
-
+            {alerta && modificacionPuntajeValue != 0 && (
+              <Alert variant="outlined" severity="warning">
+                La nota final será: {notaFinal}% al aplicar la modificación.
+              </Alert>
+            )}
           </Stack>
         </Stack>
 
-        <h2>Observaciones</h2>
+        <DividerTexto texto={"Observaciones"} />
         <div style={{ position: "relative", width: "100%" }}>
           <div
             ref={editableDivRef}
