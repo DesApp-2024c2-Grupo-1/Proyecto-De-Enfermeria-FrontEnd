@@ -92,14 +92,13 @@ function ListHeader({ textos }) {
       direction="row"
       spacing={xs ? 1 : 3}
       sx={{
-        background: "linear-gradient(90deg, #31614b 0%, #234637 100%)",
-        color: "#ffffff",
+        background: "linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 100%)",
+        color: "#13251dff",
         mt: 3,
-        mb: 1,
+        mb: -1.5,
         px: xs ? 2 : 3,
         py: xs ? 1.2 : 1.6,
         borderRadius: "12px",
-        boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
