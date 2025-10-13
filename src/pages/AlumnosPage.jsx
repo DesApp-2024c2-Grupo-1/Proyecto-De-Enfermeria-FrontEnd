@@ -4,7 +4,13 @@ import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
 import { getAllAlumnos } from "../services/AlumnoService";
 import { createTheme } from "@mui/material/styles";
-import { Stack, useMediaQuery, Pagination } from "@mui/material";
+import {
+  Stack,
+  useMediaQuery,
+  Pagination,
+  Box,
+  Paper,
+} from "@mui/material";
 import IrArribaBoton from "../components/irArribaBoton";
 import ListHeader from "../components/Header";
 
@@ -63,8 +69,8 @@ export function AlumnosPage() {
   const handleNavigate = (id) => {
     navigate(`/perfilAlumno/${id}`, {
       state: {
-        alumnoNombre: alumnos.find((alumno) => alumno.id === id).nombre,
-        alumnoApellido: alumnos.find((alumno) => alumno.id === id).apellido,
+        alumnoNombre: alumnos.find((a) => a.id === id).nombre,
+        alumnoApellido: alumnos.find((a) => a.id === id).apellido,
       },
     });
   };
@@ -83,45 +89,118 @@ export function AlumnosPage() {
   return (
     <>
       <IrArribaBoton />
+
       <Stack sx={{ alignItems: "center" }}>
-        <h1>Alumnos</h1>
+        {/* Header principal */}
         <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          width="100%"
           sx={{
+            px: xs ? "1.5rem" : 0,
+            mb: -7,
             width: xs ? "88%" : "60%",
           }}
         >
-          <Busqueda
-            placeholder="Buscar alumno..."
-            onChange={handleBusqueda}
-            width={xs ? "100%" : "200px"}
-          />
-          {!xs && <ListHeader key={keys} textos={textosHeader} />}
-          {!(filtrado && alumnosFiltrados.length === 0) ? (
+          <h1>Alumnos</h1>
+          <button className="botonClaro" onClick={handleRegisterAlumno}>
+            Añadir alumno
+          </button>
+        </Stack>
+
+        {/* Contenido principal */}
+        <Stack sx={{ width: xs ? "88%" : "60%" }}>
+          {xs ? (
             <>
-              <Lista
-                lista={alumnosPaginados}
-                keys={keys}
-                buttonOnClick={handleNavigate}
-                paramOnClick="id"
+              <Busqueda
+                placeholder="Buscar alumno..."
+                onChange={handleBusqueda}
+                width="100%"
               />
-              {listaAMostrar.length > itemsPorPagina && (
-                <Stack mt={2} alignItems="center">
-                  <Pagination
-                    count={paginasTotales}
-                    page={paginaActual}
-                    onChange={handleCambioPagina}
+              {!(filtrado && alumnosFiltrados.length === 0) ? (
+                <>
+                  <Lista
+                    lista={alumnosPaginados}
+                    keys={keys}
+                    buttonOnClick={handleNavigate}
+                    paramOnClick="id"
                   />
+                  {listaAMostrar.length > itemsPorPagina && (
+                    <Stack mt={2} alignItems="center">
+                      <Pagination
+                        count={paginasTotales}
+                        page={paginaActual}
+                        onChange={handleCambioPagina}
+                      />
+                    </Stack>
+                  )}
+                </>
+              ) : (
+                <Stack alignItems="center" py={3}>
+                  <h2>No se encontraron resultados</h2>
+                  <p>¿Necesita registrar un nuevo alumno?</p>
+                  <button className="botonClaro" onClick={handleRegisterAlumno}>
+                    Registrar
+                  </button>
                 </Stack>
               )}
             </>
           ) : (
-            <div>
-              <h2>No se encontraron resultados</h2>
-              <p>¿Necesita registrar un nuevo alumno?</p>
-              <button className="botonClaro" onClick={handleRegisterAlumno}>
-                Registrar
-              </button>
-            </div>
+            <Paper
+              sx={{
+                borderRadius: 3,
+                pt: 2,
+                pb: 3,
+                px: 5,
+                mx: -2,
+                boxShadow: "1px 2px 10px rgba(0,0,0,0.2)",
+              }}
+            >
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+                mb={2}
+              >
+                <ListHeader key={keys} textos={textosHeader} />
+                <Busqueda
+                  placeholder="Buscar alumno..."
+                  onChange={handleBusqueda}
+                  width="200px"
+                  height="25px"
+                />
+              </Stack>
+
+              {!(filtrado && alumnosFiltrados.length === 0) ? (
+                <>
+                  <Lista
+                    lista={alumnosPaginados}
+                    keys={keys}
+                    buttonOnClick={handleNavigate}
+                    paramOnClick="id"
+                  />
+
+                  {listaAMostrar.length > itemsPorPagina && (
+                    <Stack mt={2} alignItems="center">
+                      <Pagination
+                        count={paginasTotales}
+                        page={paginaActual}
+                        onChange={handleCambioPagina}
+                      />
+                    </Stack>
+                  )}
+                </>
+              ) : (
+                <Stack alignItems="center" py={3}>
+                  <h2>No se encontraron resultados</h2>
+                  <p>¿Necesita registrar un nuevo alumno?</p>
+                  <button className="botonClaro" onClick={handleRegisterAlumno}>
+                    Registrar
+                  </button>
+                </Stack>
+              )}
+            </Paper>
           )}
         </Stack>
       </Stack>
