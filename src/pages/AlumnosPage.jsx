@@ -4,15 +4,10 @@ import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
 import { getAllAlumnos } from "../services/AlumnoService";
 import { createTheme } from "@mui/material/styles";
-import {
-  Stack,
-  useMediaQuery,
-  Pagination,
-  Box,
-  Paper,
-} from "@mui/material";
+import { Stack, useMediaQuery, Pagination, Box, Paper } from "@mui/material";
 import IrArribaBoton from "../components/irArribaBoton";
 import ListHeader from "../components/Header";
+import DescargarExcelButton from "../components/exportExcel";
 
 export function AlumnosPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -89,7 +84,6 @@ export function AlumnosPage() {
   return (
     <>
       <IrArribaBoton />
-
       <Stack sx={{ alignItems: "center" }}>
         {/* Header principal */}
         <Stack
@@ -104,6 +98,7 @@ export function AlumnosPage() {
           }}
         >
           <h1>Alumnos</h1>
+          <DescargarExcelButton width={xs ? "100%" : "200px"} />
           <button className="botonClaro" onClick={handleRegisterAlumno}>
             Añadir alumno
           </button>
