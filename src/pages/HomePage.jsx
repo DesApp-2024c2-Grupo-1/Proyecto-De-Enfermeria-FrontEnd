@@ -36,7 +36,7 @@ const HomePage = () => {
         <Busqueda
           placeholder="Buscar por título..."
           width={"350px"}
-          height={"100px"}
+          height={"60px"}
           margin={"0 0 60px 0"}
           onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
         />

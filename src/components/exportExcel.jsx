@@ -1,7 +1,10 @@
-import { Button } from "@mui/material";
+import { Button, useMediaQuery } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
+import { createTheme } from "@mui/material/styles";
 
 const DescargarExcelButton = ({ width, height, margin }) => {
+  const theme = createTheme();
+  const xs = useMediaQuery(theme.breakpoints.down("sm"));
   const descargarExcel = async () => {
     try {
       const response = await fetch(
@@ -38,7 +41,7 @@ const DescargarExcelButton = ({ width, height, margin }) => {
         textTransform: "none",
         borderColor: "#e6e6e6",
         color: "#55B589",
-        fontWeight: 500,
+        fontWeight: 600,
         fontSize: "16px",
         "&:hover": {
           borderColor: "#77C4A0",
@@ -46,7 +49,7 @@ const DescargarExcelButton = ({ width, height, margin }) => {
         },
       }}
     >
-      Descargar Excel
+      {xs ? "Excel" : "Excel"}
     </Button>
   );
 };

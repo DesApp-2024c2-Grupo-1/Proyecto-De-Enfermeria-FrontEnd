@@ -30,8 +30,6 @@ export function MainLayout() {
   const menuRoutes = [
     "/",
     "/register",
-    "/registerAlumnos",
-    "/registroAlumnoExitoso",
     "/registroDocenteExitoso",
     "/401",
   ];

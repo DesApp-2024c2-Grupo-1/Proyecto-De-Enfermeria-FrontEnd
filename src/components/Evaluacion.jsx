@@ -74,17 +74,22 @@ export function Evaluacion({
           alignItems: "center",
         }}
       >
-        <Input
-          onChange={handleOnChange}
-          disabled={alumnoDisabled}
-          placeholder={alumnoPlaceholder || "Ingresar DNI:"}
-          titulo="Alumno"
-          backgroundColor={"#DDF0E7"}
-          helperText={alumno}
-          helperTextColor={
-            alumno === "Alumno no encontrado" ? "red" : "#429870"
-          }
-        />
+        <Stack
+          direction="column"
+          sx={{ maxWidth: 225, minWidth: 225, maxHeight: "10em" }}
+        >
+          <Input
+            onChange={handleOnChange}
+            disabled={alumnoDisabled}
+            placeholder={alumnoPlaceholder || "Ingresar DNI:"}
+            titulo="Alumno"
+            backgroundColor={"#DDF0E7"}
+            helperText={alumno}
+            helperTextColor={
+              alumno === "Alumno no encontrado" ? "red" : "#429870"
+            }
+          />
+        </Stack>
         <Input
           backgroundColor={"#DDF0E7"}
           disabled={true}
@@ -104,11 +109,7 @@ export function Evaluacion({
           titulo="Exigencia"
         />
       </Stack>
-      {alumno === "Alumno no encontrado" && (
-        <button className="botonClaro" onClick={handleRegister}>
-          Registrar
-        </button>
-      )}
+
       <Stack>
         {disabled && viendoHistorial !== "true" && (
           <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -147,10 +148,13 @@ export function Evaluacion({
             sx={{
               backgroundColor: "#f9fbfa",
               borderRadius: "16px",
-              p: 4,
+              paddingLeft: 4,
+              paddingRight: 4,
+              paddingBottom: 4,
+              paddingTop: 1,
               boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
               maxWidth: "100%",
-              mt: 3,
+              mt: 4,
             }}
           >
             <ListaPreguntas

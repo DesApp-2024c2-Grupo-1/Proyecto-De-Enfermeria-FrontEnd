@@ -4,10 +4,18 @@ import { useNavigate } from "react-router-dom";
 import Lista from "../components/Lista";
 import { getAllAlumnos } from "../services/AlumnoService";
 import { createTheme } from "@mui/material/styles";
-import { Stack, useMediaQuery, Pagination, Box, Paper } from "@mui/material";
+import {
+  Stack,
+  useMediaQuery,
+  Pagination,
+  Box,
+  Paper,
+  Button,
+} from "@mui/material";
 import IrArribaBoton from "../components/irArribaBoton";
 import ListHeader from "../components/Header";
 import DescargarExcelButton from "../components/exportExcel";
+import { FiPlus } from "react-icons/fi";
 
 export function AlumnosPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -97,11 +105,46 @@ export function AlumnosPage() {
             width: xs ? "88%" : "60%",
           }}
         >
-          <h1>Alumnos</h1>
-          <DescargarExcelButton width={xs ? "100%" : "200px"} />
-          <button className="botonClaro" onClick={handleRegisterAlumno}>
-            Añadir alumno
-          </button>
+          <Stack direction="row" alignItems="center">
+            <h1>Alumnos</h1>
+            <Button
+              variant="contained"
+              onClick={handleRegisterAlumno}
+              sx={{
+                marginLeft: 1.5,
+                minWidth: 0,
+                boxShadow: 0,
+                width: 30,
+                height: 30,
+                borderRadius: "50%",
+                padding: 0,
+                textTransform: "none",
+                backgroundColor: "transparent",
+                border: "#e6e6e6 solid 1px",
+                color: "#55B589",
+                "&:hover": {
+                  borderColor: "#77C4A0",
+                  backgroundColor: "#f0faf7",
+                  boxShadow: 0,
+                },
+              }}
+            >
+              <FiPlus size={22} />
+            </Button>
+          </Stack>
+          <Stack direction="row" alignItems="center">
+            <DescargarExcelButton width={xs ? "100px" : "100px"} />
+
+            {!xs && (
+              <Box sx={{marginLeft: 2}}>
+              <Busqueda
+                placeholder="Buscar alumno..."
+                onChange={handleBusqueda}
+                width="200px"
+              />
+              </Box>
+            )}
+          </Stack>
         </Stack>
 
         {/* Contenido principal */}
@@ -133,11 +176,11 @@ export function AlumnosPage() {
                 </>
               ) : (
                 <Stack alignItems="center" py={3}>
-                  <h2>No se encontraron resultados</h2>
-                  <p>¿Necesita registrar un nuevo alumno?</p>
-                  <button className="botonClaro" onClick={handleRegisterAlumno}>
-                    Registrar
-                  </button>
+                  <h2>¡No se encontraron resultados!</h2>
+                  <p>¿Necesitás registrar un nuevo alumno? Hacé clic {xs ? " " : " "}
+                  <span style={{ cursor: 'pointer' }} onClick={handleRegisterAlumno}>
+                     <u><b>acá.</b></u>
+                  </span></p>
                 </Stack>
               )}
             </>
@@ -159,12 +202,6 @@ export function AlumnosPage() {
                 mb={2}
               >
                 <ListHeader key={keys} textos={textosHeader} />
-                <Busqueda
-                  placeholder="Buscar alumno..."
-                  onChange={handleBusqueda}
-                  width="200px"
-                  height="25px"
-                />
               </Stack>
 
               {!(filtrado && alumnosFiltrados.length === 0) ? (
@@ -188,11 +225,11 @@ export function AlumnosPage() {
                 </>
               ) : (
                 <Stack alignItems="center" py={3}>
-                  <h2>No se encontraron resultados</h2>
-                  <p>¿Necesita registrar un nuevo alumno?</p>
-                  <button className="botonClaro" onClick={handleRegisterAlumno}>
-                    Registrar
-                  </button>
+                  <h2>¡No se encontraron resultados!</h2>
+                  <p>¿Necesitás registrar un nuevo alumno? Hacé clic {xs ? " " : " "}
+                  <span style={{ cursor: 'pointer' }} onClick={handleRegisterAlumno}>
+                     <u><b>acá.</b></u>
+                  </span></p>
                 </Stack>
               )}
             </Paper>

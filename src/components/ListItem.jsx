@@ -1,6 +1,6 @@
 import { Stack, Button, Box, useMediaQuery } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
-import { FiEye } from "react-icons/fi"; // 👁️ icono para el botón
+import { FiEye } from "react-icons/fi"; 
 
 function ListItem({ textos, buttonOnClick }) {
   const theme = createTheme();
