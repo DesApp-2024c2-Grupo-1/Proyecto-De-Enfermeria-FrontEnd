@@ -11,8 +11,6 @@ const HandlerRedireccion = () => {
         '/',
         '/login',
         '/register', 
-        '/registerAlumnos',
-        '/registroAlumnoExitoso',
         '/registroDocenteExitoso',
         '/401'
     ];

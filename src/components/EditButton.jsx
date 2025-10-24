@@ -33,7 +33,6 @@ function EditButton({ id }) {
   const handleDeshabilitar = async () => {
     deshabilitarEvaluacion(id);
     handleClose();
-    console.log("Evaluación deshabilitada");
     setOpenDialog(false);
     setOpenDialogExito(true);
     setTimeout(() => {
@@ -45,25 +44,24 @@ function EditButton({ id }) {
     <div>
       <Button
         sx={{
-          backgroundColor: "#31614b",
+          backgroundColor: "transparent",
           color: "white",
           borderRadius: "100%",
           minHeight: 0,
           minWidth: 0,
           height: "30px",
           width: "30px",
-
-          "&:hover": {
-            backgroundColor: "#3e7d5d",
-          },
+          paddingTop: 2.5,
+          paddingRight: 2.5
         }}
+
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <i className="fa-solid fa-gear"></i>
+        <i style={{fontSize: 20}}className="fa-solid fa-gear"></i>
       </Button>
       <Menu
         id="basic-menu"

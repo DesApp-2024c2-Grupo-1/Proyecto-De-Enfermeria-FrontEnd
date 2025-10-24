@@ -32,7 +32,7 @@ function Carpeta({ titulo, id, edicion }) {
   return (
     <Card
       sx={{
-        backgroundColor: "#E8F5E9",
+        background: "linear-gradient(to right, #d7f0dc 0%, #a3d3a8ff 90%)",
         borderRadius: "16px",
         boxShadow: "0px 1px 3px rgba(0,0,0,0.1)",
         transition: "all 0.3s ease",
@@ -42,26 +42,50 @@ function Carpeta({ titulo, id, edicion }) {
       }}
     >
       <CardContent>
-        <Box
-          sx={{
-            height: "8px",
-            background: "linear-gradient(90deg, #1A3D2D, #388E3C)",
-            borderRadius: "16px",
-            marginBottom: "8px",
-          }}
-        />
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          {edicion === "true" && <EditButton id={id} />}
-        </Box>
-        <Box sx={{ maxHeight: "6rem", minHeight: "6rem", overflow: "hidden" }}>
-          <Typography variant="h6" sx={{ fontWeight: 600, color: "#1A3D2D" }}>
-            {titulo}
-          </Typography>
-          <Typography variant="body2" sx={{ color: "#607D8B", mt: 0.5 }}>
-            Versión{" "}
-            {evaluacion && evaluacion.version ? evaluacion.version : "no encontrada."}
-          </Typography>
-        </Box>
+        <Stack direction="row" justifyContent="space-between" alignItems="top">
+          <Box
+            sx={{
+              maxHeight: "6rem",
+              minHeight: "6rem",
+              overflow: "hidden",
+              mt: -0.7,
+            }}
+          >
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 600,
+                color: "#1A3D2D",
+                maxWidth: "90%",
+                overflowWrap: "break-word",
+              }}
+            >
+              {titulo}
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              mt: -2,
+              mr: -2,
+              backgroundColor: "#31614b",
+              maxHeight: "45px",
+              maxWidth: "45px",
+              minHeight: "45px",
+              minWidth: "45px",
+              borderBottomLeftRadius: "50%",
+            }}
+          >
+            {edicion === "true" && <EditButton id={id} />}
+          </Box>
+        </Stack>
+        <Typography variant="body2" sx={{ color: "#607D8B", mt: -2.5, mb: 3}}>
+          Versión{" "}
+          {evaluacion && evaluacion.version
+            ? evaluacion.version
+            : "no encontrada."}
+        </Typography>
       </CardContent>
       <CardActions>
         <Button
@@ -69,7 +93,8 @@ function Carpeta({ titulo, id, edicion }) {
           sx={{
             color: "#1A3D2D",
             borderRadius: "10px",
-            borderColor: "#1A3D2D",
+            backgroundColor: "#E7F6E9",
+            borderColor: "#E7F6E9",
             "&:hover": {
               backgroundColor: "#daf2e3",
               color: "#1A3D2D",
