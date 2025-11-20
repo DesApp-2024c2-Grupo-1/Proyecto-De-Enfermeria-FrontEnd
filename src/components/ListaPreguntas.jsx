@@ -9,6 +9,7 @@ import {
   DialogActions,
   Button,
   useMediaQuery,
+  Divider,
 } from "@mui/material";
 import { Lugar } from "../components/Lugar";
 import { Observacion } from "../components/Observacion";
@@ -17,6 +18,7 @@ import { useDocente } from "../context/DocenteContext";
 import { useEvaluacion } from "../context/EvaluacionContext";
 import { useNavigate } from "react-router-dom";
 import { createTheme } from "@mui/material/styles";
+import DividerTexto from "./DividerTitulo";
 
 export function ListaPreguntas({
   preguntas,
@@ -25,7 +27,7 @@ export function ListaPreguntas({
   lugar,
   modificacionPuntajeValue,
   observacionValue,
-  viendoHistorial
+  viendoHistorial,
 }) {
   const { docenteContext } = useDocente();
   const { evaluacionContext } = useEvaluacion();
@@ -188,6 +190,7 @@ export function ListaPreguntas({
   return (
     <div>
       <Stack>
+        <DividerTexto texto={"Criterios"}/>
         {preguntas.map((pregunta, index) => (
           <div key={index}>
             <div className="no-break-inside">
@@ -203,33 +206,36 @@ export function ListaPreguntas({
             </div>
           </div>
         ))}
-        {viendoHistorial !== "true" && 
-        <div className="no-break-inside">
-          <Lugar
-            disabled={registrado}
-            selected={lugar ? lugar : lugarSeleccionado}
-            onChange={handleLugarChange}
-            movil={xs ? "true" : "false"}
-          />
-        </div>
-        }
-        {viendoHistorial !== "true" && 
-        <div className="no-break-inside">
-          <Observacion
-            disabled={registrado}
-            onObservacionChange={handleObservacionChange}
-            onPuntajeChange={handlePuntajeChange}
-            modificacionPuntajeValue={
-              modificacionPuntajeValue
-                ? modificacionPuntajeValue
-                : modificacionPuntaje
-            }
-            observacionValue={observacionValue ? observacionValue : observacion}
-            notaFinal={notaFinal}
-            alerta={alerta}
-          />
-        </div>
-         }
+        {viendoHistorial !== "true" && (
+          <div className="no-break-inside">
+            <DividerTexto texto={"Lugar"}/>
+            <Lugar
+              disabled={registrado}
+              selected={lugar ? lugar : lugarSeleccionado}
+              onChange={handleLugarChange}
+              movil={xs ? "true" : "false"}
+            />
+          </div>
+        )}
+        {viendoHistorial !== "true" && (
+          <div className="no-break-inside">
+            <Observacion
+              disabled={registrado}
+              onObservacionChange={handleObservacionChange}
+              onPuntajeChange={handlePuntajeChange}
+              modificacionPuntajeValue={
+                modificacionPuntajeValue
+                  ? modificacionPuntajeValue
+                  : modificacionPuntaje
+              }
+              observacionValue={
+                observacionValue ? observacionValue : observacion
+              }
+              notaFinal={notaFinal}
+              alerta={alerta}
+            />
+          </div>
+        )}
         {!registrado ? (
           <div style={{ display: "flex", justifyContent: "center" }}>
             <button
@@ -314,7 +320,10 @@ export function ListaPreguntas({
           ></dotlottie-wc>
         </DialogTitle>
         <DialogContent>
-          <p style={{ textAlign: "center" }} dangerouslySetInnerHTML={{ __html: mensajeIncompleto }} />
+          <p
+            style={{ textAlign: "center" }}
+            dangerouslySetInnerHTML={{ __html: mensajeIncompleto }}
+          />
         </DialogContent>
         <DialogActions>
           <Button

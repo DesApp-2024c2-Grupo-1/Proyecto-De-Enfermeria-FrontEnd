@@ -1,6 +1,6 @@
-import { Route, Routes } from "react-router-dom";
-import { PerfilDocentePage } from "./pages/PerfilDocentePage";
-import { HomePage } from "./pages/HomePage";
+import { Route, Routes, useLocation } from "react-router-dom";
+import PerfilDocentePage from "./pages/PerfilDocentePage";
+import HomePage from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { RegisterPageAlumnos } from "./pages/RegisterPageAlumnos";
@@ -12,78 +12,221 @@ import { VerEvaluacionPage } from "./pages/VerEvaluacionPage";
 import { EvaluacionesPorAlumno } from "./pages/EvaluacionesPorAlumnoPage";
 import { AlumnoPerfilPage } from "./pages/AlumnoPerfilPage";
 import { AlumnosPage } from "./pages/AlumnosPage";
-import { CrearEvaluacionPage } from "./pages/CrearEvaluacionPage";
+import CrearEvaluacionPage from "./pages/CrearEvaluacionPage";
 import { CrearEvaluacionExitoPage } from "./pages/CrearEvaluacionExito";
-import { EditarEvaluacionPage } from "./pages/EditarEvaluacionPage";
+import EditarEvaluacionPage from "./pages/EditarEvaluacionPage";
 import { HistorialEvaluacion } from "./pages/HistorialEvaluacion";
 import { RegistrarEvaluacionExitoPage } from "./pages/RegistrarEvaluacionExito";
 import { EvaluacionDeshabilitadaPage } from "./pages/EvaluacionDeshablitadaPage";
+import NoAutorizado from "./components/NoAutorizado";
 import ChartMockeadoDemo from "./pages/ChartsPage";
+import "./animations.css";
+
+function Page({ children }) {
+  return <div className="page">{children}</div>;
+}
 
 export function AppRouter() {
+  const location = useLocation();
+
   return (
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      <Route path="/alumnos" element={<AlumnosPage />} />
-      <Route path="/home" element={<HomePage />} />
+    <Routes location={location} key={location.pathname}>
+      <Route
+        path="/"
+        element={
+            <LoginPage />
+        }
+      />
+      <Route
+        path="/alumnos"
+        element={
+          <Page>
+            <AlumnosPage />
+          </Page>
+        }
+      />
+      <Route
+        path="/home"
+        element={
+          <Page>
+            <HomePage />
+          </Page>
+        }
+      />
       <Route
         path="/evaluacionesPorAlumno"
-        element={<EvaluacionesPorAlumno />}
+        element={
+          <Page>
+            <EvaluacionesPorAlumno />
+          </Page>
+        }
       />
       <Route
         path="/evaluacionesPorAlumno/:idEvaluacion/:idAlumno"
-        element={<EvaluacionesPorAlumno />}
+        element={
+          <Page>
+            <EvaluacionesPorAlumno />
+          </Page>
+        }
       />
-      <Route path="/verEvaluacion/:id" element={<VerEvaluacionPage />} />
-      <Route path="/perfilAlumno" element={<AlumnoPerfilPage />} />
-      <Route path="/perfilAlumno/:idAlumno" element={<AlumnoPerfilPage />} />
-      <Route path="/perfilDocente" element={<PerfilDocentePage />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/registerAlumnos" element={<RegisterPageAlumnos />} />
+      <Route
+        path="/verEvaluacion/:id"
+        element={
+          <Page>
+            <VerEvaluacionPage />
+          </Page>
+        }
+      />
+      <Route
+        path="/perfilAlumno"
+        element={
+          <Page>
+            <AlumnoPerfilPage />
+          </Page>
+        }
+      />
+      <Route
+        path="/perfilAlumno/:idAlumno"
+        element={
+          <Page>
+            <AlumnoPerfilPage />
+          </Page>
+        }
+      />
+      <Route
+        path="/perfilDocente"
+        element={
+          <Page>
+            <PerfilDocentePage />
+          </Page>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+            <RegisterPage />
+        }
+      />
+      <Route
+        path="/registerAlumnos"
+        element={
+            <RegisterPageAlumnos />
+        }
+      />
       <Route
         path="/registrarEvaluacion"
-        element={<RegistrarEvaluacionPage />}
+        element={
+          <Page>
+            <RegistrarEvaluacionPage />
+          </Page>
+        }
       />
       <Route
         path="/registrarEvaluacion/:id"
-        element={<RegistrarEvaluacionPage />}
+        element={
+          <Page>
+            <RegistrarEvaluacionPage />
+          </Page>
+        }
       />
       <Route
         path="/registroEvaluaciones"
-        element={<RegistroEvaluacionesPage />}
+        element={
+          <Page>
+            <RegistroEvaluacionesPage />
+          </Page>
+        }
       />
       <Route
         path="/registroEvaluaciones/evaluaciones-realizadas/:id"
-        element={<RegistroEvaluacionesPage />}
+        element={
+          <Page>
+            <RegistroEvaluacionesPage />
+          </Page>
+        }
       />
-      <Route path="/crearEvaluacion" element={<CrearEvaluacionPage />} />
+      <Route
+        path="/crearEvaluacion"
+        element={
+          <Page>
+            <CrearEvaluacionPage />
+          </Page>
+        }
+      />
       <Route
         path="/registroAlumnoExitoso"
-        element={<RegistroAlumnoExitoso />}
+        element={
+            <RegistroAlumnoExitoso />
+        }
       />
       <Route
         path="/registroDocenteExitoso"
-        element={<RegistroDocenteExitoso />}
+        element={
+            <RegistroDocenteExitoso />
+        }
       />
-      <Route path="/verEvaluacion" element={<VerEvaluacionPage />} />
+      <Route
+        path="/verEvaluacion"
+        element={
+          <Page>
+            <VerEvaluacionPage />
+          </Page>
+        }
+      />
       <Route
         path="/crearEvaluacionExito"
-        element={<CrearEvaluacionExitoPage />}
+        element={
+          <Page>
+            <CrearEvaluacionExitoPage />
+          </Page>
+        }
       />
       <Route
         path="/estadisticas"
-        element={<ChartMockeadoDemo />}
+        element={
+          <Page>
+            <ChartMockeadoDemo />
+          </Page>
+        }
       />
       <Route
         path="/evaluarExito"
-        element={<RegistrarEvaluacionExitoPage />}
+        element={
+          <Page>
+            <RegistrarEvaluacionExitoPage />
+          </Page>
+        }
       />
-      <Route path="/editarEvaluacion/:id" element={<EditarEvaluacionPage />} />
-
-      <Route path="/historialEvaluacion/:id" element={<HistorialEvaluacion />} />
-
-       <Route path="/evaluacionDeshabilitada/:id" element={<EvaluacionDeshabilitadaPage  />} />
-    
+      <Route
+        path="/editarEvaluacion/:id"
+        element={
+          <Page>
+            <EditarEvaluacionPage />
+          </Page>
+        }
+      />
+      <Route
+        path="/historialEvaluacion/:id"
+        element={
+          <Page>
+            <HistorialEvaluacion />
+          </Page>
+        }
+      />
+      <Route
+        path="/evaluacionDeshabilitada/:id"
+        element={
+          <Page>
+            <EvaluacionDeshabilitadaPage />
+          </Page>
+        }
+      />
+      <Route
+        path="/401"
+        element={
+            <NoAutorizado />
+        }
+      />
     </Routes>
   );
 }

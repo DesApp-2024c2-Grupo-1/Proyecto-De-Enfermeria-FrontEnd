@@ -6,8 +6,9 @@ import IrArribaBoton from "../components/irArribaBoton";
 import { useEffect, useState } from "react";
 import { getAllEvaluaciones } from "../services/EvaluacionService";
 import { useDocente } from "../context/DocenteContext";
+import { autenticacion } from "../components/HandlerNecesidadAuth";
 
-export function HomePage() {
+const HomePage = () => {
   const [carpetas, setCarpetas] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const { docenteContext } = useDocente();
@@ -15,6 +16,7 @@ export function HomePage() {
   const listaFiltrada = carpetas.filter((carpeta) =>
     carpeta.titulo.toLowerCase().includes(searchTerm)
   );
+  
   const fetchCarpetas = async () => {
     const data = await getAllEvaluaciones();
     setCarpetas(data);
@@ -34,7 +36,7 @@ export function HomePage() {
         <Busqueda
           placeholder="Buscar por título..."
           width={"350px"}
-          height={"100px"}
+          height={"60px"}
           margin={"0 0 60px 0"}
           onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
         />
@@ -57,4 +59,6 @@ export function HomePage() {
       </Stack>
     </>
   );
-}
+};
+
+export default autenticacion(HomePage);

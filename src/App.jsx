@@ -1,28 +1,39 @@
-import React, { useEffect } from "react";
-import { Box, Grid, Stack } from "@mui/material";
-import { BrowserRouter, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Box, Stack, useMediaQuery } from "@mui/material";
+import { BrowserRouter, useLocation, useNavigate } from "react-router-dom";
 import { Menu } from "./components/adaptableTopMenu";
 import { AppRouter } from "./AppRouter";
 import Footer from "./components/Footer";
+import { noAutorizadoCallback } from "./services/_authRequest";
+import HandlerRedireccion from "./components/HandlerRedireccion";
+import { DocenteProvider } from "./context/DocenteContext";
+import { createTheme } from "@mui/material/styles";
+import "./barrascroll.css";
 
 export function App() {
   return (
     <BrowserRouter>
-      <MainLayout />
+      <DocenteProvider>
+        <MainLayout />
+        <HandlerRedireccion />
+      </DocenteProvider>
     </BrowserRouter>
   );
 }
 
 export function MainLayout() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const theme = createTheme();
+  const xs = useMediaQuery(theme.breakpoints.down("sm"));
 
   const menuRoutes = [
     "/",
     "/register",
-    "/registerAlumnos",
-    "/registroAlumnoExitoso",
     "/registroDocenteExitoso",
+    "/401",
   ];
+
   const shouldHideMenu = menuRoutes.includes(location.pathname);
 
   useEffect(() => {
@@ -35,16 +46,29 @@ export function MainLayout() {
     }
   }, [location.pathname]);
 
+  useEffect(() => {
+    noAutorizadoCallback(() => {
+      console.log("Usuario no autorizado");
+      navigate("/401");
+    });
+
+    return () => noAutorizadoCallback(null);
+  }, [navigate]);
+
   return (
-    <Stack 
-      direction="column" 
-      sx={{ minHeight: "100vh" }}
-    >
+    <Stack direction="column" sx={{ minHeight: "100vh" }}>
       {!shouldHideMenu && <Menu />}
-      <Box sx={{ flexGrow: 1 }}>
-        <AppRouter />
-      </Box>
+        <Box
+          sx={{
+            flexGrow: 1,
+            paddingLeft: shouldHideMenu || xs ? "0px" : "80px",
+            overflowY: "none",
+            scrollbarGutter: "stable",
+          }}
+        >
+          <AppRouter />
+        </Box>
       {!shouldHideMenu && <Footer />}
     </Stack>
-  );
+  );  
 }

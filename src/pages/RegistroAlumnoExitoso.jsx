@@ -1,14 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import { Stack, Box } from "@mui/material";
-
+import { Stack, Box, Button } from "@mui/material";
 
 export function RegistroAlumnoExitoso() {
   const navigate = useNavigate();
 
   const handleRedirect = () => {
-    navigate("/home");
+    navigate("/alumnos");
   };
-  
+
   return (
     <>
       <Stack
@@ -16,7 +15,7 @@ export function RegistroAlumnoExitoso() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "100vh",
+          marginTop: 20,
         }}
       >
         <Stack
@@ -27,7 +26,6 @@ export function RegistroAlumnoExitoso() {
             alignItems: "center",
             backgroundColor: "rgba(255, 255, 255, 0.87)",
             borderRadius: "20px",
-            boxShadow: "0px 0px 20px 0px rgba(0,0,0,0.2)",
           }}
           spacing={2}
         >
@@ -48,9 +46,51 @@ export function RegistroAlumnoExitoso() {
             <i className="fa fa-user" style={{ fontSize: "60px" }}></i>
           </Box>
           <h1>¡Alumno registrado con éxito!</h1>
-          <button className="botonClaro" onClick={handleRedirect}>
-            Volver al inicio
-          </button>
+          <Stack direction="row">
+            <Button
+              variant="contained"
+              onClick={handleRedirect}
+              sx={{
+                textTransform: "none",
+                fontWeight: 600,
+                background: "#2E7D5D",
+                color: "white",
+                borderRadius: "10px",
+                maxWidth: 150,
+                minWidth: 150,
+                marginRight: 1,
+                px: 3,
+                py: 1.2,
+                "&:hover": {
+                  background: "#275B43",
+                },
+              }}
+            >
+              Ir a Alumnos
+            </Button>
+
+            <Button
+              variant="contained"
+              onClick={() => navigate("/registerAlumnos")}
+              sx={{
+                textTransform: "none",
+                fontWeight: 600,
+                background: "#2E7D5D",
+                color: "white",
+                borderRadius: "10px",
+                maxWidth: 150,
+                minWidth: 150,
+                marginLeft: 1,
+                px: 3,
+                py: 1.2,
+                "&:hover": {
+                  background: "#275B43",
+                },
+              }}
+            >
+              Registrar otro
+            </Button>
+          </Stack>
         </Stack>
       </Stack>
     </>

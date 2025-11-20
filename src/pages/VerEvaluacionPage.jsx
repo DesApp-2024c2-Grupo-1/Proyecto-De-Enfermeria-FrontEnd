@@ -72,7 +72,7 @@ export function VerEvaluacionPage() {
       >
         <button
           className="botonVerde"
-          style={{ marginTop: "-30px" }}
+          style={{ marginTop: "10px" }}
           onClick={descargarEvaluacionComoPDF}
         >
           Descargar

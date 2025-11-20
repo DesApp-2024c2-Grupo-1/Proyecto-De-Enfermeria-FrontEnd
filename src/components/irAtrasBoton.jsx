@@ -7,7 +7,7 @@ const IrAtrasBoton = () => {
   return (
     <Button
       sx={{
-        color: "white",
+        color: "#1A3D2D",
         width: "100px",
         fontSize: "15px",
         marginLeft: "48px"
@@ -17,7 +17,7 @@ const IrAtrasBoton = () => {
         <i
           class="fa fa-arrow-left"
           aria-hidden="true"
-          style={{ fontSize: "12 px", color: "white" }}
+          style={{ fontSize: "12 px", color: "#1A3D2D" }}
         ></i>
       }
     >

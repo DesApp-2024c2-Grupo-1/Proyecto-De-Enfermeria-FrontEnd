@@ -1,25 +1,26 @@
-import axios from "axios";
+import { authRequest } from "./_authRequest";
 
-export const registrarEvaluacionRealizada = async (docenteData) => {
-    const response = await axios.post('http://localhost:3000/evaluacion-realizada', docenteData);
-    return response.data;
-  };
-  export const getEvaluacionById = async (id) => {
-    const response = await axios.get(`http://localhost:3000/evaluacion-realizada/${id}`);
-    return response.data;
-  };
+export const registrarEvaluacionRealizada = async (evaluacionData) => {
+    return await authRequest('post', '/evaluacion-realizada', evaluacionData);
+};
 
-  export const getAllEvaluacionesRealizadasPorAlumno = async (id) => {
-    const response = await axios.get(`http://localhost:3000/evaluacion-realizada/evaluaciones-realizadas-por-alumno/${id}`);
-    return response.data;
-  } /* Trae todas las evaluaciones realizadas por un alumno, independientmente del modelo de evaluación*/
 
-  export const findAllAlumnosPorEvaluacion = async (id) => {
-    const response = await axios.get(`http://localhost:3000/evaluacion-realizada/evaluaciones-realizadas/${id}`);
-    return response.data;
-  };
+export const getEvaluacionById = async (id) => {
+    return await authRequest('get', `/evaluacion-realizada/${id}`);
+};
 
-  export const findEvaluacionesDeUnAlumno = async (idEvaluacion, idAlumno) => {
-    const response = await axios.get(`http://localhost:3000/evaluacion-realizada/evaluaciones-alumno/${idEvaluacion}/${idAlumno}`);
-    return response.data;
-  };
+export const getAllEvaluacionesRealizadasPorAlumno = async (id) => {
+    return await authRequest('get', `/evaluacion-realizada/evaluaciones-realizadas-por-alumno/${id}`);
+};
+
+export const findAllAlumnosPorEvaluacion = async (id) => {
+    return await authRequest('get', `/evaluacion-realizada/evaluaciones-realizadas/${id}`);
+};
+
+export const findEvaluacionesDeUnAlumno = async (idEvaluacion, idAlumno) => {
+    return await authRequest('get', `/evaluacion-realizada/evaluaciones-alumno/${idEvaluacion}/${idAlumno}`);
+};
+
+export const exportarExcel = async (idEvaluacion) => {
+    return await authRequest('get', `/evaluacion-realizada/exportar/excel/${idEvaluacion}`);
+};

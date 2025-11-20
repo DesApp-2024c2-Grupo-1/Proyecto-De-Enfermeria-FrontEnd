@@ -8,13 +8,13 @@ function Footer() {
     return (
         <Box
           sx={{
-            marginTop: "60px",
-            backgroundColor: "#1A3D2D",
+            marginTop: "40px",
+            backgroundColor: "#FFFFFF",
             color: "white",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "100px",
+            height: "10px",
             width: "100%",
             bottom: "0",
           }}
@@ -28,7 +28,6 @@ function Footer() {
               alignItems: "center",
             }}
           >
-            <p>Proyecto de Enfermería - 2025</p>
           </Stack>
         </Box>
     )

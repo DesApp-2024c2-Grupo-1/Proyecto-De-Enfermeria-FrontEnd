@@ -17,8 +17,9 @@ import { createTheme } from "@mui/material/styles";
 import { useDocente } from "../context/DocenteContext";
 import { modificarDocente } from "../services/DocenteService";
 import { useNavigate } from "react-router-dom";
+import { autenticacion } from "../components/HandlerNecesidadAuth";
 
-export function PerfilDocentePage() {
+const PerfilDocentePage = () => {
   const [editando, setEditando] = useState(true);
   const { docenteContext, setDocenteContext } = useDocente();
   const [nombre, setNombre] = useState(docenteContext.nombre);
@@ -149,7 +150,7 @@ export function PerfilDocentePage() {
         >
           {editando ? "Editar" : "Guardar"}
         </button>
-        <Button
+        {xs ? <Button
           sx={{
             width: "15rem",
             borderRadius: "10px",
@@ -161,7 +162,7 @@ export function PerfilDocentePage() {
           onClick={handleOpenDialog}
         >
           Cerrar Sesión
-        </Button>
+        </Button> : null}
       </Stack>
 
       <Dialog
@@ -273,3 +274,4 @@ export function PerfilDocentePage() {
     </>
   );
 }
+export default autenticacion(PerfilDocentePage);

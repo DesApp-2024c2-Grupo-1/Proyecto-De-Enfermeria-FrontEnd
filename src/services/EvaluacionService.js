@@ -1,31 +1,25 @@
-import axios from "axios";
+import { authRequest } from "./_authRequest";
 
 export const getAllEvaluaciones = async () => {
-    const response = await axios.get('http://localhost:3000/evaluacion');
-    return response.data;
+    return await authRequest('get', '/evaluacion');
 };
 
 export const getEvaluacionById = async (id) => {
-    const response = await axios.get(`http://localhost:3000/evaluacion/${id}`);
-    return response.data;
+    return await authRequest('get', `/evaluacion/${id}`);
 };
 
 export const getAllVersionesDeUnModelo = async (id) => {
-    const response = await axios.get(`http://localhost:3000/evaluacion/versiones/${id}`);
-    return response.data;
-}
+    return await authRequest('get', `/evaluacion/versiones/${id}`);
+};
 
 export const postEvaluacionYPreguntas = async (evaluacionYPreguntasData) => {
-    const response = await axios.post(`http://localhost:3000/evaluacion`, evaluacionYPreguntasData);
-    return response.data;
+    return await authRequest('post', '/evaluacion', evaluacionYPreguntasData);
 };
 
 export const putEvaluacionYPreguntas = async (evaluacionYPreguntasData, id) => {
-    const response = await axios.put(`http://localhost:3000/evaluacion/modificar-evaluacion/${id}`, evaluacionYPreguntasData);
-    return response.data;
+    return await authRequest('put', `/evaluacion/modificar-evaluacion/${id}`, evaluacionYPreguntasData);
 };
 
 export const deshabilitarEvaluacion = async (id) => {
-    const response = await axios.put(`http://localhost:3000/evaluacion/${id}`);
-    return response.data;
+    return await authRequest('put', `/evaluacion/${id}`);
 };

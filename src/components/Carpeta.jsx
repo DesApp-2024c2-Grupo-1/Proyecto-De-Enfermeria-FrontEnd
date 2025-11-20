@@ -1,9 +1,12 @@
-import { Box, Typography, Paper, Stack } from "@mui/material";
+import { Box, Typography, Paper, Stack, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useEvaluacion } from "../context/EvaluacionContext";
 import { getEvaluacionById } from "../services/EvaluacionService";
 import EditButton from "./EditButton";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
 
 function Carpeta({ titulo, id, edicion }) {
   const { setEvaluacionContext } = useEvaluacion();
@@ -23,106 +26,114 @@ function Carpeta({ titulo, id, edicion }) {
     if (evaluacion) {
       setEvaluacionContext(evaluacion);
       navigate(`/registrarEvaluacion/${id}`);
-    } 
+    }
   };
 
   return (
-    <Stack
+    <Card
       sx={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "row",
-        gap: 1,
+        background: "linear-gradient(to right, #d7f0dc 0%, #a3d3a8ff 90%)",
+        borderRadius: "16px",
+        boxShadow: "0px 1px 3px rgba(0,0,0,0.1)",
+        transition: "all 0.3s ease",
+        "&:hover": {
+          boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+        },
       }}
     >
-      <Stack
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Paper
-          sx={{
-            paddingTop: "4vh",
-            paddingBottom: edicion === "true" ? "2vh" : "4vh",
-            width: "15rem",
-            backgroundColor: "#daf2e3",
-            position: "relative",
-            borderRadius: "10px",
-            boxShadow: "3px 3px 5px rgba(0, 0, 0, 0.3)",
-          }}
-        >
-          {/* CarpetaPestaña */}
+      <CardContent>
+        <Stack direction="row" justifyContent="space-between" alignItems="top">
           <Box
             sx={{
-              width: "80px",
-              height: "20px",
-              backgroundColor: "#daf2e3",
-              position: "absolute",
-              top: "-15px",
-              borderBottom: "none",
-              borderRadius: "5px 5px 0 0",
-            }}
-          />
-          {/* Contenedor de botones */}
-          <Stack
-            sx={{
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-              gap: "10px",
+              maxHeight: "6rem",
+              minHeight: "6rem",
+              overflow: "hidden",
+              mt: -0.7,
             }}
           >
-            <button
-              className="botonClaro"
-              onClick={handleOnClick}
-              style={{ borderRadius: 5 }}
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 600,
+                color: "#1A3D2D",
+                maxWidth: "90%",
+                overflowWrap: "break-word",
+              }}
             >
-              {edicion === "true" ? "Evaluar" : "Consultar"}
-            </button>
-            {edicion === "true" && <button
-              className="botonClaro"
-              onClick={() =>
-                navigate(
-                  `/registroEvaluaciones/evaluaciones-realizadas/${id}`,
-                  {
-                    state: {
-                      evaluacionTitulo: evaluacion ? evaluacion.titulo : "",
-                      evaluacionId: id,
-                    },
-                  }
-                )
-              }
-              style={{ borderRadius: 5 }}
-            >
-              Ver
-            </button> }
+              {titulo}
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              mt: -2,
+              mr: -2,
+              backgroundColor: "#31614b",
+              maxHeight: "45px",
+              maxWidth: "45px",
+              minHeight: "45px",
+              minWidth: "45px",
+              borderBottomLeftRadius: "50%",
+            }}
+          >
             {edicion === "true" && <EditButton id={id} />}
-          </Stack>
-        </Paper>
-
-        {/* Título */}
-        <Typography
-          sx={{
-            fontSize: "1.3rem",
-
-            margin: "10px 0 0 0",
-            textAlign: "center",
-            width: "15rem",
-          }}
-        >
-          {titulo}
+          </Box>
+        </Stack>
+        <Typography variant="body2" sx={{ color: "#607D8B", mt: -2.5, mb: 3}}>
+          Versión{" "}
+          {evaluacion && evaluacion.version
+            ? evaluacion.version
+            : "no encontrada."}
         </Typography>
-      </Stack>
-    </Stack>
+      </CardContent>
+      <CardActions>
+        <Button
+          variant="outlined"
+          sx={{
+            color: "#1A3D2D",
+            borderRadius: "10px",
+            backgroundColor: "#E7F6E9",
+            borderColor: "#E7F6E9",
+            "&:hover": {
+              backgroundColor: "#daf2e3",
+              color: "#1A3D2D",
+              borderColor: "#daf2e3",
+            },
+            width: "100px",
+          }}
+          onClick={handleOnClick}
+        >
+          {edicion === "true" ? "Evaluar" : "Consultar"}
+        </Button>
+        <Button
+          sx={{
+            color: "#FFFFFF",
+            backgroundColor: "#1A3D2D",
+            borderColor: "#1A3D2D",
+            borderRadius: "10px",
+            "&:hover": {
+              backgroundColor: "#daf2e3",
+              color: "#1A3D2D",
+              borderColor: "#daf2e3",
+            },
+            width: "100px",
+          }}
+          onClick={() =>
+            navigate(`/registroEvaluaciones/evaluaciones-realizadas/${id}`, {
+              state: {
+                evaluacionTitulo: evaluacion ? evaluacion.titulo : "",
+                evaluacionId: id,
+              },
+            })
+          }
+          autoFocus
+        >
+          Ver
+        </Button>
+      </CardActions>
+    </Card>
   );
 }
 
 export default Carpeta;
-
-/*
-
-
-*/
