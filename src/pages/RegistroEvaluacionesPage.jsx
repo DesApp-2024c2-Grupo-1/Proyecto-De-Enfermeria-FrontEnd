@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { createTheme } from "@mui/material/styles";
 import Lista from "../components/Lista";
+import DescargarExcelButton from "../components/exportExcel";
 
 import {
   Button,
@@ -12,7 +13,7 @@ import {
   DialogActions,
   useMediaQuery,
   Pagination,
-  Box
+  Box,
 } from "@mui/material";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
 
@@ -78,33 +79,42 @@ export function RegistroEvaluacionesPage() {
     <>
       <Stack sx={{ alignItems: "center" }}>
         <h1>{evaluacionTitulo}</h1>
-        <Stack sx={{
+        <Stack
+          sx={{
             width: xs ? "88%" : "60%",
-          }}>
+          }}
+        >
+          <Stack
+            direction={xs ? "column" : "row"}
+            spacing={2}>
           <Busqueda
             placeholder="Buscar un alumno..."
             onChange={handleBusqueda}
             width={xs ? "100%" : "220px"}
           />
-
+          <DescargarExcelButton
+            width={xs ? "100px" : "100px"}
+            idEvaluacion={id}
+          />
+          </Stack>
           {alumnos.length > 0 ? (
             <>
               {!(filtrado && alumnosFiltrados.length === 0) ? (
                 <>
-                <Box sx={{ mt: "15px" }}>
-                  <Lista
-                    dropdown={true}
-                    lista={alumnosPaginados}
-                    keys={["nombre", "apellido", "dni"]}
-                    contenidoDropdown={alumnosPaginados.map(
-                      (item) => item.evaluacionesRealizadas
-                    )}
-                    keysDropdown={["fecha", "nota"]}
-                    buttonOnClick={(evaluacionId) =>
-                      navigate(`/verEvaluacion/${evaluacionId}`)
-                    }
-                    paramOnClick={"id"}
-                  />
+                  <Box sx={{ mt: "15px" }}>
+                    <Lista
+                      dropdown={true}
+                      lista={alumnosPaginados}
+                      keys={["nombre", "apellido", "dni"]}
+                      contenidoDropdown={alumnosPaginados.map(
+                        (item) => item.evaluacionesRealizadas
+                      )}
+                      keysDropdown={["fecha", "nota"]}
+                      buttonOnClick={(evaluacionId) =>
+                        navigate(`/verEvaluacion/${evaluacionId}`)
+                      }
+                      paramOnClick={"id"}
+                    />
                   </Box>
                   {listaAMostrar.length > itemsPorPagina && (
                     <Stack mt={2} alignItems="center">
@@ -149,17 +159,17 @@ export function RegistroEvaluacionesPage() {
                 <Button
                   variant="outlined"
                   sx={{
-                  color: "#1A3D2D",
-                  backgroundColor: "#FFFFFF",
-                  borderColor: "#1A3D2D",
-                  borderRadius: "10px",
-                  "&:hover": {
-                    backgroundColor: "#FFFFFF",
                     color: "#1A3D2D",
-                    borderColor: "#FFFFFF",
-                  },
-                  width: "120px",
-                }}
+                    backgroundColor: "#FFFFFF",
+                    borderColor: "#1A3D2D",
+                    borderRadius: "10px",
+                    "&:hover": {
+                      backgroundColor: "#FFFFFF",
+                      color: "#1A3D2D",
+                      borderColor: "#FFFFFF",
+                    },
+                    width: "120px",
+                  }}
                   onClick={() => navigate("/home")}
                 >
                   Volver atrás

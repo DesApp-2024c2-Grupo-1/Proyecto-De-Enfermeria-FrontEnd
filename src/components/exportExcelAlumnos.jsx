@@ -2,13 +2,13 @@ import { Button, useMediaQuery } from "@mui/material";
 import DownloadIcon from "@mui/icons-material/Download";
 import { createTheme } from "@mui/material/styles";
 
-const DescargarExcelButton = ({ width, height, margin, idEvaluacion }) => {
+const DescargarExcelButtonAlumnos = ({ width, height, margin, idEvaluacion }) => {
   const theme = createTheme();
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
   const descargarExcel = async (idEvaluacion) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/evaluacion-realizada/exportar/excel/${idEvaluacion}`,
+        "http://localhost:3000/alumno/exportar/excel",
         {
           method: "GET",
         }
@@ -20,7 +20,7 @@ const DescargarExcelButton = ({ width, height, margin, idEvaluacion }) => {
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = "Evaluaciones.xlsx";
+      link.download = "Alumnos.xlsx";
       link.click();
       window.URL.revokeObjectURL(url);
     } catch (error) {
@@ -54,4 +54,4 @@ const DescargarExcelButton = ({ width, height, margin, idEvaluacion }) => {
   );
 };
 
-export default DescargarExcelButton;
+export default DescargarExcelButtonAlumnos;

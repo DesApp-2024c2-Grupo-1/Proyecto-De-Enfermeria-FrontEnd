@@ -20,3 +20,7 @@ export const findAllAlumnosPorEvaluacion = async (id) => {
 export const findEvaluacionesDeUnAlumno = async (idEvaluacion, idAlumno) => {
     return await authRequest('get', `/evaluacion-realizada/evaluaciones-alumno/${idEvaluacion}/${idAlumno}`);
 };
+
+export const exportarExcel = async (idEvaluacion) => {
+    return await authRequest('get', `/evaluacion-realizada/exportar/excel/${idEvaluacion}`);
+};

@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import IrArribaBoton from "../components/irArribaBoton";
 import ListHeader from "../components/Header";
-import DescargarExcelButton from "../components/exportExcel";
+import DescargarExcelButtonAlumnos from "../components/exportExcelAlumnos";
 import { FiPlus } from "react-icons/fi";
 
 export function AlumnosPage() {
@@ -133,7 +133,7 @@ export function AlumnosPage() {
             </Button>
           </Stack>
           <Stack direction="row" alignItems="center">
-            <DescargarExcelButton width={xs ? "100px" : "100px"} />
+            <DescargarExcelButtonAlumnos width={xs ? "100px" : "100px"} />
 
             {!xs && (
               <Box sx={{marginLeft: 2}}>
