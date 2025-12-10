@@ -10,6 +10,7 @@ import { DocenteProvider } from "./context/DocenteContext";
 import { createTheme } from "@mui/material/styles";
 import "./barrascroll.css";
 
+
 export function App() {
   return (
     <BrowserRouter>

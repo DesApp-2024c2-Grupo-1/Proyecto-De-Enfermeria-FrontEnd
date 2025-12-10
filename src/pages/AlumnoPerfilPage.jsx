@@ -10,8 +10,10 @@ import {
   DialogTitle,
   DialogActions,
   useMediaQuery,
-  createTheme
+  createTheme,
 } from "@mui/material";
+import ListaCards from "../components/ListaCards";
+import AlumnoPerfilHeader from "../components/AlumnoPerfilHeader";
 
 export function AlumnoPerfilPage() {
   const [evaluaciones, setEvaluaciones] = useState([]);
@@ -48,63 +50,72 @@ export function AlumnoPerfilPage() {
   }, [idAlumno]);
 
   return (
-    <>
-      <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
-        <h1>
-          {alumnoNombre} {alumnoApellido}
-        </h1>
-        {evaluacionesFiltradas.length > 0 ? (
-          <Box sx={{ width: xs ? "88%" : "60%", display: "flex", flexDirection: "column" }}>
-            {evaluacionesFiltradas.map((evaluacion, index) => (
-              <Lista
-                key={index}
-                titulo={evaluacion.titulo}
-                lista={evaluacion.instancias}
-                keys={keys}
-                buttonOnClick={(id) => navigate(`/verEvaluacion/${id}`)}
-                paramOnClick="id"
-              />
-            ))}
-          </Box>
-        ) : (
-          <Dialog
-            open={openDialog}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-            sx={{
-              "& .MuiDialog-paper": {
-                padding: "1.75rem",
-                borderRadius: "20px",
-              },
-            }}
-          >
-            <DialogTitle id="alert-dialog-title">
-              {"El o la estudiante no ha tomado ninguna evaluación."}
-            </DialogTitle>
+    <Stack
+      sx={{
+        width: xs ? "85%" : "100%",
+        px: { xs: 2, sm: 3, md: 0 },
+        alignItems: "center",
+      }}
+    >
+      <Box sx={{ width: "100%", maxWidth: 900 }}>
+        <AlumnoPerfilHeader
+          alumnoNombre={alumnoNombre}
+          alumnoApellido={alumnoApellido}
+          evaluaciones={evaluaciones}
+        />
+      </Box>
 
-            <DialogActions>
-              <Button
-                variant="outlined"
-                sx={{
-                  color: "#1A3D2D",
+      {evaluacionesFiltradas.length > 0 ? (
+        <Box sx={{ width: "100%", maxWidth: 900, mt: 3 }}>
+          {evaluacionesFiltradas.map((evaluacion, index) => (
+            <ListaCards
+              key={index}
+              titulo={evaluacion.titulo}
+              lista={evaluacion.instancias}
+              keys={["fecha", "nota"]}
+              buttonOnClick={(id) => navigate(`/verEvaluacion/${id}`)}
+              paramOnClick="id"
+            />
+          ))}
+        </Box>
+      ) : (
+        <Dialog
+          open={openDialog}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          sx={{
+            "& .MuiDialog-paper": {
+              padding: "1.75rem",
+              borderRadius: "20px",
+            },
+          }}
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"El o la estudiante no ha tomado ninguna evaluación."}
+          </DialogTitle>
+
+          <DialogActions>
+            <Button
+              variant="outlined"
+              sx={{
+                color: "#1A3D2D",
+                backgroundColor: "#FFFFFF",
+                borderColor: "#1A3D2D",
+                borderRadius: "10px",
+                "&:hover": {
                   backgroundColor: "#FFFFFF",
-                  borderColor: "#1A3D2D",
-                  borderRadius: "10px",
-                  "&:hover": {
-                    backgroundColor: "#FFFFFF",
-                    color: "#1A3D2D",
-                    borderColor: "#FFFFFF",
-                  },
-                  width: "120px",
-                }}
-                onClick={() => navigate("/alumnos")}
-              >
-                Volver atrás
-              </Button>
-            </DialogActions>
-          </Dialog>
-        )}
-      </Stack>
-    </>
+                  color: "#1A3D2D",
+                  borderColor: "#FFFFFF",
+                },
+                width: "120px",
+              }}
+              onClick={() => navigate("/alumnos")}
+            >
+              Volver atrás
+            </Button>
+          </DialogActions>
+        </Dialog>
+      )}
+    </Stack>
   );
 }
