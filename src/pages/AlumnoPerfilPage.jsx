@@ -22,11 +22,17 @@ export function AlumnoPerfilPage() {
   const keys = ["fecha", "nota"];
   const navigate = useNavigate();
   const location = useLocation();
-  const alumnoNombre = location.state.alumnoNombre;
-  const alumnoApellido = location.state.alumnoApellido;
+  const alumnoNombre = location.state?.alumnoNombre;
+  const alumnoApellido = location.state?.alumnoApellido;
   const theme = createTheme();
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
   const { idAlumno } = useParams();
+
+  useEffect(() => {
+    if (!location.state || !location.state.alumnoNombre) {
+      navigate("/401", { replace: true });
+    }
+  }, [location.state, navigate]);
 
   const evaluacionesTitulos = Array.from(
     new Set(evaluaciones.map((evaluacion) => evaluacion.evaluacion.titulo))
@@ -73,7 +79,7 @@ export function AlumnoPerfilPage() {
           display: "flex",
           justifyContent: xs ? "space-between" : "flex-end",
           mt: -5,
-          mr: -4.65
+          mr: -4.65,
         }}
       >
         <Busqueda width={300} placeholder={"Buscar por título..."} />
