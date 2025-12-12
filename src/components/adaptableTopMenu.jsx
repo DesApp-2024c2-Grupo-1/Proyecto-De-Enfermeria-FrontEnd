@@ -107,7 +107,6 @@ export function Menu() {
             <IrAtrasBoton />
             <PerfilMenuButton />
           </Stack>
-
           <Stack
             direction="column"
             alignItems="center"

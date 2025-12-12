@@ -110,12 +110,14 @@ export function LoginPage() {
           <button onClick={handleLogin} className="botonClaro">
             Iniciar sesión
           </button>
+        {/*
           <a
             href="https://ar.pinterest.com/pin/369084131975098694/"
             target="_blank"
           >
             ¿Olvidaste la contraseña?
           </a>
+          */}
           <p>¿No tenés cuenta?</p>
           <button onClick={handleRegister} className="botonClaroInvertido">
             Registrate

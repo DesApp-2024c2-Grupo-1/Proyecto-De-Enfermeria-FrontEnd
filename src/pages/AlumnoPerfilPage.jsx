@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import ListaCards from "../components/ListaCards";
 import AlumnoPerfilHeader from "../components/AlumnoPerfilHeader";
+import Busqueda from "../components/Busqueda";
 
 export function AlumnoPerfilPage() {
   const [evaluaciones, setEvaluaciones] = useState([]);
@@ -57,12 +58,25 @@ export function AlumnoPerfilPage() {
         alignItems: "center",
       }}
     >
-      <Box sx={{ width: "100%", maxWidth: 900 }}>
+      <Box sx={{ width: "100%", maxWidth: 900, mt: 3 }}>
         <AlumnoPerfilHeader
           alumnoNombre={alumnoNombre}
           alumnoApellido={alumnoApellido}
           evaluaciones={evaluaciones}
         />
+      </Box>
+
+      <Box
+        sx={{
+          width: "100%",
+          maxWidth: 900,
+          display: "flex",
+          justifyContent: xs ? "space-between" : "flex-end",
+          mt: -5,
+          mr: -4.65
+        }}
+      >
+        <Busqueda width={300} placeholder={"Buscar por título..."} />
       </Box>
 
       {evaluacionesFiltradas.length > 0 ? (

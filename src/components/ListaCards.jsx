@@ -97,8 +97,17 @@ export default function ListaCards({
                       sx={{ padding: "8px 4px" }}
                     >
                       <Box>
-                        <Typography sx={{ fontFamily: "Poppins, Inter, sans-serif" }} fontWeight={600}>{fecha}</Typography>
-                        <Typography sx={{ fontFamily: "Poppins, Inter, sans-serif" }} fontSize={14} color="text.secondary">
+                        <Typography
+                          sx={{ fontFamily: "Poppins, Inter, sans-serif" }}
+                          fontWeight={600}
+                        >
+                          {fecha}
+                        </Typography>
+                        <Typography
+                          sx={{ fontFamily: "Poppins, Inter, sans-serif" }}
+                          fontSize={14}
+                          color="text.secondary"
+                        >
                           Nota: {nota}
                         </Typography>
                       </Box>
@@ -137,16 +146,18 @@ export default function ListaCards({
               sx={{
                 textTransform: "none",
                 color: "#1A3D2D",
-                borderColor: "#1A3D2D",
+                borderColor: "transparent",
                 borderRadius: "10px",
                 px: 3,
-                "&:hover": { backgroundColor: "#EBF4EF" },
+                "&:hover": {borderColor: "transparent" },
               }}
               onClick={() => setExpanded(!expanded)}
             >
-              {expanded
-                ? "Ver menos"
-                : `Ver todas (${listaOrdenada.length - initialLimit} más)`}
+              {expanded ? (
+                <i className="fa fa-angle-up fa-2x" aria-hidden="true"></i>
+              ) : (
+                <i className="fa fa-angle-down fa-2x" aria-hidden="true"></i>
+              )}
             </Button>
           </Box>
         )}

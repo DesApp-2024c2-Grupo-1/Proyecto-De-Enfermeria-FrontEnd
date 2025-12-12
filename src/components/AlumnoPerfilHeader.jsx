@@ -21,7 +21,7 @@ export default function AlumnoPerfilHeader({
         maxWidth: "900px",
       }}
     >
-      <Avatar sx={{ width: 90, height: 90, fontSize: 32, bgcolor: "#1A3D2D" }}>
+      <Avatar sx={{ width: 95, height: 95, fontSize: 34, bgcolor: "#1A3D2D" }}>
         {iniciales}
       </Avatar>
 
