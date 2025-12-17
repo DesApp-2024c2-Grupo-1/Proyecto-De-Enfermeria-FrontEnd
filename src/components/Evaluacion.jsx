@@ -17,6 +17,8 @@ export function Evaluacion({
   observacion,
   nota,
   viendoHistorial,
+  docenteNombre,
+  docenteApellido
 }) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
@@ -97,7 +99,7 @@ export function Evaluacion({
           placeholder={
             viendoHistorial == "true"
               ? "Nombre del Docente"
-              : `${docenteContext.nombre} ${docenteContext.apellido}`
+              : `${docenteNombre} ${docenteApellido}`
           }
           titulo="Docente"
         />

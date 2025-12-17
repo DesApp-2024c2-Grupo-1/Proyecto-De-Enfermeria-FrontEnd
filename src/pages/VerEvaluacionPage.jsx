@@ -62,6 +62,8 @@ export function VerEvaluacionPage() {
           observacion={evaluacionRealizada.observacion}
           nota={evaluacionRealizada.nota}
           viendoHistorial={"false"}
+          docenteNombre={evaluacionRealizada.docente?.nombre}
+          docenteApellido={evaluacionRealizada.docente?.apellido}
         />
       </div>
       <Box
