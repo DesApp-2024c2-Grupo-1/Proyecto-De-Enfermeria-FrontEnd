@@ -13,6 +13,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import HomeIcon from "/assets/home.png";
 import ProfileIcon from "/assets/profile.png";
 import AlumnosIcon from "/assets/alumnos.png";
+import EstadisticasIcon from "/assets/estadisticas.png";
 import { useDocente } from "../context/DocenteContext";
 import IrAtrasBoton from "./irAtrasBoton";
 import PerfilMenuButton from "./PerfilDocenteButton";
@@ -45,8 +46,18 @@ function MenuOption({ path, label, icon, onClick, mobile = false }) {
           "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
         }}
       >
-        <img src={icon} alt={label} style={{ width: 22, height: 22, opacity: 0.9 }} />
-        <Typography sx={{ color: "#fff", fontWeight: isActive ? 600 : 400, fontSize: "0.95rem" }}>
+        <img
+          src={icon}
+          alt={label}
+          style={{ width: 22, height: 22, opacity: 0.9 }}
+        />
+        <Typography
+          sx={{
+            color: "#fff",
+            fontWeight: isActive ? 600 : 400,
+            fontSize: "0.95rem",
+          }}
+        >
           {label}
         </Typography>
       </Box>
@@ -86,7 +97,11 @@ function MenuOption({ path, label, icon, onClick, mobile = false }) {
             : {},
         }}
       >
-        <img src={icon} alt={label} style={{ width: 24, height: 24, opacity: isActive ? 1 : 0.65 }} />
+        <img
+          src={icon}
+          alt={label}
+          style={{ width: 24, height: 24, opacity: isActive ? 1 : 0.65 }}
+        />
         <Typography
           sx={{
             fontSize: "0.65rem",
@@ -121,11 +136,13 @@ export function Menu() {
   const opcionesMenu = [
     { path: "/home", label: "Inicio", icon: HomeIcon },
     { path: "/alumnos", label: "Alumnos", icon: AlumnosIcon },
+    { path: "/estadisticas", label: "Estadísticas", icon: EstadisticasIcon },
   ];
 
   const opcionesMenuMovil = [
     { path: "/home", label: "Inicio", icon: HomeIcon },
     { path: "/alumnos", label: "Alumnos", icon: AlumnosIcon },
+    { path: "/estadisticas", label: "Estadísticas", icon: EstadisticasIcon },
     { path: "/perfilDocente", label: "Perfil", icon: ProfileIcon },
   ];
 
@@ -224,7 +241,11 @@ export function Menu() {
               "&:hover": { backgroundColor: "#285742" },
             }}
           >
-            <i className="fa fa-bars" aria-hidden="true" style={{ fontSize: "16px" }} />
+            <i
+              className="fa fa-bars"
+              aria-hidden="true"
+              style={{ fontSize: "16px" }}
+            />
           </IconButton>
 
           {/* Drawer móvil */}
@@ -243,13 +264,27 @@ export function Menu() {
             }}
           >
             <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
-              <IconButton onClick={toggleDrawer} sx={{ color: "rgba(255,255,255,0.7)" }}>
-                <i className="fa fa-times" aria-hidden="true" style={{ fontSize: "18px" }} />
+              <IconButton
+                onClick={toggleDrawer}
+                sx={{ color: "rgba(255,255,255,0.7)" }}
+              >
+                <i
+                  className="fa fa-times"
+                  aria-hidden="true"
+                  style={{ fontSize: "18px" }}
+                />
               </IconButton>
             </Box>
 
             <Box sx={{ mb: 2, px: 2 }}>
-              <Typography sx={{ color: "rgba(255,255,255,0.45)", fontSize: "0.7rem", letterSpacing: "0.1em", fontWeight: 600 }}>
+              <Typography
+                sx={{
+                  color: "rgba(255,255,255,0.45)",
+                  fontSize: "0.7rem",
+                  letterSpacing: "0.1em",
+                  fontWeight: 600,
+                }}
+              >
                 MENÚ
               </Typography>
             </Box>

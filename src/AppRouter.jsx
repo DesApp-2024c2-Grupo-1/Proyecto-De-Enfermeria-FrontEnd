@@ -19,7 +19,7 @@ import { HistorialEvaluacion } from "./pages/HistorialEvaluacion";
 import { RegistrarEvaluacionExitoPage } from "./pages/RegistrarEvaluacionExito";
 import { EvaluacionDeshabilitadaPage } from "./pages/EvaluacionDeshablitadaPage";
 import NoAutorizado from "./components/NoAutorizado";
-import ChartMockeadoDemo from "./pages/ChartsPage";
+import ChartsPage from "./pages/ChartsPage";
 import "./animations.css";
 
 function Page({ children }) {
@@ -185,7 +185,7 @@ export function AppRouter() {
         path="/estadisticas"
         element={
           <Page>
-            <ChartMockeadoDemo />
+            <ChartsPage />
           </Page>
         }
       />
