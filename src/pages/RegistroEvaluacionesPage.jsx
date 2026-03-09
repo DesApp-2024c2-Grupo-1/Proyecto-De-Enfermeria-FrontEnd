@@ -1,19 +1,15 @@
 import Busqueda from "../components/Busqueda";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-import { createTheme } from "@mui/material/styles";
 import Lista from "../components/Lista";
 import DescargarExcelButton from "../components/exportExcel";
-
 import {
-  Button,
   Stack,
-  Dialog,
-  DialogTitle,
-  DialogActions,
   useMediaQuery,
   Pagination,
   Box,
+  Typography,
+  Chip,
 } from "@mui/material";
 import { findAllAlumnosPorEvaluacion } from "../services/EvaluacionRealizadaService";
 
@@ -21,164 +17,170 @@ export function RegistroEvaluacionesPage() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [alumnos, setAlumnos] = useState([]);
-  const [alumnosFiltrados, setAlumnosFiltrados] = useState([]);
-  const [filtrado, setFiltrado] = useState(false);
-  const [openDialog, setOpenDialog] = useState(true);
   const location = useLocation();
-  const theme = createTheme();
-  const xs = useMediaQuery(theme.breakpoints.down("sm"));
-  const evaluacionTitulo = location.state
-    ? location.state.evaluacionTitulo
-    : "Título no disponible";
+  const xs = useMediaQuery("(max-width:600px)");
+  const evaluacionTitulo = location.state?.evaluacionTitulo ?? "Título no disponible";
   const { id } = useParams();
   const [paginaActual, setPaginaActual] = useState(1);
   const itemsPorPagina = 8;
 
-  const fetchAlumnosPorId = async (id) => {
-    const data = await findAllAlumnosPorEvaluacion(id);
-    setAlumnos(data);
-    setAlumnosFiltrados(data);
-  };
-
   useEffect(() => {
-    fetchAlumnosPorId(id);
+    const fetchAlumnos = async () => {
+      const data = await findAllAlumnosPorEvaluacion(id);
+      setAlumnos(data);
+    };
+    fetchAlumnos();
   }, [id]);
 
   const handleBusqueda = (e) => {
     setPaginaActual(1);
-    let valor = e.target.value.toLowerCase();
-    setSearchTerm(valor);
-    if (valor === "") {
-      setAlumnosFiltrados(alumnos);
-      setFiltrado(false);
-      return;
-    }
-    setAlumnosFiltrados(
-      alumnos.filter(
-        (alumno) =>
-          String(alumno.nombre).toLowerCase().includes(valor) ||
-          String(alumno.apellido).toLowerCase().includes(valor) ||
-          String(alumno.dni).toLowerCase().includes(valor)
-      )
-    );
-    setFiltrado(true);
+    setSearchTerm(e.target.value.toLowerCase());
   };
 
-  const listaAMostrar = filtrado ? alumnosFiltrados : alumnos;
-  const paginasTotales = Math.ceil(listaAMostrar.length / itemsPorPagina);
-  const alumnosPaginados = listaAMostrar.slice(
+  const listaFiltrada = alumnos.filter(
+    (alumno) =>
+      String(alumno.nombre).toLowerCase().includes(searchTerm) ||
+      String(alumno.apellido).toLowerCase().includes(searchTerm) ||
+      String(alumno.dni).toLowerCase().includes(searchTerm)
+  );
+
+  const paginasTotales = Math.ceil(listaFiltrada.length / itemsPorPagina);
+  const alumnosPaginados = listaFiltrada.slice(
     (paginaActual - 1) * itemsPorPagina,
     paginaActual * itemsPorPagina
   );
 
-  const handleCambioPagina = (event, value) => {
-    setPaginaActual(value);
-  };
-
   return (
     <>
-      <Stack sx={{ alignItems: "center" }}>
-        <h1>{evaluacionTitulo}</h1>
-        <Stack
-          sx={{
-            width: xs ? "88%" : "60%",
-          }}
+      {/* Header */}
+      <Box
+        sx={{
+          px: { xs: 3, sm: 6 },
+          pt: { xs: 4, sm: 5 },
+          pb: { xs: 3, sm: 4 },
+          borderBottom: "1px solid #e8f1ec",
+        }}
+      >
+        <Typography
+          variant="overline"
+          sx={{ color: "#5a9e7c", fontWeight: 600, letterSpacing: "0.12em" }}
         >
-          <Stack
-            direction={xs ? "column" : "row"}
-            spacing={2}>
+          Registro de evaluaciones
+        </Typography>
+        <Typography
+          variant="h4"
+          sx={{ fontWeight: 700, color: "#1A3D2D", mt: 0.5, lineHeight: 1.2 }}
+        >
+          {evaluacionTitulo}
+        </Typography>
+      </Box>
+
+      {/* Toolbar */}
+      <Box
+        sx={{
+          px: { xs: 3, sm: 6 },
+          pt: 4,
+          pb: 2,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: 2,
+        }}
+      >
+        <Stack direction="row" alignItems="center" spacing={1.5}>
+          <Typography variant="h6" sx={{ fontWeight: 600, color: "#1A3D2D" }}>
+            Estudiantes
+          </Typography>
+          <Chip
+            label={alumnos.length}
+            size="small"
+            sx={{
+              backgroundColor: "#d7f0dc",
+              color: "#1A3D2D",
+              fontWeight: 700,
+              height: "22px",
+            }}
+          />
+        </Stack>
+
+        <Stack direction="row" alignItems="center" spacing={1.5}>
+          <DescargarExcelButton idEvaluacion={id} />
           <Busqueda
             placeholder="Buscar un alumno..."
             onChange={handleBusqueda}
             width={xs ? "100%" : "220px"}
+            height="46px"
           />
-          <DescargarExcelButton
-            width={xs ? "100px" : "100px"}
-            idEvaluacion={id}
-          />
-          </Stack>
-          {alumnos.length > 0 ? (
-            <>
-              {!(filtrado && alumnosFiltrados.length === 0) ? (
-                <>
-                  <Box sx={{ mt: "15px" }}>
-                    <Lista
-                      dropdown={true}
-                      lista={alumnosPaginados}
-                      keys={["nombre", "apellido", "dni"]}
-                      contenidoDropdown={alumnosPaginados.map(
-                        (item) => item.evaluacionesRealizadas
-                      )}
-                      keysDropdown={["fecha", "nota"]}
-                      buttonOnClick={(evaluacionId) =>
-                        navigate(`/verEvaluacion/${evaluacionId}`)
-                      }
-                      paramOnClick={"id"}
-                    />
-                  </Box>
-                  {listaAMostrar.length > itemsPorPagina && (
-                    <Stack mt={2} alignItems="center">
-                      <Pagination
-                        count={paginasTotales}
-                        page={paginaActual}
-                        onChange={handleCambioPagina}
-                      />
-                    </Stack>
-                  )}
-                </>
-              ) : (
-                <div>
-                  <h2>No se encontraron resultados</h2>
-                  <p>¿Necesita evaluar a un alumno?</p>
-                  <button
-                    className="botonClaro"
-                    onClick={() => navigate(`/registrarEvaluacion/${id}`)}
-                  >
-                    Evaluar
-                  </button>
-                </div>
-              )}
-            </>
-          ) : (
-            <Dialog
-              open={openDialog}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-              sx={{
-                "& .MuiDialog-paper": {
-                  padding: "1.7rem",
-                  borderRadius: "20px",
-                },
-              }}
-            >
-              <DialogTitle id="alert-dialog-title">
-                {"No hay alumnos que hayan tomado esta evaluación."}
-              </DialogTitle>
-
-              <DialogActions>
-                <Button
-                  variant="outlined"
-                  sx={{
-                    color: "#1A3D2D",
-                    backgroundColor: "#FFFFFF",
-                    borderColor: "#1A3D2D",
-                    borderRadius: "10px",
-                    "&:hover": {
-                      backgroundColor: "#FFFFFF",
-                      color: "#1A3D2D",
-                      borderColor: "#FFFFFF",
-                    },
-                    width: "120px",
-                  }}
-                  onClick={() => navigate("/home")}
-                >
-                  Volver atrás
-                </Button>
-              </DialogActions>
-            </Dialog>
-          )}
         </Stack>
-      </Stack>
+      </Box>
+
+      {/* Contenido */}
+      <Box sx={{ px: { xs: 3, sm: 6 }, pb: 8 }}>
+        {listaFiltrada.length > 0 ? (
+          <>
+            <Lista
+              dropdown={true}
+              lista={alumnosPaginados}
+              keys={["nombre", "apellido", "dni"]}
+              contenidoDropdown={alumnosPaginados.map(
+                (item) => item.evaluacionesRealizadas
+              )}
+              keysDropdown={["fecha", "nota"]}
+              buttonOnClick={(evaluacionId) =>
+                navigate(`/verEvaluacion/${evaluacionId}`)
+              }
+              paramOnClick={"id"}
+            />
+            {listaFiltrada.length > itemsPorPagina && (
+              <Stack mt={3} alignItems="center">
+                <Pagination
+                  count={paginasTotales}
+                  page={paginaActual}
+                  onChange={(_, value) => setPaginaActual(value)}
+                  sx={{
+                    "& .MuiPaginationItem-root.Mui-selected": {
+                      backgroundColor: "#1A3D2D",
+                      color: "#fff",
+                    },
+                  }}
+                />
+              </Stack>
+            )}
+          </>
+        ) : (
+          <Box sx={{ mt: 8, textAlign: "center", color: "#8ab09a" }}>
+            {searchTerm ? (
+              <>
+                <i
+                  className="fa fa-search"
+                  style={{ fontSize: "2.5rem", marginBottom: "1rem", display: "block" }}
+                />
+                <Typography sx={{ fontWeight: 500 }}>
+                  No se encontraron alumnos para "{searchTerm}"
+                </Typography>
+              </>
+            ) : (
+              <>
+                <i
+                  className="fa fa-clipboard"
+                  style={{ fontSize: "2.5rem", marginBottom: "1rem", display: "block" }}
+                />
+                <Typography sx={{ fontWeight: 500 }}>
+                  Ningún alumno ha tomado esta evaluación aún.
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ mt: 0.5, color: "#aac4b4", cursor: "pointer" }}
+                  onClick={() => navigate(`/registrarEvaluacion/${id}`)}
+                >
+                  Evaluar un alumno
+                </Typography>
+              </>
+            )}
+          </Box>
+        )}
+      </Box>
     </>
   );
 }

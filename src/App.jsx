@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Box, Stack, useMediaQuery } from "@mui/material";
 import { BrowserRouter, useLocation, useNavigate } from "react-router-dom";
 import { Menu } from "./components/adaptableTopMenu";
@@ -7,17 +7,33 @@ import Footer from "./components/Footer";
 import { noAutorizadoCallback } from "./services/_authRequest";
 import HandlerRedireccion from "./components/HandlerRedireccion";
 import { DocenteProvider } from "./context/DocenteContext";
-import { createTheme } from "@mui/material/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./barrascroll.css";
 
+const theme = createTheme({
+  typography: {
+    fontFamily: "'Poppins', Inter, system-ui, sans-serif",
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: "none",
+        },
+      },
+    },
+  },
+});
 
 export function App() {
   return (
     <BrowserRouter>
-      <DocenteProvider>
-        <MainLayout />
-        <HandlerRedireccion />
-      </DocenteProvider>
+      <ThemeProvider theme={theme}>
+        <DocenteProvider>
+          <MainLayout />
+          <HandlerRedireccion />
+        </DocenteProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }
@@ -25,7 +41,6 @@ export function App() {
 export function MainLayout() {
   const location = useLocation();
   const navigate = useNavigate();
-  const theme = createTheme();
   const xs = useMediaQuery(theme.breakpoints.down("sm"));
 
   const menuRoutes = [

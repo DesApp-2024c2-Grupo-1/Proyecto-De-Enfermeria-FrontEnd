@@ -1,55 +1,104 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Stack,
   Drawer,
   IconButton,
   useMediaQuery,
-  Button,
   Typography,
-  Chip,
-  Avatar,
+  Tooltip,
+  Divider,
 } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import HomeIcon from "/assets/home.png";
 import ProfileIcon from "/assets/profile.png";
 import AlumnosIcon from "/assets/alumnos.png";
-import EstadisticasIcon from "/assets/estadisticas.png";
 import { useDocente } from "../context/DocenteContext";
 import IrAtrasBoton from "./irAtrasBoton";
 import PerfilMenuButton from "./PerfilDocenteButton";
 
-function MenuOption({ path, label, icon, onClick }) {
+function MenuOption({ path, label, icon, onClick, mobile = false }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const isActive = pathname === path;
+
+  const handleClick = () => {
+    navigate(path);
+    if (onClick) onClick();
+  };
+
+  if (mobile) {
+    return (
+      <Box
+        onClick={handleClick}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 1.5,
+          width: "100%",
+          px: 2,
+          py: 1.5,
+          borderRadius: "10px",
+          cursor: "pointer",
+          backgroundColor: isActive ? "rgba(255,255,255,0.15)" : "transparent",
+          transition: "background-color 0.2s",
+          "&:hover": { backgroundColor: "rgba(255,255,255,0.1)" },
+        }}
+      >
+        <img src={icon} alt={label} style={{ width: 22, height: 22, opacity: 0.9 }} />
+        <Typography sx={{ color: "#fff", fontWeight: isActive ? 600 : 400, fontSize: "0.95rem" }}>
+          {label}
+        </Typography>
+      </Box>
+    );
+  }
 
   return (
-    <Stack
-      direction="column"
-      alignItems="center"
-      justifyContent="space-between"
-      sx={{
-        typography: pathname === path ? "topMenuSelected" : "topMenu",
-        padding: 0.5,
-        cursor: "pointer",
-        display: "flex",
-      }}
-      onClick={() => {
-        navigate(path);
-        if (onClick) onClick();
-      }}
-    >
-      <Chip
-        avatar={
-          <Avatar src={icon} alt={label} sx={{ width: 35, height: 35, paddingLeft: 0.8, borderRadius: 0 }} />
-        }
+    <Tooltip title={label} placement="right" arrow>
+      <Box
+        onClick={handleClick}
         sx={{
-          backgroundColor: pathname === path ? "#285742" : "transparent",
-          paddingLeft: 0.8 
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 0.5,
+          px: 1,
+          py: 1,
+          borderRadius: "12px",
+          cursor: "pointer",
+          width: "56px",
+          backgroundColor: isActive ? "rgba(255,255,255,0.12)" : "transparent",
+          transition: "background-color 0.2s",
+          "&:hover": { backgroundColor: "rgba(255,255,255,0.08)" },
+          "&::before": isActive
+            ? {
+                content: '""',
+                position: "absolute",
+                left: "-12px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                width: "4px",
+                height: "60%",
+                borderRadius: "0 4px 4px 0",
+                backgroundColor: "#6fcfa0",
+              }
+            : {},
         }}
-      />
-      <Typography sx={{ fontSize: 14, marginTop: 0.5 }}>{label}</Typography>
-    </Stack>
+      >
+        <img src={icon} alt={label} style={{ width: 24, height: 24, opacity: isActive ? 1 : 0.65 }} />
+        <Typography
+          sx={{
+            fontSize: "0.65rem",
+            color: isActive ? "#fff" : "rgba(255,255,255,0.6)",
+            fontWeight: isActive ? 600 : 400,
+            lineHeight: 1,
+          }}
+        >
+          {label}
+        </Typography>
+      </Box>
+    </Tooltip>
   );
 }
 
@@ -65,13 +114,9 @@ export function Menu() {
     }
   }, [docenteContext, navigate]);
 
-  if (!docenteContext) {
-    return null;
-  }
+  if (!docenteContext) return null;
 
-  const toggleDrawer = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  const toggleDrawer = () => setMobileOpen((prev) => !prev);
 
   const opcionesMenu = [
     { path: "/home", label: "Inicio", icon: HomeIcon },
@@ -88,6 +133,7 @@ export function Menu() {
     <>
       {isDesktop ? (
         <>
+          {/* Topbar */}
           <Stack
             direction="row"
             alignItems="center"
@@ -100,39 +146,39 @@ export function Menu() {
               position: "sticky",
               top: 0,
               zIndex: 1000,
-              overflowY: "none",
               scrollbarGutter: "stable",
             }}
           >
             <IrAtrasBoton />
             <PerfilMenuButton />
           </Stack>
+
+          {/* Sidebar */}
           <Stack
             direction="column"
             alignItems="center"
-            spacing={4}
             sx={{
               width: "80px",
               height: "100vh",
               backgroundColor: "#1A3D2D",
-              color: "white",
-              py: 4,
+              py: 3,
               position: "fixed",
               left: 0,
               top: 0,
               zIndex: 1000,
+              gap: 1,
             }}
           >
-            <img
-              src="../assets/unahur-logo-cuadrado.png"
-              alt="Logo"
-              style={{
-                width: 35,
-                height: 35,
-                marginTop: -17,
-                marginBottom: -7,
-              }}
-            />
+            <Box sx={{ mb: 2, mt: 0.5 }}>
+              <img
+                src="../assets/unahur-logo-cuadrado.png"
+                alt="Logo"
+                style={{ width: 32, height: 32 }}
+              />
+            </Box>
+
+            <Divider sx={{ width: "50%", borderColor: "rgba(255,255,255,0.1)", mb: 1 }} />
+
             {opcionesMenu.map((option) => (
               <MenuOption
                 key={option.path}
@@ -144,36 +190,53 @@ export function Menu() {
           </Stack>
         </>
       ) : (
-        // Menú móvil
         <>
+          {/* Botón hamburguesa móvil */}
           <IconButton
             onClick={toggleDrawer}
-            sx={{ position: "absolute", top: 16, right: 16 }}
+            sx={{
+              position: "fixed",
+              top: 12,
+              right: 12,
+              zIndex: 1100,
+              backgroundColor: "#1A3D2D",
+              color: "#fff",
+              width: 40,
+              height: 40,
+              "&:hover": { backgroundColor: "#285742" },
+            }}
           >
-            <i class="fa fa-bars" aria-hidden="true"></i>
+            <i className="fa fa-bars" aria-hidden="true" style={{ fontSize: "16px" }} />
           </IconButton>
+
+          {/* Drawer móvil */}
           <Drawer
             anchor="right"
             open={mobileOpen}
             onClose={toggleDrawer}
             PaperProps={{
-              sx: { width: "60%", backgroundColor: "#31614b" },
+              sx: {
+                width: "220px",
+                backgroundColor: "#1A3D2D",
+                pt: 2,
+                pb: 3,
+                px: 2,
+              },
             }}
           >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                p: 3,
-              }}
-            >
-              <IconButton
-                onClick={toggleDrawer}
-                sx={{ alignSelf: "flex-end", mb: 2 }}
-              >
-                <i class="fa fa-times-circle" aria-hidden="true"></i>
+            <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
+              <IconButton onClick={toggleDrawer} sx={{ color: "rgba(255,255,255,0.7)" }}>
+                <i className="fa fa-times" aria-hidden="true" style={{ fontSize: "18px" }} />
               </IconButton>
+            </Box>
+
+            <Box sx={{ mb: 2, px: 2 }}>
+              <Typography sx={{ color: "rgba(255,255,255,0.45)", fontSize: "0.7rem", letterSpacing: "0.1em", fontWeight: 600 }}>
+                MENÚ
+              </Typography>
+            </Box>
+
+            <Stack spacing={0.5}>
               {opcionesMenuMovil.map((option) => (
                 <MenuOption
                   key={option.path}
@@ -181,9 +244,10 @@ export function Menu() {
                   label={option.label}
                   icon={option.icon}
                   onClick={toggleDrawer}
+                  mobile
                 />
               ))}
-            </Box>
+            </Stack>
           </Drawer>
         </>
       )}

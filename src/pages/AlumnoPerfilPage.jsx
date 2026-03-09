@@ -1,31 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-import Lista from "../components/Lista";
 import { getAllEvaluacionesRealizadasPorAlumno } from "../services/EvaluacionRealizadaService";
-import {
-  Stack,
-  Box,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogActions,
-  useMediaQuery,
-  createTheme,
-} from "@mui/material";
+import { Stack, Box, Typography, Chip } from "@mui/material";
 import ListaCards from "../components/ListaCards";
 import AlumnoPerfilHeader from "../components/AlumnoPerfilHeader";
 import Busqueda from "../components/Busqueda";
 
 export function AlumnoPerfilPage() {
   const [evaluaciones, setEvaluaciones] = useState([]);
-  const [openDialog, setOpenDialog] = useState(true);
-  const keys = ["fecha", "nota"];
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const alumnoNombre = location.state?.alumnoNombre;
   const alumnoApellido = location.state?.alumnoApellido;
-  const theme = createTheme();
-  const xs = useMediaQuery(theme.breakpoints.down("sm"));
   const { idAlumno } = useParams();
 
   useEffect(() => {
@@ -35,36 +22,41 @@ export function AlumnoPerfilPage() {
   }, [location.state, navigate]);
 
   const evaluacionesTitulos = Array.from(
-    new Set(evaluaciones.map((evaluacion) => evaluacion.evaluacion.titulo))
+    new Set(evaluaciones.map((e) => e.evaluacion.titulo))
   );
 
-  const evaluacionesFiltradas = evaluacionesTitulos.map((titulo) => {
-    return {
-      titulo: titulo,
-      instancias: evaluaciones.filter(
-        (evaluacion) => evaluacion.evaluacion.titulo === titulo
-      ),
-    };
-  });
-
-  const fetchEvaluacionesPorAlumno = async (id) => {
-    const data = await getAllEvaluacionesRealizadasPorAlumno(id);
-    setEvaluaciones(data);
-  };
+  const evaluacionesFiltradas = evaluacionesTitulos
+    .filter((titulo) => titulo.toLowerCase().includes(searchTerm))
+    .map((titulo) => ({
+      titulo,
+      instancias: evaluaciones.filter((e) => e.evaluacion.titulo === titulo),
+    }));
 
   useEffect(() => {
-    fetchEvaluacionesPorAlumno(idAlumno);
+    const fetchEvaluaciones = async () => {
+      const data = await getAllEvaluacionesRealizadasPorAlumno(idAlumno);
+      setEvaluaciones(data);
+    };
+    fetchEvaluaciones();
   }, [idAlumno]);
 
   return (
-    <Stack
-      sx={{
-        width: xs ? "85%" : "100%",
-        px: { xs: 2, sm: 3, md: 0 },
-        alignItems: "center",
-      }}
-    >
-      <Box sx={{ width: "100%", maxWidth: 900, mt: 3 }}>
+    <Box sx={{ width: "100%" }}>
+      {/* Header */}
+      <Box
+        sx={{
+          px: { xs: 3, sm: 6 },
+          pt: { xs: 4, sm: 5 },
+          pb: { xs: 3, sm: 4 },
+          borderBottom: "1px solid #e8f1ec",
+        }}
+      >
+        <Typography
+          variant="overline"
+          sx={{ color: "#5a9e7c", fontWeight: 600, letterSpacing: "0.12em" }}
+        >
+          Perfil del alumno
+        </Typography>
         <AlumnoPerfilHeader
           alumnoNombre={alumnoNombre}
           alumnoApellido={alumnoApellido}
@@ -72,22 +64,46 @@ export function AlumnoPerfilPage() {
         />
       </Box>
 
+      {/* Toolbar */}
       <Box
         sx={{
-          width: "100%",
-          maxWidth: 900,
+          px: { xs: 3, sm: 6 },
+          pt: 4,
+          pb: 2,
           display: "flex",
-          justifyContent: xs ? "space-between" : "flex-end",
-          mt: -5,
-          mr: -4.65,
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: 2,
         }}
       >
-        <Busqueda width={300} placeholder={"Buscar por título..."} />
+        <Stack direction="row" alignItems="center" spacing={1.5}>
+          <Typography variant="h6" sx={{ fontWeight: 600, color: "#1A3D2D" }}>
+            Evaluaciones
+          </Typography>
+          <Chip
+            label={evaluacionesTitulos.length}
+            size="small"
+            sx={{
+              backgroundColor: "#d7f0dc",
+              color: "#1A3D2D",
+              fontWeight: 700,
+              height: "22px",
+            }}
+          />
+        </Stack>
+        <Busqueda
+          width={280}
+          height={46}
+          placeholder="Buscar por título..."
+          onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
+        />
       </Box>
 
-      {evaluacionesFiltradas.length > 0 ? (
-        <Box sx={{ width: "100%", maxWidth: 900, mt: 3 }}>
-          {evaluacionesFiltradas.map((evaluacion, index) => (
+      {/* Lista */}
+      <Box sx={{ px: { xs: 3, sm: 6 }, pb: 8 }}>
+        {evaluacionesFiltradas.length > 0 ? (
+          evaluacionesFiltradas.map((evaluacion, index) => (
             <ListaCards
               key={index}
               titulo={evaluacion.titulo}
@@ -96,46 +112,40 @@ export function AlumnoPerfilPage() {
               buttonOnClick={(id) => navigate(`/verEvaluacion/${id}`)}
               paramOnClick="id"
             />
-          ))}
-        </Box>
-      ) : (
-        <Dialog
-          open={openDialog}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          sx={{
-            "& .MuiDialog-paper": {
-              padding: "1.75rem",
-              borderRadius: "20px",
-            },
-          }}
-        >
-          <DialogTitle id="alert-dialog-title">
-            {"El o la estudiante no ha tomado ninguna evaluación."}
-          </DialogTitle>
-
-          <DialogActions>
-            <Button
-              variant="outlined"
-              sx={{
-                color: "#1A3D2D",
-                backgroundColor: "#FFFFFF",
-                borderColor: "#1A3D2D",
-                borderRadius: "10px",
-                "&:hover": {
-                  backgroundColor: "#FFFFFF",
-                  color: "#1A3D2D",
-                  borderColor: "#FFFFFF",
-                },
-                width: "120px",
-              }}
-              onClick={() => navigate("/alumnos")}
-            >
-              Volver atrás
-            </Button>
-          </DialogActions>
-        </Dialog>
-      )}
-    </Stack>
+          ))
+        ) : (
+          <Box sx={{ mt: 8, textAlign: "center", color: "#8ab09a" }}>
+            {evaluaciones.length === 0 ? (
+              <>
+                <i
+                  className="fa fa-clipboard"
+                  style={{ fontSize: "2.5rem", marginBottom: "1rem", display: "block" }}
+                />
+                <Typography sx={{ fontWeight: 500 }}>
+                  Este alumno aún no tiene evaluaciones realizadas.
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ mt: 0.5, color: "#aac4b4", cursor: "pointer" }}
+                  onClick={() => navigate("/alumnos")}
+                >
+                  Volver al listado de alumnos
+                </Typography>
+              </>
+            ) : (
+              <>
+                <i
+                  className="fa fa-search"
+                  style={{ fontSize: "2.5rem", marginBottom: "1rem", display: "block" }}
+                />
+                <Typography sx={{ fontWeight: 500 }}>
+                  No se encontraron evaluaciones para "{searchTerm}"
+                </Typography>
+              </>
+            )}
+          </Box>
+        )}
+      </Box>
+    </Box>
   );
 }
