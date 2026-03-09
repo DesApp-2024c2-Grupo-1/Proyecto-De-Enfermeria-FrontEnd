@@ -161,7 +161,7 @@ export function Menu() {
               width: "80px",
               height: "100vh",
               backgroundColor: "#1A3D2D",
-              py: 3,
+              pb: 3,
               position: "fixed",
               left: 0,
               top: 0,
@@ -169,15 +169,33 @@ export function Menu() {
               gap: 1,
             }}
           >
-            <Box sx={{ mb: 2, mt: 0.5 }}>
+            {/* Mismo alto que el topbar para alinear el logo con el botón Atrás */}
+            <Box
+              sx={{
+                position: "relative",
+                width: "100%",
+                height: "61px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}
+            >
               <img
                 src="../assets/unahur-logo-cuadrado.png"
                 alt="Logo"
                 style={{ width: 32, height: 32 }}
               />
+              <Divider
+                sx={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: "25%",
+                  width: "50%",
+                  borderColor: "rgba(255,255,255,0.18)",
+                }}
+              />
             </Box>
-
-            <Divider sx={{ width: "50%", borderColor: "rgba(255,255,255,0.1)", mb: 1 }} />
 
             {opcionesMenu.map((option) => (
               <MenuOption
