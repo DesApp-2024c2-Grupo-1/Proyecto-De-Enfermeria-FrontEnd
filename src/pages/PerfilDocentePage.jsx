@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Input } from "../components/Input";
 import {
   Button,
   Box,
@@ -8,16 +7,28 @@ import {
   Alert,
   Dialog,
   DialogTitle,
-  DialogContent,
-  DialogContentText,
   DialogActions,
+  TextField,
+  Typography,
+  Avatar,
+  Chip,
   useMediaQuery,
 } from "@mui/material";
-import { createTheme } from "@mui/material/styles";
 import { useDocente } from "../context/DocenteContext";
 import { modificarDocente } from "../services/DocenteService";
 import { useNavigate } from "react-router-dom";
 import { autenticacion } from "../components/HandlerNecesidadAuth";
+
+const fieldSx = (disabled) => ({
+  "& .MuiOutlinedInput-root": {
+    borderRadius: 2,
+    backgroundColor: disabled ? "#f5faf7" : "#fff",
+    "& fieldset": { borderColor: "#e8f1ec" },
+    "&:hover fieldset": { borderColor: disabled ? "#e8f1ec" : "#5a9e7c" },
+    "&.Mui-focused fieldset": { borderColor: "#1A3D2D" },
+  },
+  "& .MuiInputLabel-root.Mui-focused": { color: "#1A3D2D" },
+});
 
 const PerfilDocentePage = () => {
   const [editando, setEditando] = useState(true);
@@ -25,28 +36,15 @@ const PerfilDocentePage = () => {
   const [nombre, setNombre] = useState(docenteContext.nombre);
   const [apellido, setApellido] = useState(docenteContext.apellido);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
   const [error, setError] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
-  const [openDialogExito, setOpenDialogExito] = useState(false);
   const navigate = useNavigate();
-  const theme = createTheme();
-  const xs = useMediaQuery(theme.breakpoints.down("sm"));
+  const xs = useMediaQuery("(max-width:600px)");
 
-  const docenteData = docenteContext
-    ? {
-        ...docenteContext,
-        email: docenteContext.email,
-        modificable: true,
-      }
-    : null;
-
-  const handleOpenDialog = () => {
-    setOpenDialog(true);
-  };
-
-  const handleCloseDialog = () => {
-    setOpenDialog(false);
-  };
+  const iniciales =
+    (docenteContext?.nombre?.[0] || "").toUpperCase() +
+    (docenteContext?.apellido?.[0] || "").toUpperCase();
 
   const handleCerrarSesion = () => {
     setDocenteContext(null);
@@ -59,219 +57,240 @@ const PerfilDocentePage = () => {
     const capitalizar = (str) =>
       str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
-    const updatedData = {
-      nombre: capitalizar(nombre),
-      apellido: capitalizar(apellido),
-    };
+    if (editando) {
+      setEditando(false);
+      return;
+    }
 
     try {
-      if (editando) {
-        setEditando(!editando);
-      } else {
-        console.log(docenteContext);
-        const updatedDocente = await modificarDocente(
-          docenteContext.id,
-          updatedData
-        );
-        setDocenteContext(updatedDocente);
-        setEditando(!editando);
-        setOpenDialogExito(true);
-        setTimeout(() => {
-          navigate("/");
-        }, 5000);
-      }
-    } catch (error) {
+      const updatedDocente = await modificarDocente(docenteContext.id, {
+        nombre: capitalizar(nombre),
+        apellido: capitalizar(apellido),
+      });
+      setDocenteContext(updatedDocente);
+      setEditando(true);
+      setOpenSuccessSnackbar(true);
+      setTimeout(() => navigate("/"), 3000);
+    } catch (err) {
       const mensajeError =
-        error.response?.data?.message || "Error al modificar docente.";
-      setError(mensajeError);
+        err.response?.data?.message || "Error al modificar docente.";
+      setError(Array.isArray(mensajeError) ? mensajeError : [mensajeError]);
       setOpenSnackbar(true);
     }
   };
 
   return (
-    <>
-      <Stack
-        direction="column"
-        spacing={2}
-        sx={{ display: "flex", alignItems: "center", my: "2rem" }}
-      >
-        <Box
-          sx={{
-            height: "6rem",
-            width: "6rem",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: "100%",
-            backgroundColor: "#DDF0E7",
-            color: "#429870",
-            fontSize: "3rem",
-            fontWeight: "500",
-            boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
-          }}
-        >
-          {docenteData?.nombre?.charAt(0).toUpperCase()}
-          {docenteData?.apellido?.charAt(0).toUpperCase()}
-        </Box>
-
-        <Input
-          key="nombre"
-          width={xs ? "17rem" : "25rem"}
-          backgroundColor={"#DDF0E7"}
-          disabled={editando}
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-          titulo="Nombre"
-        />
-
-        <Input
-          key="apellido"
-          width={xs ? "17rem" : "25rem"}
-          backgroundColor={"#DDF0E7"}
-          disabled={editando}
-          value={apellido}
-          onChange={(e) => setApellido(e.target.value)}
-          titulo="Apellido"
-        />
-
-        <Input
-          width={xs ? "17rem" : "25rem"}
-          backgroundColor={"#DDF0E7"}
-          key="email"
-          disabled={true}
-          placeholder={docenteContext?.email || "Email no definido"}
-          titulo="Email"
-        />
-
-        <button
-          style={{ width: "15rem" }}
-          className="botonVerde"
-          onClick={handleClick}
-        >
-          {editando ? "Editar" : "Guardar"}
-        </button>
-        {xs ? <Button
-          sx={{
-            width: "15rem",
-            borderRadius: "10px",
-            fontWeight: "600",
-            boxShadow: "1px 1px 3px rgba(0, 0, 0, 0.3)",
-          }}
-          variant="outlined"
-          color="error"
-          onClick={handleOpenDialog}
-        >
-          Cerrar Sesión
-        </Button> : null}
-      </Stack>
-
-      <Dialog
-        open={openDialog}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
+    <Box sx={{ width: "100%" }}>
+      {/* Header */}
+      <Box
         sx={{
-          "& .MuiDialog-paper": {
-            paddingLeft: "2.35rem",
-            paddingRight: "2.35rem",
-            paddingBottom: "1.35rem",
-            paddingTop: "1.35rem",
-            borderRadius: "20px",
-          },
+          px: { xs: 3, sm: 6 },
+          pt: { xs: 4, sm: 5 },
+          pb: { xs: 3, sm: 4 },
+          borderBottom: "1px solid #e8f1ec",
         }}
       >
-        <DialogTitle id="alert-dialog-title">{"¿Cerrar sesión?"}</DialogTitle>
+        <Typography
+          variant="overline"
+          sx={{ color: "#5a9e7c", fontWeight: 600, letterSpacing: "0.12em" }}
+        >
+          Cuenta
+        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2.5, mt: 1.5, flexWrap: "wrap" }}>
+          <Avatar
+            sx={{
+              width: 72,
+              height: 72,
+              fontSize: 26,
+              bgcolor: "#1A3D2D",
+              fontWeight: 700,
+            }}
+          >
+            {iniciales}
+          </Avatar>
+          <Box>
+            <Typography
+              variant="h4"
+              sx={{ fontWeight: 700, color: "#1A3D2D", lineHeight: 1.2 }}
+            >
+              {docenteContext?.nombre} {docenteContext?.apellido}
+            </Typography>
+            <Chip
+              label="Docente"
+              size="small"
+              sx={{ mt: 1, backgroundColor: "#d7f0dc", color: "#1A3D2D", fontWeight: 600 }}
+            />
+          </Box>
+        </Box>
+      </Box>
 
-        <DialogActions>
+      {/* Form */}
+      <Box
+        sx={{
+          px: { xs: 3, sm: 6 },
+          pt: 4,
+          pb: 8,
+          maxWidth: 640,
+        }}
+      >
+        <Typography variant="subtitle1" fontWeight={700} color="#1A3D2D" mb={3}>
+          {editando ? "Información personal" : "Editando información"}
+        </Typography>
+
+        <Stack spacing={3}>
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={2.5}>
+            <Box sx={{ flex: 1 }}>
+              <Typography variant="body2" fontWeight={600} color="#5a9e7c" mb={0.75}>
+                Nombre
+              </Typography>
+              <TextField
+                fullWidth
+                size="small"
+                disabled={editando}
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                sx={fieldSx(editando)}
+              />
+            </Box>
+            <Box sx={{ flex: 1 }}>
+              <Typography variant="body2" fontWeight={600} color="#5a9e7c" mb={0.75}>
+                Apellido
+              </Typography>
+              <TextField
+                fullWidth
+                size="small"
+                disabled={editando}
+                value={apellido}
+                onChange={(e) => setApellido(e.target.value)}
+                sx={fieldSx(editando)}
+              />
+            </Box>
+          </Stack>
+
+          <Box>
+            <Typography variant="body2" fontWeight={600} color="#5a9e7c" mb={0.75}>
+              Email
+            </Typography>
+            <TextField
+              fullWidth
+              size="small"
+              disabled
+              value={docenteContext?.email || ""}
+              sx={fieldSx(true)}
+            />
+          </Box>
+
+          <Stack direction="row" spacing={2} pt={1}>
+            <Button
+              variant="contained"
+              onClick={handleClick}
+              sx={{
+                backgroundColor: "#1A3D2D",
+                color: "#fff",
+                borderRadius: 2,
+                fontWeight: 600,
+                px: 3,
+                "&:hover": { backgroundColor: "#15312400", color: "#1A3D2D", boxShadow: "none" },
+                boxShadow: "none",
+              }}
+            >
+              {editando ? "Editar" : "Guardar cambios"}
+            </Button>
+
+            {!editando && (
+              <Button
+                variant="outlined"
+                onClick={() => { setEditando(true); setNombre(docenteContext.nombre); setApellido(docenteContext.apellido); }}
+                sx={{
+                  borderColor: "#e8f1ec",
+                  color: "#555",
+                  borderRadius: 2,
+                  fontWeight: 600,
+                  "&:hover": { borderColor: "#5a9e7c", backgroundColor: "transparent" },
+                }}
+              >
+                Cancelar
+              </Button>
+            )}
+
+            {xs && editando && (
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => setOpenDialog(true)}
+                sx={{ borderRadius: 2, fontWeight: 600 }}
+              >
+                Cerrar sesión
+              </Button>
+            )}
+          </Stack>
+        </Stack>
+      </Box>
+
+      {/* Logout confirmation dialog */}
+      <Dialog
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        PaperProps={{ sx: { borderRadius: 3, px: 3, py: 2, minWidth: 280 } }}
+      >
+        <DialogTitle sx={{ fontWeight: 700, color: "#1A3D2D", pb: 1 }}>
+          ¿Cerrar sesión?
+        </DialogTitle>
+        <DialogActions sx={{ pb: 1 }}>
           <Button
             variant="outlined"
+            onClick={() => setOpenDialog(false)}
             sx={{
-              color: "#1A3D2D",
-              borderRadius: "10px",
-              borderColor: "#1A3D2D",
-              "&:hover": {
-                backgroundColor: "#FFFFFF",
-                color: "#1A3D2D",
-                borderColor: "#FFFFFF",
-              },
-              width: "100px",
+              borderColor: "#e8f1ec",
+              color: "#555",
+              borderRadius: 2,
+              "&:hover": { borderColor: "#5a9e7c", backgroundColor: "transparent" },
             }}
-            onClick={handleCloseDialog}
           >
             Cancelar
           </Button>
           <Button
-            sx={{
-              color: "#FFFFFF",
-              backgroundColor: "#1A3D2D",
-              borderColor: "#1A3D2D",
-              borderRadius: "10px",
-              "&:hover": {
-                backgroundColor: "#FFFFFF",
-                color: "#1A3D2D",
-                borderColor: "#FFFFFF",
-              },
-              width: "100px",
-            }}
+            variant="contained"
             onClick={handleCerrarSesion}
-            autoFocus
+            sx={{
+              backgroundColor: "#1A3D2D",
+              borderRadius: 2,
+              "&:hover": { backgroundColor: "#15312400", color: "#1A3D2D", boxShadow: "none" },
+              boxShadow: "none",
+            }}
           >
             Confirmar
           </Button>
         </DialogActions>
       </Dialog>
-      <Dialog
-        open={openDialogExito}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        sx={{
-          "& .MuiDialog-paper": { padding: "1.75rem", borderRadius: "20px" },
-        }}
-      >
-        <DialogTitle
-          id="alert-dialog-exito"
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <dotlottie-wc
-            src="https://lottie.host/182b34ff-8146-4be2-9cc9-e1ea97d6a04d/u56gM45ANy.lottie"
-            style={{ width: "300px", height: "300px", margin: "-50px" }}
-            autoplay
-          ></dotlottie-wc>
-        </DialogTitle>
-        <DialogContent>
-          <p style={{ textAlign: "center" }}>
-            ¡Tus datos fueron editados correctamente! Serás
-            redirigido/a al Inicio de Sesión en unos segundos.
-          </p>
-        </DialogContent>
-      </Dialog>
+
+      {/* Error snackbar */}
       <Snackbar
         open={openSnackbar}
-        autoHideDuration={3000}
+        autoHideDuration={4000}
         onClose={() => setOpenSnackbar(false)}
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-          margin: "auto",
-        }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
-        <Alert
-          onClose={() => setOpenSnackbar(false)}
-          severity="error"
-          sx={{ width: "50%" }}
-        >
-          <ul>
-            {error.map((err, index) => (
-              <li key={index}>{err}</li>
-            ))}
+        <Alert onClose={() => setOpenSnackbar(false)} severity="error" sx={{ width: "100%" }}>
+          <ul style={{ margin: 0, paddingLeft: 16 }}>
+            {error.map((err, i) => <li key={i}>{err}</li>)}
           </ul>
         </Alert>
       </Snackbar>
-    </>
+
+      {/* Success snackbar */}
+      <Snackbar
+        open={openSuccessSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSuccessSnackbar(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert onClose={() => setOpenSuccessSnackbar(false)} severity="success" sx={{ width: "100%" }}>
+          ¡Datos actualizados correctamente! Redirigiendo...
+        </Alert>
+      </Snackbar>
+    </Box>
   );
-}
+};
+
 export default autenticacion(PerfilDocentePage);
